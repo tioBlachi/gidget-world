@@ -1,0 +1,88 @@
+[gd_scene load_steps=8 format=3 uid="uid://c2mmmw150y6yj"]
+
+[ext_resource type="AudioStream" uid="uid://cf4ximdc8rfn3" path="res://assets/sounds/door_open.ogg" id="2_hs0ii"]
+[ext_resource type="Script" uid="uid://bdob06hee7o6b" path="res://scripts/cell_floor.gd" id="2_td7e3"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_yjpbd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_td7e3"]
+size = Vector2(16, 180)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hs0ii"]
+size = Vector2(16, 179)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hqjrn"]
+size = Vector2(124, 37)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c0duh"]
+
+[node name="LabCell" type="Node2D"]
+position = Vector2(36, -31)
+
+[node name="LeftWall" type="StaticBody2D" parent="."]
+position = Vector2(12, 25)
+physics_material_override = SubResource("PhysicsMaterial_yjpbd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall"]
+position = Vector2(133, 162)
+shape = SubResource("RectangleShape2D_td7e3")
+
+[node name="ColorRect" type="ColorRect" parent="LeftWall"]
+offset_left = 125.0
+offset_top = 71.0
+offset_right = 141.0
+offset_bottom = 252.0
+color = Color(0.00139673, 0.00139673, 0.00139673, 1)
+
+[node name="RightWall" type="StaticBody2D" parent="."]
+position = Vector2(-79, 43)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="RightWall"]
+position = Vector2(332, 145)
+shape = SubResource("RectangleShape2D_hs0ii")
+
+[node name="ColorRect" type="ColorRect" parent="RightWall"]
+offset_left = 324.0
+offset_top = 55.0
+offset_right = 340.0
+offset_bottom = 235.0
+color = Color(0.00139673, 0.00139673, 0.00139673, 1)
+
+[node name="Top Wall" type="StaticBody2D" parent="."]
+position = Vector2(55, 34)
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Top Wall"]
+position = Vector2(144, 44.5)
+shape = SubResource("RectangleShape2D_hqjrn")
+
+[node name="ColorRect" type="ColorRect" parent="Top Wall"]
+offset_left = 82.0
+offset_top = 24.0
+offset_right = 206.0
+offset_bottom = 64.0
+color = Color(0, 0, 0, 1)
+
+[node name="CellFloor" type="RigidBody2D" parent="."]
+position = Vector2(135, 270)
+script = ExtResource("2_td7e3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CellFloor"]
+position = Vector2(64.5, 12)
+shape = SubResource("RectangleShape2D_c0duh")
+
+[node name="PinJoint2D" type="PinJoint2D" parent="CellFloor"]
+position = Vector2(3, 7)
+node_a = NodePath("..")
+node_b = NodePath("../../LeftWall")
+
+[node name="ColorRect" type="ColorRect" parent="CellFloor"]
+offset_left = 2.0
+offset_top = 7.0
+offset_right = 126.0
+offset_bottom = 17.0
+color = Color(0, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="OpenDoor" type="AudioStreamPlayer2D" parent="CellFloor"]
+position = Vector2(-135, -270)
+stream = ExtResource("2_hs0ii")
