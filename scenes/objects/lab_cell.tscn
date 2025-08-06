@@ -33,6 +33,7 @@ offset_top = 71.0
 offset_right = 141.0
 offset_bottom = 252.0
 color = Color(0.00139673, 0.00139673, 0.00139673, 1)
+metadata/_edit_use_anchors_ = true
 
 [node name="RightWall" type="StaticBody2D" parent="."]
 position = Vector2(-79, 43)
@@ -47,6 +48,7 @@ offset_top = 55.0
 offset_right = 340.0
 offset_bottom = 235.0
 color = Color(0.00139673, 0.00139673, 0.00139673, 1)
+metadata/_edit_use_anchors_ = true
 
 [node name="Top Wall" type="StaticBody2D" parent="."]
 position = Vector2(55, 34)
@@ -61,6 +63,7 @@ offset_top = 24.0
 offset_right = 206.0
 offset_bottom = 64.0
 color = Color(0, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
 
 [node name="CellFloor" type="RigidBody2D" parent="."]
 position = Vector2(135, 270)

@@ -12,12 +12,10 @@ collision_layer = 3
 collision_mask = 3
 script = ExtResource("1_g2els")
 
-[node name="Visual" type="Sprite2D" parent="."]
-position = Vector2(388, 196)
+[node name="Sprite" type="Sprite2D" parent="."]
 texture = ExtResource("2_qhqgy")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(389, 194)
 shape = SubResource("RectangleShape2D_hqtel")
 
 [node name="JumpSound" type="AudioStreamPlayer2D" parent="."]

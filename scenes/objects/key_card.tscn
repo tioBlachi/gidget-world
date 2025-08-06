@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://q5myivnq8cna"]
+
+[ext_resource type="Script" uid="uid://dkf3hm5sdnnca" path="res://key_card.gd" id="1_ae5c8"]
+[ext_resource type="Texture2D" uid="uid://dd7xeypuiguhg" path="res://assets/sprites/KeyCard.png" id="2_6fbv0"]
+[ext_resource type="AudioStream" uid="uid://25oqx0vh5fa3" path="res://assets/sounds/chime.ogg" id="3_6fbv0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_515ex"]
+size = Vector2(35.3553, 25)
+
+[node name="KeyCard" type="Area2D"]
+script = ExtResource("1_ae5c8")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 3
+rotation = -0.785398
+scale = Vector2(1.25, 1)
+texture = ExtResource("2_6fbv0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.25, 0.25)
+rotation = -0.785398
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_515ex")
+
+[node name="collect_sfx" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_6fbv0")
+volume_db = 0.22
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

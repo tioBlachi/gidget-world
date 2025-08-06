@@ -1,0 +1,75 @@
+[gd_scene load_steps=12 format=3 uid="uid://dbh40ehfj6b7n"]
+
+[ext_resource type="Texture2D" uid="uid://bugf1keep3l24" path="res://assets/sprites/lab_exit.png" id="1_5lsd3"]
+[ext_resource type="Script" uid="uid://cxw4hg76dyv8j" path="res://scripts/lab_exit_door.gd" id="1_do4ok"]
+[ext_resource type="AudioStream" uid="uid://dl2syysxb73jf" path="res://assets/sounds/lab_door_open_sfx.mp3" id="3_dne46"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_do4ok"]
+atlas = ExtResource("1_5lsd3")
+region = Rect2(5, 2, 21, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dne46"]
+atlas = ExtResource("1_5lsd3")
+region = Rect2(37, 2, 21, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_10dsk"]
+atlas = ExtResource("1_5lsd3")
+region = Rect2(5, 34, 21, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b4v3m"]
+atlas = ExtResource("1_5lsd3")
+region = Rect2(37, 34, 21, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n2g18"]
+atlas = ExtResource("1_5lsd3")
+region = Rect2(5, 66, 21, 29)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vfr65"]
+atlas = ExtResource("1_5lsd3")
+region = Rect2(37, 66, 21, 29)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bgbtl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_do4ok")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dne46")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_10dsk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b4v3m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n2g18")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vfr65")
+}],
+"loop": false,
+"name": &"opening",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dne46"]
+size = Vector2(2, 28)
+
+[node name="LabExitDoor" type="Area2D"]
+script = ExtResource("1_do4ok")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_bgbtl")
+animation = &"opening"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_dne46")
+
+[node name="LabDoorOpenSfx" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_dne46")
+volume_db = -1.71
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

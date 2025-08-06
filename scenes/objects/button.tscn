@@ -42,30 +42,29 @@ animations = [{
 }],
 "loop": false,
 "name": &"pressed",
-"speed": 12.0
+"speed": 15.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ufqlp"]
-size = Vector2(24, 8)
+size = Vector2(24, 4)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2wxwk"]
 size = Vector2(31.3333, 4)
 
 [node name="Button" type="Node2D"]
-scale = Vector2(2, 3)
+scale = Vector2(0.851337, 2.28)
 script = ExtResource("1_2wxwk")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_fg1av")
 animation = &"pressed"
-frame = 1
-frame_progress = 0.481251
+frame = 2
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(0, -8)
+position = Vector2(0, -6)
 shape = SubResource("RectangleShape2D_ufqlp")
 
 [node name="ButtonBase" type="StaticBody2D" parent="."]
