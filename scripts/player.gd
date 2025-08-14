@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 
 var cell_floor: RigidBody2D = null
+var facing_right = true
 
 const SPEED = 200.0
 const JUMP_VELOCITY = -375.0
@@ -25,6 +26,7 @@ func _physics_process(delta: float) -> void:
 	var direction := Input.get_axis("ui_left", "ui_right")
 	if direction:
 		velocity.x = direction * SPEED
+		facing_right = direction > 0
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 

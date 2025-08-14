@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://q5myivnq8cna"]
 
-[ext_resource type="Script" uid="uid://dkf3hm5sdnnca" path="res://key_card.gd" id="1_ae5c8"]
+[ext_resource type="Script" uid="uid://dkf3hm5sdnnca" path="res://scripts/key_card.gd" id="1_ae5c8"]
 [ext_resource type="Texture2D" uid="uid://dd7xeypuiguhg" path="res://assets/sprites/KeyCard.png" id="2_6fbv0"]
 [ext_resource type="AudioStream" uid="uid://25oqx0vh5fa3" path="res://assets/sounds/chime.ogg" id="3_6fbv0"]
 

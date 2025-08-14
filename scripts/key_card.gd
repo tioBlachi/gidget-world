@@ -17,10 +17,12 @@ func _on_door_opened():
 
 func _process(delta: float) -> void:
 	if collected and holder:
-		# Keep position floating above player
+		# Keep position floating in front of player
 		var bob_height = 2.0
 		var bob_speed = 4.0
-		position = Vector2(0, -24 + sin(Time.get_ticks_msec() / 200.0) * bob_height)
+		var x_offset = 90 if holder.facing_right else -90
+		var y_offset = -50
+		position = Vector2(x_offset, y_offset + sin(Time.get_ticks_msec() / 200.0) * bob_height)
 
 
 func _on_body_entered(body):
@@ -36,10 +38,7 @@ func _on_body_entered(body):
 		get_parent().remove_child(self)
 		holder.add_child(self)
 
-		# Position above player
-		position = Vector2(64, -24)
-
-		# Tell the player they have it (optional)
+		
 		if holder.has_method("pickup_keycard"):
 			$collect_sfx.play()
 			holder.pickup_keycard(self)
