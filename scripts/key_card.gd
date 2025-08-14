@@ -26,7 +26,8 @@ func _process(delta: float) -> void:
 
 
 func _on_body_entered(body):
-	print("Something touched me! Eww")
+	if not collected:
+		print("Keycard grabbed by: ", body.name)
 	if collected:
 		return
 
