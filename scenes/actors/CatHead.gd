@@ -3,6 +3,8 @@ extends CharacterBody2D
 signal herded
 signal escaped
 
+@onready var anim: AnimatedSprite2D = $Anim
+@export var frames: SpriteFrames
 # How fast the cat moves (pixels per second)
 @export var speed: float = 150.0
 @export var flee_speed: float = 220.0
@@ -35,6 +37,10 @@ const DIRECTIONS := [
 
 func _ready() -> void:
 	rng.randomize()
+	if frames:
+		anim.sprite_frames = frames
+		if not anim.is_playing():
+			anim.play("idle")
 	# Timer to handle pauses, can be added in Scene Tree
 	pause_timer = Timer.new()
 	pause_timer.one_shot = true
