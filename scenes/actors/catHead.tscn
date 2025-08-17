@@ -1,0 +1,158 @@
+[gd_scene load_steps=21 format=3 uid="uid://ug4dtfp4td5v"]
+
+[ext_resource type="Texture2D" uid="uid://bjogluitgmqt2" path="res://assets/sprites/cat_siamese.png" id="1_hwsec"]
+[ext_resource type="Script" uid="uid://dgmqd8tpbcc0d" path="res://scenes/actors/CatHead.gd" id="1_w1sjm"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x2ag8"]
+atlas = ExtResource("1_hwsec")
+region = Rect2(0, 0, 27, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tqv8f"]
+atlas = ExtResource("1_hwsec")
+region = Rect2(27, 0, 27, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8l8m4"]
+atlas = ExtResource("1_hwsec")
+region = Rect2(0, 24, 27, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0xkf1"]
+atlas = ExtResource("1_hwsec")
+region = Rect2(27, 24, 27, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4u5ff"]
+atlas = ExtResource("1_hwsec")
+region = Rect2(0, 48, 27, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ckxj7"]
+atlas = ExtResource("1_hwsec")
+region = Rect2(27, 48, 27, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y65mn"]
+atlas = ExtResource("1_hwsec")
+region = Rect2(0, 0, 27, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wqrej"]
+atlas = ExtResource("1_hwsec")
+region = Rect2(27, 0, 27, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2fatd"]
+atlas = ExtResource("1_hwsec")
+region = Rect2(0, 0, 27, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mfgmn"]
+atlas = ExtResource("1_hwsec")
+region = Rect2(27, 0, 27, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dg8du"]
+atlas = ExtResource("1_hwsec")
+region = Rect2(0, 24, 27, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x2qkq"]
+atlas = ExtResource("1_hwsec")
+region = Rect2(27, 24, 27, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2wilw"]
+atlas = ExtResource("1_hwsec")
+region = Rect2(0, 48, 27, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_57vgu"]
+atlas = ExtResource("1_hwsec")
+region = Rect2(27, 48, 27, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qrbn5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x2ag8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tqv8f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8l8m4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0xkf1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4u5ff")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ckxj7")
+}],
+"loop": true,
+"name": &"bounce",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y65mn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wqrej")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2fatd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mfgmn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dg8du")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x2qkq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2wilw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_57vgu")
+}],
+"loop": true,
+"name": &"run",
+"speed": 10.0
+}]
+
+[sub_resource type="GDScript" id="GDScript_n12o0"]
+script/source = "extends AnimatedSprite2D
+"
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_47fqo"]
+radius = 10.8108
+height = 27.027
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rj4fp"]
+radius = 83.006
+
+[node name="CatHead" type="CharacterBody2D"]
+scale = Vector2(1.48, 1.48)
+script = ExtResource("1_w1sjm")
+
+[node name="Anim" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_qrbn5")
+animation = &"bounce"
+script = SubResource("GDScript_n12o0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-4.68759e-13, 2.02703)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_47fqo")
+
+[node name="Sense" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sense"]
+shape = SubResource("CircleShape2D_rj4fp")
+
+[node name="WanderTimer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[connection signal="body_entered" from="Sense" to="." method="_on_sense_body_entered"]
+[connection signal="body_exited" from="Sense" to="." method="_on_sense_body_exited"]
