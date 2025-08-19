@@ -148,8 +148,17 @@ sources/4 = SubResource("TileSetAtlasSource_8myk5")
 [sub_resource type="GDScript" id="GDScript_q7y6r"]
 script/source = "extends Area2D
 
+func _ready() -> void:
+	body_entered.connect(_on_body_entered)
+	body_exited.connect(_on_body_exited)
 
-	
+func _on_body_entered(body: Node2D) -> void:
+	if body.is_in_group(\"cats\") and body.has_signal(\"herded\"):
+		body.emit_signal(\"herded\")
+
+func _on_body_exited(body: Node2D) -> void:
+	if body.is_in_group(\"cats\") and body.has_signal(\"escaped\"):
+		body.emit_signal(\"escaped\")
 "
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q7y6r"]
@@ -182,24 +191,24 @@ script = SubResource("GDScript_q7y6r")
 position = Vector2(664, 264)
 shape = SubResource("RectangleShape2D_q7y6r")
 
-[node name="CatHead" parent="." instance=ExtResource("2_yfx42")]
+[node name="CatHead" parent="." groups=["cats"] instance=ExtResource("2_yfx42")]
 position = Vector2(131, 103)
 collision_layer = 3
 collision_mask = 3
 frames = ExtResource("9_u5efl")
 
-[node name="CatHead2" parent="." instance=ExtResource("2_yfx42")]
+[node name="CatHead2" parent="." groups=["cats"] instance=ExtResource("2_yfx42")]
 position = Vector2(783, 51)
 frames = ExtResource("10_u4ftb")
 
-[node name="CatHead3" parent="." instance=ExtResource("2_yfx42")]
+[node name="CatHead3" parent="." groups=["cats"] instance=ExtResource("2_yfx42")]
 position = Vector2(1062, 537)
 frames = ExtResource("10_8myk5")
 
-[node name="CatHead4" parent="." instance=ExtResource("2_yfx42")]
+[node name="CatHead4" parent="." groups=["cats"] instance=ExtResource("2_yfx42")]
 position = Vector2(581, 588)
 frames = ExtResource("9_u5efl")
 
-[node name="CatHead5" parent="." instance=ExtResource("2_yfx42")]
+[node name="CatHead5" parent="." groups=["cats"] instance=ExtResource("2_yfx42")]
 position = Vector2(179, 477)
 frames = ExtResource("10_8myk5")
