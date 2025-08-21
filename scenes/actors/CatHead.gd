@@ -7,12 +7,12 @@ signal escaped
 @onready var meow1: AudioStreamPlayer2D = $Meow1
 @onready var meow2: AudioStreamPlayer2D = $Meow2
 @onready var meow3: AudioStreamPlayer2D = $Meow3
-
-
 @export var frames: SpriteFrames
 # How fast the cat moves (pixels per second)
 @export var speed: float = 150.0
 @export var flee_speed: float = 220.0
+@export var bounce_nudge: float = 0.5
+@export var bounce_random_deg: float = 12.0
 # Minimum and maximum distance to move each time
 @export var min_distance: float = 8.0
 @export var max_distance: float = 200.0
@@ -46,16 +46,11 @@ const DIRECTIONS := [
 func _ready() -> void:
 	rng.randomize()
 	
-	get_tree().create_timer(0.2).timeout.connect(func ():
-		if meow1.stream:
-			print("Test")
-			meow1.play()
-			)
 	if frames:
 		anim.sprite_frames = frames
 		if not anim.is_playing():
 			anim.play("idle")
-	# Timer to handle pauses, can be added in Scene Tree
+	# Timers
 	pause_timer = Timer.new()
 	meow_timer = Timer.new()
 	pause_timer.one_shot = true
@@ -79,14 +74,18 @@ func _physics_process(delta: float) -> void:
 	if player_nearby:
 		var away = (global_position - player_nearby.global_position).normalized()
 		var step = flee_speed * delta
-		move_and_collide(away * step)
+		var collision_info = move_and_collide(away * step)
+		if collision_info:
+			_apply_bounce(collision_info, true)
+		return
+		
 	if moving:
 		var step = min(speed * delta, distance_left)
 		var step_vector = direction.normalized() * step
 
 		var collision = move_and_collide(step_vector)
 		if collision:
-			_stop_move()
+			_apply_bounce(collision, false)
 		else:
 			distance_left -= step
 			if distance_left <= 0:
@@ -94,9 +93,7 @@ func _physics_process(delta: float) -> void:
 
 
 func _start_move() -> void:
-	# Pick a random direction
 	direction = DIRECTIONS[rng.randi_range(0, DIRECTIONS.size() - 1)]
-	# Pick a random distance
 	distance_left = rng.randf_range(min_distance, max_distance)
 	moving = true
 
@@ -140,6 +137,33 @@ func _on_escaped():
 	is_herded = false
 	_reset_meow_timer()
 	
+	
+
+func _apply_bounce(c: KinematicCollision2D, is_flee: bool) -> void:
+	var n := c.get_normal()                  # surface normal we hit
+	var incoming: Vector2
+
+	if is_flee and player_nearby:
+		# FLEE: slide along the wall to avoid jitter
+		incoming = (global_position - player_nearby.global_position).normalized()
+		var slid := incoming.slide(n)
+		# If slide nearly zero (grazing a corner), pick the wall tangent,
+		# biased to keep roughly the previous direction.
+		if slid.length() < 0.001:
+			var tangent := Vector2(-n.y, n.x)  # one of the tangents
+			if tangent.dot(direction) < 0.0:
+				tangent = -tangent
+			slid = tangent
+		direction = slid.normalized()
+	else:
+		# WANDER: reflect (true bounce) + tiny random wiggle
+		incoming = direction.normalized()
+		var reflected := incoming.bounce(n).normalized()
+		reflected = reflected.rotated(deg_to_rad(rng.randf_range(-bounce_random_deg, bounce_random_deg)))
+		direction = reflected.normalized()
+
+	# Small separation so we don't stay embedded in the collider
+	global_position += n * bounce_nudge
 	
 func _on_sense_body_entered(body: Node2D) -> void:
 	if body.name.begins_with("Player"):
