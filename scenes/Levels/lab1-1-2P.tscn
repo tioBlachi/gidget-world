@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=4 uid="uid://dmr310l5vjau2"]
 
 [ext_resource type="PackedScene" uid="uid://bxpry3684affg" path="res://scenes/player/player.tscn" id="1_5xq0a"]
-[ext_resource type="Script" uid="uid://kwqdtogko814" path="res://scripts/lab_1_1_2p.gd" id="1_max5s"]
+[ext_resource type="Script" uid="uid://kwqdtogko814" path="res://scripts/Levels/lab_1_1_2p.gd" id="1_max5s"]
 [ext_resource type="PackedScene" uid="uid://c2mmmw150y6yj" path="res://scenes/objects/lab_cell.tscn" id="3_7txhj"]
 [ext_resource type="Texture2D" uid="uid://ctijq3u5aqe1v" path="res://assets/Tiles/lab_tiles.png" id="3_max5s"]
 [ext_resource type="PackedScene" uid="uid://cyxa25yg2hfwc" path="res://scenes/objects/button.tscn" id="5_lnb5p"]

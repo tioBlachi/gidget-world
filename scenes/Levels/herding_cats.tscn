@@ -1,6 +1,6 @@
 [gd_scene load_steps=21 format=4 uid="uid://d1fmdxq5blbxf"]
 
-[ext_resource type="Script" uid="uid://gs2a1w6kgnm1" path="res://scenes/Levels/herding_cats.gd" id="1_diqqx"]
+[ext_resource type="Script" uid="uid://gs2a1w6kgnm1" path="res://scripts/Levels/herding_cats.gd" id="1_diqqx"]
 [ext_resource type="PackedScene" uid="uid://bxpry3684affg" path="res://scenes/player/player.tscn" id="2_t3gqf"]
 [ext_resource type="PackedScene" uid="uid://ug4dtfp4td5v" path="res://scenes/actors/catHead.tscn" id="2_yfx42"]
 [ext_resource type="Texture2D" uid="uid://cdgt0yy4irs8" path="res://assets/Tiles/park_tiles.png" id="3_t3gqf"]

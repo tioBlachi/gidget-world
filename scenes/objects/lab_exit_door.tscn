@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://dbh40ehfj6b7n"]
 
 [ext_resource type="Texture2D" uid="uid://bugf1keep3l24" path="res://assets/sprites/lab_exit.png" id="1_5lsd3"]
-[ext_resource type="Script" uid="uid://cxw4hg76dyv8j" path="res://scripts/lab_exit_door.gd" id="1_do4ok"]
+[ext_resource type="Script" uid="uid://cxw4hg76dyv8j" path="res://scripts/objects/lab_exit_door.gd" id="1_do4ok"]
 [ext_resource type="AudioStream" uid="uid://dl2syysxb73jf" path="res://assets/sounds/lab_door_open_sfx.mp3" id="3_dne46"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_do4ok"]

@@ -139,11 +139,11 @@ func _on_escaped():
 	
 	
 
-func _apply_bounce(c: KinematicCollision2D, is_flee: bool) -> void:
-	var n := c.get_normal()                  # surface normal we hit
+func _apply_bounce(c: KinematicCollision2D, is_fleeing: bool) -> void:
+	var n := c.get_normal()                  # surface normal
 	var incoming: Vector2
 
-	if is_flee and player_nearby:
+	if is_fleeing and player_nearby:
 		# FLEE: slide along the wall to avoid jitter
 		incoming = (global_position - player_nearby.global_position).normalized()
 		var slid := incoming.slide(n)
