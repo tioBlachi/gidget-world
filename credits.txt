@@ -1,3 +1,13 @@
+Sprites and Spritesheets
+
 8-bit-explosion.ogg:
 	Creator: Adrien Kjer
 	https://samplefocus.com/samples/8-bit-kit-explosion-3
+
+explosion.png:
+	Creator: JROB774
+	https://opengameart.org/content/pixel-explosion-12-frames
+
+/sprites/Fence/:
+	Creator: InThePixel
+	https://opengameart.org/content/fantastic-fence-16x16
