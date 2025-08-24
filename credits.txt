@@ -1,0 +1,3 @@
+8-bit-explosion.ogg:
+	Creator: Adrien Kjer
+	https://samplefocus.com/samples/8-bit-kit-explosion-3

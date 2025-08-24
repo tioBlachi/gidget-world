@@ -124,18 +124,18 @@ func _reset_meow_timer():
 	meow_timer.start()
 	
 
-func _on_herded():
-	if is_herded:
-		return
-	is_herded = true
-	if meow_timer: meow_timer.stop()
-	if meow1: meow1.stop()
-	if meow2: meow2.stop()
-	
-	
-func _on_escaped():
-	is_herded = false
-	_reset_meow_timer()
+#func _on_herded():
+	#if is_herded:
+		#return
+	#is_herded = true
+	#if meow_timer: meow_timer.stop()
+	#if meow1: meow1.stop()
+	#if meow2: meow2.stop()
+	#
+	#
+#func _on_escaped():
+	#is_herded = false
+	#_reset_meow_timer()
 	
 	
 
@@ -156,13 +156,12 @@ func _apply_bounce(c: KinematicCollision2D, is_fleeing: bool) -> void:
 			slid = tangent
 		direction = slid.normalized()
 	else:
-		# WANDER: reflect (true bounce) + tiny random wiggle
+		# WANDER:
 		incoming = direction.normalized()
 		var reflected := incoming.bounce(n).normalized()
 		reflected = reflected.rotated(deg_to_rad(rng.randf_range(-bounce_random_deg, bounce_random_deg)))
 		direction = reflected.normalized()
 
-	# Small separation so we don't stay embedded in the collider
 	global_position += n * bounce_nudge
 	
 func _on_sense_body_entered(body: Node2D) -> void:
