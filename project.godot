@@ -26,6 +26,10 @@ window/stretch/mode="viewport"
 
 project/assembly_name="Gidget World"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/gut/plugin.cfg")
+
 [input]
 
 jump={
