@@ -5,7 +5,6 @@ extends Node2D
 @onready var cell2 = $LabCell2/CellFloor
 @onready var player1 = $Player
 @onready var player2 = $Player2
-# Called when the node enters the scene tree for the first time.
 
 func _ready() -> void:
 	randomize()
