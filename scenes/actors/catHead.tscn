@@ -1,0 +1,50 @@
+[gd_scene load_steps=9 format=3 uid="uid://ug4dtfp4td5v"]
+
+[ext_resource type="Script" uid="uid://dgmqd8tpbcc0d" path="res://scenes/actors/CatHead.gd" id="1_w1sjm"]
+[ext_resource type="SpriteFrames" uid="uid://cidimnf6nt56w" path="res://scenes/actors/calico_frames.tres" id="2_w1sjm"]
+[ext_resource type="AudioStream" uid="uid://dnhebdcyfb6b2" path="res://assets/sounds/meow1.ogg" id="3_mpgt1"]
+[ext_resource type="AudioStream" uid="uid://c13ciohlicsw6" path="res://assets/sounds/meow2.mp3" id="4_08q3r"]
+[ext_resource type="AudioStream" uid="uid://cj6p05jnn6xaf" path="res://assets/sounds/meow3.mp3" id="5_wgjft"]
+
+[sub_resource type="GDScript" id="GDScript_n12o0"]
+script/source = "extends AnimatedSprite2D
+"
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_47fqo"]
+radius = 10.8108
+height = 27.027
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rj4fp"]
+radius = 83.006
+
+[node name="CatHead" type="CharacterBody2D"]
+scale = Vector2(1.48, 1.48)
+script = ExtResource("1_w1sjm")
+
+[node name="Anim" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = ExtResource("2_w1sjm")
+animation = &"run"
+script = SubResource("GDScript_n12o0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-4.68759e-13, 2.02703)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_47fqo")
+
+[node name="Sense" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sense"]
+shape = SubResource("CircleShape2D_rj4fp")
+
+[node name="Meow1" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_mpgt1")
+
+[node name="Meow2" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_08q3r")
+
+[node name="Meow3" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_wgjft")
+
+[connection signal="body_entered" from="Sense" to="." method="_on_sense_body_entered"]
+[connection signal="body_exited" from="Sense" to="." method="_on_sense_body_exited"]
