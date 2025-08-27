@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bjogluitgmqt2"
-path="res://.godot/imported/cat_siamese.png-2061bdc380a27f24657396d1d98e70a6.ctex"
+uid="uid://bugf1keep3l24"
+path="res://.godot/imported/lab_exit.png-0049ac9c5586eb54c891d835d2314548.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/cat_siamese.png"
-dest_files=["res://.godot/imported/cat_siamese.png-2061bdc380a27f24657396d1d98e70a6.ctex"]
+source_file="res://assets 2/sprites/lab_exit.png"
+dest_files=["res://.godot/imported/lab_exit.png-0049ac9c5586eb54c891d835d2314548.ctex"]
 
 [params]
 

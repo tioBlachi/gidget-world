@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://brs3yhmq3yxxc"
-path="res://.godot/imported/fence_post.png-ad6ce331c9e8465f2f2d3dc675635a38.ctex"
+uid="uid://dd7xeypuiguhg"
+path="res://.godot/imported/KeyCard.png-1b79f8def995a3ff9a0831ccb573687e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/Fence/fence_post.png"
-dest_files=["res://.godot/imported/fence_post.png-ad6ce331c9e8465f2f2d3dc675635a38.ctex"]
+source_file="res://assets 2/sprites/KeyCard.png"
+dest_files=["res://.godot/imported/KeyCard.png-1b79f8def995a3ff9a0831ccb573687e.ctex"]
 
 [params]
 

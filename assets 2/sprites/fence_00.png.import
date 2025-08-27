@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cwip4wrrrdyv4"
-path="res://.godot/imported/cat_calico.png-137c5d96f010b15b6697871d82e5f126.ctex"
+uid="uid://c0gt0d5rljr6r"
+path="res://.godot/imported/fence_00.png-034446ea17ed0e8a303247b048a506b5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/cat_calico.png"
-dest_files=["res://.godot/imported/cat_calico.png-137c5d96f010b15b6697871d82e5f126.ctex"]
+source_file="res://assets 2/sprites/fence_00.png"
+dest_files=["res://.godot/imported/fence_00.png-034446ea17ed0e8a303247b048a506b5.ctex"]
 
 [params]
 

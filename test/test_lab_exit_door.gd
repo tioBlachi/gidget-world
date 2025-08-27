@@ -12,7 +12,7 @@ class FakePlayer:
 
 func _make_door() -> Area2D:
 	var door := Area2D.new()
-	door.set_script(load("res://scripts/lab_exit_door.gd"))
+	door.set_script(load("res://scripts/objects/lab_exit_door.gd"))
 
 	# AnimatedSprite2D child expected by script
 	var anim := AnimatedSprite2D.new()

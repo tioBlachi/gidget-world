@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dpc3kna16mq41"
+path="res://.godot/imported/meow3.ogg-538df9411650aa7b094e9450b3539e4b.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets 2/sounds/meow3.ogg"
+dest_files=["res://.godot/imported/meow3.ogg-538df9411650aa7b094e9450b3539e4b.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
