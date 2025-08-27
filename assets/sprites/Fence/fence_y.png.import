@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bjogluitgmqt2"
-path="res://.godot/imported/cat_siamese.png-04ea7e894b56b6f016c6199cbb8fb209.ctex"
+uid="uid://dqgjnfunnd0ep"
+path="res://.godot/imported/fence_y.png-17df76a829fe1160325bb8c5c38d4ea8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets 2/sprites/cat_siamese.png"
-dest_files=["res://.godot/imported/cat_siamese.png-04ea7e894b56b6f016c6199cbb8fb209.ctex"]
+source_file="res://assets/sprites/Fence/fence_y.png"
+dest_files=["res://.godot/imported/fence_y.png-17df76a829fe1160325bb8c5c38d4ea8.ctex"]
 
 [params]
 

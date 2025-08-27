@@ -12,7 +12,7 @@ class FakePlayer:
 
 func _make_keycard(parent: Node) -> Area2D:
 	var kc := Area2D.new()
-	kc.set_script(load("res://scripts/objects/key_card.gd"))
+	kc.set_script(load("res://scripts/key_card.gd"))
 	# Provide required child so `$collect_sfx.play()` won't error
 	var s := AudioStreamPlayer.new()
 	s.name = "collect_sfx"

@@ -14,7 +14,7 @@ class FakePlayer:
 
 func _make_button() -> Node2D:
 	var btn := Node2D.new()
-	btn.set_script(load("res://scripts/objects/button.gd"))
+	btn.set_script(load("res://scripts/button.gd"))
 	var anim := AnimatedSprite2D.new(); anim.name = "AnimatedSprite2D"; btn.add_child(anim)
 	var click := AudioStreamPlayer.new(); click.name = "ClickSound"; btn.add_child(click)
 	return btn

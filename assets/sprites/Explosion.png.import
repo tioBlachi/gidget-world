@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cjygpv2l2x8y3"
-path="res://.godot/imported/grass_tileset_16x16.png-b0a6e4267448e627f4b6e5038c9ced14.ctex"
+uid="uid://ci0kjxllfmyhu"
+path="res://.godot/imported/Explosion.png-c0627f0cec7dab16b74334380bf872a9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets 2/sprites/grass_tileset_16x16.png"
-dest_files=["res://.godot/imported/grass_tileset_16x16.png-b0a6e4267448e627f4b6e5038c9ced14.ctex"]
+source_file="res://assets/sprites/Explosion.png"
+dest_files=["res://.godot/imported/Explosion.png-c0627f0cec7dab16b74334380bf872a9.ctex"]
 
 [params]
 

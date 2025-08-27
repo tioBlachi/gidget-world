@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cud2481gymp04"
-path="res://.godot/imported/button_sprite_sheet.png-efa7c704c962e1948a801b0d6ff75dec.ctex"
+uid="uid://cjygpv2l2x8y3"
+path="res://.godot/imported/grass_tileset_16x16.png-234b835e2b576841b488f601c4c3e8e9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets 2/sprites/button_sprite_sheet.png"
-dest_files=["res://.godot/imported/button_sprite_sheet.png-efa7c704c962e1948a801b0d6ff75dec.ctex"]
+source_file="res://assets/sprites/grass_tileset_16x16.png"
+dest_files=["res://.godot/imported/grass_tileset_16x16.png-234b835e2b576841b488f601c4c3e8e9.ctex"]
 
 [params]
 
