@@ -2,7 +2,7 @@ extends GutTest
 
 func _make_cell_floor() -> RigidBody2D:
 	var cf := RigidBody2D.new()
-	cf.set_script(load("res://scripts/cell_floor.gd"))
+	cf.set_script(load("res://scripts/objects/cell_floor.gd"))
 	var sfx := AudioStreamPlayer.new(); sfx.name = "OpenDoor"; cf.add_child(sfx)
 	return cf
 

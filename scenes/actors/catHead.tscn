@@ -3,8 +3,8 @@
 [ext_resource type="Script" uid="uid://dgmqd8tpbcc0d" path="res://scenes/actors/CatHead.gd" id="1_w1sjm"]
 [ext_resource type="SpriteFrames" uid="uid://cidimnf6nt56w" path="res://scenes/actors/calico_frames.tres" id="2_w1sjm"]
 [ext_resource type="AudioStream" uid="uid://dnhebdcyfb6b2" path="res://assets/sounds/meow1.ogg" id="3_mpgt1"]
-[ext_resource type="AudioStream" uid="uid://c13ciohlicsw6" path="res://assets/sounds/meow2.mp3" id="4_08q3r"]
-[ext_resource type="AudioStream" uid="uid://cj6p05jnn6xaf" path="res://assets/sounds/meow3.mp3" id="5_wgjft"]
+[ext_resource type="AudioStream" uid="uid://c56xvqxg4sor0" path="res://assets/sounds/meow2.ogg" id="4_08q3r"]
+[ext_resource type="AudioStream" uid="uid://dpc3kna16mq41" path="res://assets/sounds/meow3.ogg" id="5_wgjft"]
 
 [sub_resource type="GDScript" id="GDScript_n12o0"]
 script/source = "extends AnimatedSprite2D
