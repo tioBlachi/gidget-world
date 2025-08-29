@@ -30,6 +30,10 @@ project/assembly_name="Gidget World"
 
 enabled=PackedStringArray("res://addons/gut/plugin.cfg")
 
+[global_group]
+
+herdingCats=""
+
 [input]
 
 jump={
