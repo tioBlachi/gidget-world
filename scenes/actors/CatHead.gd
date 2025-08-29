@@ -41,7 +41,7 @@ const DIRECTIONS := [
 
 
 func _ready() -> void:
-	add_to_group("cats")
+	add_to_group("cats", true)
 	rng.randomize()
 	
 	if frames:
@@ -120,22 +120,7 @@ func _on_meow_timer_timeout():
 func _reset_meow_timer():
 	meow_timer.wait_time = rng.randf_range(2.0, 6.0)
 	meow_timer.start()
-	
 
-#func _on_herded():
-	#if is_herded:
-		#return
-	#is_herded = true
-	#if meow_timer: meow_timer.stop()
-	#if meow1: meow1.stop()
-	#if meow2: meow2.stop()
-	#
-	#
-#func _on_escaped():
-	#is_herded = false
-	#_reset_meow_timer()
-	
-	
 
 func _apply_bounce(c: KinematicCollision2D, is_fleeing: bool) -> void:
 	var n := c.get_normal()                  # surface normal

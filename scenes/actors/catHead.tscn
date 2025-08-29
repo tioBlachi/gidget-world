@@ -15,7 +15,7 @@ radius = 10.8108
 height = 27.027
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rj4fp"]
-radius = 83.006
+radius = 51.8864
 
 [node name="CatHead" type="CharacterBody2D"]
 scale = Vector2(1.48, 1.48)
