@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://q5myivnq8cna" path="res://scenes/objects/key_card.tscn" id="7_lj0qi"]
 [ext_resource type="PackedScene" uid="uid://dbh40ehfj6b7n" path="res://scenes/objects/lab_exit_door.tscn" id="8_v2h3i"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_max5s"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_v2h3i"]
 texture = ExtResource("3_max5s")
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
@@ -44,7 +44,7 @@ texture = ExtResource("3_max5s")
 
 [sub_resource type="TileSet" id="TileSet_lnb5p"]
 physics_layer_0/collision_layer = 1
-sources/0 = SubResource("TileSetAtlasSource_max5s")
+sources/0 = SubResource("TileSetAtlasSource_v2h3i")
 
 [node name="Lab1-1-2P" type="Node2D"]
 script = ExtResource("1_max5s")
