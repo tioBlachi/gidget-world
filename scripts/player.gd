@@ -7,6 +7,10 @@ extends CharacterBody2D
 var cell_floor: RigidBody2D = null
 var facing_right = true
 
+
+func _ready():
+	add_to_group("players")
+
 func _physics_process(delta: float) -> void:
 	if side_scroller:
 	# Add the gravity.
