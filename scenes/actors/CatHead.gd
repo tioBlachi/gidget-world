@@ -1,8 +1,5 @@
 extends CharacterBody2D
 
-signal herded
-signal escaped
-
 @onready var anim: AnimatedSprite2D = $Anim
 @onready var meow1: AudioStreamPlayer2D = $Meow1
 @onready var meow2: AudioStreamPlayer2D = $Meow2
@@ -44,6 +41,7 @@ const DIRECTIONS := [
 
 
 func _ready() -> void:
+	add_to_group("cats")
 	rng.randomize()
 	
 	if frames:
