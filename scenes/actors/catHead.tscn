@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://ug4dtfp4td5v"]
 
-[ext_resource type="Script" uid="uid://dgmqd8tpbcc0d" path="res://scenes/actors/CatHead.gd" id="1_w1sjm"]
+[ext_resource type="Script" uid="uid://dgmqd8tpbcc0d" path="res://scripts/actors/CatHead.gd" id="1_w1sjm"]
 [ext_resource type="SpriteFrames" uid="uid://cidimnf6nt56w" path="res://scenes/actors/calico_frames.tres" id="2_w1sjm"]
 [ext_resource type="AudioStream" uid="uid://dnhebdcyfb6b2" path="res://assets/sounds/meow1.ogg" id="3_mpgt1"]
 [ext_resource type="AudioStream" uid="uid://c56xvqxg4sor0" path="res://assets/sounds/meow2.ogg" id="4_08q3r"]
