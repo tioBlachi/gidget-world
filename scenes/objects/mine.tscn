@@ -185,6 +185,6 @@ stream = ExtResource("4_koaxh")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_enp30")
-animation = &"outer_warning"
+animation = &"explosion"
 
 [node name="BeepTimer" type="Timer" parent="."]

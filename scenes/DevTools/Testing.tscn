@@ -1,0 +1,149 @@
+[gd_scene load_steps=5 format=3 uid="uid://c8227ubacwbag"]
+
+[ext_resource type="Script" uid="uid://b51wvad2rm0ro" path="res://scripts/Network/network_manager.gd" id="1_mw4oa"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_isvdv"]
+font_size = 30
+font_color = Color(0.0470588, 0.0509804, 1, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_hcs0a"]
+font_size = 30
+font_color = Color(0.0537454, 0.706278, 5.77569e-07, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_4tnxq"]
+font_size = 50
+
+[node name="Testing" type="Node2D"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 1279.0
+offset_bottom = 725.0
+
+[node name="NetworkManager" type="Node" parent="."]
+script = ExtResource("1_mw4oa")
+
+[node name="NetworkUI" type="Panel" parent="NetworkManager"]
+offset_left = 52.0
+offset_top = 44.0
+offset_right = 491.0
+offset_bottom = 344.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="NetworkManager/NetworkUI"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 20.0
+offset_right = 423.0
+offset_bottom = 376.0
+theme_override_constants/separation = 11
+
+[node name="HostBtn" type="Button" parent="NetworkManager/NetworkUI/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Start Server"
+
+[node name="JoinBtn" type="Button" parent="NetworkManager/NetworkUI/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Join Server
+"
+
+[node name="IP_Input" type="LineEdit" parent="NetworkManager/NetworkUI/VBoxContainer"]
+layout_mode = 2
+text = "localhost"
+placeholder_text = "IP Address..."
+
+[node name="Port_Input" type="LineEdit" parent="NetworkManager/NetworkUI/VBoxContainer"]
+layout_mode = 2
+text = "8080"
+placeholder_text = "Port..."
+
+[node name="ServerManager" type="Node" parent="."]
+
+[node name="ServerManagerUI" type="Panel" parent="ServerManager"]
+offset_left = 600.0
+offset_top = 47.0
+offset_right = 1234.0
+offset_bottom = 571.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ServerManager/ServerManagerUI"]
+layout_mode = 0
+offset_left = 18.0
+offset_top = 15.0
+offset_right = 620.0
+offset_bottom = 507.0
+theme_override_constants/separation = 20
+
+[node name="LobbyPanelTitle" type="Label" parent="ServerManager/ServerManagerUI/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Players IDs in Server"
+horizontal_alignment = 1
+
+[node name="HostID" type="Label" parent="ServerManager/ServerManagerUI/VBoxContainer"]
+layout_mode = 2
+text = "Host ID: N/A"
+label_settings = SubResource("LabelSettings_isvdv")
+
+[node name="HostUsername" type="Label" parent="ServerManager/ServerManagerUI/VBoxContainer"]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_isvdv")
+
+[node name="ClientID" type="Label" parent="ServerManager/ServerManagerUI/VBoxContainer"]
+layout_mode = 2
+text = "Client ID: N/A"
+label_settings = SubResource("LabelSettings_hcs0a")
+
+[node name="ClientUsername" type="Label" parent="ServerManager/ServerManagerUI/VBoxContainer"]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_hcs0a")
+
+[node name="LevelManager" type="Node" parent="."]
+
+[node name="LevelSelectorUI" type="Panel" parent="LevelManager"]
+offset_left = 55.0
+offset_top = 365.0
+offset_right = 493.0
+offset_bottom = 569.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LevelManager/LevelSelectorUI"]
+layout_mode = 0
+offset_left = 7.0
+offset_top = 8.0
+offset_right = 430.0
+offset_bottom = 196.0
+theme_override_constants/separation = 20
+
+[node name="LevelPanelTitle" type="Label" parent="LevelManager/LevelSelectorUI/VBoxContainer"]
+layout_mode = 2
+text = "Select Test Level"
+label_settings = SubResource("LabelSettings_4tnxq")
+horizontal_alignment = 1
+
+[node name="OptionButton" type="OptionButton" parent="LevelManager/LevelSelectorUI/VBoxContainer"]
+layout_mode = 2
+item_count = 2
+popup/item_0/text = "Herding Cats"
+popup/item_0/id = 0
+popup/item_1/text = "Lab Escape"
+popup/item_1/id = 1
+
+[node name="Panel" type="Panel" parent="."]
+offset_left = 422.0
+offset_top = 629.0
+offset_right = 655.0
+offset_bottom = 672.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 0
+offset_top = 10.0
+offset_right = 228.0
+offset_bottom = 33.0
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "Gidget World Testing Center"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="NetworkManager/NetworkUI/VBoxContainer/HostBtn" to="NetworkManager" method="start_host"]
+[connection signal="pressed" from="NetworkManager/NetworkUI/VBoxContainer/JoinBtn" to="NetworkManager" method="start_client"]
+[connection signal="item_selected" from="LevelManager/LevelSelectorUI/VBoxContainer/OptionButton" to="NetworkManager" method="_on_option_button_item_selected"]
