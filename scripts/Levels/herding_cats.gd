@@ -62,6 +62,7 @@ func set_side_scroller_now(id: int, value: bool):
 		if node:
 			node.set_side_scroller.rpc(value)
 			
+# ------------ RPCs ----------------
 @rpc("authority", "call_local", "reliable")
 func spawn_player(id: int):
 	var player_instance = player_scene.instantiate()
