@@ -2,8 +2,6 @@ extends Area2D
 
 signal lab_door_opened
 
-#@export var requires_keycard = true
-
 var is_open = false
 
 func open_door():

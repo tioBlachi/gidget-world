@@ -4,15 +4,24 @@ extends CharacterBody2D
 @export var JUMP_VELOCITY: float = -375.0
 @export var side_scroller: bool = true
 
+@onready var multiplayer_sync = $MultiplayerSynchronizer
+
 var cell_floor: RigidBody2D = null
 var facing_right = true
 
 
 func _ready():
+	var peer_id = name.to_int()
+	if peer_id != 1:
+		set_multiplayer_authority(peer_id)
 	add_to_group("players")
+	
+	for players in get_tree().get_nodes_in_group("players"):
+		print("Player Group: ", players)
 
 func _physics_process(delta: float) -> void:
 	if is_multiplayer_authority():
+		$Camera2D.make_current()
 		if side_scroller:
 		# Add the gravity.
 			if not is_on_floor():
@@ -31,7 +40,7 @@ func _physics_process(delta: float) -> void:
 			var direction := Input.get_axis("ui_left", "ui_right")
 			if direction:
 				velocity.x = direction * SPEED
-				facing_right = direction > 0
+				#facing_right = direction > 0
 			else:
 				velocity.x = move_toward(velocity.x, 0, SPEED)
 
@@ -45,9 +54,6 @@ func _physics_process(delta: float) -> void:
 				dir = dir.normalized()
 				velocity.x = dir.x * SPEED
 				velocity.y = dir.y * SPEED
-				# Might use code below later
-				#if x_direction != 0:
-					#facing_right = x_direction > 0
 			else:
 				velocity.x = move_toward(velocity.x, 0.0, SPEED)
 				velocity.y = move_toward(velocity.y, 0.0, SPEED)

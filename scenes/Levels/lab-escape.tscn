@@ -1,11 +1,9 @@
-[gd_scene load_steps=11 format=4 uid="uid://dmr310l5vjau2"]
+[gd_scene load_steps=9 format=4 uid="uid://dmr310l5vjau2"]
 
 [ext_resource type="Script" uid="uid://kwqdtogko814" path="res://scripts/Levels/lab-escape.gd" id="1_r6deh"]
-[ext_resource type="PackedScene" uid="uid://bxpry3684affg" path="res://scenes/player/player.tscn" id="2_modnx"]
 [ext_resource type="PackedScene" uid="uid://c2mmmw150y6yj" path="res://scenes/objects/lab_cell.tscn" id="3_hrlo7"]
 [ext_resource type="Texture2D" uid="uid://ctijq3u5aqe1v" path="res://assets/Tiles/lab_tiles.png" id="4_mi8k0"]
 [ext_resource type="PackedScene" uid="uid://cyxa25yg2hfwc" path="res://scenes/objects/button.tscn" id="5_7nrcb"]
-[ext_resource type="Script" uid="uid://byl2gfe1hmqf" path="res://camera_2d.gd" id="6_r1fac"]
 [ext_resource type="PackedScene" uid="uid://q5myivnq8cna" path="res://scenes/objects/key_card.tscn" id="7_85sb4"]
 [ext_resource type="PackedScene" uid="uid://dbh40ehfj6b7n" path="res://scenes/objects/lab_exit_door.tscn" id="8_fg2n0"]
 
@@ -49,14 +47,6 @@ sources/0 = SubResource("TileSetAtlasSource_max5s")
 [node name="LabEscape" type="Node2D"]
 script = ExtResource("1_r6deh")
 
-[node name="Player" parent="." instance=ExtResource("2_modnx")]
-position = Vector2(334, 449)
-scale = Vector2(0.5, 0.5)
-
-[node name="Player2" parent="." instance=ExtResource("2_modnx")]
-position = Vector2(506, 450)
-scale = Vector2(0.5, 0.5)
-
 [node name="LabCell2" parent="." instance=ExtResource("3_hrlo7")]
 position = Vector2(306, 204)
 
@@ -79,15 +69,6 @@ tile_set = SubResource("TileSet_lnb5p")
 [node name="Button" parent="." instance=ExtResource("5_7nrcb")]
 position = Vector2(874, 806)
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(830, 586)
-limit_left = -120
-limit_top = -124
-limit_right = 2045
-limit_bottom = 1076
-script = ExtResource("6_r1fac")
-players = Array[NodePath]([NodePath("../Player"), NodePath("../Player2")])
-
 [node name="KeyCard" parent="." instance=ExtResource("7_85sb4")]
 position = Vector2(1798, 484)
 
@@ -95,6 +76,20 @@ position = Vector2(1798, 484)
 z_index = -1
 position = Vector2(1458, 741)
 scale = Vector2(4.2281, 4.55587)
+
+[node name="pSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("uid://bxpry3684affg")
+spawn_path = NodePath("../Players")
+
+[node name="PlayerMarkers" type="Node2D" parent="."]
+
+[node name="Player1Marker" type="Marker2D" parent="PlayerMarkers"]
+position = Vector2(306, 633)
+
+[node name="Player2Marker" type="Marker2D" parent="PlayerMarkers"]
+position = Vector2(569, 581)
+
+[node name="Players" type="Node2D" parent="."]
 
 [editable path="LabCell2"]
 [editable path="LabCell1"]

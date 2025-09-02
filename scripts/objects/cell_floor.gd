@@ -15,6 +15,7 @@ var first_cell_open = false
 func _ready():
 	freeze = true
 
+
 func count_jumps():
 	if is_flimsy and not first_cell_open:
 		jump_count += 1

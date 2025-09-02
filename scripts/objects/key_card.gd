@@ -7,7 +7,6 @@ var holder: Node = null  # The player holding it
 func _ready():
 	var door = get_node("../LabExitDoor")
 	if door:
-		print("Waiting for door signal")
 		door.connect("lab_door_opened", _on_door_opened)
 	
 	
@@ -24,7 +23,7 @@ func _process(delta: float) -> void:
 		var y_offset = -50
 		position = Vector2(x_offset, y_offset + sin(Time.get_ticks_msec() / 200.0) * bob_height)
 
-
+@rpc("authority", "call_local")
 func _on_body_entered(body):
 	if not collected:
 		print("Keycard grabbed by: ", body.name)
