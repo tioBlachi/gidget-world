@@ -65,9 +65,6 @@ func _on_peer_connected(id: int):
 		print("Server: Client with ID %d connected." % id)
 		_add_player_to_server(id) 
 		
-		#if players.size() >= MAX_CLIENTS:
-			#_all_players_loaded()
-		
 func _on_peer_disconnected(id: int):
 	if multiplayer.is_server():
 		var index = players.find(id)
