@@ -2,9 +2,9 @@ name: GUT
 
 on:
   push:
-    branches:["**"]
+    branches: ["**"]
   pull_request:
-    branches:{"main"]
+    branches: ["main"]
 
 jobs:
   test:
@@ -21,7 +21,7 @@ jobs:
       - name: Run GUT Tests
         run: |
           godot --headless --path . \
-            --script res://addons/gut/gut_cmdls.gd \
+            --script res://addons/gut/gut_cmdln.gd \
             -gdir=res://test \
             -ginclude_subdirs \
             -gexit
