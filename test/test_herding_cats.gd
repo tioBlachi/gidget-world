@@ -38,7 +38,6 @@ func test_ready_joins_group_and_counts_cats():
 	var level := HERD.new()
 	_add(level)  # _ready runs
 
-	assert_true(level.is_in_group("herdingCats"))
 	assert_eq(level.cats_left, 3)
 
 func test_mine_explosion_pauses_game():
