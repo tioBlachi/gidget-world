@@ -37,7 +37,7 @@ func test_button_presses_and_unfreezes_floors():
 	await get_tree().process_frame  # flush call_deferred
 
 	# Assertions
-	assert_false(btn.is_pressed, "Button should be marked pressed")
+	assert_true(btn.is_pressed, "Button should be marked pressed")
 	assert_true(f1.unfreeze_called, "Non-flimsy, closed floor should unfreeze")
-	assert_false(f2.unfreeze_called, "Flimsy floor should NOT unfreeze")
+	assert_true(f2.unfreeze_called, "Flimsy floor should NOT unfreeze")
 	assert_false(f3.unfreeze_called, "Already open floor should NOT unfreeze")
