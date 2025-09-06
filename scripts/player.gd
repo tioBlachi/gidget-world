@@ -23,7 +23,7 @@ func _physics_process(delta: float) -> void:
 
 
 		# Get the input direction and handle the movement/deceleration.
-		var direction := Input.get_axis("ui_left", "ui_right")
+		var direction := Input.get_axis("move_left", "move_right")
 		if direction:
 			velocity.x = direction * SPEED
 			facing_right = direction > 0
@@ -32,8 +32,8 @@ func _physics_process(delta: float) -> void:
 
 		move_and_slide()
 	else:
-		var x_direction = Input.get_axis("ui_left", "ui_right")
-		var y_direction = Input.get_axis("ui_up", "ui_down")
+		var x_direction = Input.get_axis("move_left", "move_right")
+		var y_direction = Input.get_axis("move_up", "move_down")
 		var dir = Vector2(x_direction, y_direction)
 		
 		if dir != Vector2.ZERO:
