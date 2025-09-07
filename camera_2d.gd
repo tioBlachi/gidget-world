@@ -12,6 +12,11 @@ extends Camera2D
 # need to find a way to make this dynamic for every scene so we do not need 
 # to manually do this for every level
 
+func _ready():
+	var spawned_players = get_tree().get_nodes_in_group("players")
+	for p in spawned_players:
+		print(p)
+
 func _process(delta: float) -> void:
 	if players.size() == 0:
 		return

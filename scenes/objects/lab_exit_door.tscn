@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dbh40ehfj6b7n"]
+[gd_scene load_steps=13 format=3 uid="uid://dbh40ehfj6b7n"]
 
 [ext_resource type="Texture2D" uid="uid://bugf1keep3l24" path="res://assets/sprites/lab_exit.png" id="1_5lsd3"]
 [ext_resource type="Script" uid="uid://cxw4hg76dyv8j" path="res://scripts/objects/lab_exit_door.gd" id="1_do4ok"]
@@ -57,6 +57,11 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dne46"]
 size = Vector2(2, 28)
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_dne46"]
+properties/0/path = NodePath(".:is_open")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
 [node name="LabExitDoor" type="Area2D"]
 script = ExtResource("1_do4ok")
 
@@ -72,4 +77,7 @@ shape = SubResource("RectangleShape2D_dne46")
 stream = ExtResource("3_dne46")
 volume_db = -1.71
 
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_dne46")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered_local"]
