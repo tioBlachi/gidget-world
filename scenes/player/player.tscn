@@ -14,6 +14,9 @@ properties/0/replication_mode = 1
 properties/1/path = NodePath("Camera2D:position")
 properties/1/spawn = true
 properties/1/replication_mode = 1
+properties/2/path = NodePath(".:move_direction")
+properties/2/spawn = true
+properties/2/replication_mode = 1
 
 [node name="Player" type="CharacterBody2D"]
 scale = Vector2(0.520001, 0.520001)

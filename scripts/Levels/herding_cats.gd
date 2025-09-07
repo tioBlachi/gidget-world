@@ -98,5 +98,5 @@ func set_side_scroller(value: bool):
 	if not pSpawner:
 		return
 	for p in pSpawner.get_children():
-		if p.has_variable("side_scroller"):
-			p.side_scroller = value
+		if p.has_method("set_side_scroller"):
+			p.set_side_scroller(value)

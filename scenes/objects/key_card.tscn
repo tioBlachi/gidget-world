@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://q5myivnq8cna"]
+[gd_scene load_steps=6 format=3 uid="uid://q5myivnq8cna"]
 
 [ext_resource type="Script" uid="uid://dkf3hm5sdnnca" path="res://scripts/objects/key_card.gd" id="1_ae5c8"]
 [ext_resource type="Texture2D" uid="uid://dd7xeypuiguhg" path="res://assets/sprites/KeyCard.png" id="2_6fbv0"]
@@ -6,6 +6,14 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_515ex"]
 size = Vector2(35.3553, 25)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_6fbv0"]
+properties/0/path = NodePath(".:collected")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:holder_peer_id")
+properties/1/spawn = true
+properties/1/replication_mode = 1
 
 [node name="KeyCard" type="Area2D"]
 script = ExtResource("1_ae5c8")
@@ -24,5 +32,8 @@ shape = SubResource("RectangleShape2D_515ex")
 [node name="collect_sfx" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_6fbv0")
 volume_db = 0.22
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_6fbv0")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

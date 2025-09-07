@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cyxa25yg2hfwc"]
+[gd_scene load_steps=12 format=3 uid="uid://cyxa25yg2hfwc"]
 
 [ext_resource type="Script" uid="uid://dw2cf757povs6" path="res://scripts/objects/button.gd" id="1_2wxwk"]
 [ext_resource type="Texture2D" uid="uid://cud2481gymp04" path="res://assets/sprites/button_sprite_sheet.png" id="1_ufqlp"]
@@ -51,6 +51,11 @@ size = Vector2(24, 4)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2wxwk"]
 size = Vector2(31.3333, 4)
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_e5cij"]
+properties/0/path = NodePath(".:is_pressed")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
 [node name="Button" type="Node2D"]
 scale = Vector2(0.851337, 2.28)
 script = ExtResource("1_2wxwk")
@@ -75,5 +80,8 @@ shape = SubResource("RectangleShape2D_2wxwk")
 
 [node name="ClickSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_e5cij")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_e5cij")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

@@ -3,11 +3,11 @@ extends CharacterBody2D
 @export var SPEED: float = 200.0
 @export var JUMP_VELOCITY: float = -375.0
 @export var side_scroller: bool = true
+@export var move_direction: float = 1.0
 
 @onready var multiplayer_sync = $MultiplayerSynchronizer
 
 var cell_floor: RigidBody2D = null
-var facing_right = true
 
 
 func _ready():
@@ -15,15 +15,13 @@ func _ready():
 	if peer_id != 1:
 		set_multiplayer_authority(peer_id)
 	add_to_group("players")
-	
-	for players in get_tree().get_nodes_in_group("players"):
-		print("Player Group: ", players)
 
 func _physics_process(delta: float) -> void:
 	if is_multiplayer_authority():
-		$Camera2D.make_current()
+		#$Camera2D.make_current()
 		if side_scroller:
 		# Add the gravity.
+			$Camera2D.make_current()
 			if not is_on_floor():
 				velocity += get_gravity() * delta
 
@@ -32,15 +30,22 @@ func _physics_process(delta: float) -> void:
 				velocity.y = JUMP_VELOCITY
 				$JumpSound.play()
 				
-				if cell_floor and cell_floor.has_method("count_jumps"):
-					cell_floor.count_jumps()
+				#if cell_floor and cell_floor.has_method("count_jumps"):
+					#cell_floor.count_jumps()
+				var my_id = name.to_int()
+				var lab = get_tree().get_first_node_in_group("lab_escape")
+				if lab:
+					if multiplayer.is_server():
+						lab.rpc_report_jump(my_id)
+					else:
+						lab.rpc_id(1, "rpc_report_jump", my_id)
 
 
 			# Get the input direction and handle the movement/deceleration.
 			var direction := Input.get_axis("ui_left", "ui_right")
 			if direction:
 				velocity.x = direction * SPEED
-				#facing_right = direction > 0
+				move_direction = direction
 			else:
 				velocity.x = move_toward(velocity.x, 0, SPEED)
 
@@ -67,3 +72,7 @@ var keycard_ref: Node = null
 func pickup_keycard(keycard: Node):
 	has_keycard = true
 	keycard_ref = keycard
+	
+func set_side_scroller(value: bool):
+	side_scroller = value
+	$Camera2D.queue_free()
