@@ -19,9 +19,9 @@ extends CharacterBody2D
 @export var max_pause: float = 1.25
 
 var is_herded = false
-var moving: bool = false
-var player_nearby: Node2D = null
-var direction: Vector2 = Vector2.ZERO
+@export var moving: bool = false
+@export var player_nearby: Node2D = null
+@export var direction: Vector2 = Vector2.ZERO
 var distance_left: float = 0.0
 var rng := RandomNumberGenerator.new()
 var pause_timer: Timer
@@ -148,10 +148,12 @@ func _apply_bounce(c: KinematicCollision2D, is_fleeing: bool) -> void:
 	global_position += n * bounce_nudge
 	
 func _on_sense_body_entered(body: Node2D) -> void:
-	if body.name.begins_with("Player"):
+	#if body.name.begins_with("Player"):
+	if body.is_in_group("players"):
 		player_nearby = body
 
 
 func _on_sense_body_exited(body: Node2D) -> void:
-	if body.name.begins_with("Player"):
+	#if body.name.begins_with("Player"):
+	if body.is_in_group("players"):
 		player_nearby = null
