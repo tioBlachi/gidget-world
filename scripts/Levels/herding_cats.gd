@@ -80,6 +80,8 @@ func spawn_player(id: int):
 	if not (pSpawner and player_scene):
 		return
 	var player_instance = player_scene.instantiate()
+	if id != 1:
+		player_instance.modulate = Color.hex(0xE0FFFF)
 	player_instance.name = str(id)
 
 	var spawn_pos := Vector2.ZERO

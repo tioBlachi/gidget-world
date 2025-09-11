@@ -27,7 +27,7 @@ func _process(_delta: float) -> void:
 		if holder:
 			# Keep position floating in front of player (GLOBAL positioning)
 			var bob_height = 2.0
-			var x_offset = 40 if holder.move_direction > 0 else -40
+			var x_offset = 40 if holder.direction > 0 else -40
 			var y_offset = -50
 			global_position = holder.global_position + Vector2(
 				x_offset,
@@ -71,3 +71,7 @@ func rpc_request_pickup(requester_id: int):
 
 	if player.has_method("pickup_keycard"):
 		player.pickup_keycard(self)
+		
+	var lab = get_tree().get_first_node_in_group("lab_escape")
+	if lab and lab.has_method("rpc_drop_trapdoor"):
+		lab.rpc("rpc_drop_trapdoor")
