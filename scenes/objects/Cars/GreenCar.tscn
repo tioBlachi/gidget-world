@@ -1,0 +1,51 @@
+[gd_scene load_steps=8 format=3 uid="uid://bsknfknpkqnoc"]
+
+[ext_resource type="Script" uid="uid://uqjl7o5h2djp" path="res://scripts/objects/moving_killbox.gd" id="1_m4526"]
+[ext_resource type="Texture2D" uid="uid://q0ov7gntfuin" path="res://Art/NewArt/GreenCarAnimation.png" id="2_vqwqr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bhwsn"]
+atlas = ExtResource("2_vqwqr")
+region = Rect2(0, 0, 128, 54)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wghcf"]
+atlas = ExtResource("2_vqwqr")
+region = Rect2(128, 0, 128, 54)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t2eof"]
+atlas = ExtResource("2_vqwqr")
+region = Rect2(256, 0, 128, 54)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jgdmc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bhwsn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wghcf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t2eof")
+}],
+"loop": true,
+"name": &"default",
+"speed": 20.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m8v0c"]
+size = Vector2(669.833, 226.667)
+
+[node name="Car" type="Area2D"]
+script = ExtResource("1_m4526")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-1, -9)
+scale = Vector2(-2, 2)
+sprite_frames = SubResource("SpriteFrames_jgdmc")
+autoplay = "default"
+frame_progress = 0.0677478
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 0)
+scale = Vector2(0.3, 0.3)
+shape = SubResource("RectangleShape2D_m8v0c")
