@@ -1,0 +1,58 @@
+[gd_scene load_steps=7 format=3 uid="uid://c1e75iq14sjs2"]
+
+[ext_resource type="Script" uid="uid://cu8f17jv2urb0" path="res://scripts/objects/trap_door.gd" id="1_3oep3"]
+[ext_resource type="Texture2D" uid="uid://dh3qpgv5wov8e" path="res://assets/BowenStuff/metal.png" id="1_igfcu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3oep3"]
+size = Vector2(9.41175, 9.85715)
+
+[sub_resource type="Animation" id="Animation_rpppd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_3oep3"]
+resource_name = "drop"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0666667, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 70)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hv77r"]
+_data = {
+&"RESET": SubResource("Animation_rpppd"),
+&"drop": SubResource("Animation_3oep3")
+}
+
+[node name="TrapDoor" type="StaticBody2D"]
+script = ExtResource("1_3oep3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_3oep3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("1_igfcu")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_hv77r")
+}

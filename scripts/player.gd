@@ -3,12 +3,17 @@ extends CharacterBody2D
 @export var SPEED: float = 200.0
 @export var JUMP_VELOCITY: float = -375.0
 @export var side_scroller: bool = true
-@export var move_direction: float = 1.0
+@export var direction: float = 1.0
+@onready var collision_shape = $CollisionShape2D
 
-@onready var multiplayer_sync = $MultiplayerSynchronizer
+const PUSH_FORCE = 15.0
+const MIN_PUSH_FORCE = 10.0
 
 var cell_floor: RigidBody2D = null
 
+# New death-related variables
+var is_dead = false
+var death_texture = preload("res://assets/BowenStuff/gDeath.png") # Update this path to your dead sprite
 
 func _ready():
 	var peer_id = name.to_int()
@@ -18,10 +23,24 @@ func _ready():
 
 func _physics_process(delta: float) -> void:
 	if is_multiplayer_authority():
-		#$Camera2D.make_current()
+		var level_root = get_parent().get_parent()
+		# This return prevents movement if the player is dead
+		if is_dead:
+			# Continue falling
+			velocity += get_gravity() * delta * 2.0 # Faster gravity for a dramatic fall
+			move_and_slide()
+			return
+
 		if side_scroller:
-		# Add the gravity.
 			$Camera2D.make_current()
+			
+			if level_root and level_root.has_method("get_map_limits"):
+				var limits = level_root.get_map_limits()
+				$Camera2D.limit_left = int(limits.position.x)
+				$Camera2D.limit_top = int(limits.position.y)
+				$Camera2D.limit_right = int(limits.end.x)
+				$Camera2D.limit_bottom = int(limits.end.y)
+			# Add the gravity.
 			if not is_on_floor():
 				velocity += get_gravity() * delta
 
@@ -30,8 +49,6 @@ func _physics_process(delta: float) -> void:
 				velocity.y = JUMP_VELOCITY
 				$JumpSound.play()
 				
-				#if cell_floor and cell_floor.has_method("count_jumps"):
-					#cell_floor.count_jumps()
 				var my_id = name.to_int()
 				var lab = get_tree().get_first_node_in_group("lab_escape")
 				if lab:
@@ -40,21 +57,29 @@ func _physics_process(delta: float) -> void:
 					else:
 						lab.rpc_id(1, "rpc_report_jump", my_id)
 
-
 			# Get the input direction and handle the movement/deceleration.
-			var direction := Input.get_axis("ui_left", "ui_right")
+			direction = Input.get_axis("ui_left", "ui_right")
 			if direction:
 				velocity.x = direction * SPEED
-				move_direction = direction
+				$Sprite.flip_h = direction < 0
 			else:
 				velocity.x = move_toward(velocity.x, 0, SPEED)
 
-			move_and_slide()
+			if move_and_slide():
+				for i in get_slide_collision_count():
+					var c = get_slide_collision(i)
+					var collider = c.get_collider()
+					
+					if collider and collider is RigidBody2D and collider.is_in_group("crates"):
+						var push_direction = -c.get_normal()
+						collider.apply_central_impulse(push_direction * PUSH_FORCE)
+			
 		else:
+			# Top-down movement logic
 			var x_direction = Input.get_axis("ui_left", "ui_right")
 			var y_direction = Input.get_axis("ui_up", "ui_down")
 			var dir = Vector2(x_direction, y_direction)
-			
+
 			if dir != Vector2.ZERO:
 				dir = dir.normalized()
 				velocity.x = dir.x * SPEED
@@ -62,6 +87,11 @@ func _physics_process(delta: float) -> void:
 			else:
 				velocity.x = move_toward(velocity.x, 0.0, SPEED)
 				velocity.y = move_toward(velocity.y, 0.0, SPEED)
+
+			if x_direction > 0:
+				$Sprite.flip_h = false
+			elif x_direction < 0:
+				$Sprite.flip_h = true
 
 			move_and_slide()
 		
@@ -75,4 +105,44 @@ func pickup_keycard(keycard: Node):
 	
 func set_side_scroller(value: bool):
 	side_scroller = value
-	$Camera2D.queue_free()
+	if not side_scroller:
+		# If the camera exists, remove it
+		if is_instance_valid($Camera2D):
+			$Camera2D.queue_free()
+
+# New function to handle the player's death
+# Inside your player.gd script
+
+func die():
+	if is_dead:
+		return
+
+	is_dead = true
+	
+	# Apply an upward bounce
+	velocity.y = -1000
+	velocity.x = 0
+	
+	# Disable the player's collision so they can fall through the floor
+	collision_shape.set_deferred("disabled", true)
+	
+	# Change the sprite to the dead texture
+	$Sprite.texture = death_texture
+	
+	# Stop the camera from following the player
+	if is_instance_valid($Camera2D):
+		$Camera2D.process_mode = self.PROCESS_MODE_DISABLED
+	
+	# Disable multiplayer synchronization for the dying player
+	$MultiplayerSynchronizer.set_process(false)
+	$DeathSFX.play()
+	var timer = Timer.new()
+	timer.one_shot = true
+	timer.wait_time = 1.5
+	add_child(timer)
+	timer.timeout.connect(_on_timer_complete)
+	timer.timeout.connect(self.queue_free)
+	timer.start()
+
+func _on_timer_complete():
+	get_tree().paused = true

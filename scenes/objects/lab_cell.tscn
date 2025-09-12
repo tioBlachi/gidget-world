@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://c2mmmw150y6yj"]
+[gd_scene load_steps=9 format=3 uid="uid://c2mmmw150y6yj"]
 
 [ext_resource type="AudioStream" uid="uid://cf4ximdc8rfn3" path="res://assets/sounds/door_open.ogg" id="2_hs0ii"]
 [ext_resource type="Script" uid="uid://bdob06hee7o6b" path="res://scripts/objects/cell_floor.gd" id="2_td7e3"]
@@ -16,8 +16,6 @@ size = Vector2(124, 37)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c0duh"]
 size = Vector2(123, 7)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_fjq0b"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_td7e3"]
 properties/0/path = NodePath(".:is_flimsy")
@@ -100,12 +98,6 @@ metadata/_edit_use_anchors_ = true
 [node name="OpenDoor" type="AudioStreamPlayer2D" parent="CellFloor"]
 position = Vector2(-135, -270)
 stream = ExtResource("2_hs0ii")
-
-[node name="JumpCounter" type="Area2D" parent="CellFloor"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CellFloor/JumpCounter"]
-position = Vector2(62, -126)
-shape = SubResource("RectangleShape2D_fjq0b")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="CellFloor"]
 replication_config = SubResource("SceneReplicationConfig_td7e3")
