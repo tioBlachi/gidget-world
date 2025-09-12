@@ -23,3 +23,4 @@ func _on_body_entered(body: Node) -> void:
 		body.queue_free()
 		if auto_free_on_kill:
 			queue_free()
+
