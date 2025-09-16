@@ -1,9 +1,20 @@
-[gd_scene load_steps=20 format=3 uid="uid://bmxxih4b0lrx8"]
+[gd_scene load_steps=28 format=3 uid="uid://bmxxih4b0lrx8"]
 
-[ext_resource type="Script" uid="uid://cb705motko4c7" path="res://scripts/objects/mine.gd" id="1_laqjk"]
+[ext_resource type="Script" uid="uid://bkhxna7y5jjji" path="res://scripts/objects/mine.gd" id="1_laqjk"]
 [ext_resource type="Texture2D" uid="uid://ci0kjxllfmyhu" path="res://assets/sprites/Explosion.png" id="2_e56mg"]
 [ext_resource type="Texture2D" uid="uid://po5am8bnlbwl" path="res://assets/sprites/mine32.png" id="3_0ivq6"]
 [ext_resource type="AudioStream" uid="uid://diqgbk7t8hcg6" path="res://assets/sounds/8-bit-explosion.wav" id="4_koaxh"]
+[ext_resource type="AudioStream" uid="uid://dh1wl611dkvi3" path="res://assets/sounds/mine_beep.wav" id="4_laqjk"]
+[ext_resource type="Texture2D" uid="uid://kdmsng7frnkw" path="res://assets/sprites/mine32(1).png" id="6_0ivq6"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_e56mg"]
+radius = 11.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_040t7"]
+radius = 46.0109
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_laqjk"]
+radius = 88.0909
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8a1bh"]
 atlas = ExtResource("2_e56mg")
@@ -57,6 +68,22 @@ region = Rect2(1056, 0, 96, 96)
 atlas = ExtResource("3_0ivq6")
 region = Rect2(0, 0, 32, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_koaxh"]
+atlas = ExtResource("6_0ivq6")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_enp30"]
+atlas = ExtResource("6_0ivq6")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tsjpn"]
+atlas = ExtResource("6_0ivq6")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gvn0d"]
+atlas = ExtResource("6_0ivq6")
+region = Rect2(0, 0, 32, 32)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_enp30"]
 animations = [{
 "frames": [{
@@ -96,7 +123,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_1k02e")
 }],
-"loop": true,
+"loop": false,
 "name": &"explosion",
 "speed": 15.0
 }, {
@@ -107,22 +134,57 @@ animations = [{
 "loop": true,
 "name": &"idle",
 "speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_koaxh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_enp30")
+}],
+"loop": true,
+"name": &"inner_warning",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tsjpn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gvn0d")
+}],
+"loop": true,
+"name": &"outer_warning",
+"speed": 2.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_gvn0d"]
-radius = 12.0
-
-[node name="Mine" type="Area2D"]
+[node name="Mine" type="Node2D"]
 script = ExtResource("1_laqjk")
+
+[node name="KillZone" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KillZone"]
+shape = SubResource("CircleShape2D_e56mg")
+
+[node name="InnerWarning" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InnerWarning"]
+shape = SubResource("CircleShape2D_040t7")
+
+[node name="OuterWarning" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OuterWarning"]
+shape = SubResource("CircleShape2D_laqjk")
+
+[node name="Beep" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_laqjk")
+
+[node name="Boom" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_koaxh")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_enp30")
-animation = &"idle"
-frame_progress = 0.636699
+animation = &"explosion"
 
-[node name="Hitbox" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_gvn0d")
-
-[node name="SFX" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("4_koaxh")
+[node name="BeepTimer" type="Timer" parent="."]

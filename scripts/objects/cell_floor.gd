@@ -1,33 +1,32 @@
 extends RigidBody2D
-'''
-Mechanics for the cell floor in Lab 1-1
-A random cell is designated flimsy
-The player in that cell can jump 6 times 
-to break the floor beneath them
-'''
 
-var is_flimsy = false
-var jumps_needed = 4
-var jump_count = 0
-var is_open = false
-var first_cell_open = false
+@export var is_flimsy := false
+@export var jumps_needed := 4
+@export var is_open := false
+
+var jump_count := 0
+
 
 func _ready():
 	freeze = true
+	if is_open:
+		set_deferred("freeze", false)
 
-func count_jumps():
-	if is_flimsy and not first_cell_open:
+func count_jumps_local():
+	if is_flimsy and not is_open:
 		jump_count += 1
 		if jump_count >= jumps_needed:
-			await get_tree().create_timer(1.0).timeout
-			$OpenDoor.play()
-			freeze = false
-			first_cell_open = true
-			
-func unfreeze():
+			rpc("rpc_unfreeze")
+# optional helper if you want to call locally (not used by server path)
+@rpc("authority", "call_local", "reliable")
+func rpc_unfreeze():
 	if is_open:
 		return
 	is_open = true
-	await get_tree().create_timer(0.75).timeout
+	call_deferred("_apply_unfreeze")
+
+func _apply_unfreeze():
 	$OpenDoor.play()
-	freeze = false
+	set_deferred("freeze", false)
+	if has_node("PinJoint2D"):
+		$"PinJoint2D".queue_free()

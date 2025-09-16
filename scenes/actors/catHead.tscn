@@ -1,6 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://ug4dtfp4td5v"]
+[gd_scene load_steps=10 format=3 uid="uid://ug4dtfp4td5v"]
 
-[ext_resource type="Script" uid="uid://dgmqd8tpbcc0d" path="res://scenes/actors/CatHead.gd" id="1_w1sjm"]
+[ext_resource type="Script" uid="uid://dgmqd8tpbcc0d" path="res://scripts/actors/CatHead.gd" id="1_w1sjm"]
 [ext_resource type="SpriteFrames" uid="uid://cidimnf6nt56w" path="res://scenes/actors/calico_frames.tres" id="2_w1sjm"]
 [ext_resource type="AudioStream" uid="uid://dnhebdcyfb6b2" path="res://assets/sounds/meow1.ogg" id="3_mpgt1"]
 [ext_resource type="AudioStream" uid="uid://c56xvqxg4sor0" path="res://assets/sounds/meow2.ogg" id="4_08q3r"]
@@ -15,7 +15,12 @@ radius = 10.8108
 height = 27.027
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rj4fp"]
-radius = 83.006
+radius = 51.8864
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_mpgt1"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
 
 [node name="CatHead" type="CharacterBody2D"]
 scale = Vector2(1.48, 1.48)
@@ -45,6 +50,9 @@ stream = ExtResource("4_08q3r")
 
 [node name="Meow3" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_wgjft")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_mpgt1")
 
 [connection signal="body_entered" from="Sense" to="." method="_on_sense_body_entered"]
 [connection signal="body_exited" from="Sense" to="." method="_on_sense_body_exited"]

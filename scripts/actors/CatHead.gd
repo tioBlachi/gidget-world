@@ -1,8 +1,5 @@
 extends CharacterBody2D
 
-signal herded
-signal escaped
-
 @onready var anim: AnimatedSprite2D = $Anim
 @onready var meow1: AudioStreamPlayer2D = $Meow1
 @onready var meow2: AudioStreamPlayer2D = $Meow2
@@ -22,9 +19,9 @@ signal escaped
 @export var max_pause: float = 1.25
 
 var is_herded = false
-var moving: bool = false
-var player_nearby: Node2D = null
-var direction: Vector2 = Vector2.ZERO
+@export var moving: bool = false
+@export var player_nearby: Node2D = null
+@export var direction: Vector2 = Vector2.ZERO
 var distance_left: float = 0.0
 var rng := RandomNumberGenerator.new()
 var pause_timer: Timer
@@ -44,6 +41,7 @@ const DIRECTIONS := [
 
 
 func _ready() -> void:
+	add_to_group("cats", true)
 	rng.randomize()
 	
 	if frames:
@@ -122,22 +120,7 @@ func _on_meow_timer_timeout():
 func _reset_meow_timer():
 	meow_timer.wait_time = rng.randf_range(2.0, 6.0)
 	meow_timer.start()
-	
 
-#func _on_herded():
-	#if is_herded:
-		#return
-	#is_herded = true
-	#if meow_timer: meow_timer.stop()
-	#if meow1: meow1.stop()
-	#if meow2: meow2.stop()
-	#
-	#
-#func _on_escaped():
-	#is_herded = false
-	#_reset_meow_timer()
-	
-	
 
 func _apply_bounce(c: KinematicCollision2D, is_fleeing: bool) -> void:
 	var n := c.get_normal()                  # surface normal
@@ -165,10 +148,12 @@ func _apply_bounce(c: KinematicCollision2D, is_fleeing: bool) -> void:
 	global_position += n * bounce_nudge
 	
 func _on_sense_body_entered(body: Node2D) -> void:
-	if body.name.begins_with("Player"):
+	#if body.name.begins_with("Player"):
+	if body.is_in_group("players"):
 		player_nearby = body
 
 
 func _on_sense_body_exited(body: Node2D) -> void:
-	if body.name.begins_with("Player"):
+	#if body.name.begins_with("Player"):
+	if body.is_in_group("players"):
 		player_nearby = null
