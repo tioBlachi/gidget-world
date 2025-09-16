@@ -1,11 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://bfbhvld432sxs"]
+[gd_scene load_steps=9 format=3 uid="uid://ctmh8sreidnve"]
 
-[ext_resource type="Script" uid="uid://dktyq47nrvfah" path="res://scripts/main_menu.gd" id="1_bqqt6"]
-[ext_resource type="Texture2D" uid="uid://c4jbolx1tx2dw" path="res://assets/Menu/Back 1.png" id="1_ekxnf"]
-[ext_resource type="FontFile" uid="uid://cc8siuxfdx6c7" path="res://assets/Fonts/WinterTreesRegular-d9dmx.ttf" id="2_bqqt6"]
+[ext_resource type="Script" uid="uid://ghl7w4m2vj7l" path="res://scenes/options.gd" id="1_nmn1p"]
+[ext_resource type="Texture2D" uid="uid://c4jbolx1tx2dw" path="res://assets/Menu/Back 1.png" id="2_pxqj8"]
+[ext_resource type="FontFile" uid="uid://cc8siuxfdx6c7" path="res://assets/Fonts/WinterTreesRegular-d9dmx.ttf" id="3_w238l"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wu84c"]
-texture = ExtResource("1_ekxnf")
+texture = ExtResource("2_pxqj8")
 modulate_color = Color(0.154876, 0.154876, 0.154876, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ekxnf"]
@@ -37,14 +37,14 @@ corner_radius_bottom_left = 16
 shadow_size = 5
 shadow_offset = Vector2(0, 3.14)
 
-[node name="MainMenu" type="Control"]
+[node name="Options" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_bqqt6")
+script = ExtResource("1_nmn1p")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 1
@@ -60,14 +60,15 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -166.5
-offset_top = 90.0
-offset_right = 166.5
-offset_bottom = 210.0
+offset_left = -326.0
+offset_top = 24.0
+offset_right = 329.0
+offset_bottom = 231.0
 grow_horizontal = 2
-theme_override_fonts/font = ExtResource("2_bqqt6")
+theme_override_fonts/font = ExtResource("3_w238l")
 theme_override_font_sizes/font_size = 118
-text = "Gidget World"
+text = "Gidget World
+Options"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -86,7 +87,7 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_constants/separation = 30
 
-[node name="Start" type="Button" parent="VBoxContainer"]
+[node name="Controls" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0.133333, 0.545098, 0.133333, 1)
@@ -95,9 +96,9 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_ekxnf")
 theme_override_styles/hover = SubResource("StyleBoxFlat_ekxnf")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_bqqt6")
 theme_override_styles/normal = SubResource("StyleBoxFlat_vue75")
-text = "Start Game! (Host)"
+text = "Controls"
 
-[node name="Join" type="Button" parent="VBoxContainer"]
+[node name="Video" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0.133333, 0.545098, 0.133333, 1)
@@ -106,9 +107,9 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_ekxnf")
 theme_override_styles/hover = SubResource("StyleBoxFlat_ekxnf")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_bqqt6")
 theme_override_styles/normal = SubResource("StyleBoxFlat_vue75")
-text = "Join Game (Client)"
+text = "Video"
 
-[node name="Options" type="Button" parent="VBoxContainer"]
+[node name="Audio" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0.133333, 0.545098, 0.133333, 1)
@@ -117,7 +118,7 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_ekxnf")
 theme_override_styles/hover = SubResource("StyleBoxFlat_ekxnf")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_bqqt6")
 theme_override_styles/normal = SubResource("StyleBoxFlat_vue75")
-text = "Options"
+text = "Audio"
 
 [node name="Exit" type="Button" parent="VBoxContainer"]
 layout_mode = 2
@@ -128,10 +129,12 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_ekxnf")
 theme_override_styles/hover = SubResource("StyleBoxFlat_ekxnf")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_bqqt6")
 theme_override_styles/normal = SubResource("StyleBoxFlat_vue75")
-text = "Exit Game"
+text = "Exit"
 
-[connection signal="pressed" from="VBoxContainer/Start" to="." method="_on_start_pressed"]
-[connection signal="pressed" from="VBoxContainer/Join" to="." method="_on_start_pressed"]
-[connection signal="pressed" from="VBoxContainer/Join" to="." method="_on_join_pressed"]
-[connection signal="pressed" from="VBoxContainer/Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="VBoxContainer/Controls" to="." method="_on_controls_pressed"]
+[connection signal="pressed" from="VBoxContainer/Controls" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="VBoxContainer/Video" to="." method="_on_video_pressed"]
+[connection signal="pressed" from="VBoxContainer/Video" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="VBoxContainer/Audio" to="." method="_on_audio_pressed"]
+[connection signal="pressed" from="VBoxContainer/Audio" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="VBoxContainer/Exit" to="." method="_on_exit_pressed"]
