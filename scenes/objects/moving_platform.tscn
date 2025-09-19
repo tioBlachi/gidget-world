@@ -1,0 +1,47 @@
+[gd_scene load_steps=6 format=3 uid="uid://87ms82l1c82e"]
+
+[ext_resource type="Texture2D" uid="uid://dh3qpgv5wov8e" path="res://assets/BowenStuff/metal.png" id="1_gfj5l"]
+[ext_resource type="Script" uid="uid://dkycc55huw0n0" path="res://scripts/objects/moving_platform.gd" id="1_ll65p"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ll65p"]
+size = Vector2(26.6667, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fja67"]
+size = Vector2(18, 8)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ll65p"]
+properties/0/path = NodePath(".:speed")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:constant_linear_velocity")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath(".:position")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+
+[node name="MovingPlatform" type="AnimatableBody2D"]
+script = ExtResource("1_ll65p")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(0.926806, 0.926806, 0.926806, 1)
+texture_filter = 1
+scale = Vector2(1.4, 1.48)
+texture = ExtResource("1_gfj5l")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(0.520001, 0.720002)
+shape = SubResource("RectangleShape2D_ll65p")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="PlayerSensor" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -8)
+scale = Vector2(0.759998, 0.319999)
+shape = SubResource("RectangleShape2D_fja67")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_ll65p")
+
+[connection signal="body_entered" from="Area2D" to="." method="_player_on_platform"]
+[connection signal="body_exited" from="Area2D" to="." method="_player_left_platform"]

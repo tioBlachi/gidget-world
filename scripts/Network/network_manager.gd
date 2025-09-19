@@ -96,6 +96,8 @@ func _load_level():
 			level_path = "res://scenes/Levels/herding_cats.tscn"
 		elif selected_level == "Lab Escape":
 			level_path = "res://scenes/Levels/lab-escape.tscn"
+		elif selected_level == "Urban Uprising":
+			level_path = "res://scenes/Levels/urban_uprising.tscn"
 		change_scene_rpc.rpc(level_path)
 	else:
 		ready_label.text = "The server must be started and a level must be selected"

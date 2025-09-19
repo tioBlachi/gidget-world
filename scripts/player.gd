@@ -29,7 +29,7 @@ func _physics_process(delta: float) -> void:
 			return
 
 		if side_scroller:
-			$Camera2D.make_current()
+			#$Camera2D.make_current()
 			
 			if level_root and level_root.has_method("get_map_limits"):
 				var limits = level_root.get_map_limits()
@@ -58,7 +58,9 @@ func _physics_process(delta: float) -> void:
 				$Sprite.flip_h = direction < 0
 			else:
 				velocity.x = move_toward(velocity.x, 0, SPEED)
-
+				
+			_update_slope_tilt()
+			
 			if move_and_slide():
 				for i in get_slide_collision_count():
 					var c = get_slide_collision(i)
@@ -101,6 +103,18 @@ func set_side_scroller(value: bool):
 	if not side_scroller:
 		if is_instance_valid($Camera2D):
 			$Camera2D.queue_free()
+
+func _update_slope_tilt():
+	if is_on_floor():
+		var n := get_floor_normal()
+		var t := Vector2(-n.y, n.x)
+		var target := t.angle()
+
+		$Sprite.rotation = lerp_angle($Sprite.rotation, target, 0.15)
+		$CollisionShape2D.rotation = lerp_angle($Sprite.rotation, target, 0.15)
+	else:
+		# Smoothly return to upright in the air
+		$Sprite.rotation = lerp_angle($Sprite.rotation, 0.0, 0.1)
 
 
 func die():
