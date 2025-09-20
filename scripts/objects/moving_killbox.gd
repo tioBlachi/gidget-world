@@ -18,8 +18,11 @@ func _physics_process(delta: float) -> void:
 		queue_free()
 
 func _on_body_entered(body: Node) -> void:
-	# Treat anything named Player* as lethal target
-	if body is CharacterBody2D and body.name.begins_with("Player"):
-		body.queue_free()
+	# Kill any player object on contact. Prefer calling die() to keep existing flow.
+	if body is CharacterBody2D and (body.is_in_group("players") or body.name.begins_with("Player")):
+		if body.has_method("die"):
+			body.die()
+		else:
+			body.queue_free()
 		if auto_free_on_kill:
 			queue_free()

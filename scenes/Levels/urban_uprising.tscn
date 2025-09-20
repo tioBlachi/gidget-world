@@ -1,11 +1,11 @@
 [gd_scene load_steps=15 format=4 uid="uid://bqm3nrdrmkonl"]
 
-[ext_resource type="Texture2D" uid="uid://daekjnkkdhlxs" path="res://assets/BowenStuff/metal2.png" id="1_sqmmr"]
+[ext_resource type="Texture2D" uid="uid://daekjnkkdhlxs" path="res://Art/OldTestArt/metal2.png" id="1_sqmmr"]
 [ext_resource type="Script" uid="uid://chy5ttrcgpkg1" path="res://scripts/Levels/urban_uprising.gd" id="1_tf8py"]
-[ext_resource type="Texture2D" uid="uid://cuprd525fvcbp" path="res://assets/BowenStuff/dirt.png" id="2_am28d"]
-[ext_resource type="Texture2D" uid="uid://b7deransdfo1i" path="res://assets/sprites/Clouds.png" id="2_bahpy"]
-[ext_resource type="Texture2D" uid="uid://dah0wel5vo7o1" path="res://assets/BowenStuff/city.png" id="5_xly1k"]
-[ext_resource type="Texture2D" uid="uid://c03usmmale5gr" path="res://assets/sprites/New Piskel.png" id="6_hb40t"]
+[ext_resource type="Texture2D" uid="uid://cuprd525fvcbp" path="res://Art/OldTestArt/dirt.png" id="2_am28d"]
+[ext_resource type="Texture2D" uid="uid://1whwrcmex8u1" path="res://assets/sprites/Clouds.png" id="2_bahpy"]
+[ext_resource type="Texture2D" uid="uid://ngpcuovhe3by" path="res://Art/NewArt/Big City.png" id="4_5h4xf"]
+[ext_resource type="Texture2D" uid="uid://0n81g7arp8a2" path="res://assets/sprites/New Piskel.png" id="6_hb40t"]
 [ext_resource type="PackedScene" uid="uid://87ms82l1c82e" path="res://scenes/objects/moving_platform.tscn" id="7_5h4xf"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_5h4xf"]
@@ -8756,9 +8756,9 @@ z_as_relative = false
 motion_scale = Vector2(0.5, 0.5)
 
 [node name="City" type="Sprite2D" parent="ParallaxBackground/CitySkyline"]
-position = Vector2(675.992, 176.999)
-scale = Vector2(0.759959, 2.01879)
-texture = ExtResource("5_xly1k")
+position = Vector2(525, -505)
+scale = Vector2(4.5, 4.5)
+texture = ExtResource("4_5h4xf")
 
 [node name="Building" type="TileMapLayer" parent="."]
 position = Vector2(2.99207, -0.00463867)
