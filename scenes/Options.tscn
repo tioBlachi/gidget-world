@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://ctmh8sreidnve"]
 
-[ext_resource type="Script" uid="uid://ghl7w4m2vj7l" path="res://scenes/options.gd" id="1_nmn1p"]
+[ext_resource type="Script" path="res://scenes/options.gd" id="1_nmn1p"]
 [ext_resource type="Texture2D" uid="uid://c4jbolx1tx2dw" path="res://assets/Menu/Back 1.png" id="2_pxqj8"]
 [ext_resource type="FontFile" uid="uid://cc8siuxfdx6c7" path="res://assets/Fonts/WinterTreesRegular-d9dmx.ttf" id="3_w238l"]
 
@@ -131,10 +131,10 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_bqqt6")
 theme_override_styles/normal = SubResource("StyleBoxFlat_vue75")
 text = "Exit"
 
-[connection signal="pressed" from="VBoxContainer/Controls" to="." method="_on_controls_pressed"]
 [connection signal="pressed" from="VBoxContainer/Controls" to="." method="_on_start_pressed"]
-[connection signal="pressed" from="VBoxContainer/Video" to="." method="_on_video_pressed"]
+[connection signal="pressed" from="VBoxContainer/Controls" to="." method="_on_controls_pressed"]
 [connection signal="pressed" from="VBoxContainer/Video" to="." method="_on_start_pressed"]
-[connection signal="pressed" from="VBoxContainer/Audio" to="." method="_on_audio_pressed"]
+[connection signal="pressed" from="VBoxContainer/Video" to="." method="_on_video_pressed"]
 [connection signal="pressed" from="VBoxContainer/Audio" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="VBoxContainer/Audio" to="." method="_on_audio_pressed"]
 [connection signal="pressed" from="VBoxContainer/Exit" to="." method="_on_exit_pressed"]

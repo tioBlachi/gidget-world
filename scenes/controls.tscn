@@ -1,0 +1,42 @@
+[gd_scene load_steps=4 format=3 uid="uid://wkn3xtbel61r"]
+
+[ext_resource type="Texture2D" uid="uid://c4jbolx1tx2dw" path="res://assets/Menu/Back 1.png" id="1_5tddo"]
+[ext_resource type="FontFile" uid="uid://cc8siuxfdx6c7" path="res://assets/Fonts/WinterTreesRegular-d9dmx.ttf" id="2_cywyo"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ihl6s"]
+texture = ExtResource("1_5tddo")
+modulate_color = Color(0.154876, 0.154876, 0.154876, 1)
+
+[node name="Controls" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_ihl6s")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -326.0
+offset_top = 24.0
+offset_right = 329.0
+offset_bottom = 231.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("2_cywyo")
+theme_override_font_sizes/font_size = 118
+text = "Gidget World
+Controls"
+horizontal_alignment = 1
+vertical_alignment = 1
