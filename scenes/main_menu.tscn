@@ -1,3 +1,4 @@
+[gd_scene load_steps=9 format=3 uid="uid://dnc6f0xs88nye"]
 
 [ext_resource type="Script" uid="uid://dktyq47nrvfah" path="res://scripts/main_menu.gd" id="1_bqqt6"]
 [ext_resource type="Texture2D" uid="uid://c4jbolx1tx2dw" path="res://assets/Menu/Back 1.png" id="1_ekxnf"]
@@ -131,5 +132,6 @@ text = "Exit Game"
 
 [connection signal="pressed" from="VBoxContainer/Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="VBoxContainer/Join" to="." method="_on_join_pressed"]
+[connection signal="pressed" from="VBoxContainer/Join" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="VBoxContainer/Options" to="." method="_on_options_pressed"]
 [connection signal="pressed" from="VBoxContainer/Exit" to="." method="_on_exit_pressed"]
