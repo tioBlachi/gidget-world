@@ -52,7 +52,7 @@ func _physics_process(delta: float) -> void:
 					else:
 						lab.rpc_id(1, "rpc_report_jump", my_id)
 
-			direction = Input.get_axis("ui_left", "ui_right")
+			direction = Input.get_axis("move left", "move right")
 			if direction:
 				velocity.x = direction * SPEED
 				$Sprite.flip_h = direction < 0
@@ -71,8 +71,8 @@ func _physics_process(delta: float) -> void:
 						collider.apply_central_impulse(push_direction * PUSH_FORCE)
 			
 		else:
-			var x_direction = Input.get_axis("ui_left", "ui_right")
-			var y_direction = Input.get_axis("ui_up", "ui_down")
+			var x_direction = Input.get_axis("move left", "move right")
+			var y_direction = Input.get_axis("move up", "move down")
 			var dir = Vector2(x_direction, y_direction)
 
 			if dir != Vector2.ZERO:
