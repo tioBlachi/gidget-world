@@ -24,24 +24,25 @@ func _ready():
 	multiplayer.connection_failed.connect(_connection_failed)
 	multiplayer.server_disconnected.connect(_server_disconnected)
 	
-func start_host():
-	var peer = ENetMultiplayerPeer.new()
-	var port = int(port_input.text)
-	var error = peer.create_server(port, MAX_CLIENTS)
-	if error != OK:
-		print("Error: Cannot host server: %s" % error)
-		return
-
-	multiplayer.multiplayer_peer = peer
-	var local_peer_id = multiplayer.get_unique_id()
-
-	_add_player_to_server(local_peer_id)
 	
-	server_label.text = "Hosting server with ID: %d" % local_peer_id
-	server_started = true
+func start_server():
+	var port := int(port_input.text)
+	if Net.start_server(port, MAX_CLIENTS):
+		var local_peer_id := multiplayer.get_unique_id()
+		_add_player_to_server(local_peer_id)
+		server_label.text = "Hosting server with ID: %d" % local_peer_id
+		server_started = true
+	else:
+		print("NetworkManager: server not started (headless or error).")
+
+
 # --- Client Functions ---
 
 func start_client():
+	if OS.has_feature("dedicated_server") or OS.has_feature("headless"):
+		print("Headless/dedicated build: NetworkManager.start_server() ignored.")
+		return
+		
 	var client_peer = ENetMultiplayerPeer.new()
 	var ip = ip_input.text
 	var port = int(port_input.text)

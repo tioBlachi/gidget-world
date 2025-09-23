@@ -148,7 +148,7 @@ layout_mode = 2
 text = "Gidget World Testing Center"
 horizontal_alignment = 1
 
-[connection signal="pressed" from="NetworkManager/NetworkUI/VBoxContainer/HostBtn" to="NetworkManager" method="start_host"]
+[connection signal="pressed" from="NetworkManager/NetworkUI/VBoxContainer/HostBtn" to="NetworkManager" method="start_server"]
 [connection signal="pressed" from="NetworkManager/NetworkUI/VBoxContainer/JoinBtn" to="NetworkManager" method="start_client"]
 [connection signal="pressed" from="ServerManager/ServerManagerUI/VBoxContainer/StartLevelBtn" to="NetworkManager" method="_load_level"]
 [connection signal="item_selected" from="LevelManager/LevelSelectorUI/VBoxContainer/OptionButton" to="NetworkManager" method="_on_option_button_item_selected"]
