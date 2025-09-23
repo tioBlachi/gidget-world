@@ -1,4 +1,3 @@
-# dedicated_server.gd
 extends Node
 
 const DEFAULT_PORT := 8080

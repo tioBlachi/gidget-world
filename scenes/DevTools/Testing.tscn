@@ -1,7 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://c8227ubacwbag"]
+[gd_scene load_steps=4 format=3 uid="uid://c8227ubacwbag"]
 
 [ext_resource type="Script" uid="uid://b51wvad2rm0ro" path="res://scripts/Network/network_manager.gd" id="1_mw4oa"]
-[ext_resource type="Script" uid="uid://b1ff7yjelfvw7" path="res://scripts/Network/level_manager.gd" id="2_isvdv"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_isvdv"]
 font_size = 30
@@ -101,7 +100,6 @@ horizontal_alignment = 1
 autowrap_mode = 3
 
 [node name="LevelManager" type="Node" parent="."]
-script = ExtResource("2_isvdv")
 
 [node name="LevelSelectorUI" type="Panel" parent="LevelManager"]
 offset_left = 55.0
@@ -132,8 +130,6 @@ popup/item_1/text = "Lab Escape"
 popup/item_1/id = 1
 popup/item_2/text = "Urban Uprising"
 popup/item_2/id = 2
-
-[node name="LevelRoot" type="Node2D" parent="LevelManager"]
 
 [node name="Panel" type="Panel" parent="."]
 offset_left = 422.0

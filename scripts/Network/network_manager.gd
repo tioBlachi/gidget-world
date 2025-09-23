@@ -58,7 +58,7 @@ func start_client():
 	
 @rpc("any_peer", "call_local")
 func change_scene_rpc(level_path: String):
-	lm.load_level(level_path)
+	SceneManager.load_level(level_path)
 	
 func _on_peer_connected(id: int):
 	if multiplayer.is_server():

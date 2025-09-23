@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://btd2nmq35cw3i"]
+[gd_scene load_steps=2 format=3 uid="uid://btd2nmq35cw3i"]
+
+[ext_resource type="Script" uid="uid://c0fliiisa46b6" path="res://scripts/UI/main_menu.gd" id="1_11hie"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -11,6 +13,7 @@ offset_right = 51.0
 offset_bottom = 14.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_11hie")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0
