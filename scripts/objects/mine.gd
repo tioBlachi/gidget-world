@@ -49,7 +49,6 @@ func _refresh_beep() -> void:
 		_stop_beep()
 		return
 
-	# pick anim + beep interval by priority (inner > outer > idle)
 	if inner.has_overlapping_bodies():
 		_set_interval(inner_interval)
 		_set_anim("inner_warning")

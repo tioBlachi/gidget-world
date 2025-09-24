@@ -12,6 +12,11 @@ var selected_level: String
 var server_started := false
 var level_selected := false
 
+func _ready() -> void:
+	for scene_name in SceneManager.SCENES.keys():
+		option_button.add_item(scene_name)
+		option_button.select(0)
+		
 func start_server() -> void:
 	var port := int(port_input.text)
 	if Net.start_server(port):
@@ -36,8 +41,8 @@ func start_client() -> void:
 
 
 @rpc("any_peer", "call_local")
-func change_scene_rpc(level_name: String) -> void:
-	SceneManager.load_level(level_name)
+func change_scene_rpc(scene_name: String) -> void:
+	SceneManager.switch_scene(scene_name)
 
 func _load_level() -> void:
 	if not multiplayer.is_server() or OS.has_feature("dedicated_server"):

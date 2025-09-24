@@ -1,6 +1,6 @@
 extends Node2D
 
-@onready var cam : Camera2D = $Camera2D
+@onready var level_cam : Camera2D = $Camera2D
 @onready var bottom_border = $Camera2D/BottomBorder
 @onready var player_scene = preload("res://scenes/player/player.tscn")
 @onready var pSpawner = $pSpawner
@@ -9,42 +9,44 @@ extends Node2D
 
 @export var cam_rise_speed : float = 50
 
-var players_spawned := 0
-
 func _ready() -> void:
 	if multiplayer.is_server():
-		spawn_player.rpc(1)
-		var peers := multiplayer.get_peers()
-		if peers.size() > 0:
-			var client := peers[0]
-			if client != 1:
-				spawn_player.rpc(client)
-				print("Client spawned")
+		spawn_players.rpc(Net.players)
 
 func _process(delta: float) -> void:
-	var cam_position = cam.global_position.y
+	var cam_position = level_cam.global_position.y
 	cam_position -= cam_rise_speed * delta
 	
-	if cam_position < cam.limit_top:
-		cam_position = cam.limit_top
+	if cam_position < level_cam.limit_top:
+		cam_position = level_cam.limit_top
 		
-	cam.global_position.y = cam_position
+	level_cam.global_position.y = cam_position
 		
 	
 @rpc("authority", "call_local", "reliable")
-func spawn_player(id: int):
-	var player_instance = player_scene.instantiate()
-	player_instance.get_node("Camera2D").enabled = false
-	if id != 1:
-		player_instance.modulate = Color.hex(0xE0FFFF)
-	player_instance.name = str(id)
-	var spawn_pos: Vector2 = player1marker.global_position if players_spawned == 0 else player2marker.global_position
-	player_instance.global_position = spawn_pos
-	pSpawner.add_child(player_instance)
-	players_spawned += 1
+func spawn_players(p_array: PackedInt32Array) -> void:
+	if p_array.size() < 2:
+		push_error("spawn_players: need 2 peer IDs, got %d" % p_array.size())
+		return
+		
+	var markers := [player1marker, player2marker]
+	var tints := [Color.WHITE, Color.hex(0xE0FFFF)]
+	
+	for i in 2:
+		var peer_id := p_array[i]
+		var player := player_scene.instantiate()
+		player.name = str(peer_id)
+		player.modulate = tints[i]
+		player.global_position = markers[i].global_position
+		player.set_multiplayer_authority(peer_id)
+
+		pSpawner.add_child(player)
+
+		var cam: Camera2D = player.get_node("Camera2D")
+		cam.enabled = false
 
 
 func _on_bottom_border_body_entered(body: Node2D) -> void:
 	if body.is_in_group("players"):
-		body.die()
+		body.die.rpc()
 		

@@ -4,30 +4,23 @@ extends Node2D
 @onready var player_scene = preload("res://scenes/player/player.tscn")
 @onready var cell1 = $LabCell1/CellFloor
 @onready var cell2 = $LabCell2/CellFloor
-@onready var pSpawner = $pSpawner
 @onready var spikes = $Spikes
+@onready var pSpawner = $pSpawner
 @onready var player1marker = $PlayerMarkers/Player1Marker
 @onready var player2marker = $PlayerMarkers/Player2Marker
-
-var players_spawned := 0
-
+		
+		
 func _ready() -> void:
 	add_to_group("lab_escape")
 	if multiplayer.is_server():
-		spawn_player.rpc(1)
-		var peers := multiplayer.get_peers()
-		if peers.size() > 0:
-			var client := peers[0]
-			if client != 1:
-				spawn_player.rpc(client)
-				print("Client spawned")
+		spawn_players.rpc(Net.players)
 		_set_initial_flimsy_cell()
-
+		
 func _set_initial_flimsy_cell():
 	randomize()
 	var choice = randi() % 2
 	set_flimsy_cell.rpc(choice)
-
+	
 @rpc("call_local", "reliable")
 func set_flimsy_cell(choice: int):
 	if choice == 0:
@@ -38,17 +31,27 @@ func set_flimsy_cell(choice: int):
 		print("Cell 2 is flimsy")
 
 @rpc("authority", "call_local", "reliable")
-func spawn_player(id: int):
-	var player_instance = player_scene.instantiate()
-	if id != 1:
-		player_instance.modulate = Color.hex(0xE0FFFF)
-	player_instance.name = str(id)
-	var spawn_pos: Vector2 = player1marker.global_position if players_spawned == 0 else player2marker.global_position
-	player_instance.global_position = spawn_pos
-	pSpawner.add_child(player_instance)
-	players_spawned += 1
+func spawn_players(p_array: PackedInt32Array) -> void:
+	if p_array.size() < 2:
+		push_error("spawn_players: need 2 peer IDs, got %d" % p_array.size())
+		return
+		
+	var markers := [player1marker, player2marker]
+	var tints := [Color.WHITE, Color.hex(0xE0FFFF)]
+	
+	for i in 2:
+		var peer_id := p_array[i]
+		var player := player_scene.instantiate()
+		player.name = str(peer_id)
+		player.modulate = tints[i]
+		player.global_position = markers[i].global_position
+		player.set_multiplayer_authority(peer_id)
 
-# ---- NEW: clients report jumps; server validates + unfreezes if needed
+		pSpawner.add_child(player)
+
+		var cam: Camera2D = player.get_node("Camera2D")
+		cam.make_current()
+			
 @rpc("any_peer", "reliable")
 func rpc_report_jump(peer_id: int):
 	if not multiplayer.is_server():

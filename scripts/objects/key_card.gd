@@ -3,7 +3,7 @@ extends Area2D
 @export var collected := false
 @export var holder_peer_id: int = 0
 
-var holder: Node = null  # The player holding it
+var holder: Node = null
 
 func _ready():
 	add_to_group("keycards")
@@ -20,12 +20,10 @@ func _on_door_opened():
 	
 	
 func _process(_delta: float) -> void:
-	# Visual follow (no reparent): derive from holder each frame
 	if collected:
 		if holder == null:
 			holder = find_player(holder_peer_id)
 		if holder:
-			# Keep position floating in front of player (GLOBAL positioning)
 			var bob_height = 2.0
 			var x_offset = 40 if holder.direction > 0 else -40
 			var y_offset = -50

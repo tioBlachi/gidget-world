@@ -8692,11 +8692,6 @@ script = ExtResource("1_tf8py")
 _spawnable_scenes = PackedStringArray("uid://bxpry3684affg")
 spawn_path = NodePath("../Players")
 
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
-replication_config = SubResource("SceneReplicationConfig_5h4xf")
-
-[node name="Players" type="Node2D" parent="."]
-
 [node name="PlayerMarkers" type="Node2D" parent="."]
 position = Vector2(1, 8)
 
@@ -8704,7 +8699,12 @@ position = Vector2(1, 8)
 position = Vector2(127, 512)
 
 [node name="Player2Marker" type="Marker2D" parent="PlayerMarkers"]
-position = Vector2(223, 464)
+position = Vector2(226, 514)
+
+[node name="Players" type="Node2D" parent="."]
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_5h4xf")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 

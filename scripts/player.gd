@@ -4,6 +4,7 @@ extends CharacterBody2D
 @export var JUMP_VELOCITY: float = -375.0
 @export var side_scroller: bool = true
 @export var direction: float = 1.0
+@onready var cam = $Camera2D
 @onready var collision_shape = $CollisionShape2D
 
 const PUSH_FORCE = 15.0
@@ -15,9 +16,6 @@ var is_dead = false
 var death_texture = preload("res://Art/OldTestArt/gDeath.png")
 
 func _ready():
-	var peer_id = name.to_int()
-	if peer_id != 1:
-		set_multiplayer_authority(peer_id)
 	add_to_group("players")
 
 func _physics_process(delta: float) -> void:
@@ -28,9 +26,7 @@ func _physics_process(delta: float) -> void:
 			move_and_slide()
 			return
 
-		if side_scroller:
-			#$Camera2D.make_current()
-			
+		if side_scroller:			
 			if level_root and level_root.has_method("get_map_limits"):
 				var limits = level_root.get_map_limits()
 				$Camera2D.limit_left = int(limits.position.x)
@@ -113,10 +109,9 @@ func _update_slope_tilt():
 		$Sprite.rotation = lerp_angle($Sprite.rotation, target, 0.15)
 		$CollisionShape2D.rotation = lerp_angle($Sprite.rotation, target, 0.15)
 	else:
-		# Smoothly return to upright in the air
 		$Sprite.rotation = lerp_angle($Sprite.rotation, 0.0, 0.1)
 
-
+@rpc("any_peer", "call_local")
 func die():
 	if is_dead:
 		return

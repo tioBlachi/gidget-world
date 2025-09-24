@@ -7,25 +7,22 @@ const NET_VERSION := "V1-min"
 const DEFAULT_PORT := 8080
 const DEFAULT_MAX_CLIENTS := 2
 
-var players: PackedInt32Array = []  # client peer IDs; host is only added in non-dedicated builds
+var players: PackedInt32Array = []  # client peer IDs; host (id=1) is only added in non-dedicated builds
 
 func _ready() -> void:
-	print("Net autoloader ready. Version: ", NET_VERSION, " Server=", multiplayer.is_server())
-
 	multiplayer.peer_connected.connect(_on_peer_connected)
 	multiplayer.peer_disconnected.connect(_on_peer_disconnected)
 	multiplayer.connected_to_server.connect(_connected_to_server)
 	multiplayer.connection_failed.connect(_connection_failed)
 	multiplayer.server_disconnected.connect(_server_disconnected)
 
-	# In dedicated/headless builds, auto-host exactly once.
+	# In dedicated/headless builds, auto-host exactly once. Should fix bug
 	if _is_dedicated_server() and not is_hosting():
 		if start_server(DEFAULT_PORT):
 			print("Net: Dedicated/headless server listening on %d" % DEFAULT_PORT)
 
-# ----------------------
-# Helpers & guards
-# ----------------------
+
+# ------- Helpers & guards -------
 
 func _is_dedicated_server() -> bool:
 	return OS.has_feature("dedicated_server") or OS.has_feature("headless")
@@ -58,9 +55,8 @@ func force_start_server(port: int) -> bool:
 	players.clear()
 	return _create_server_peer(port)
 
-# ----------------------
-# Server / Client API
-# ----------------------
+# ------- Server / Client API -------
+
 
 func start_server(port: int) -> bool:
 	var p := multiplayer.multiplayer_peer
@@ -122,9 +118,8 @@ func start_client(host: String, port: int) -> bool:
 	print("Net: Connecting to %s:%d ..." % [host, port])
 	return true
 
-# ----------------------
-# Multiplayer signal handlers
-# ----------------------
+
+# ------- Multiplayer signal handlers -------
 
 func _connected_to_server() -> void:
 	print("[CLIENT] connected_to_server fired. pid=%d" % multiplayer.get_unique_id())
@@ -142,9 +137,9 @@ func _on_peer_connected(id: int) -> void:
 			players.push_back(id)
 		print("[HOST] peer_connected -> %d" % id)
 		if not _is_dedicated_server():
-			print("[HOST DEBUG] players now: ", players)
+			print("[HOST] Joined Player IDs: ", players)
 		player_connected.emit(id)
-		print("[HOST] players: ", players)
+		print("[HOST] Joined Player IDs: ", players)
 
 func _on_peer_disconnected(id: int) -> void:
 	if multiplayer.is_server():
