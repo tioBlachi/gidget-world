@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=3 uid="uid://bxpry3684affg"]
 
 [ext_resource type="Script" uid="uid://gmylnlvujh2e" path="res://scripts/player.gd" id="1_g2els"]
-[ext_resource type="Texture2D" uid="uid://3d4v20ldnl74" path="res://Art/OldTestArt/gRight.png" id="2_gmlin"]
+[ext_resource type="Texture2D" uid="uid://dsejfk32iyt78" path="res://Art/OldTestArt/gRight.png" id="2_gmlin"]
 [ext_resource type="AudioStream" uid="uid://cqt8c2sa1757t" path="res://assets/sounds/8-bit-jump.mp3" id="3_gmlin"]
-[ext_resource type="AudioStream" uid="uid://e4ot17r0001w" path="res://assets/sounds/080205_life-lost-game-over-89697.mp3" id="4_lvxji"]
+[ext_resource type="AudioStream" uid="uid://ex8s0rf7g5ce" path="res://assets/sounds/080205_life-lost-game-over-89697.mp3" id="4_lvxji"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hqtel"]
 size = Vector2(128, 128)

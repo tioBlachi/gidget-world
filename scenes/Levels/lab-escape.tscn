@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://kwqdtogko814" path="res://scripts/Levels/lab-escape.gd" id="1_r6deh"]
 [ext_resource type="PackedScene" uid="uid://c2mmmw150y6yj" path="res://scenes/objects/lab_cell.tscn" id="3_hrlo7"]
-[ext_resource type="Texture2D" uid="uid://ctijq3u5aqe1v" path="res://assets/Tiles/lab_tiles.png" id="4_mi8k0"]
+[ext_resource type="Texture2D" uid="uid://ctijq3u5aqe1v" path="res://assets/Tiles/oldTiles/lab_tiles.png" id="4_mi8k0"]
 [ext_resource type="PackedScene" uid="uid://cyxa25yg2hfwc" path="res://scenes/objects/button.tscn" id="5_7nrcb"]
 [ext_resource type="PackedScene" uid="uid://q5myivnq8cna" path="res://scenes/objects/key_card.tscn" id="7_85sb4"]
 [ext_resource type="Texture2D" uid="uid://bpcg7s8xatixv" path="res://Art/OldTestArt/spike.png" id="7_modnx"]

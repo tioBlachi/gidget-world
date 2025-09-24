@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://gs2a1w6kgnm1" path="res://scripts/Levels/herding_cats.gd" id="1_diqqx"]
 [ext_resource type="PackedScene" uid="uid://ug4dtfp4td5v" path="res://scenes/actors/catHead.tscn" id="2_yfx42"]
-[ext_resource type="Texture2D" uid="uid://cdgt0yy4irs8" path="res://assets/Tiles/park_tiles.png" id="3_t3gqf"]
+[ext_resource type="Texture2D" uid="uid://cdgt0yy4irs8" path="res://assets/Tiles/oldTiles/park_tiles.png" id="3_t3gqf"]
 [ext_resource type="Texture2D" uid="uid://cifurrvxjg8jy" path="res://assets/sprites/Fence/fence_side.png" id="4_go4aw"]
 [ext_resource type="Texture2D" uid="uid://cjygpv2l2x8y3" path="res://assets/sprites/grass_tileset_16x16.png" id="4_q7pie"]
 [ext_resource type="Texture2D" uid="uid://brs3yhmq3yxxc" path="res://assets/sprites/Fence/fence_post.png" id="6_eno57"]

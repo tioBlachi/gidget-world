@@ -18,7 +18,7 @@ func _physics_process(delta: float) -> void:
 		queue_free()
 
 func _on_body_entered(body: Node) -> void:
-	# Kill any player object on contact. Prefer calling die() to keep existing flow.
+	# Kill any player object on contact
 	if body is CharacterBody2D and (body.is_in_group("players") or body.name.begins_with("Player")):
 		if body.has_method("die"):
 			body.die()
