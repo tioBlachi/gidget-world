@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=4 uid="uid://c6r636nge6f1x"]
+[gd_scene load_steps=30 format=4 uid="uid://c6r636nge6f1x"]
 
 [ext_resource type="Texture2D" uid="uid://bkuouxcowxnc7" path="res://assets/Tiles/marble.png" id="1_6fjr6"]
 [ext_resource type="Texture2D" uid="uid://brp763x2rpc8y" path="res://assets/Tiles/rock.png" id="2_ia20t"]
@@ -9,6 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://ddhaggknaaejj" path="res://assets/Tiles/tilemap_farm.png" id="7_8cld8"]
 [ext_resource type="Texture2D" uid="uid://djfcan6756x2m" path="res://assets/Tiles/tilemap_industrial.png" id="8_8cld8"]
 [ext_resource type="Texture2D" uid="uid://ccewt4wsjae8e" path="res://assets/Tiles/tilemap_normal.png" id="9_di6tg"]
+[ext_resource type="Texture2D" uid="uid://c0q5wyxg6m1dk" path="res://assets/Tiles/genericItems_spritesheet_colored.png" id="10_dp14p"]
+[ext_resource type="Texture2D" uid="uid://ckkqy1fhk50c4" path="res://assets/Tiles/spritesheet_complete.png" id="11_f35vw"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_25ood"]
 texture = ExtResource("1_6fjr6")
@@ -1217,3 +1219,12 @@ tile_set = SubResource("TileSet_lg7gw")
 position = Vector2(10.2286, 15.0164)
 tile_map_data = PackedByteArray("AAAMAC4AAAABAAEAAAANAC4AAAACAAEAAAAOAC4AAAACAAEAAAAPAC4AAAACAAEAAAAQAC4AAAACAAEAAAARAC4AAAACAAEAAAASAC4AAAACAAEAAAATAC4AAAACAAEAAAAUAC4AAAADAAEAAAAMAC8AAAABAAYAAAANAC8AAAAEAAUAAAAOAC8AAAAEAAUAAAAPAC8AAAAEAAUAAAAQAC8AAAAEAAUAAAARAC8AAAAEAAUAAAASAC8AAAAEAAUAAAATAC8AAAAEAAUAAAAUAC8AAAADAAYAAAAUADAAAAADAAYAAAAUADEAAAADAAYAAAATADEAAAAEAAUAAAATADAAAAAEAAUAAAASADAAAAAEAAUAAAARADAAAAAEAAUAAAAQADAAAAAEAAUAAAAPADAAAAAEAAUAAAAPADEAAAAEAAUAAAAOADEAAAAEAAUAAAANADEAAAAEAAUAAAAMADEAAAABAAYAAAAMADAAAAABAAYAAAANADAAAAAEAAUAAAAOADAAAAAEAAUAAAAQADEAAAAEAAUAAAARADEAAAAEAAUAAAASADEAAAAEAAUAAAAPADIAAAACAAcAAAAOADIAAAACAAcAAAANADIAAAACAAcAAAAQADIAAAACAAcAAAARADIAAAACAAcAAAAMADIAAAABAAcAAAASADIAAAACAAcAAAATADIAAAACAAcAAAAUADIAAAADAAcAAAAPAC0AAAAHAAEAAAARAC0AAAAIAAEAAAANAC0AAAARAAYAAAANACwAAAARAAUAAAANACsAAAAQAAUAAAANACoAAAAQAAUAAAANACkAAAASAAIAAAAMACcAAAASAAAAAAAMACgAAAASAAEAAAAMACkAAAASAAIAAAANACcAAAASAAAAAAANACgAAAASAAEAAAAOACcAAAASAAAAAAAOACgAAAASAAEAAAAOACkAAAASAAIAAAAPACcAAAATAAAAAAAPACgAAAATAAEAAAAPACkAAAATAAIAAAALACcAAAARAAAAAAALACgAAAARAAEAAAALACkAAAARAAIAAAA=")
 tile_set = SubResource("TileSet_w6gs3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-29.2712, 674.986)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("10_dp14p")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(576.083, 1009.22)
+texture = ExtResource("11_f35vw")
