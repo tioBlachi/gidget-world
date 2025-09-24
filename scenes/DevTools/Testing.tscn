@@ -1,7 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://c8227ubacwbag"]
+[gd_scene load_steps=4 format=3 uid="uid://c8227ubacwbag"]
 
-[ext_resource type="Script" uid="uid://b51wvad2rm0ro" path="res://scripts/Network/network_manager.gd" id="1_mw4oa"]
-[ext_resource type="Script" uid="uid://b1ff7yjelfvw7" path="res://scripts/Network/level_manager.gd" id="2_isvdv"]
+[ext_resource type="Script" uid="uid://b51wvad2rm0ro" path="res://scripts/Network/testing.gd" id="1_mw4oa"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_isvdv"]
 font_size = 30
@@ -11,13 +10,13 @@ font_color = Color(0.152941, 0.207843, 0.658824, 1)
 font_size = 50
 
 [node name="Testing" type="Node2D"]
+script = ExtResource("1_mw4oa")
 
 [node name="Background" type="ColorRect" parent="."]
 offset_right = 1279.0
 offset_bottom = 725.0
 
 [node name="NetworkManager" type="Node" parent="."]
-script = ExtResource("1_mw4oa")
 
 [node name="NetworkUI" type="Panel" parent="NetworkManager"]
 offset_left = 52.0
@@ -101,7 +100,6 @@ horizontal_alignment = 1
 autowrap_mode = 3
 
 [node name="LevelManager" type="Node" parent="."]
-script = ExtResource("2_isvdv")
 
 [node name="LevelSelectorUI" type="Panel" parent="LevelManager"]
 offset_left = 55.0
@@ -133,8 +131,6 @@ popup/item_1/id = 1
 popup/item_2/text = "Urban Uprising"
 popup/item_2/id = 2
 
-[node name="LevelRoot" type="Node2D" parent="LevelManager"]
-
 [node name="Panel" type="Panel" parent="."]
 offset_left = 422.0
 offset_top = 629.0
@@ -152,7 +148,7 @@ layout_mode = 2
 text = "Gidget World Testing Center"
 horizontal_alignment = 1
 
-[connection signal="pressed" from="NetworkManager/NetworkUI/VBoxContainer/HostBtn" to="NetworkManager" method="start_host"]
-[connection signal="pressed" from="NetworkManager/NetworkUI/VBoxContainer/JoinBtn" to="NetworkManager" method="start_client"]
-[connection signal="pressed" from="ServerManager/ServerManagerUI/VBoxContainer/StartLevelBtn" to="NetworkManager" method="_load_level"]
-[connection signal="item_selected" from="LevelManager/LevelSelectorUI/VBoxContainer/OptionButton" to="NetworkManager" method="_on_option_button_item_selected"]
+[connection signal="pressed" from="NetworkManager/NetworkUI/VBoxContainer/HostBtn" to="." method="start_server"]
+[connection signal="pressed" from="NetworkManager/NetworkUI/VBoxContainer/JoinBtn" to="." method="start_client"]
+[connection signal="pressed" from="ServerManager/ServerManagerUI/VBoxContainer/StartLevelBtn" to="." method="_load_level"]
+[connection signal="item_selected" from="LevelManager/LevelSelectorUI/VBoxContainer/OptionButton" to="." method="_on_option_button_item_selected"]

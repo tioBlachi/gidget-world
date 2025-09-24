@@ -12,7 +12,7 @@ const MIN_PUSH_FORCE = 10.0
 var cell_floor: RigidBody2D = null
 
 var is_dead = false
-var death_texture = preload("res://assets/BowenStuff/gDeath.png")
+var death_texture = preload("res://Art/OldTestArt/gDeath.png")
 
 func _ready():
 	var peer_id = name.to_int()

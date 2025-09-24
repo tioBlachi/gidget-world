@@ -11,9 +11,14 @@ config_version=5
 [application]
 
 config/name="Gidget World"
-run/main_scene="res://scenes/Levels/lab-escape.tscn"
+run/main_scene="uid://p014fw8skfub"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[autoload]
+
+Net="*res://scripts/Network/Net.gd"
+SceneManager="*res://scripts/Network/SceneManager.gd"
 
 [display]
 

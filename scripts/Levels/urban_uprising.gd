@@ -12,7 +12,6 @@ extends Node2D
 var players_spawned := 0
 
 func _ready() -> void:
-	#add_to_group("urban_uprising")
 	if multiplayer.is_server():
 		spawn_player.rpc(1)
 		var peers := multiplayer.get_peers()
