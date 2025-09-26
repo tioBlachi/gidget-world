@@ -12,6 +12,7 @@ grow_vertical = 2
 script = ExtResource("1_m0b7u")
 
 [node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
 offset_left = 1.0
 offset_top = -3.0
 offset_right = 1278.0
@@ -27,6 +28,7 @@ offset_bottom = 461.0
 color = Color(0.176471, 0.156863, 1, 1)
 
 [node name="Label" type="Label" parent="."]
+layout_mode = 0
 offset_left = 442.0
 offset_top = 119.0
 offset_right = 543.0
@@ -80,3 +82,6 @@ visible = false
 layout_mode = 2
 text = "Ready!"
 horizontal_alignment = 1
+
+[connection signal="item_selected" from="ButtonContainer/LevelSelect" to="." method="_on_level_select_item_selected"]
+[connection signal="pressed" from="ButtonContainer/StartButton" to="." method="start_game"]

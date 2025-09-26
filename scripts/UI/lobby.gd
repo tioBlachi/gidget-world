@@ -37,3 +37,10 @@ func update_labels() -> void:
 	
 	if both_ready and selected_level != "":
 		start_button.visible = true
+
+
+func _on_level_select_item_selected(index: int) -> void:
+	selected_level = level_select.get_item_text(index)
+
+func start_game():
+	Net.rpc_id(1, "rpc_start_game", selected_level)
