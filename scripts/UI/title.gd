@@ -1,6 +1,6 @@
 extends Control
 
-var default_ip := "localhost"
+var default_ip := "18.234.63.242"
 var default_port := 8080
 
 func join_lobby():

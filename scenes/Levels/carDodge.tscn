@@ -1,15 +1,14 @@
-[gd_scene load_steps=14 format=3 uid="uid://dhpdxn5g33vpp"]
+[gd_scene load_steps=13 format=3 uid="uid://dhpdxn5g33vpp"]
 
-[ext_resource type="Texture2D" uid="uid://jkrwsj8v6a7m" path="res://assets/Tiles/oldTiles/lab_tiles.png" id="1_dnvpt"]
-[ext_resource type="PackedScene" uid="uid://bxpry3684affg" path="res://scenes/player/player.tscn" id="2_p5aq2"]
-[ext_resource type="Script" uid="uid://bttad68wyxtf0" path="res://camera_2d.gd" id="3_p5aq2"]
+[ext_resource type="Texture2D" uid="uid://dhjnmqtfenj7p" path="res://assets/Tiles/oldTiles/lab_tiles.png" id="1_dnvpt"]
+[ext_resource type="Script" uid="uid://ds61fpcbhgyig" path="res://scripts/Levels/car_dodge.gd" id="1_e8t8o"]
 [ext_resource type="Script" uid="uid://by67bhfq2l8jb" path="res://scripts/Levels/killbox_spawner.gd" id="4_rfpyh"]
 [ext_resource type="PackedScene" uid="uid://bexy1hnpe0tel" path="res://scenes/objects/Cars/BlueCar.tscn" id="5_q40wf"]
 [ext_resource type="PackedScene" uid="uid://bsknfknpkqnoc" path="res://scenes/objects/Cars/GreenCar.tscn" id="6_redad"]
 [ext_resource type="PackedScene" uid="uid://bvv6bjcuycqsv" path="res://scenes/objects/Cars/YellowCar.tscn" id="7_e8t8o"]
-[ext_resource type="Texture2D" uid="uid://cmfsccdat8ahl" path="res://Art/NewArt/Big City.png" id="8_e8t8o"]
-[ext_resource type="Texture2D" uid="uid://dweerah3nktmq" path="res://Art/NewArt/Night City.png" id="9_kivjt"]
-[ext_resource type="AudioStream" uid="uid://hlvgvxh25d0h" path="res://Sounds/TrafficSounds.mp3" id="10_e8t8o"]
+[ext_resource type="Texture2D" uid="uid://cs58b63d0hxtf" path="res://Art/NewArt/Big City.png" id="8_e8t8o"]
+[ext_resource type="Texture2D" uid="uid://bw55gs15yarv6" path="res://Art/NewArt/Night City.png" id="9_kivjt"]
+[ext_resource type="AudioStream" uid="uid://dk65rp6d7g3m3" path="res://Sounds/TrafficSounds.mp3" id="10_e8t8o"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rfpyh"]
 texture = ExtResource("1_dnvpt")
@@ -54,30 +53,26 @@ b = Vector2(81.2769, 1.04117)
 
 [node name="CarDodge" type="Node2D"]
 position = Vector2(197, -30)
+script = ExtResource("1_e8t8o")
+
+[node name="pSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("uid://bxpry3684affg")
+spawn_path = NodePath("../Players")
+
+[node name="PlayerMarkers" type="Node2D" parent="."]
+
+[node name="Player1Marker" type="Marker2D" parent="PlayerMarkers"]
+position = Vector2(-841, 852)
+
+[node name="Player2Marker" type="Marker2D" parent="PlayerMarkers"]
+position = Vector2(-1155, 846)
+
+[node name="Players" type="Node2D" parent="."]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 position = Vector2(7, 3)
 scale = Vector2(2, 2)
 tile_set = SubResource("TileSet_q40wf")
-
-[node name="1" parent="." instance=ExtResource("2_p5aq2")]
-position = Vector2(-772.812, 826.133)
-scale = Vector2(0.3, 0.3)
-side_scroller = false
-
-[node name="2" parent="." instance=ExtResource("2_p5aq2")]
-position = Vector2(-581.812, 950.133)
-scale = Vector2(0.3, 0.3)
-side_scroller = false
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(442, 387)
-limit_left = -2000
-limit_top = -124
-limit_right = 8000
-limit_bottom = 1050
-script = ExtResource("3_p5aq2")
-players = Array[NodePath]([NodePath("../1"), NodePath("../2")])
 
 [node name="CarSpawners" type="Node2D" parent="."]
 
