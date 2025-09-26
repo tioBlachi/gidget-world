@@ -19,7 +19,7 @@ func _ready() -> void:
 		
 func start_server() -> void:
 	var port := int(port_input.text)
-	if Net.start_server(port):
+	if Net.become_host(port):
 		var local_peer_id := multiplayer.get_unique_id()
 		server_label.text = "Hosting server with ID: %d" % local_peer_id
 		server_started = true
@@ -27,9 +27,7 @@ func start_server() -> void:
 		print("NetworkManager: server not started (headless or error).")
 
 func start_client() -> void:
-	var ip = ip_input.text.strip_edges()
-	if ip.to_lower() == "localhost" or ip == "::1":
-		ip = "127.0.0.1" 
+	var ip = ip_input.text.strip_edges() 
 
 	var port := int(port_input.text)
 	print("[JOIN] dialing %s:%d" % [ip, port])

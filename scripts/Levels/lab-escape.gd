@@ -56,12 +56,12 @@ func spawn_players(p_array: PackedInt32Array) -> void:
 func rpc_report_jump(peer_id: int):
 	if not multiplayer.is_server():
 		return
-	var floor = cell1 if peer_id == 1 else cell2
-	if not floor.is_flimsy or floor.is_open:
+	var flr = cell1 if peer_id == 1 else cell2
+	if not flr.is_flimsy or flr.is_open:
 		return
-	floor.jump_count += 1
-	if floor.jump_count >= floor.jumps_needed:
-		floor.rpc("rpc_unfreeze")
+	flr.jump_count += 1
+	if flr.jump_count >= flr.jumps_needed:
+		flr.rpc("rpc_unfreeze")
 		
 func _drop_trapdoor_now():
 	$TrapDoor/AnimationPlayer.play("drop")

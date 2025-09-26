@@ -1,0 +1,82 @@
+[gd_scene load_steps=2 format=3 uid="uid://dd4fcehq72heb"]
+
+[ext_resource type="Script" uid="uid://dty3ghypd4lwm" path="res://scripts/UI/lobby.gd" id="1_m0b7u"]
+
+[node name="Lobby" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_m0b7u")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = 1.0
+offset_top = -3.0
+offset_right = 1278.0
+offset_bottom = 722.0
+color = Color(0.282353, 0.443137, 1, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+layout_mode = 2
+offset_left = 512.0
+offset_top = 285.0
+offset_right = 786.0
+offset_bottom = 461.0
+color = Color(0.176471, 0.156863, 1, 1)
+
+[node name="Label" type="Label" parent="."]
+offset_left = 442.0
+offset_top = 119.0
+offset_right = 543.0
+offset_bottom = 142.0
+scale = Vector2(4, 4)
+text = "Lobby"
+horizontal_alignment = 1
+
+[node name="ButtonContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+offset_left = 530.0
+offset_top = 475.0
+offset_right = 765.0
+offset_bottom = 530.0
+theme_override_constants/separation = 19
+
+[node name="Label" type="Label" parent="ButtonContainer"]
+layout_mode = 2
+text = "Select A Level"
+horizontal_alignment = 1
+
+[node name="LevelSelect" type="OptionButton" parent="ButtonContainer"]
+layout_mode = 2
+
+[node name="StartButton" type="Button" parent="ButtonContainer"]
+visible = false
+layout_mode = 2
+text = "Start Game"
+
+[node name="Panel" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 530.0
+offset_top = 268.0
+offset_right = 768.0
+offset_bottom = 491.0
+theme_override_constants/separation = 24
+alignment = 1
+
+[node name="Player1" type="Label" parent="Panel"]
+layout_mode = 2
+text = "Waiting on Player1 to connect..."
+horizontal_alignment = 1
+
+[node name="Player2" type="Label" parent="Panel"]
+layout_mode = 2
+text = "Waiting on Player2 to connect..."
+horizontal_alignment = 1
+
+[node name="PlayersReady" type="Label" parent="Panel"]
+visible = false
+layout_mode = 2
+text = "Ready!"
+horizontal_alignment = 1
