@@ -7,6 +7,7 @@ extends CharacterBody2D
 @onready var cam = $Camera2D
 @onready var collision_shape = $CollisionShape2D
 
+
 const PUSH_FORCE = 15.0
 const MIN_PUSH_FORCE = 10.0
 
