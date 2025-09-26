@@ -1,4 +1,3 @@
-# herding_cats.gd (test-friendly)
 extends Node2D
 
 @onready var player_scene = preload("res://scenes/player/player.tscn") # optional in tests
@@ -6,7 +5,6 @@ extends Node2D
 @onready var player2marker: Node2D = get_node_or_null("PlayerMarkers/Player2Marker")
 @onready var pSpawner: Node = get_node_or_null("pSpawner")
 
-var players_spawned := 0
 var cats_left: int = 0
 
 func _ready() -> void:
@@ -18,16 +16,7 @@ func _ready() -> void:
 
 	# ---- Multiplayer path (runtime only) ----
 	if multiplayer.is_server():
-		# Only attempt spawn if we have a valid spawner and markers
-		if pSpawner and player_scene:
-			spawn_player.rpc(1)
-			var peers := multiplayer.get_peers()
-			if peers.size() > 0:
-				var client := peers[0]
-				if client != 1:
-					spawn_player.rpc(client)
-					print("Client spawned")
-					set_side_scroller.rpc(false)
+		spawn_players.rpc(Net.players)
 
 	_setup_level_logic()
 
@@ -37,15 +26,12 @@ func _ready() -> void:
 		net._level_ready_rpc.rpc_id(1, multiplayer.get_unique_id())
 
 func _setup_level_logic() -> void:
-	# Count cats currently in the tree
 	var cats_group := get_tree().get_nodes_in_group("cats")
 	cats_left = cats_group.size()
 
-	# Connect to mines that may explode
 	var mines_group := get_tree().get_nodes_in_group("mines")
 	for mine in mines_group:
 		if is_instance_valid(mine) and mine.has_signal("exploded"):
-			# Avoid duplicate connections if re-entering
 			if not mine.is_connected("exploded", Callable(self, "_on_mine_exploded")):
 				mine.exploded.connect(Callable(self, "_on_mine_exploded"))
 
@@ -74,31 +60,29 @@ func set_side_scroller_now(id: int, value: bool):
 			if node and node.has_method("set_side_scroller"):
 				node.set_side_scroller.rpc(value)
 
-# ------------ RPCs ----------------
 @rpc("authority", "call_local", "reliable")
-func spawn_player(id: int):
-	if not (pSpawner and player_scene):
+func spawn_players(p_array: PackedInt32Array) -> void:
+	if p_array.size() < 2:
+		push_error("spawn_players: need 2 peer IDs, got %d" % p_array.size())
 		return
-	var player_instance = player_scene.instantiate()
-	if id != 1:
-		player_instance.modulate = Color.hex(0xE0FFFF)
-	player_instance.name = str(id)
+		
+	var markers := [player1marker, player2marker]
+	var tints := [Color.WHITE, Color.hex(0xE0FFFF)]
+	
+	for i in 2:
+		var peer_id := p_array[i]
+		var player := player_scene.instantiate()
+		player.name = str(peer_id)
+		player.modulate = tints[i]
+		player.global_position = markers[i].global_position
+		player.set_multiplayer_authority(peer_id)
 
-	var spawn_pos := Vector2.ZERO
-	if players_spawned == 0 and player1marker:
-		spawn_pos = player1marker.global_position
-	elif players_spawned == 1 and player2marker:
-		spawn_pos = player2marker.global_position
+		pSpawner.add_child(player)
+		if player.get_script():
+			var props = player.get_property_list()
+			for prop in props:
+				if prop.name == "side_scroller":
+					player.set(prop.name, false)
 
-	player_instance.global_position = spawn_pos
-	pSpawner.add_child(player_instance)
-	print("Players Spawned: ", players_spawned)
-	players_spawned += 1
-
-@rpc("authority", "call_local", "reliable")
-func set_side_scroller(value: bool):
-	if not pSpawner:
-		return
-	for p in pSpawner.get_children():
-		if p.has_method("set_side_scroller"):
-			p.set_side_scroller(value)
+		var cam: Camera2D = player.get_node("Camera2D")
+		cam.enabled = false

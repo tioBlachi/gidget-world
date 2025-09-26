@@ -1,9 +1,13 @@
 [gd_scene load_steps=7 format=3 uid="uid://bxpry3684affg"]
 
 [ext_resource type="Script" uid="uid://gmylnlvujh2e" path="res://scripts/player.gd" id="1_g2els"]
-[ext_resource type="Texture2D" uid="uid://dsejfk32iyt78" path="res://assets/BowenStuff/gRight.png" id="2_gmlin"]
+[ext_resource type="Texture2D" uid="uid://chwjotgds2hdb" path="res://Art/OldTestArt/gRight.png" id="2_gmlin"]
 [ext_resource type="AudioStream" uid="uid://cqt8c2sa1757t" path="res://assets/sounds/8-bit-jump.mp3" id="3_gmlin"]
+<<<<<<< HEAD
 [ext_resource type="AudioStream" uid="uid://e4ot17r0001w" path="res://assets/sounds/080205_life-lost-game-over-89697.mp3" id="4_lvxji"]
+=======
+[ext_resource type="AudioStream" uid="uid://bwe5a2n1p7aoj" path="res://assets/sounds/080205_life-lost-game-over-89697.mp3" id="4_lvxji"]
+>>>>>>> main
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hqtel"]
 size = Vector2(128, 128)
@@ -21,11 +25,22 @@ properties/2/replication_mode = 1
 properties/3/path = NodePath("Sprite:flip_v")
 properties/3/spawn = true
 properties/3/replication_mode = 1
+properties/4/path = NodePath("Sprite:rotation")
+properties/4/spawn = true
+properties/4/replication_mode = 1
+properties/5/path = NodePath("CollisionShape2D:rotation")
+properties/5/spawn = true
+properties/5/replication_mode = 1
+properties/6/path = NodePath("CollisionShape2D:position")
+properties/6/spawn = true
+properties/6/replication_mode = 1
 
 [node name="Player" type="CharacterBody2D"]
 scale = Vector2(0.520001, 0.520001)
 collision_layer = 3
 collision_mask = 3
+floor_stop_on_slope = false
+platform_on_leave = 2
 script = ExtResource("1_g2els")
 
 [node name="Sprite" type="Sprite2D" parent="."]

@@ -2,13 +2,13 @@
 
 [ext_resource type="Script" uid="uid://kwqdtogko814" path="res://scripts/Levels/lab-escape.gd" id="1_r6deh"]
 [ext_resource type="PackedScene" uid="uid://c2mmmw150y6yj" path="res://scenes/objects/lab_cell.tscn" id="3_hrlo7"]
-[ext_resource type="Texture2D" uid="uid://ctijq3u5aqe1v" path="res://assets/Tiles/lab_tiles.png" id="4_mi8k0"]
+[ext_resource type="Texture2D" uid="uid://jkrwsj8v6a7m" path="res://assets/Tiles/oldTiles/lab_tiles.png" id="4_mi8k0"]
 [ext_resource type="PackedScene" uid="uid://cyxa25yg2hfwc" path="res://scenes/objects/button.tscn" id="5_7nrcb"]
 [ext_resource type="PackedScene" uid="uid://q5myivnq8cna" path="res://scenes/objects/key_card.tscn" id="7_85sb4"]
-[ext_resource type="Texture2D" uid="uid://bpcg7s8xatixv" path="res://assets/BowenStuff/spike.png" id="7_modnx"]
+[ext_resource type="Texture2D" uid="uid://c65o80uds8p2y" path="res://Art/OldTestArt/spike.png" id="7_modnx"]
 [ext_resource type="PackedScene" uid="uid://dbh40ehfj6b7n" path="res://scenes/objects/lab_exit_door.tscn" id="8_fg2n0"]
-[ext_resource type="Texture2D" uid="uid://dh3qpgv5wov8e" path="res://assets/BowenStuff/metal.png" id="8_hrlo7"]
-[ext_resource type="Texture2D" uid="uid://dt43xyrsdyk8s" path="res://assets/BowenStuff/crate.png" id="9_mi8k0"]
+[ext_resource type="Texture2D" uid="uid://c1hcpv5u6brqc" path="res://Art/OldTestArt/metal.png" id="8_hrlo7"]
+[ext_resource type="Texture2D" uid="uid://difn7j60ku573" path="res://Art/OldTestArt/crate.png" id="9_mi8k0"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_max5s"]
 texture = ExtResource("4_mi8k0")
@@ -109,6 +109,21 @@ _data = {
 [node name="LabEscape" type="Node2D"]
 script = ExtResource("1_r6deh")
 
+[node name="pSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("uid://bxpry3684affg")
+spawn_path = NodePath("../Players")
+
+[node name="PlayerMarkers" type="Node2D" parent="."]
+position = Vector2(1, 8)
+
+[node name="Player1Marker" type="Marker2D" parent="PlayerMarkers"]
+position = Vector2(330, 425)
+
+[node name="Player2Marker" type="Marker2D" parent="PlayerMarkers"]
+position = Vector2(504, 429)
+
+[node name="Players" type="Node2D" parent="."]
+
 [node name="LabCell2" parent="." instance=ExtResource("3_hrlo7")]
 position = Vector2(306, 204)
 
@@ -138,21 +153,6 @@ position = Vector2(1798, 484)
 z_index = -1
 position = Vector2(1458, 741)
 scale = Vector2(4.2281, 4.55587)
-
-[node name="pSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("uid://bxpry3684affg")
-spawn_path = NodePath("../Players")
-
-[node name="PlayerMarkers" type="Node2D" parent="."]
-position = Vector2(1, 8)
-
-[node name="Player1Marker" type="Marker2D" parent="PlayerMarkers"]
-position = Vector2(330, 425)
-
-[node name="Player2Marker" type="Marker2D" parent="PlayerMarkers"]
-position = Vector2(504, 429)
-
-[node name="Players" type="Node2D" parent="."]
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_rxhor")

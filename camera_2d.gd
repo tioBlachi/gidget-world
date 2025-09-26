@@ -48,7 +48,6 @@ func _process(delta: float) -> void:
 	# Move camera smoothly to center
 	global_position = lerp(global_position, center, delta * move_speed)
 
-	# Calculate needed zoom to fit all players
 	var screen_size = get_viewport_rect().size
 	var dist_x = max_x - min_x + margin
 	var dist_y = max_y - min_y + margin
@@ -57,7 +56,6 @@ func _process(delta: float) -> void:
 	var zoom_y = dist_y / screen_size.y
 	var target_zoom = clamp(max(zoom_x, zoom_y), min_zoom, max_zoom)
 
-	# Smooth zoom
 	var current_zoom = zoom.x
 	var new_zoom = lerp(current_zoom, target_zoom, delta * zoom_speed)
 	zoom = Vector2(new_zoom, new_zoom)

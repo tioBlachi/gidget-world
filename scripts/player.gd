@@ -4,6 +4,7 @@ extends CharacterBody2D
 @export var JUMP_VELOCITY: float = -375.0
 @export var side_scroller: bool = true
 @export var direction: float = 1.0
+@onready var cam = $Camera2D
 @onready var collision_shape = $CollisionShape2D
 
 const PUSH_FORCE = 15.0
@@ -11,40 +12,30 @@ const MIN_PUSH_FORCE = 10.0
 
 var cell_floor: RigidBody2D = null
 
-# New death-related variables
 var is_dead = false
-var death_texture = preload("res://assets/BowenStuff/gDeath.png") # Update this path to your dead sprite
+var death_texture = preload("res://Art/OldTestArt/gDeath.png")
 
 func _ready():
-	var peer_id = name.to_int()
-	if peer_id != 1:
-		set_multiplayer_authority(peer_id)
 	add_to_group("players")
 
 func _physics_process(delta: float) -> void:
 	if is_multiplayer_authority():
 		var level_root = get_parent().get_parent()
-		# This return prevents movement if the player is dead
 		if is_dead:
-			# Continue falling
-			velocity += get_gravity() * delta * 2.0 # Faster gravity for a dramatic fall
+			velocity += get_gravity() * delta * 2.0 
 			move_and_slide()
 			return
 
-		if side_scroller:
-			$Camera2D.make_current()
-			
+		if side_scroller:			
 			if level_root and level_root.has_method("get_map_limits"):
 				var limits = level_root.get_map_limits()
 				$Camera2D.limit_left = int(limits.position.x)
 				$Camera2D.limit_top = int(limits.position.y)
 				$Camera2D.limit_right = int(limits.end.x)
 				$Camera2D.limit_bottom = int(limits.end.y)
-			# Add the gravity.
 			if not is_on_floor():
 				velocity += get_gravity() * delta
 
-			# Handle jump.
 			if Input.is_action_just_pressed("jump") and is_on_floor():
 				velocity.y = JUMP_VELOCITY
 				$JumpSound.play()
@@ -57,14 +48,15 @@ func _physics_process(delta: float) -> void:
 					else:
 						lab.rpc_id(1, "rpc_report_jump", my_id)
 
-			# Get the input direction and handle the movement/deceleration.
-			direction = Input.get_axis("ui_left", "ui_right")
+			direction = Input.get_axis("move left", "move right")
 			if direction:
 				velocity.x = direction * SPEED
 				$Sprite.flip_h = direction < 0
 			else:
 				velocity.x = move_toward(velocity.x, 0, SPEED)
-
+				
+			_update_slope_tilt()
+			
 			if move_and_slide():
 				for i in get_slide_collision_count():
 					var c = get_slide_collision(i)
@@ -75,9 +67,8 @@ func _physics_process(delta: float) -> void:
 						collider.apply_central_impulse(push_direction * PUSH_FORCE)
 			
 		else:
-			# Top-down movement logic
-			var x_direction = Input.get_axis("ui_left", "ui_right")
-			var y_direction = Input.get_axis("ui_up", "ui_down")
+			var x_direction = Input.get_axis("move left", "move right")
+			var y_direction = Input.get_axis("move up", "move down")
 			var dir = Vector2(x_direction, y_direction)
 
 			if dir != Vector2.ZERO:
@@ -106,34 +97,37 @@ func pickup_keycard(keycard: Node):
 func set_side_scroller(value: bool):
 	side_scroller = value
 	if not side_scroller:
-		# If the camera exists, remove it
 		if is_instance_valid($Camera2D):
 			$Camera2D.queue_free()
 
-# New function to handle the player's death
-# Inside your player.gd script
+func _update_slope_tilt():
+	if is_on_floor():
+		var n := get_floor_normal()
+		var t := Vector2(-n.y, n.x)
+		var target := t.angle()
 
+		$Sprite.rotation = lerp_angle($Sprite.rotation, target, 0.15)
+		$CollisionShape2D.rotation = lerp_angle($Sprite.rotation, target, 0.15)
+	else:
+		$Sprite.rotation = lerp_angle($Sprite.rotation, 0.0, 0.1)
+
+@rpc("any_peer", "call_local")
 func die():
 	if is_dead:
 		return
 
 	is_dead = true
-	
-	# Apply an upward bounce
+	self.modulate = Color(1,1,1,1)
 	velocity.y = -1000
 	velocity.x = 0
 	
-	# Disable the player's collision so they can fall through the floor
 	collision_shape.set_deferred("disabled", true)
 	
-	# Change the sprite to the dead texture
 	$Sprite.texture = death_texture
 	
-	# Stop the camera from following the player
 	if is_instance_valid($Camera2D):
 		$Camera2D.process_mode = self.PROCESS_MODE_DISABLED
 	
-	# Disable multiplayer synchronization for the dying player
 	$MultiplayerSynchronizer.set_process(false)
 	$DeathSFX.play()
 	var timer = Timer.new()
