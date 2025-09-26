@@ -6,6 +6,7 @@ extends CharacterBody2D
 @export var direction: float = 1.0
 @onready var cam = $Camera2D
 @onready var collision_shape = $CollisionShape2D
+@export var max_fall_speed: float = 500.0 #allows other scenes to access max fall speed
 
 const PUSH_FORCE = 15.0
 const MIN_PUSH_FORCE = 10.0
@@ -35,6 +36,7 @@ func _physics_process(delta: float) -> void:
 				$Camera2D.limit_bottom = int(limits.end.y)
 			if not is_on_floor():
 				velocity += get_gravity() * delta
+				velocity.y = min(velocity.y, max_fall_speed)
 
 			if Input.is_action_just_pressed("jump") and is_on_floor():
 				velocity.y = JUMP_VELOCITY
