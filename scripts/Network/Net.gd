@@ -1,42 +1,16 @@
 extends Node
 
-signal player_connected(id: int)
-signal player_disconnected(id: int)
-
-const NET_VERSION := "V1-min"
-const DEFAULT_PORT := 8080
 const DEFAULT_MAX_CLIENTS := 2
 
-var players: PackedInt32Array = []  # client peer IDs; host (id=1) is only added in non-dedicated builds
+signal players_changed(players)
 
-func _ready() -> void:
-	multiplayer.peer_connected.connect(_on_peer_connected)
-	multiplayer.peer_disconnected.connect(_on_peer_disconnected)
-	multiplayer.connected_to_server.connect(_connected_to_server)
-	multiplayer.connection_failed.connect(_connection_failed)
-	multiplayer.server_disconnected.connect(_server_disconnected)
-
-	# In dedicated/headless builds, auto-host exactly once. Should fix bug
-	if _is_dedicated_server() and not is_hosting():
-		if start_server(DEFAULT_PORT):
-			print("Net: Dedicated/headless server listening on %d" % DEFAULT_PORT)
-
-
-# ------- Helpers & guards -------
+var players: PackedInt32Array = []
+# ----------------- Helpers -----------------
 
 func _is_dedicated_server() -> bool:
 	return OS.has_feature("dedicated_server") or OS.has_feature("headless")
 
-func _peer_status_string(p: MultiplayerPeer) -> String:
-	if p == null:
-		return "NULL"
-	match p.get_connection_status():
-		MultiplayerPeer.CONNECTION_DISCONNECTED: return "DISCONNECTED"
-		MultiplayerPeer.CONNECTION_CONNECTING:   return "CONNECTING"
-		MultiplayerPeer.CONNECTION_CONNECTED:    return "CONNECTED"
-		_: return str(p.get_connection_status())
 
-# True only if an ENet server is actually bound & connected. Working so far
 func is_hosting() -> bool:
 	var p := multiplayer.multiplayer_peer
 	return p != null \
@@ -44,108 +18,96 @@ func is_hosting() -> bool:
 		and p.get_connection_status() == MultiplayerPeer.CONNECTION_CONNECTED \
 		and multiplayer.is_server()
 
-# For debugging: force a clean restart of the server (clears stale peers)
-# Possibly not needed? Was a just in case type of function
-func force_start_server(port: int) -> bool:
-	var p := multiplayer.multiplayer_peer
-	if p != null:
-		print("[HOST] force_start: closing stale peer (status=%s)" % _peer_status_string(p))
-		p.close()
-		multiplayer.multiplayer_peer = null
-	players.clear()
-	return _create_server_peer(port)
+# ----------------- Server / Client API -----------------
 
-# ------- Server / Client API -------
-
-
-func start_server(port: int) -> bool:
-	var p := multiplayer.multiplayer_peer
-	print("[HOST] start_server called. peer=%s status=%s is_server=%s" %
-		[ str(p), _peer_status_string(p), str(multiplayer.is_server()) ])
-
-	# if already hosting, do nothing.
+func become_host(port: int) -> bool:
 	if is_hosting():
-		print("Net: Already hosting (peer_id=%d)." % multiplayer.get_unique_id())
+		print("[NET] Already hosting (peer_id=%d)" % multiplayer.get_unique_id())
 		return true
 
-	# If there’s a non-connected peer just "there", get rid of it. Should solve bug
-	if p != null and p.get_connection_status() != MultiplayerPeer.CONNECTION_CONNECTED:
-		print("[HOST] clearing non-connected stale peer (status=%s)" % _peer_status_string(p))
-		p.close()
-		multiplayer.multiplayer_peer = null
-
-	return _create_server_peer(port)
-
-func _create_server_peer(port: int) -> bool:
-	var peer := ENetMultiplayerPeer.new()
-	var err := peer.create_server(port, DEFAULT_MAX_CLIENTS)
-	print("[HOST] create_server(port=%d, max=%d) -> err=%d" % [port, DEFAULT_MAX_CLIENTS, err])
-
+	var server_peer := ENetMultiplayerPeer.new()
+	var err := server_peer.create_server(port, DEFAULT_MAX_CLIENTS)
 	if err != OK:
-		push_error("Net: cannot host on %d (err=%d)" % [port, err])
+		if err == ERR_ALREADY_IN_USE:
+			print("[NET] Port %d is in use — likely a dedicated server is already running." % port)
+		else:
+			print("[NET] Failed to start server on port %d (err=%d)." % [port, err])
 		return false
 
-	multiplayer.multiplayer_peer = peer
-	print("[HOST] set multiplayer_peer. status=%s" % _peer_status_string(multiplayer.multiplayer_peer))
-
-	var host_id := multiplayer.get_unique_id()
+	multiplayer.multiplayer_peer = server_peer
+	multiplayer.peer_connected.connect(_add_player_to_game)
+	multiplayer.peer_disconnected.connect(_del_player)
+	multiplayer.connected_to_server.connect(_connected_to_server)
+	multiplayer.server_disconnected.connect(_server_disconnected)
 
 	if not _is_dedicated_server():
+		var host_id := multiplayer.get_unique_id()
 		if players.find(host_id) == -1:
 			players.push_back(host_id)
-			player_connected.emit(host_id)
+	else:
+		print("Dedicated Server Started...")
 
-	print("Net: Hosting on UDP %d (server peer_id=%d)" % [port, host_id])
-	print("[HOST] listening; players=", players)
 	return true
 
+
+# join_as_player2 from youtube
 func start_client(host: String, port: int) -> bool:
-	if _is_dedicated_server():
-		push_error("Net: headless/dedicated build cannot start a client.")
+	var client_peer = ENetMultiplayerPeer.new()
+	var err := client_peer.create_client(host, port)
+	if err != OK:	
 		return false
 
-	var peer := ENetMultiplayerPeer.new()
-	var err := peer.create_client(host, port)
-	print("[CLIENT] create_client(%s:%d) -> err=%d" % [host, port, err])
-
-	if err != OK:
-		push_error("Net: cannot connect to %s:%d (err=%d)" % [host, port, err])
-		return false
-
-	multiplayer.multiplayer_peer = peer
-	print("[CLIENT_AFTER_SET_PEER] pid=%s is_server=%s peer=%s" %
-		[ str(multiplayer.get_unique_id()), str(multiplayer.is_server()), str(multiplayer.multiplayer_peer) ])
-	print("Net: Connecting to %s:%d ..." % [host, port])
+	multiplayer.multiplayer_peer = client_peer
+	print("[NET] Connecting to %s:%d ..." % [host, port])
 	return true
 
-
-# ------- Multiplayer signal handlers -------
+# ----------------- Multiplayer signal handlers -----------------
 
 func _connected_to_server() -> void:
-	print("[CLIENT] connected_to_server fired. pid=%d" % multiplayer.get_unique_id())
+	print("[CLIENT] connected (pid=%d)" % multiplayer.get_unique_id())
 
 func _connection_failed() -> void:
 	print("[CLIENT] connection_failed")
 
 func _server_disconnected() -> void:
-	print("[CLIENT] Disconnected from server.")
+	print("[CLIENT] server_disconnected")
 	players.clear()
 
-func _on_peer_connected(id: int) -> void:
+func _add_player_to_game(id: int) -> void:
 	if multiplayer.is_server():
 		if players.find(id) == -1:
 			players.push_back(id)
-		print("[HOST] peer_connected -> %d" % id)
-		if not _is_dedicated_server():
-			print("[HOST] Joined Player IDs: ", players)
-		player_connected.emit(id)
-		print("[HOST] Joined Player IDs: ", players)
+		rpc("rpc_send_players", players)
+		print("[HOST] peer_connected -> %d ; players=%s" % [id, str(players)])
 
-func _on_peer_disconnected(id: int) -> void:
+func _del_player(id: int) -> void:
 	if multiplayer.is_server():
 		var idx := players.find(id)
 		if idx != -1:
 			players.remove_at(idx)
-		print("[HOST] peer_disconnected -> %d" % id)
-		player_disconnected.emit(id)
-		print("[HOST] players: ", players)
+		rpc("rpc_send_players", players)
+		print("[HOST] peer_disconnected -> %d ; players=%s" % [id, str(players)])
+		
+# ------------------- RPCs --------------------
+@rpc("any_peer", "reliable")
+func rpc_request_players():
+	if multiplayer.is_server():
+		rpc_id(multiplayer.get_remote_sender_id(), "rpc_send_players", players)
+
+@rpc("any_peer", "reliable")
+func rpc_send_players(server_players: PackedInt32Array) -> void:
+	players = server_players
+	emit_signal("players_changed", players)
+
+# Client → Server: request to start a level
+@rpc("any_peer", "reliable")
+func rpc_start_game(level_name: String) -> void:
+	if not multiplayer.is_server():
+		return
+	# (optional) validate players/count here, then broadcast:
+	rpc("rpc_open_level", level_name)
+
+# Server → Everyone (call_local): open that level on all peers
+@rpc("any_peer", "call_local", "reliable")
+func rpc_open_level(level_name: String) -> void:
+	SceneManager.switch_scene(level_name)

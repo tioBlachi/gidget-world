@@ -42,6 +42,6 @@ func _apply_pressed_visuals():
 	click_sfx.play()
 
 func _release_other_floors():
-	for floor in get_tree().get_nodes_in_group("cell_floor"):
-		if floor is RigidBody2D and not floor.is_flimsy and not floor.is_open:
-			floor.rpc("rpc_unfreeze")
+	for flr in get_tree().get_nodes_in_group("cell_floor"):
+		if flr is RigidBody2D and not flr.is_flimsy and not flr.is_open:
+			flr.rpc("rpc_unfreeze")
