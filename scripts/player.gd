@@ -21,6 +21,7 @@ func _ready():
 	add_to_group("players")
 
 func _physics_process(delta: float) -> void:
+	print("Player velocity.y = ", velocity.y)
 	if is_multiplayer_authority():
 		var level_root = get_parent().get_parent()
 		if is_dead:
