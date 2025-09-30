@@ -34,9 +34,22 @@ func _physics_process(delta: float) -> void:
 				$Camera2D.limit_top = int(limits.position.y)
 				$Camera2D.limit_right = int(limits.end.x)
 				$Camera2D.limit_bottom = int(limits.end.y)
+				
 			if not is_on_floor():
-				velocity += get_gravity() * delta
-				velocity.y = min(velocity.y, max_fall_speed)
+				var gravity_force = get_gravity()
+				var fall_limit = max_fall_speed
+
+			# Fast fall when pressing down
+				if Input.is_action_pressed("move_down"):
+					gravity_force *= 2
+					fall_limit *= 2
+
+				velocity += gravity_force * delta
+				velocity.y = min(velocity.y, fall_limit)
+
+				if Input.is_action_just_pressed("move_up") or Input.is_action_just_pressed("jump"):
+					velocity.y *= 0.5
+
 
 			if Input.is_action_just_pressed("jump") and is_on_floor():
 				velocity.y = JUMP_VELOCITY
