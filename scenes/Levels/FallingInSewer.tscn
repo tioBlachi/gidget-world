@@ -47,11 +47,11 @@ sources/0 = SubResource("TileSetAtlasSource_5yfk3")
 script = ExtResource("1_4kqsw")
 
 [node name="1" parent="." instance=ExtResource("3_ewixd")]
-position = Vector2(498, 94)
+position = Vector2(720, 42)
 scale = Vector2(0.3, 0.3)
 
 [node name="2" parent="." instance=ExtResource("3_ewixd")]
-position = Vector2(689, 218)
+position = Vector2(816, -81)
 scale = Vector2(0.3, 0.3)
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
@@ -60,7 +60,8 @@ scale = Vector2(2, 2)
 tile_set = SubResource("TileSet_a2dya")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(715, 349)
+position = Vector2(707, 190)
+scale = Vector2(0.949306, 0.952778)
 texture = ExtResource("5_ewixd")
 
 [node name="Parallax2D" type="Parallax2D" parent="."]
