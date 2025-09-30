@@ -40,9 +40,9 @@ func _on_timer() -> void:
 func _on_zone_changed(_b: Node2D) -> void:
 	_refresh_beep()
 
-func _set_anim(name: String) -> void:
-	if anim.animation != name:
-		anim.play(name)
+func _set_anim(n: String) -> void:
+	if anim.animation != n:
+		anim.play(n)
 
 func _refresh_beep() -> void:
 	if triggered:
@@ -60,8 +60,8 @@ func _refresh_beep() -> void:
 		_set_anim("idle")
 
 func _any_body(a: Area2D) -> bool:
-	for b in a.get_overlapping_bodies():
-		if b.is_in_group("cats") or b.name.begins_with("Player"):
+	for body in a.get_overlapping_bodies():
+		if body.is_in_group("cats") or body.is_in_group("players"):
 			return true
 	return false
 

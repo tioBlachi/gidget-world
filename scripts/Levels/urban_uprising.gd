@@ -7,7 +7,7 @@ extends Node2D
 @onready var player1marker = $PlayerMarkers/Player1Marker
 @onready var player2marker = $PlayerMarkers/Player2Marker
 
-@export var cam_rise_speed : float = 50
+@export var cam_rise_speed : float = 40
 
 func _ready() -> void:
 	if multiplayer.is_server():
