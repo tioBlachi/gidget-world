@@ -1,6 +1,7 @@
 extends Node
 
 const SCENES: Dictionary = {
+	"lawnmower madness": "res://scenes/Levels/lawnmower_madness.tscn",
 	"Herding Cats": "res://scenes/Levels/herding_cats.tscn",
 	"Lab Escape": "res://scenes/Levels/lab-escape.tscn",
 	"Urban Uprising": "res://scenes/Levels/urban_uprising.tscn",
