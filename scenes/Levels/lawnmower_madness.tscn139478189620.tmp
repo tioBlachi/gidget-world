@@ -207,15 +207,15 @@ tile_map_data = PackedByteArray("AAAAAP//BAAAAAAAAAAAAAAABAAAAAEAAAAAAAEABAAAAAI
 tile_set = SubResource("TileSet_v26jc")
 
 [node name="Lawnmower" type="CharacterBody2D" parent="."]
-position = Vector2(1228, 644)
 collision_layer = 8
 script = ExtResource("7_l1kjl")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Lawnmower"]
-position = Vector2(0, -40)
+position = Vector2(1120, 616.5)
 shape = SubResource("RectangleShape2D_l1kjl")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Lawnmower"]
+position = Vector2(1120, 657)
 sprite_frames = SubResource("SpriteFrames_chk2d")
 animation = &"mow"
 autoplay = "mow"
@@ -223,7 +223,7 @@ autoplay = "mow"
 [node name="Killzone" parent="Lawnmower" instance=ExtResource("8_eihww")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Lawnmower/Killzone"]
-position = Vector2(0, -40)
+position = Vector2(1120, 617)
 shape = SubResource("RectangleShape2D_eihww")
 
 [node name="Area2D" type="Area2D" parent="Lawnmower"]
@@ -231,7 +231,7 @@ collision_mask = 2
 script = ExtResource("10_chk2d")
 
 [node name="Keyzone" type="CollisionShape2D" parent="Lawnmower/Area2D"]
-position = Vector2(37, 66)
+position = Vector2(1156.5, 723.5)
 shape = SubResource("RectangleShape2D_chk2d")
 
 [connection signal="body_entered" from="Lawnmower/Area2D" to="Lawnmower/Area2D" method="_on_body_entered"]
