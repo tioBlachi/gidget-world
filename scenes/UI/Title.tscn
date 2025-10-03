@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://btd2nmq35cw3i"]
 
 [ext_resource type="Script" uid="uid://c0fliiisa46b6" path="res://scripts/UI/title.gd" id="1_vd34o"]
-[ext_resource type="Texture2D" uid="uid://dbatyjj04cxgb" path="res://Art/NewArt/GidgetWorldLogo.png" id="2_lp2qc"]
+[ext_resource type="Texture2D" uid="uid://blqcoyp1mqluu" path="res://Art/NewArt/GidgetWorldLogo.png" id="2_lp2qc"]
 
 [node name="Title" type="Control"]
 layout_mode = 3

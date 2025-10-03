@@ -48,15 +48,17 @@ func spawn_players(p_array: PackedInt32Array) -> void:
 		player.set_multiplayer_authority(peer_id)
 
 		pSpawner.add_child(player)
-
-		var cam: Camera2D = player.get_node("Camera2D")
-		cam.make_current()
+		if multiplayer.get_unique_id() == peer_id:
+			var cam: Camera2D = player.get_node("Camera2D")
+			cam.make_current()
 			
 @rpc("any_peer", "reliable")
 func rpc_report_jump(peer_id: int):
 	if not multiplayer.is_server():
 		return
-	var flr = cell1 if peer_id == 1 else cell2
+		
+	var index = Net.players.find(peer_id)
+	var flr = cell1 if index == 0 else cell2
 	if not flr.is_flimsy or flr.is_open:
 		return
 	flr.jump_count += 1
