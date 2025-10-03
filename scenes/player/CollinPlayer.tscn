@@ -61,7 +61,7 @@ replication_config = SubResource("SceneReplicationConfig_gmlin")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 limit_left = 0
-limit_top = 16
+limit_top = -16
 limit_right = 2192
 limit_bottom = 1090
 position_smoothing_enabled = true
