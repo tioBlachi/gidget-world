@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=4 uid="uid://b5g7eb7pdyncf"]
+[gd_scene load_steps=25 format=4 uid="uid://b5g7eb7pdyncf"]
 
 [ext_resource type="Script" uid="uid://ky4ql3m5py7w" path="res://scripts/Levels/lawnmower_madness.gd" id="1_1m4jy"]
 [ext_resource type="Texture2D" uid="uid://b12yc0lkq54vd" path="res://assets/Tiles/oldTiles/park_tiles.png" id="2_qtf7v"]
@@ -176,6 +176,17 @@ size = Vector2(90, 80)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_chk2d"]
 size = Vector2(17, 17)
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_chk2d"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:acceleration")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath(".:rotation")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+
 [node name="LawnmowerMadness" type="Node2D"]
 script = ExtResource("1_1m4jy")
 
@@ -207,7 +218,11 @@ tile_map_data = PackedByteArray("AAAAAP//BAAAAAAAAAAAAAAABAAAAAEAAAAAAAEABAAAAAI
 tile_set = SubResource("TileSet_v26jc")
 
 [node name="Lawnmower" type="CharacterBody2D" parent="."]
+light_mask = 17
+visibility_layer = 17
+z_index = 1
 position = Vector2(1228, 644)
+rotation = -1.5708
 collision_layer = 8
 script = ExtResource("7_l1kjl")
 
@@ -233,5 +248,8 @@ script = ExtResource("10_chk2d")
 [node name="Keyzone" type="CollisionShape2D" parent="Lawnmower/Area2D"]
 position = Vector2(37, 66)
 shape = SubResource("RectangleShape2D_chk2d")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="Lawnmower"]
+replication_config = SubResource("SceneReplicationConfig_chk2d")
 
 [connection signal="body_entered" from="Lawnmower/Area2D" to="Lawnmower/Area2D" method="_on_body_entered"]
