@@ -5,6 +5,7 @@ const SCENES: Dictionary = {
 	"Lab Escape": "res://scenes/Levels/lab-escape.tscn",
 	"Urban Uprising": "res://scenes/Levels/urban_uprising.tscn",
 	"Car Dodge": "res://scenes/Levels/carDodge.tscn",
+	"Sewer Climb": "res://scenes/Levels/sewer_climb.tscn",
 	"Title": "res://scenes/UI/Title.tscn",
 	"Testing" : "res://scenes/DevTools/Testing.tscn",
 	"Lobby" : "res://scenes/UI/Lobby.tscn"

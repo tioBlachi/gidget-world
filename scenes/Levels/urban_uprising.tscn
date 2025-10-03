@@ -1,10 +1,10 @@
-[gd_scene load_steps=11 format=4 uid="uid://bqm3nrdrmkonl"]
+[gd_scene load_steps=11 format=4 uid="uid://byukt8eyso7jr"]
 
-[ext_resource type="Texture2D" uid="uid://c7f3sl0eldmyp" path="res://Art/OldTestArt/metal2.png" id="1_sqmmr"]
-[ext_resource type="Script" uid="uid://chy5ttrcgpkg1" path="res://scripts/Levels/urban_uprising.gd" id="1_tf8py"]
-[ext_resource type="Texture2D" uid="uid://biteud63uieua" path="res://Art/NewArt/Big City.png" id="4_5h4xf"]
-[ext_resource type="Texture2D" uid="uid://dneu22rr5fcdw" path="res://assets/sprites/New Piskel.png" id="6_hb40t"]
-[ext_resource type="PackedScene" uid="uid://87ms82l1c82e" path="res://scenes/objects/moving_platform.tscn" id="7_5h4xf"]
+[ext_resource type="Texture2D" uid="uid://daekjnkkdhlxs" path="res://Art/OldTestArt/metal2.png" id="1_sqmmr"]
+[ext_resource type="Script" path="res://scripts/Levels/urban_uprising.gd" id="1_tf8py"]
+[ext_resource type="Texture2D" uid="uid://ngpcuovhe3by" path="res://Art/NewArt/Big City.png" id="4_5h4xf"]
+[ext_resource type="Texture2D" uid="uid://0n81g7arp8a2" path="res://assets/sprites/New Piskel.png" id="6_hb40t"]
+[ext_resource type="PackedScene" path="res://scenes/objects/moving_platform.tscn" id="7_5h4xf"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_5h4xf"]
 
