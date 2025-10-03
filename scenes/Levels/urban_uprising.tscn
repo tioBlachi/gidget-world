@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=4 uid="uid://bqm3nrdrmkonl"]
+[gd_scene load_steps=13 format=4 uid="uid://bqm3nrdrmkonl"]
 
 [ext_resource type="Texture2D" uid="uid://c7f3sl0eldmyp" path="res://Art/OldTestArt/metal2.png" id="1_sqmmr"]
 [ext_resource type="Script" uid="uid://chy5ttrcgpkg1" path="res://scripts/Levels/urban_uprising.gd" id="1_tf8py"]
 [ext_resource type="Texture2D" uid="uid://biteud63uieua" path="res://Art/NewArt/Big City.png" id="4_5h4xf"]
+[ext_resource type="PackedScene" uid="uid://lul0ymv7okl" path="res://scenes/actors/FlameDude.tscn" id="6_5h4xf"]
 [ext_resource type="Texture2D" uid="uid://dneu22rr5fcdw" path="res://assets/sprites/New Piskel.png" id="6_hb40t"]
 [ext_resource type="PackedScene" uid="uid://87ms82l1c82e" path="res://scenes/objects/moving_platform.tscn" id="7_5h4xf"]
 
@@ -8684,6 +8685,12 @@ size = Vector2(10, 10)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5h4xf"]
 size = Vector2(1672, 19)
 
+[sub_resource type="Curve2D" id="Curve2D_hb40t"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -88.3721, 16.25, 0, 0, 0, 0, 336.628, -53.3333, 0, 0, 0, 0, -88.3721, 15.8333)
+}
+point_count = 3
+
 [node name="UrbanUprising" type="Node2D"]
 position = Vector2(-16, 0)
 script = ExtResource("1_tf8py")
@@ -8835,5 +8842,11 @@ scale = Vector2(5.04, 3.15999)
 players_needed = 1
 origin = Vector2(144, -400)
 max_pos = Vector2(464, -648)
+
+[node name="FlameDude" parent="." instance=ExtResource("6_5h4xf")]
+position = Vector2(533, 84)
+
+[node name="Path2D" type="Path2D" parent="FlameDude"]
+curve = SubResource("Curve2D_hb40t")
 
 [connection signal="body_entered" from="Camera2D/BottomBorder" to="." method="_on_bottom_border_body_entered"]

@@ -1,0 +1,187 @@
+[gd_scene load_steps=25 format=3 uid="uid://lul0ymv7okl"]
+
+[ext_resource type="Script" uid="uid://12duv3deh21c" path="res://scripts/actors/flame_dude.gd" id="1_qk7ux"]
+[ext_resource type="Texture2D" uid="uid://dcqfoa7vgtmed" path="res://assets/sprites/FlameBall.png" id="2_c5qfh"]
+[ext_resource type="Texture2D" uid="uid://bw16n2w4guvnw" path="res://assets/sprites/flames.png" id="3_kve5b"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3pykl"]
+atlas = ExtResource("2_c5qfh")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l6ahf"]
+atlas = ExtResource("2_c5qfh")
+region = Rect2(0, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8krtc"]
+atlas = ExtResource("2_c5qfh")
+region = Rect2(32, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fs413"]
+atlas = ExtResource("2_c5qfh")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bneha"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3pykl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l6ahf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8krtc")
+}],
+"loop": false,
+"name": &"blink",
+"speed": 13.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fs413")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3fl7t"]
+atlas = ExtResource("3_kve5b")
+region = Rect2(0, 0, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_twaqb"]
+atlas = ExtResource("3_kve5b")
+region = Rect2(16, 0, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tgflb"]
+atlas = ExtResource("3_kve5b")
+region = Rect2(32, 0, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j7s6y"]
+atlas = ExtResource("3_kve5b")
+region = Rect2(48, 0, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yshlb"]
+atlas = ExtResource("3_kve5b")
+region = Rect2(0, 24, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aplrf"]
+atlas = ExtResource("3_kve5b")
+region = Rect2(16, 24, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ypit"]
+atlas = ExtResource("3_kve5b")
+region = Rect2(32, 24, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b244t"]
+atlas = ExtResource("3_kve5b")
+region = Rect2(48, 24, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5y3ts"]
+atlas = ExtResource("3_kve5b")
+region = Rect2(0, 48, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2f8ys"]
+atlas = ExtResource("3_kve5b")
+region = Rect2(16, 48, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uegyy"]
+atlas = ExtResource("3_kve5b")
+region = Rect2(32, 48, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oekcf"]
+atlas = ExtResource("3_kve5b")
+region = Rect2(48, 48, 16, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1qtyy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3fl7t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_twaqb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tgflb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j7s6y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yshlb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aplrf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5ypit")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b244t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5y3ts")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2f8ys")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uegyy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oekcf")
+}],
+"loop": true,
+"name": &"burning",
+"speed": 8.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_o8yeu"]
+height = 32.0
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_26h37"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ligrh"]
+radius = 8.0
+
+[node name="FlameDude" type="CharacterBody2D"]
+texture_filter = 1
+scale = Vector2(1.72, 2.4)
+script = ExtResource("1_qk7ux")
+
+[node name="Face" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(1.25, 1.1875)
+sprite_frames = SubResource("SpriteFrames_bneha")
+animation = &"blink"
+frame_progress = 0.665971
+
+[node name="BlinkTimer" type="Timer" parent="Face"]
+
+[node name="Flames" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(2, -15)
+scale = Vector2(1.8125, 1.9375)
+sprite_frames = SubResource("SpriteFrames_1qtyy")
+animation = &"burning"
+frame_progress = 0.867599
+flip_h = true
+
+[node name="BurnZone" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BurnZone"]
+position = Vector2(1, -3)
+shape = SubResource("CapsuleShape2D_o8yeu")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_26h37")
+
+[node name="BodyCollisionShape" type="CollisionShape2D" parent="."]
+position = Vector2(0, 4)
+shape = SubResource("CircleShape2D_ligrh")
+
+[connection signal="body_entered" from="BurnZone" to="." method="_on_burn_zone_body_entered"]
