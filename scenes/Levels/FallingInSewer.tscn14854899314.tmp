@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://tsj58jcpuirq"]
+[gd_scene load_steps=8 format=3 uid="uid://tsj58jcpuirq"]
 
 [ext_resource type="Script" uid="uid://dsc7fdh3f6f8c" path="res://scripts/Levels/falling_in_sewer.gd" id="1_4kqsw"]
 [ext_resource type="Texture2D" uid="uid://b6vnyfhoqgumk" path="res://assets/Tiles/oldTiles/lab_tiles.png" id="2_wrgx2"]
@@ -43,9 +43,6 @@ texture = ExtResource("2_wrgx2")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_5yfk3")
 
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_5yfk3"]
-distance = 95.0
-
 [node name="FallingInSewer" type="Node2D"]
 script = ExtResource("1_4kqsw")
 
@@ -62,7 +59,7 @@ position = Vector2(7, 3)
 scale = Vector2(2, 2)
 tile_set = SubResource("TileSet_a2dya")
 
-[node name="Top of Drain" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(707, 190)
 scale = Vector2(0.949306, 0.952778)
 texture = ExtResource("5_ewixd")
@@ -80,20 +77,3 @@ texture = ExtResource("4_wrgx2")
 position = Vector2(1213, 301)
 rotation = -1.5708
 texture = ExtResource("4_wrgx2")
-
-[node name="Death Line" type="Area2D" parent="."]
-position = Vector2(354, 220)
-rotation = 1.5708
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Death Line"]
-position = Vector2(-76, 145)
-shape = SubResource("WorldBoundaryShape2D_5yfk3")
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Death Line"]
-position = Vector2(-79, -773)
-rotation = 3.14159
-shape = SubResource("WorldBoundaryShape2D_5yfk3")
-
-[connection signal="body_entered" from="Death Line" to="." method="_on_death_line_body_entered"]
-[connection signal="body_entered" from="Death Line" to="Death Line" method="_on_body_entered"]
-[connection signal="body_shape_entered" from="Death Line" to="Death Line" method="_on_body_shape_entered"]
