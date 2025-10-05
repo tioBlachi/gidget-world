@@ -21,7 +21,7 @@ func _ready():
 	add_to_group("players")
 
 func _physics_process(delta: float) -> void:
-	print("Player velocity.y = ", velocity.y)
+	#print("Player velocity.y = ", velocity.y)
 	#print("This is gravity level ", is_gravity_level)
 	#print("We are not on floor ", not is_on_floor())
 	#print("Input move up ", Input.is_action_pressed("move_up"))

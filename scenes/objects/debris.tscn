@@ -1,7 +1,11 @@
-[gd_scene load_steps=17 format=3 uid="uid://i7vby3wukmbp"]
+[gd_scene load_steps=18 format=3 uid="uid://i7vby3wukmbp"]
 
 [ext_resource type="Script" uid="uid://bwoms8nvy8k2u" path="res://scripts/objects/debris.gd" id="1_j2g6m"]
 [ext_resource type="Texture2D" uid="uid://uvq26685cnlj" path="res://icon.svg" id="1_k0umt"]
+[ext_resource type="PackedScene" uid="uid://vqra6k6rq1db" path="res://scenes/killzone.tscn" id="3_3jvpg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3jvpg"]
+size = Vector2(27, 28)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_j2g6m"]
 atlas = ExtResource("1_k0umt")
@@ -92,22 +96,20 @@ animations = [{
 }],
 "loop": true,
 "name": &"default",
-"speed": 5.0
+"speed": 24.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_3jvpg"]
-size = Vector2(27, 28)
-
-[node name="Node2D" type="Node2D"]
+[node name="Debris" type="Node2D"]
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
 script = ExtResource("1_j2g6m")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
-sprite_frames = SubResource("SpriteFrames_dq1g7")
-frame = 9
-frame_progress = 0.0509012
+[node name="Killzone" parent="CharacterBody2D" instance=ExtResource("3_3jvpg")]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/Killzone"]
 position = Vector2(-0.5, 0)
 shape = SubResource("RectangleShape2D_3jvpg")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_dq1g7")
+frame_progress = 0.82509

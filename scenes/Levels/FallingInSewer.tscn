@@ -1,10 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://tsj58jcpuirq"]
+[gd_scene load_steps=12 format=3 uid="uid://tsj58jcpuirq"]
 
 [ext_resource type="Script" uid="uid://dsc7fdh3f6f8c" path="res://scripts/Levels/falling_in_sewer.gd" id="1_4kqsw"]
 [ext_resource type="Texture2D" uid="uid://b6vnyfhoqgumk" path="res://assets/Tiles/oldTiles/lab_tiles.png" id="2_wrgx2"]
 [ext_resource type="PackedScene" uid="uid://bxpry3684affg" path="res://scenes/player/player.tscn" id="3_ewixd"]
 [ext_resource type="Texture2D" uid="uid://dtbfo7ctxwkt4" path="res://assets/parallax backgrounds/parallax-01.png" id="4_wrgx2"]
 [ext_resource type="Texture2D" uid="uid://21mg3ph851wb" path="res://assets/parallax backgrounds/parallax-02.png" id="5_ewixd"]
+[ext_resource type="PackedScene" uid="uid://i7vby3wukmbp" path="res://scenes/objects/debris.tscn" id="6_5yfk3"]
+[ext_resource type="PackedScene" uid="uid://bbuqfc4w2cj1a" path="res://scenes/objects/dissolving_platform.tscn" id="7_a2dya"]
+[ext_resource type="PackedScene" uid="uid://3nowdnpj4o11" path="res://scenes/objects/heat_seek_enemy.tscn" id="8_uv5ab"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5yfk3"]
 texture = ExtResource("2_wrgx2")
@@ -50,11 +53,11 @@ distance = 95.0
 script = ExtResource("1_4kqsw")
 
 [node name="1" parent="." instance=ExtResource("3_ewixd")]
-position = Vector2(720, 42)
+position = Vector2(630, -538)
 scale = Vector2(0.3, 0.3)
 
 [node name="2" parent="." instance=ExtResource("3_ewixd")]
-position = Vector2(816, -81)
+position = Vector2(685, -695)
 scale = Vector2(0.3, 0.3)
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
@@ -93,6 +96,71 @@ shape = SubResource("WorldBoundaryShape2D_5yfk3")
 position = Vector2(-79, -773)
 rotation = 3.14159
 shape = SubResource("WorldBoundaryShape2D_5yfk3")
+
+[node name="Debris" parent="." instance=ExtResource("6_5yfk3")]
+position = Vector2(280, 477)
+
+[node name="Debris2" parent="." instance=ExtResource("6_5yfk3")]
+position = Vector2(369, 487)
+
+[node name="Debris3" parent="." instance=ExtResource("6_5yfk3")]
+position = Vector2(471, 473)
+
+[node name="Debris4" parent="." instance=ExtResource("6_5yfk3")]
+position = Vector2(565, 475)
+
+[node name="Debris5" parent="." instance=ExtResource("6_5yfk3")]
+position = Vector2(707, 972)
+
+[node name="Debris6" parent="." instance=ExtResource("6_5yfk3")]
+position = Vector2(805, 977)
+
+[node name="Debris7" parent="." instance=ExtResource("6_5yfk3")]
+position = Vector2(930, 974)
+
+[node name="Debris8" parent="." instance=ExtResource("6_5yfk3")]
+position = Vector2(1046, 961)
+
+[node name="Debris9" parent="." instance=ExtResource("6_5yfk3")]
+position = Vector2(174, 1559)
+
+[node name="Debris10" parent="." instance=ExtResource("6_5yfk3")]
+position = Vector2(384, 1559)
+
+[node name="Debris11" parent="." instance=ExtResource("6_5yfk3")]
+position = Vector2(599, 1551)
+
+[node name="Debris12" parent="." instance=ExtResource("6_5yfk3")]
+position = Vector2(820, 1538)
+
+[node name="Debris13" parent="." instance=ExtResource("6_5yfk3")]
+position = Vector2(986, 1544)
+
+[node name="Debris14" parent="." instance=ExtResource("6_5yfk3")]
+position = Vector2(1170, 1541)
+
+[node name="Debris15" parent="." instance=ExtResource("6_5yfk3")]
+position = Vector2(402, 2815)
+
+[node name="Debris16" parent="." instance=ExtResource("6_5yfk3")]
+position = Vector2(574, 2812)
+
+[node name="Debris17" parent="." instance=ExtResource("6_5yfk3")]
+position = Vector2(747, 2791)
+
+[node name="Debris18" parent="." instance=ExtResource("6_5yfk3")]
+position = Vector2(888, 2802)
+
+[node name="Debris19" parent="." instance=ExtResource("6_5yfk3")]
+position = Vector2(995, 2805)
+
+[node name="Dissolving Platform" parent="." instance=ExtResource("7_a2dya")]
+position = Vector2(610, -978)
+scale = Vector2(6, 6)
+
+[node name="Heat Seaker" parent="." instance=ExtResource("8_uv5ab")]
+position = Vector2(602, -796)
+scale = Vector2(4, 4)
 
 [connection signal="body_entered" from="Death Line" to="." method="_on_death_line_body_entered"]
 [connection signal="body_entered" from="Death Line" to="Death Line" method="_on_body_entered"]
