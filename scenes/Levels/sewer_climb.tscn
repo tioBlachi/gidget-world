@@ -13,7 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://b0pa3ya73spk2" path="res://Art/OldTestArt/button.png" id="10_6v2ta"]
 [ext_resource type="Texture2D" uid="uid://ctxan4k7kcct6" path="res://Art/OldTestArt/buttonPressed.png" id="11_webr0"]
 [ext_resource type="Script" uid="uid://bd4lps7vgjrgc" path="res://scripts/objects/StaticSewage.gd" id="13_ftp6k"]
-[ext_resource type="PackedScene" uid="uid://jylojstufht1" path="res://scenes/player/BowenPlayer.tscn" id="14_ftp6k"]
+[ext_resource type="PackedScene" uid="uid://bxpry3684affg" path="res://scenes/player/player.tscn" id="13_webr0"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_31be5"]
 texture = ExtResource("9_webr0")
@@ -1345,19 +1345,10 @@ tile_set = SubResource("TileSet_31be5")
 
 [node name="Players2" type="Node" parent="."]
 
-[node name="Player3" parent="Players2" instance=ExtResource("14_ftp6k")]
-position = Vector2(283, 816)
-scale = Vector2(0.13, 0.13)
-use_wasd = true
-
-[node name="Camera2D" type="Camera2D" parent="Players2/Player3"]
-visible = false
-zoom = Vector2(3.625, 3.625)
-
-[node name="Player2" parent="Players2" instance=ExtResource("14_ftp6k")]
-position = Vector2(213, 814)
+[node name="Player" parent="Players2" instance=ExtResource("13_webr0")]
+position = Vector2(221, 792)
 scale = Vector2(0.13, 0.13)
 
-[node name="Camera2D" type="Camera2D" parent="Players2/Player2"]
-visible = false
-zoom = Vector2(3.625, 3.625)
+[node name="Player4" parent="Players2" instance=ExtResource("13_webr0")]
+position = Vector2(268, 792)
+scale = Vector2(0.13, 0.13)
