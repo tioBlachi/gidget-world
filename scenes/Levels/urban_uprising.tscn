@@ -8830,7 +8830,7 @@ speed = 200.0
 max_pos = Vector2(264, -1480)
 
 [node name="3rd" parent="." instance=ExtResource("7_5h4xf")]
-position = Vector2(160, -400)
+position = Vector2(148, -414)
 scale = Vector2(5.04, 3.15999)
 players_needed = 1
 origin = Vector2(144, -400)
