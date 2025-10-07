@@ -1346,7 +1346,7 @@ tile_set = SubResource("TileSet_31be5")
 [node name="Players2" type="Node" parent="."]
 
 [node name="Player3" parent="Players2" instance=ExtResource("14_ftp6k")]
-position = Vector2(1043, 124)
+position = Vector2(283, 816)
 scale = Vector2(0.13, 0.13)
 use_wasd = true
 
@@ -1355,7 +1355,7 @@ visible = false
 zoom = Vector2(3.625, 3.625)
 
 [node name="Player2" parent="Players2" instance=ExtResource("14_ftp6k")]
-position = Vector2(1064, 132)
+position = Vector2(213, 814)
 scale = Vector2(0.13, 0.13)
 
 [node name="Camera2D" type="Camera2D" parent="Players2/Player2"]
