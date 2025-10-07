@@ -874,11 +874,11 @@ spawn_path = NodePath("../Players")
 [node name="PlayerMarkers" type="Node2D" parent="."]
 
 [node name="Player1Marker" type="Marker2D" parent="PlayerMarkers"]
-position = Vector2(307, 804)
+position = Vector2(283, 806)
 scale = Vector2(0.24, 0.24)
 
 [node name="Player2Marker" type="Marker2D" parent="PlayerMarkers"]
-position = Vector2(253, 801)
+position = Vector2(236, 807)
 scale = Vector2(0.24, 0.24)
 
 [node name="Players" type="Node2D" parent="."]
