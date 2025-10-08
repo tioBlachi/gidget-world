@@ -1,19 +1,18 @@
-[gd_scene load_steps=31 format=4 uid="uid://bw426uewyu1ti"]
+[gd_scene load_steps=30 format=4 uid="uid://bw426uewyu1ti"]
 
 [ext_resource type="PackedScene" path="res://scenes/objects/sewage.tscn" id="1_dk0sx"]
-[ext_resource type="PackedScene" path="res://scenes/objects/button_once.tscn" id="2_dk0sx"]
+[ext_resource type="PackedScene" uid="uid://bc2hnyo407l47" path="res://scenes/objects/button_once.tscn" id="2_dk0sx"]
 [ext_resource type="PackedScene" uid="uid://ct8ip3qr0bu73" path="res://scenes/objects/one_shot_mover.tscn" id="3_dk0sx"]
-[ext_resource type="Texture2D" uid="uid://bkuouxcowxnc7" path="res://assets/Tiles/marble.png" id="5_1g2y4"]
+[ext_resource type="Texture2D" uid="uid://gpufj5wv3tf3" path="res://assets/Tiles/marble.png" id="5_1g2y4"]
 [ext_resource type="Script" uid="uid://076niupbrtvo" path="res://scripts/Levels/sewer_climb.gd" id="5_script"]
-[ext_resource type="Texture2D" uid="uid://brp763x2rpc8y" path="res://assets/Tiles/rock.png" id="6_yd7do"]
-[ext_resource type="Texture2D" uid="uid://djfcan6756x2m" path="res://assets/Tiles/tilemap_industrial.png" id="7_6v2ta"]
-[ext_resource type="Texture2D" uid="uid://cpkkibt87aunn" path="res://assets/Tiles/sand.png" id="7_yy6s6"]
-[ext_resource type="Texture2D" uid="uid://cxiaftsnawb21" path="res://assets/Tiles/stone.png" id="8_bf676"]
-[ext_resource type="Texture2D" uid="uid://drrvmitvw5qh2" path="res://assets/Tiles/BackgroundRock.png" id="9_webr0"]
-[ext_resource type="Texture2D" uid="uid://b0pa3ya73spk2" path="res://Art/OldTestArt/button.png" id="10_6v2ta"]
-[ext_resource type="Texture2D" uid="uid://ctxan4k7kcct6" path="res://Art/OldTestArt/buttonPressed.png" id="11_webr0"]
+[ext_resource type="Texture2D" uid="uid://d1d5g51eufqir" path="res://assets/Tiles/rock.png" id="6_yd7do"]
+[ext_resource type="Texture2D" uid="uid://dm4ynga7tc6wf" path="res://assets/Tiles/tilemap_industrial.png" id="7_6v2ta"]
+[ext_resource type="Texture2D" uid="uid://kitkyug2b1qj" path="res://assets/Tiles/sand.png" id="7_yy6s6"]
+[ext_resource type="Texture2D" uid="uid://to2hwj6d7drn" path="res://assets/Tiles/stone.png" id="8_bf676"]
+[ext_resource type="Texture2D" uid="uid://cs5w64bj3vdqt" path="res://assets/Tiles/BackgroundRock.png" id="9_webr0"]
+[ext_resource type="Texture2D" uid="uid://bdygq424grhul" path="res://Art/OldTestArt/button.png" id="10_6v2ta"]
+[ext_resource type="Texture2D" uid="uid://cyc5owpkfglam" path="res://Art/OldTestArt/buttonPressed.png" id="11_webr0"]
 [ext_resource type="Script" uid="uid://bd4lps7vgjrgc" path="res://scripts/objects/StaticSewage.gd" id="13_ftp6k"]
-[ext_resource type="PackedScene" uid="uid://bxpry3684affg" path="res://scenes/player/player.tscn" id="13_webr0"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_31be5"]
 texture = ExtResource("9_webr0")
@@ -874,11 +873,11 @@ spawn_path = NodePath("../Players")
 [node name="PlayerMarkers" type="Node2D" parent="."]
 
 [node name="Player1Marker" type="Marker2D" parent="PlayerMarkers"]
-position = Vector2(283, 806)
+position = Vector2(283, 793)
 scale = Vector2(0.24, 0.24)
 
 [node name="Player2Marker" type="Marker2D" parent="PlayerMarkers"]
-position = Vector2(236, 807)
+position = Vector2(223, 805)
 scale = Vector2(0.24, 0.24)
 
 [node name="Players" type="Node2D" parent="."]
@@ -1342,13 +1341,3 @@ position = Vector2(322.345, -217.515)
 scale = Vector2(0.895, 0.895)
 tile_map_data = PackedByteArray("AACf/xoAAAACAAEAAACg/xoAAAACAAEAAACh/xoAAAACAAEAAACi/xoAAAACAAEAAACj/xoAAAACAAEAAACk/xoAAAACAAEAAACl/xoAAAACAAEAAACm/xoAAAACAAEAAACn/xoAAAACAAEAAACf/xsAAAACAAIAAACg/xsAAAACAAIAAACh/xsAAAACAAIAAACi/xsAAAACAAIAAACj/xsAAAACAAIAAACk/xsAAAACAAIAAACl/xsAAAACAAIAAACm/xsAAAACAAIAAACn/xsAAAACAAIAAACf/xwAAAACAAIAAACg/xwAAAACAAIAAACh/xwAAAACAAIAAACi/xwAAAACAAIAAACj/xwAAAACAAIAAACk/xwAAAACAAIAAACl/xwAAAACAAIAAACm/xwAAAACAAIAAACn/x0AAAACAAIAAACn/xwAAAACAAIAAACn/x4AAAACAAIAAACm/x4AAAACAAIAAACl/x4AAAACAAIAAACk/x4AAAACAAIAAACj/x4AAAACAAIAAACi/x4AAAACAAIAAACh/x4AAAACAAIAAACg/x4AAAACAAIAAACf/x4AAAACAAIAAACf/x0AAAACAAIAAACg/x0AAAACAAIAAACh/x0AAAACAAIAAACi/x0AAAACAAIAAACj/x0AAAACAAIAAACk/x0AAAACAAIAAACl/x0AAAACAAIAAACm/x0AAAACAAIAAACf/x8AAAACAAEAADCg/x8AAAACAAEAADCh/x8AAAACAAEAADCi/x8AAAACAAEAADCj/x8AAAACAAEAADCk/x8AAAACAAEAADCl/x8AAAACAAEAADCm/x8AAAACAAEAADCn/x8AAAACAAEAADA=")
 tile_set = SubResource("TileSet_31be5")
-
-[node name="Players2" type="Node" parent="."]
-
-[node name="Player" parent="Players2" instance=ExtResource("13_webr0")]
-position = Vector2(221, 792)
-scale = Vector2(0.13, 0.13)
-
-[node name="Player4" parent="Players2" instance=ExtResource("13_webr0")]
-position = Vector2(268, 792)
-scale = Vector2(0.13, 0.13)
