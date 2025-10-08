@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://tsj58jcpuirq"]
+[gd_scene load_steps=14 format=3 uid="uid://tsj58jcpuirq"]
 
 [ext_resource type="Script" uid="uid://dsc7fdh3f6f8c" path="res://scripts/Levels/falling_in_sewer.gd" id="1_4kqsw"]
 [ext_resource type="Texture2D" uid="uid://b6vnyfhoqgumk" path="res://assets/Tiles/oldTiles/lab_tiles.png" id="2_wrgx2"]
@@ -9,7 +9,6 @@
 [ext_resource type="PackedScene" uid="uid://bbuqfc4w2cj1a" path="res://scenes/objects/dissolving_platform.tscn" id="7_a2dya"]
 [ext_resource type="PackedScene" uid="uid://q5myivnq8cna" path="res://scenes/objects/key_card.tscn" id="8_nw4bf"]
 [ext_resource type="Script" uid="uid://vchdm8w8dxr8" path="res://scripts/objects/dissolving_platform_2.gd" id="9_nw4bf"]
-[ext_resource type="Script" uid="uid://fae7fqppo4hq" path="res://scripts/objects/exit_line.gd" id="10_2ukmc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5yfk3"]
 texture = ExtResource("2_wrgx2")
@@ -54,8 +53,6 @@ distance = 95.0
 [sub_resource type="SystemFont" id="SystemFont_uv5ab"]
 font_names = PackedStringArray("Chiller")
 
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_nw4bf"]
-
 [node name="FallingInSewer" type="Node2D"]
 script = ExtResource("1_4kqsw")
 
@@ -72,11 +69,6 @@ tile_set = SubResource("TileSet_a2dya")
 [node name="Top of Drain" type="Sprite2D" parent="."]
 position = Vector2(707, 190)
 scale = Vector2(0.949306, 0.952778)
-texture = ExtResource("5_ewixd")
-
-[node name="Bottom of Drain" type="Sprite2D" parent="."]
-position = Vector2(656, 67432)
-scale = Vector2(0.901182, 0.907786)
 texture = ExtResource("5_ewixd")
 
 [node name="Parallax2D" type="Parallax2D" parent="."]
@@ -110,6 +102,72 @@ shape = SubResource("WorldBoundaryShape2D_5yfk3")
 position = Vector2(596, 385)
 
 [node name="Debris" type="Node" parent="."]
+
+[node name="Debris23" parent="Debris" instance=ExtResource("6_5yfk3")]
+position = Vector2(383, 13441)
+
+[node name="Debris24" parent="Debris" instance=ExtResource("6_5yfk3")]
+position = Vector2(452, 13482)
+
+[node name="Debris25" parent="Debris" instance=ExtResource("6_5yfk3")]
+position = Vector2(519, 13518)
+
+[node name="Debris26" parent="Debris" instance=ExtResource("6_5yfk3")]
+position = Vector2(579, 13559)
+
+[node name="Debris27" parent="Debris" instance=ExtResource("6_5yfk3")]
+position = Vector2(642, 13603)
+
+[node name="Debris28" parent="Debris" instance=ExtResource("6_5yfk3")]
+position = Vector2(1154, 14896)
+
+[node name="Debris29" parent="Debris" instance=ExtResource("6_5yfk3")]
+position = Vector2(1067, 14955)
+
+[node name="Debris30" parent="Debris" instance=ExtResource("6_5yfk3")]
+position = Vector2(987, 15014)
+
+[node name="Debris31" parent="Debris" instance=ExtResource("6_5yfk3")]
+position = Vector2(893, 15078)
+
+[node name="Debris32" parent="Debris" instance=ExtResource("6_5yfk3")]
+position = Vector2(834, 15134)
+
+[node name="Debris33" parent="Debris" instance=ExtResource("6_5yfk3")]
+position = Vector2(429, 16475)
+
+[node name="Debris34" parent="Debris" instance=ExtResource("6_5yfk3")]
+position = Vector2(542, 16475)
+
+[node name="Debris35" parent="Debris" instance=ExtResource("6_5yfk3")]
+position = Vector2(635, 16475)
+
+[node name="Debris36" parent="Debris" instance=ExtResource("6_5yfk3")]
+position = Vector2(725, 16472)
+
+[node name="Debris37" parent="Debris" instance=ExtResource("6_5yfk3")]
+position = Vector2(810, 16470)
+
+[node name="Debris38" parent="Debris" instance=ExtResource("6_5yfk3")]
+position = Vector2(887, 16474)
+
+[node name="Debris39" parent="Debris" instance=ExtResource("6_5yfk3")]
+position = Vector2(330, 17844)
+
+[node name="Debris40" parent="Debris" instance=ExtResource("6_5yfk3")]
+position = Vector2(408, 17842)
+
+[node name="Debris41" parent="Debris" instance=ExtResource("6_5yfk3")]
+position = Vector2(502, 17844)
+
+[node name="Debris42" parent="Debris" instance=ExtResource("6_5yfk3")]
+position = Vector2(879, 17840)
+
+[node name="Debris43" parent="Debris" instance=ExtResource("6_5yfk3")]
+position = Vector2(966, 17830)
+
+[node name="Debris44" parent="Debris" instance=ExtResource("6_5yfk3")]
+position = Vector2(1051, 17844)
 
 [node name="Debris" parent="Debris" instance=ExtResource("6_5yfk3")]
 position = Vector2(326, 1826)
@@ -177,72 +235,6 @@ position = Vector2(909, 6215)
 [node name="Debris22" parent="Debris" instance=ExtResource("6_5yfk3")]
 position = Vector2(994, 6229)
 
-[node name="Debris23" parent="Debris" instance=ExtResource("6_5yfk3")]
-position = Vector2(317, 13440)
-
-[node name="Debris24" parent="Debris" instance=ExtResource("6_5yfk3")]
-position = Vector2(386, 13481)
-
-[node name="Debris25" parent="Debris" instance=ExtResource("6_5yfk3")]
-position = Vector2(453, 13517)
-
-[node name="Debris26" parent="Debris" instance=ExtResource("6_5yfk3")]
-position = Vector2(513, 13558)
-
-[node name="Debris27" parent="Debris" instance=ExtResource("6_5yfk3")]
-position = Vector2(576, 13602)
-
-[node name="Debris28" parent="Debris" instance=ExtResource("6_5yfk3")]
-position = Vector2(1088, 14895)
-
-[node name="Debris29" parent="Debris" instance=ExtResource("6_5yfk3")]
-position = Vector2(1001, 14954)
-
-[node name="Debris30" parent="Debris" instance=ExtResource("6_5yfk3")]
-position = Vector2(921, 15013)
-
-[node name="Debris31" parent="Debris" instance=ExtResource("6_5yfk3")]
-position = Vector2(827, 15077)
-
-[node name="Debris32" parent="Debris" instance=ExtResource("6_5yfk3")]
-position = Vector2(768, 15133)
-
-[node name="Debris33" parent="Debris" instance=ExtResource("6_5yfk3")]
-position = Vector2(363, 16474)
-
-[node name="Debris34" parent="Debris" instance=ExtResource("6_5yfk3")]
-position = Vector2(476, 16474)
-
-[node name="Debris35" parent="Debris" instance=ExtResource("6_5yfk3")]
-position = Vector2(569, 16474)
-
-[node name="Debris36" parent="Debris" instance=ExtResource("6_5yfk3")]
-position = Vector2(659, 16471)
-
-[node name="Debris37" parent="Debris" instance=ExtResource("6_5yfk3")]
-position = Vector2(744, 16469)
-
-[node name="Debris38" parent="Debris" instance=ExtResource("6_5yfk3")]
-position = Vector2(821, 16473)
-
-[node name="Debris39" parent="Debris" instance=ExtResource("6_5yfk3")]
-position = Vector2(264, 17843)
-
-[node name="Debris40" parent="Debris" instance=ExtResource("6_5yfk3")]
-position = Vector2(342, 17841)
-
-[node name="Debris41" parent="Debris" instance=ExtResource("6_5yfk3")]
-position = Vector2(436, 17843)
-
-[node name="Debris42" parent="Debris" instance=ExtResource("6_5yfk3")]
-position = Vector2(813, 17839)
-
-[node name="Debris43" parent="Debris" instance=ExtResource("6_5yfk3")]
-position = Vector2(900, 17829)
-
-[node name="Debris44" parent="Debris" instance=ExtResource("6_5yfk3")]
-position = Vector2(985, 17843)
-
 [node name="Labels" type="Node" parent="."]
 
 [node name="Label" type="Label" parent="Labels"]
@@ -277,16 +269,6 @@ theme_override_font_sizes/font_size = 80
 text = "Something a bit harder"
 horizontal_alignment = 1
 
-[node name="Label4" type="Label" parent="Labels"]
-offset_left = 152.0
-offset_top = 40672.0
-offset_right = 1124.0
-offset_bottom = 41410.0
-theme_override_fonts/font = SubResource("SystemFont_uv5ab")
-theme_override_font_sizes/font_size = 80
-text = "Good Luck"
-horizontal_alignment = 1
-
 [node name="Platforms" type="Node" parent="."]
 
 [node name="Dissolving Platform" parent="Platforms" instance=ExtResource("7_a2dya")]
@@ -303,19 +285,10 @@ scale = Vector2(6, 6)
 script = ExtResource("9_nw4bf")
 
 [node name="Dissolving Platform4" parent="Platforms" instance=ExtResource("7_a2dya")]
-position = Vector2(608, 40952)
+position = Vector2(656, 24192)
 scale = Vector2(6, 6)
-
-[node name="Exit Line" type="Area2D" parent="."]
-position = Vector2(1016, 67200)
-scale = Vector2(0.901182, 0.907786)
-script = ExtResource("10_2ukmc")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Exit Line"]
-position = Vector2(-452.739, 431.82)
-shape = SubResource("WorldBoundaryShape2D_nw4bf")
+script = ExtResource("9_nw4bf")
 
 [connection signal="body_entered" from="Death Line" to="." method="_on_death_line_body_entered"]
 [connection signal="body_entered" from="Death Line" to="Death Line" method="_on_body_entered"]
 [connection signal="body_shape_entered" from="Death Line" to="Death Line" method="_on_body_shape_entered"]
-[connection signal="body_entered" from="Exit Line" to="." method="_on_exit_line_body_entered"]

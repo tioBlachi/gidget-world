@@ -8,6 +8,7 @@ extends CharacterBody2D
 @onready var collision_shape = $CollisionShape2D
 @export var max_fall_speed: float = 500.0 #allows other scenes to access max fall speed
 @export var is_gravity_level: bool = false
+@export var god_mode: bool = false
 
 const PUSH_FORCE = 15.0
 const MIN_PUSH_FORCE = 10.0
@@ -143,6 +144,11 @@ func _update_slope_tilt():
 
 @rpc("any_peer", "call_local")
 func die():
+	
+	if god_mode:
+		print("Player is in God Mode and cannot die.")
+		return
+		
 	if is_dead:
 		return
 
@@ -169,5 +175,6 @@ func die():
 	timer.start()
 
 func _on_timer_complete():
+	Global.player_died.emit()
 	get_tree().reload_current_scene()
 	#get_tree().paused = true

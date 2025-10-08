@@ -7,7 +7,12 @@ extends CharacterBody2D
 #var velocity: Vector2 = Vector2.ZERO
 
 func _ready():
-	pass #$AnimatedSprite2D.play("fall") # play your falling animation
+	#$AnimatedSprite2D.play("fall") # play your falling animation
+	Global.player_died.connect(remove_self)
+
+func remove_self():
+	queue_free()
+
 
 func _physics_process(delta):
 	velocity.y += gravity * slow_multiplier * delta
