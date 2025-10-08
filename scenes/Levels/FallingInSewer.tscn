@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://tsj58jcpuirq"]
+[gd_scene load_steps=14 format=3 uid="uid://tsj58jcpuirq"]
 
 [ext_resource type="Script" uid="uid://dsc7fdh3f6f8c" path="res://scripts/Levels/falling_in_sewer.gd" id="1_4kqsw"]
 [ext_resource type="Texture2D" uid="uid://b6vnyfhoqgumk" path="res://assets/Tiles/oldTiles/lab_tiles.png" id="2_wrgx2"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://21mg3ph851wb" path="res://assets/parallax backgrounds/parallax-02.png" id="5_ewixd"]
 [ext_resource type="PackedScene" uid="uid://i7vby3wukmbp" path="res://scenes/objects/debris.tscn" id="6_5yfk3"]
 [ext_resource type="PackedScene" uid="uid://bbuqfc4w2cj1a" path="res://scenes/objects/dissolving_platform.tscn" id="7_a2dya"]
+[ext_resource type="PackedScene" uid="uid://q5myivnq8cna" path="res://scenes/objects/key_card.tscn" id="8_nw4bf"]
 [ext_resource type="PackedScene" uid="uid://3nowdnpj4o11" path="res://scenes/objects/heat_seek_enemy.tscn" id="8_uv5ab"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5yfk3"]
@@ -49,15 +50,14 @@ sources/0 = SubResource("TileSetAtlasSource_5yfk3")
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_5yfk3"]
 distance = 95.0
 
+[sub_resource type="SystemFont" id="SystemFont_uv5ab"]
+font_names = PackedStringArray("Chiller")
+
 [node name="FallingInSewer" type="Node2D"]
 script = ExtResource("1_4kqsw")
 
 [node name="1" parent="." instance=ExtResource("3_ewixd")]
 position = Vector2(630, -538)
-scale = Vector2(0.3, 0.3)
-
-[node name="2" parent="." instance=ExtResource("3_ewixd")]
-position = Vector2(685, -695)
 scale = Vector2(0.3, 0.3)
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
@@ -97,70 +97,108 @@ position = Vector2(-79, -773)
 rotation = 3.14159
 shape = SubResource("WorldBoundaryShape2D_5yfk3")
 
-[node name="Debris" parent="." instance=ExtResource("6_5yfk3")]
-position = Vector2(280, 477)
+[node name="Heat Seaker" parent="." instance=ExtResource("8_uv5ab")]
+position = Vector2(50, 4043)
+scale = Vector2(4, 4)
 
-[node name="Debris2" parent="." instance=ExtResource("6_5yfk3")]
-position = Vector2(369, 487)
+[node name="Heat Seaker2" parent="." instance=ExtResource("8_uv5ab")]
+position = Vector2(386, 23881)
+scale = Vector2(4, 4)
 
-[node name="Debris3" parent="." instance=ExtResource("6_5yfk3")]
-position = Vector2(471, 473)
+[node name="KeyCard" parent="." instance=ExtResource("8_nw4bf")]
+position = Vector2(596, 385)
 
-[node name="Debris4" parent="." instance=ExtResource("6_5yfk3")]
-position = Vector2(565, 475)
+[node name="Debris" type="Node" parent="."]
 
-[node name="Debris5" parent="." instance=ExtResource("6_5yfk3")]
-position = Vector2(707, 972)
+[node name="Debris" parent="Debris" instance=ExtResource("6_5yfk3")]
+position = Vector2(326, 1826)
 
-[node name="Debris6" parent="." instance=ExtResource("6_5yfk3")]
-position = Vector2(805, 977)
+[node name="Debris2" parent="Debris" instance=ExtResource("6_5yfk3")]
+position = Vector2(395, 1867)
 
-[node name="Debris7" parent="." instance=ExtResource("6_5yfk3")]
-position = Vector2(930, 974)
+[node name="Debris3" parent="Debris" instance=ExtResource("6_5yfk3")]
+position = Vector2(462, 1903)
 
-[node name="Debris8" parent="." instance=ExtResource("6_5yfk3")]
-position = Vector2(1046, 961)
+[node name="Debris4" parent="Debris" instance=ExtResource("6_5yfk3")]
+position = Vector2(522, 1944)
 
-[node name="Debris9" parent="." instance=ExtResource("6_5yfk3")]
-position = Vector2(174, 1559)
+[node name="Debris5" parent="Debris" instance=ExtResource("6_5yfk3")]
+position = Vector2(585, 1988)
 
-[node name="Debris10" parent="." instance=ExtResource("6_5yfk3")]
-position = Vector2(384, 1559)
+[node name="Debris6" parent="Debris" instance=ExtResource("6_5yfk3")]
+position = Vector2(1097, 3281)
 
-[node name="Debris11" parent="." instance=ExtResource("6_5yfk3")]
-position = Vector2(599, 1551)
+[node name="Debris7" parent="Debris" instance=ExtResource("6_5yfk3")]
+position = Vector2(1010, 3340)
 
-[node name="Debris12" parent="." instance=ExtResource("6_5yfk3")]
-position = Vector2(820, 1538)
+[node name="Debris8" parent="Debris" instance=ExtResource("6_5yfk3")]
+position = Vector2(930, 3399)
 
-[node name="Debris13" parent="." instance=ExtResource("6_5yfk3")]
-position = Vector2(986, 1544)
+[node name="Debris9" parent="Debris" instance=ExtResource("6_5yfk3")]
+position = Vector2(836, 3463)
 
-[node name="Debris14" parent="." instance=ExtResource("6_5yfk3")]
-position = Vector2(1170, 1541)
+[node name="Debris10" parent="Debris" instance=ExtResource("6_5yfk3")]
+position = Vector2(777, 3519)
 
-[node name="Debris15" parent="." instance=ExtResource("6_5yfk3")]
-position = Vector2(402, 2815)
+[node name="Debris11" parent="Debris" instance=ExtResource("6_5yfk3")]
+position = Vector2(372, 4860)
 
-[node name="Debris16" parent="." instance=ExtResource("6_5yfk3")]
-position = Vector2(574, 2812)
+[node name="Debris12" parent="Debris" instance=ExtResource("6_5yfk3")]
+position = Vector2(485, 4860)
 
-[node name="Debris17" parent="." instance=ExtResource("6_5yfk3")]
-position = Vector2(747, 2791)
+[node name="Debris13" parent="Debris" instance=ExtResource("6_5yfk3")]
+position = Vector2(578, 4860)
 
-[node name="Debris18" parent="." instance=ExtResource("6_5yfk3")]
-position = Vector2(888, 2802)
+[node name="Debris14" parent="Debris" instance=ExtResource("6_5yfk3")]
+position = Vector2(668, 4857)
 
-[node name="Debris19" parent="." instance=ExtResource("6_5yfk3")]
-position = Vector2(995, 2805)
+[node name="Debris15" parent="Debris" instance=ExtResource("6_5yfk3")]
+position = Vector2(753, 4855)
 
-[node name="Dissolving Platform" parent="." instance=ExtResource("7_a2dya")]
-position = Vector2(610, -978)
+[node name="Debris16" parent="Debris" instance=ExtResource("6_5yfk3")]
+position = Vector2(830, 4859)
+
+[node name="Debris17" parent="Debris" instance=ExtResource("6_5yfk3")]
+position = Vector2(273, 6229)
+
+[node name="Debris18" parent="Debris" instance=ExtResource("6_5yfk3")]
+position = Vector2(351, 6227)
+
+[node name="Debris19" parent="Debris" instance=ExtResource("6_5yfk3")]
+position = Vector2(445, 6229)
+
+[node name="Debris20" parent="Debris" instance=ExtResource("6_5yfk3")]
+position = Vector2(822, 6225)
+
+[node name="Debris21" parent="Debris" instance=ExtResource("6_5yfk3")]
+position = Vector2(909, 6215)
+
+[node name="Debris22" parent="Debris" instance=ExtResource("6_5yfk3")]
+position = Vector2(994, 6229)
+
+[node name="Labels" type="Node" parent="."]
+
+[node name="Label" type="Label" parent="Labels"]
+offset_left = 219.0
+offset_top = 161.0
+offset_right = 1191.0
+offset_bottom = 899.0
+theme_override_fonts/font = SubResource("SystemFont_uv5ab")
+theme_override_font_sizes/font_size = 80
+text = "Watch out!
+Move left or right to doge!
+Press Ctrl to speed up and Space to slow"
+horizontal_alignment = 1
+
+[node name="Platforms" type="Node" parent="."]
+
+[node name="Dissolving Platform" parent="Platforms" instance=ExtResource("7_a2dya")]
+position = Vector2(702, 453)
 scale = Vector2(6, 6)
 
-[node name="Heat Seaker" parent="." instance=ExtResource("8_uv5ab")]
-position = Vector2(602, -796)
-scale = Vector2(4, 4)
+[node name="Dissolving Platform2" parent="Platforms" instance=ExtResource("7_a2dya")]
+position = Vector2(659, 11190)
+scale = Vector2(6, 6)
 
 [connection signal="body_entered" from="Death Line" to="." method="_on_death_line_body_entered"]
 [connection signal="body_entered" from="Death Line" to="Death Line" method="_on_body_entered"]

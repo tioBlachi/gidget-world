@@ -9,6 +9,7 @@ radius = 4.0
 height = 28.0
 
 [node name="Heat Seaker" type="CharacterBody2D"]
+scale = Vector2(3, 3)
 script = ExtResource("1_kwd64")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

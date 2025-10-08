@@ -2,11 +2,11 @@ extends CharacterBody2D
 
 
 @export var base_speed = 100.0
-@export var max_fall_speed: float = 500.0 
-@export var chase_distance: float = 500.0
+@export var max_fall_speed: float = 1800.0 
+@export var chase_distance: float = 1000.0
 @export var min_speed_distance: float = 50.0
-@export var max_speed_distance: float = 800.0
-@export var max_chase_speed: float = 2000.0 # This is the only line changed
+@export var max_speed_distance: float = 2000.0
+@export var max_chase_speed: float = 2000.0
 @export var gravity_transition_speed: float = 2.0 # Controls how fast the gravity changes
 
 var player = null
@@ -26,10 +26,10 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		if player.global_position.y < global_position.y:
 			# Target negative gravity when player is above
-			target_gravity_factor = -1.0
+			target_gravity_factor = -4.0
 		else:
 			# Target normal gravity when player is below
-			target_gravity_factor = 1.0
+			target_gravity_factor = 4.0
 		
 		# Interpolate the current gravity factor towards the target
 		current_gravity_factor = lerp(current_gravity_factor, target_gravity_factor, gravity_transition_speed * delta)

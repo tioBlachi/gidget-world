@@ -20,6 +20,7 @@ var death_texture = preload("res://Art/OldTestArt/gDeath.png")
 func _ready():
 	add_to_group("players")
 
+
 func _physics_process(delta: float) -> void:
 	#print("Player velocity.y = ", velocity.y)
 	#print("This is gravity level ", is_gravity_level)
