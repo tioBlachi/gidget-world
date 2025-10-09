@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://dmxfaox45d8k6"]
+
+[ext_resource type="Script" uid="uid://bkllaeomrwfbs" path="res://scripts/Levels/alligator_dentistry.gd" id="1_rwegt"]
+[ext_resource type="Texture2D" uid="uid://csocrbo0t3mt7" path="res://Art/OldTestArt/spikeBall.png" id="2_py8lq"]
+[ext_resource type="PackedScene" uid="uid://bxpry3684affg" path="res://scenes/player/player.tscn" id="3_u8x4h"]
+
+[node name="Alligator Dentistry" type="Node2D"]
+script = ExtResource("1_rwegt")
+
+[node name="Player" parent="." instance=ExtResource("3_u8x4h")]
+position = Vector2(90, -73)
+side_scroller = false
+
+[node name="pSpawner" type="MultiplayerSpawner" parent="Player"]
+_spawnable_scenes = PackedStringArray("uid://bxpry3684affg")
+spawn_path = NodePath("../Players")
+
+[node name="PlayerMarkers" type="Node2D" parent="Player"]
+position = Vector2(1, 8)
+
+[node name="Player1Marker" type="Marker2D" parent="Player/PlayerMarkers"]
+position = Vector2(217, 180)
+
+[node name="Player2Marker" type="Marker2D" parent="Player/PlayerMarkers"]
+position = Vector2(510, 182)
+
+[node name="Players" type="Node2D" parent="Player"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(147, -150)
+scale = Vector2(10, 10)
+texture = ExtResource("2_py8lq")
