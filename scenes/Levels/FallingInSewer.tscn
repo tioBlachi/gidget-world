@@ -1,10 +1,10 @@
 [gd_scene load_steps=16 format=3 uid="uid://tsj58jcpuirq"]
 
 [ext_resource type="Script" uid="uid://dsc7fdh3f6f8c" path="res://scripts/Levels/falling_in_sewer.gd" id="1_4kqsw"]
-[ext_resource type="Texture2D" uid="uid://b6vnyfhoqgumk" path="res://assets/Tiles/oldTiles/lab_tiles.png" id="2_wrgx2"]
+[ext_resource type="Texture2D" uid="uid://dhjnmqtfenj7p" path="res://assets/Tiles/oldTiles/lab_tiles.png" id="2_wrgx2"]
 [ext_resource type="PackedScene" uid="uid://bxpry3684affg" path="res://scenes/player/player.tscn" id="3_ewixd"]
-[ext_resource type="Texture2D" uid="uid://dtbfo7ctxwkt4" path="res://assets/parallax backgrounds/parallax-01.png" id="4_wrgx2"]
-[ext_resource type="Texture2D" uid="uid://21mg3ph851wb" path="res://assets/parallax backgrounds/parallax-02.png" id="5_ewixd"]
+[ext_resource type="Texture2D" uid="uid://doggahuclldny" path="res://assets/parallax backgrounds/parallax-01.png" id="4_wrgx2"]
+[ext_resource type="Texture2D" uid="uid://clelj4wsystxy" path="res://assets/parallax backgrounds/parallax-02.png" id="5_ewixd"]
 [ext_resource type="PackedScene" uid="uid://i7vby3wukmbp" path="res://scenes/objects/debris.tscn" id="6_5yfk3"]
 [ext_resource type="PackedScene" uid="uid://bbuqfc4w2cj1a" path="res://scenes/objects/dissolving_platform.tscn" id="7_a2dya"]
 [ext_resource type="PackedScene" uid="uid://q5myivnq8cna" path="res://scenes/objects/key_card.tscn" id="8_nw4bf"]
@@ -63,6 +63,10 @@ script = ExtResource("1_4kqsw")
 position = Vector2(630, -538)
 scale = Vector2(0.3, 0.3)
 god_mode = true
+
+[node name="Camera2D" parent="1" index="5"]
+limit_left = 8
+limit_right = 1310
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 position = Vector2(7, 3)
@@ -319,3 +323,6 @@ shape = SubResource("WorldBoundaryShape2D_nw4bf")
 [connection signal="body_entered" from="Death Line" to="Death Line" method="_on_body_entered"]
 [connection signal="body_shape_entered" from="Death Line" to="Death Line" method="_on_body_shape_entered"]
 [connection signal="body_entered" from="Exit Line" to="." method="_on_exit_line_body_entered"]
+
+[editable path="1"]
+[editable path="KeyCard"]

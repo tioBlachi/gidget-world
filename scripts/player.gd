@@ -63,7 +63,7 @@ func _physics_process(delta: float) -> void:
 				velocity += gravity_force * delta
 				velocity.y = min(velocity.y, fall_limit)
 				
-				if is_gravity_level and (Input.is_action_pressed("move_up") or Input.is_action_pressed("jump")):
+				if is_gravity_level and (Input.is_action_pressed("move up") or Input.is_action_pressed("jump")):
 					velocity.y *= 0.9
 
 				
