@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://covk48n1264is"]
+[gd_scene load_steps=2 format=3 uid="uid://btd2nmq35cw3i"]
 
 [ext_resource type="Script" uid="uid://c0fliiisa46b6" path="res://scripts/UI/title.gd" id="1_vd34o"]
-[ext_resource type="Texture2D" uid="uid://b8s5ivhiaqkpn" path="res://Art/NewArt/GidgetWorldLogo.png" id="2_lp2qc"]
 
 [node name="Title" type="Control"]
 layout_mode = 3
@@ -11,7 +10,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_vd34o")
-metadata/_edit_horizontal_guides_ = [-234.0]
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 0
@@ -19,23 +17,27 @@ offset_left = 1.0
 offset_top = -3.0
 offset_right = 1278.0
 offset_bottom = 722.0
-color = Color(0.499472, 0.636146, 1, 1)
+color = Color(0.282353, 0.443137, 1, 1)
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 422.0
+offset_top = 120.0
+offset_right = 523.0
+offset_bottom = 143.0
+scale = Vector2(4, 4)
+text = "Gidget World"
 
 [node name="ButtonVBox" type="VBoxContainer" parent="."]
 layout_mode = 0
 offset_left = 527.0
-offset_top = 576.0
+offset_top = 535.0
 offset_right = 678.0
-offset_bottom = 610.0
+offset_bottom = 569.0
 scale = Vector2(1.49185, 1.81141)
 
 [node name="StartButton" type="Button" parent="ButtonVBox"]
 layout_mode = 2
 text = "Start"
-
-[node name="GidgetWorldLogo" type="Sprite2D" parent="."]
-position = Vector2(640.5, 321.5)
-scale = Vector2(1.20605, 0.694336)
-texture = ExtResource("2_lp2qc")
 
 [connection signal="pressed" from="ButtonVBox/StartButton" to="." method="join_lobby"]

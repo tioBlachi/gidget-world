@@ -1,0 +1,14 @@
+[gd_scene format=4]
+
+[ext_resource type="Script" path="res://scripts/objects/one_shot_mover.gd" id="1_b7gk9"]
+
+[sub_resource type="RectangleShape2D" id="RectShape_platform"]
+size = Vector2(64, 16)
+
+[node name="OneShotMover" type="AnimatableBody2D"]
+script = ExtResource("1_b7gk9")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectShape_platform")
+
+
