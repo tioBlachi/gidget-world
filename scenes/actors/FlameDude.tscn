@@ -1,6 +1,6 @@
 [gd_scene load_steps=18 format=3 uid="uid://r357l4u2vr2q"]
 
-[ext_resource type="Script" uid="uid://bobx2sqjh37op" path="res://scripts/actors/FLAMEDUDE.gd" id="1_qk7ux"]
+[ext_resource type="Script" path="res://scripts/actors/FLAMEDUDE.gd" id="1_qk7ux"]
 [ext_resource type="Texture2D" uid="uid://rdcfie4es35s" path="res://assets/sprites/FlameBall.png" id="2_c5qfh"]
 [ext_resource type="Texture2D" uid="uid://c8qk1t6lo64gw" path="res://assets/sprites/flames.png" id="3_kve5b"]
 

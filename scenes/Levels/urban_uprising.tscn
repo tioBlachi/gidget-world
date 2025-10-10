@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://bqm3nrdrmkonl"]
+[gd_scene load_steps=18 format=4 uid="uid://byukt8eyso7jr"]
 
 [ext_resource type="Texture2D" uid="uid://bt8mrued3ie7w" path="res://Art/OldTestArt/metal2.png" id="1_sqmmr"]
 [ext_resource type="Script" uid="uid://chy5ttrcgpkg1" path="res://scripts/Levels/urban_uprising.gd" id="1_tf8py"]
@@ -8837,7 +8837,7 @@ origin = Vector2(176, 600)
 max_pos = Vector2(176, 200)
 use_start_as_origin = false
 
-[node name="2nd" parent="." instance=ExtResource("7_5h4xf")]
+[node name="2ndPL" parent="." instance=ExtResource("7_5h4xf")]
 position = Vector2(1216, -48)
 scale = Vector2(10.12, 2.92)
 players_needed = 1
@@ -8845,21 +8845,21 @@ origin = Vector2(1200, -48)
 max_pos = Vector2(920, -232)
 use_start_as_origin = false
 
-[node name="4th" parent="." instance=ExtResource("7_5h4xf")]
+[node name="4thPL" parent="." instance=ExtResource("7_5h4xf")]
 position = Vector2(1072, -840)
 scale = Vector2(10.12, 2.92)
 players_needed = 1
 max_pos = Vector2(800, -1328)
 ping_pong = true
 
-[node name="5th" parent="." instance=ExtResource("7_5h4xf")]
+[node name="5thPL" parent="." instance=ExtResource("7_5h4xf")]
 position = Vector2(112, -1256)
 scale = Vector2(10.12, 2.92)
 players_needed = 1
 speed = 200.0
 max_pos = Vector2(264, -1480)
 
-[node name="3rd" parent="." instance=ExtResource("7_5h4xf")]
+[node name="3rdPL" parent="." instance=ExtResource("7_5h4xf")]
 position = Vector2(160, -400)
 scale = Vector2(5.04, 3.15999)
 players_needed = 1

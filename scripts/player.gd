@@ -110,17 +110,14 @@ func set_side_scroller(value: bool):
 			
 func burn():
 	var stars = $Stars.get_children()
-	if stars and int(self.name) == Net.players[1]:
-		#$Sprite.modulate = Color(1,1,1,1)
+	if stars:
 		for s in stars:
-			s.self_modulate = Color(1,1,1,1)
 			s.visible = false
-	elif stars and int(self.name) == Net.players[0]:
-		pass
 	print("Player: ", self.name, " is burned!")
 	var burned_sprite = self.get_node_or_null("Sprite")
 		
 	burned_sprite.texture = burned_texture
+	burned_sprite.self_modulate = Color.WHITE
 	burning = true
 	
 func dizzy():
@@ -128,8 +125,10 @@ func dizzy():
 		var stars = $Stars.get_children()
 		for s in stars:
 			if int(self.name) == Net.players[1]:
-				print("Changing star colors")
-				self.modulate = Color(1,1,1,1)	 
+				s.self_modulate = Color(1,1,1,1)	 
+				s.visible = true
+				s.play("dizzy")
+			else:
 				s.visible = true
 				s.play("dizzy")
 	
@@ -137,7 +136,7 @@ func recover():
 	staggered = false
 	sprite.texture = original_texture
 	if int(self.name) == Net.players[1]:
-		self.modulate = Color.hex(0xE0FFFF)
+		sprite.self_modulate = Color.hex(0xE0FFFF)
 		
 
 func _update_slope_tilt():

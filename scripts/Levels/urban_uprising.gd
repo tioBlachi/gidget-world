@@ -35,9 +35,10 @@ func spawn_players(p_array: PackedInt32Array) -> void:
 	for i in 2:
 		var peer_id := p_array[i]
 		var player := player_scene.instantiate()
+		var sprite := player.get_node("Sprite")
 		player.JUMP_VELOCITY = -400
 		player.name = str(peer_id)
-		player.modulate = tints[i]
+		sprite.self_modulate = tints[i]
 		player.global_position = markers[i].global_position
 		player.set_multiplayer_authority(peer_id)
 
