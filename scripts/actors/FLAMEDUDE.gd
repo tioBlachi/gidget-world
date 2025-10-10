@@ -10,6 +10,7 @@ extends Path2D
 @onready var face: AnimatedSprite2D = $PathFollow2D/FlameDude/Face
 @onready var flames: AnimatedSprite2D = $PathFollow2D/FlameDude/Flames
 @onready var blink_timer: Timer = $PathFollow2D/FlameDude/Face/BlinkTimer
+@onready var player_original_sprite = preload("res://Art/OldTestArt/deathGidget.png")
 var dir := 1
 var rng := RandomNumberGenerator.new()
 
@@ -40,7 +41,13 @@ func _process(delta: float) -> void:
 func _on_burn_zone_body_entered(body: Node2D) -> void:
 	if body.is_in_group("players"):
 		print("A player touched FlameDude")
-		queue_free()
+		body.burning = true
+		body.burn()
+		panic(body)
+		
+		visible = false
+		$PathFollow2D/FlameDude/BodyCollider.set_deferred("disabled", true)
+		$PathFollow2D/FlameDude/BurnZone/BurnCollision.set_deferred("disabled", true)
 		
 func _on_blink_timer_timeout() -> void:
 	face.play("blink")
@@ -50,4 +57,35 @@ func _on_blink_timer_timeout() -> void:
 	
 func _restart_blink_timer() -> void:
 	blink_timer.start(rng.randf_range(1.0, 3.0))
-		
+	
+func panic(player: CharacterBody2D):
+	var timer: Timer = player.get_node("Timer")
+	timer.one_shot = true
+	timer.start(7.0)
+	
+	var b_timer = $Timer
+	b_timer.one_shot = false
+	b_timer.start(0.25)
+	
+	b_timer.timeout.connect(func():
+		burn_bounce(player)
+		)
+	
+	timer.timeout.connect(func ():
+		print("Time is up!")
+		b_timer.queue_free()
+		await player.recover()
+		player.burning = false
+		queue_free()
+	)
+
+func burn_bounce(player: CharacterBody2D):
+	player.staggered = false
+	var sfx := player.get_node("JumpSound")
+
+	if player.is_on_floor():
+		player.velocity.y = player.JUMP_VELOCITY * 0.35
+		sfx.play()
+	await get_tree().physics_frame
+	#player.knocked_out = true
+	

@@ -60,3 +60,5 @@ volume_db = -10.651
 replication_config = SubResource("SceneReplicationConfig_gmlin")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Timer" type="Timer" parent="."]

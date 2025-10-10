@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://r357l4u2vr2q"]
+[gd_scene load_steps=18 format=3 uid="uid://r357l4u2vr2q"]
 
 [ext_resource type="Script" uid="uid://bobx2sqjh37op" path="res://scripts/actors/FLAMEDUDE.gd" id="1_qk7ux"]
 [ext_resource type="Texture2D" uid="uid://rdcfie4es35s" path="res://assets/sprites/FlameBall.png" id="2_c5qfh"]
@@ -94,8 +94,6 @@ height = 55.7776
 [sub_resource type="CircleShape2D" id="CircleShape2D_aplrf"]
 radius = 7.0
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qk7ux"]
-
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_c5qfh"]
 properties/0/path = NodePath("PathFollow2D/FlameDude:position")
 properties/0/spawn = true
@@ -145,12 +143,9 @@ shape = SubResource("CapsuleShape2D_yshlb")
 position = Vector2(1.13178, 4.96862)
 shape = SubResource("CircleShape2D_aplrf")
 
-[node name="AnimatedSprite2D" type="CharacterBody2D" parent="PathFollow2D/FlameDude"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PathFollow2D/FlameDude/AnimatedSprite2D"]
-shape = SubResource("CapsuleShape2D_qk7ux")
-
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_c5qfh")
+
+[node name="Timer" type="Timer" parent="."]
 
 [connection signal="body_entered" from="PathFollow2D/FlameDude/BurnZone" to="." method="_on_burn_zone_body_entered"]
