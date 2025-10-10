@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://3nowdnpj4o11"]
+
+[ext_resource type="Script" uid="uid://cvphdhrpdisja" path="res://scripts/objects/heat_seek_enemy.gd" id="1_kwd64"]
+[ext_resource type="Texture2D" uid="uid://0g74f65tjhsl" path="res://Art/OldTestArt/deathGidget.png" id="1_xk7j6"]
+[ext_resource type="PackedScene" uid="uid://vqra6k6rq1db" path="res://scenes/killzone.tscn" id="3_pvbq6"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kwd64"]
+radius = 4.0
+height = 28.0
+
+[node name="Heat Seaker" type="CharacterBody2D"]
+scale = Vector2(3, 3)
+script = ExtResource("1_kwd64")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 3.14159
+scale = Vector2(1, 3)
+texture = ExtResource("1_xk7j6")
+
+[node name="Killzone" parent="." instance=ExtResource("3_pvbq6")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
+shape = SubResource("CapsuleShape2D_kwd64")
