@@ -109,12 +109,29 @@ func set_side_scroller(value: bool):
 			$Camera2D.queue_free()
 			
 func burn():
+	var stars = $Stars.get_children()
+	if stars and int(self.name) == Net.players[1]:
+		#$Sprite.modulate = Color(1,1,1,1)
+		for s in stars:
+			s.self_modulate = Color(1,1,1,1)
+			s.visible = false
+	elif stars and int(self.name) == Net.players[0]:
+		pass
 	print("Player: ", self.name, " is burned!")
 	var burned_sprite = self.get_node_or_null("Sprite")
-	if int(self.name) == Net.players[1]:
-		self.modulate = Color(1,1,1,1)
+		
 	burned_sprite.texture = burned_texture
 	burning = true
+	
+func dizzy():
+	if staggered and not burning:
+		var stars = $Stars.get_children()
+		for s in stars:
+			if int(self.name) == Net.players[1]:
+				print("Changing star colors")
+				self.modulate = Color(1,1,1,1)	 
+				s.visible = true
+				s.play("dizzy")
 	
 func recover():
 	staggered = false

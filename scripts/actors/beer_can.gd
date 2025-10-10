@@ -19,6 +19,7 @@ func _process(delta: float) -> void:
 		queue_free()
 	
 func _on_can_collides_with_player(body: Node2D) -> void:
-	if body.is_in_group("players"):# or body.name.begins_with("Lowest"):
-		print("Ouch!")
+	if body.is_in_group("players"):
+		body.staggered = true
+		body.dizzy()
 		queue_free()
