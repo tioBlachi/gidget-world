@@ -87,5 +87,4 @@ func burn_bounce(player: CharacterBody2D):
 		player.velocity.y = player.JUMP_VELOCITY * 0.35
 		sfx.play()
 	await get_tree().physics_frame
-	#player.knocked_out = true
 	
