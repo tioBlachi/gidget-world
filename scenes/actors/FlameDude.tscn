@@ -1,0 +1,151 @@
+[gd_scene load_steps=18 format=3 uid="uid://r357l4u2vr2q"]
+
+[ext_resource type="Script" uid="uid://bobx2sqjh37op" path="res://scripts/actors/FLAMEDUDE.gd" id="1_qk7ux"]
+[ext_resource type="Texture2D" uid="uid://rdcfie4es35s" path="res://assets/sprites/FlameBall.png" id="2_c5qfh"]
+[ext_resource type="Texture2D" uid="uid://c8qk1t6lo64gw" path="res://assets/sprites/flames.png" id="3_kve5b"]
+
+[sub_resource type="Curve2D" id="Curve2D_1ccaj"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -1, 0, 0, 0, 0, 0, -1, 0, 0, 0, 0, 0, 734, -175)
+}
+point_count = 3
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kve5b"]
+atlas = ExtResource("2_c5qfh")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3pykl"]
+atlas = ExtResource("2_c5qfh")
+region = Rect2(0, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l6ahf"]
+atlas = ExtResource("2_c5qfh")
+region = Rect2(32, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8krtc"]
+atlas = ExtResource("2_c5qfh")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fs413"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kve5b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3pykl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l6ahf")
+}],
+"loop": false,
+"name": &"blink",
+"speed": 20.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8krtc")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bneha"]
+atlas = ExtResource("3_kve5b")
+region = Rect2(32, 0, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3fl7t"]
+atlas = ExtResource("3_kve5b")
+region = Rect2(48, 0, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_twaqb"]
+atlas = ExtResource("3_kve5b")
+region = Rect2(0, 24, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tgflb"]
+atlas = ExtResource("3_kve5b")
+region = Rect2(16, 24, 16, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_j7s6y"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bneha")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3fl7t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_twaqb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tgflb")
+}],
+"loop": true,
+"name": &"burning",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yshlb"]
+radius = 15.7549
+height = 55.7776
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_aplrf"]
+radius = 7.0
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_c5qfh"]
+properties/0/path = NodePath("PathFollow2D/FlameDude:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath("PathFollow2D/FlameDude/Face:flip_h")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath("PathFollow2D/FlameDude/Flames:flip_h")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+
+[node name="FlameDudePath2D" type="Path2D"]
+curve = SubResource("Curve2D_1ccaj")
+script = ExtResource("1_qk7ux")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="."]
+position = Vector2(-1.13178, 0.0313759)
+
+[node name="FlameDude" type="CharacterBody2D" parent="PathFollow2D" groups=["flamedudes"]]
+
+[node name="Face" type="AnimatedSprite2D" parent="PathFollow2D/FlameDude"]
+position = Vector2(1.13178, -0.0313759)
+scale = Vector2(1.34787, 1.56348)
+sprite_frames = SubResource("SpriteFrames_fs413")
+animation = &"blink"
+flip_h = true
+
+[node name="BlinkTimer" type="Timer" parent="PathFollow2D/FlameDude/Face"]
+
+[node name="Flames" type="AnimatedSprite2D" parent="PathFollow2D/FlameDude"]
+texture_filter = 1
+position = Vector2(1.13178, -14.0314)
+scale = Vector2(1.69763, 1.45964)
+sprite_frames = SubResource("SpriteFrames_j7s6y")
+animation = &"burning"
+frame = 3
+frame_progress = 0.337442
+
+[node name="BurnZone" type="Area2D" parent="PathFollow2D/FlameDude"]
+position = Vector2(-0.0168349, -4.99997)
+
+[node name="BurnCollision" type="CollisionShape2D" parent="PathFollow2D/FlameDude/BurnZone"]
+position = Vector2(1.14861, -2.03141)
+shape = SubResource("CapsuleShape2D_yshlb")
+
+[node name="BodyCollider" type="CollisionShape2D" parent="PathFollow2D/FlameDude"]
+position = Vector2(1.13178, 4.96862)
+shape = SubResource("CircleShape2D_aplrf")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_c5qfh")
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="body_entered" from="PathFollow2D/FlameDude/BurnZone" to="." method="_on_burn_zone_body_entered"]
