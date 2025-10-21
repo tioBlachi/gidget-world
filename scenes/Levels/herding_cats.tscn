@@ -2,7 +2,10 @@
 
 [ext_resource type="Script" uid="uid://gs2a1w6kgnm1" path="res://scripts/Levels/herding_cats.gd" id="1_diqqx"]
 [ext_resource type="PackedScene" uid="uid://ug4dtfp4td5v" path="res://scenes/actors/catHead.tscn" id="2_yfx42"]
-[ext_resource type="Texture2D" uid="uid://co2bv4uee3eyl" path="res://assets/Tiles/oldTiles/park_tiles.png" id="3_t3gqf"]
+[ext_resource type="Texture2D" uid="uid://ckkujjxqycmyn" path="res://assets/Tiles/oldTiles/park_tiles.png" id="3_t3gqf"]
+
+[ext_resource type="Texture2D" uid="uid://b12yc0lkq54vd" path="res://assets/Tiles/oldTiles/park_tiles.png" id="3_t3gqf"]
+
 [ext_resource type="Texture2D" uid="uid://cifurrvxjg8jy" path="res://assets/sprites/Fence/fence_side.png" id="4_go4aw"]
 [ext_resource type="Texture2D" uid="uid://cjygpv2l2x8y3" path="res://assets/sprites/grass_tileset_16x16.png" id="4_q7pie"]
 [ext_resource type="Texture2D" uid="uid://brs3yhmq3yxxc" path="res://assets/sprites/Fence/fence_post.png" id="6_eno57"]
@@ -12,7 +15,7 @@
 [ext_resource type="SpriteFrames" uid="uid://cidimnf6nt56w" path="res://scenes/actors/calico_frames.tres" id="10_u4ftb"]
 [ext_resource type="PackedScene" uid="uid://bmxxih4b0lrx8" path="res://scenes/objects/mine.tscn" id="12_u4ftb"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_q7pie"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8myk5"]
 texture = ExtResource("3_t3gqf")
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
@@ -47,7 +50,7 @@ texture = ExtResource("3_t3gqf")
 2:3/0 = 0
 2:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_c0ljx"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_u4ftb"]
 texture = ExtResource("4_q7pie")
 0:0/0 = 0
 1:0/0 = 0
@@ -109,15 +112,15 @@ texture = ExtResource("4_q7pie")
 [sub_resource type="TileSet" id="TileSet_c0ljx"]
 physics_layer_0/collision_layer = 3
 physics_layer_0/collision_mask = 3
-sources/0 = SubResource("TileSetAtlasSource_q7pie")
-sources/16 = SubResource("TileSetAtlasSource_c0ljx")
+sources/0 = SubResource("TileSetAtlasSource_8myk5")
+sources/16 = SubResource("TileSetAtlasSource_u4ftb")
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_q7y6r"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3sxo1"]
 texture = ExtResource("4_go4aw")
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_u5efl"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xtl2x"]
 texture = ExtResource("6_eno57")
 0:0/0 = 0
 0:1/0 = 0
@@ -125,7 +128,7 @@ texture = ExtResource("6_eno57")
 0:2/0 = 0
 0:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8myk5"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_t6tos"]
 texture = ExtResource("7_eno57")
 0:0/0 = 0
 0:1/0 = 0
@@ -141,9 +144,9 @@ texture = ExtResource("7_eno57")
 
 [sub_resource type="TileSet" id="TileSet_8myk5"]
 physics_layer_0/collision_layer = 1
-sources/0 = SubResource("TileSetAtlasSource_q7y6r")
-sources/2 = SubResource("TileSetAtlasSource_u5efl")
-sources/4 = SubResource("TileSetAtlasSource_8myk5")
+sources/0 = SubResource("TileSetAtlasSource_3sxo1")
+sources/2 = SubResource("TileSetAtlasSource_xtl2x")
+sources/4 = SubResource("TileSetAtlasSource_t6tos")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q7y6r"]
 size = Vector2(528, 262)

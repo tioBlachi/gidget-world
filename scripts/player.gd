@@ -11,6 +11,8 @@ extends CharacterBody2D
 @onready var collision_shape = $CollisionShape2D
 @onready var timer = $Timer
 @export var max_fall_speed: float = 500.0 #allows other scenes to access max fall speed
+@export var is_gravity_level: bool = false
+@export var god_mode: bool = false
 
 const PUSH_FORCE = 15.0
 const MIN_PUSH_FORCE = 10.0
@@ -25,7 +27,19 @@ var burned_texture = preload("res://Art/OldTestArt/deathGidget.png")
 func _ready():
 	add_to_group("players")
 
+
 func _physics_process(delta: float) -> void:
+	#print("Player velocity.y = ", velocity.y)
+	#print("This is gravity level ", is_gravity_level)
+	#print("We are not on floor ", not is_on_floor())
+	#print("Input move up ", Input.is_action_pressed("move_up"))
+	#print("Input move down ", Input.is_action_pressed("move_down"))
+	#print("Input move right ", Input.is_action_pressed("move_right"))
+	#print("Input move left ", Input.is_action_pressed("move_left"))
+	#print("Input action 1 ", Input.is_action_pressed("action"))
+	#print("Input action 2 ", Input.is_action_pressed("action2"))
+	#print("Input jump ", Input.is_action_pressed("jump"))
+	
 	if is_multiplayer_authority():
 		var level_root = get_parent().get_parent()
 		if is_dead:
@@ -64,6 +78,36 @@ func _physics_process(delta: float) -> void:
 					velocity.x = move_toward(velocity.x, 0, SPEED)
 					
 				_update_slope_tilt()
+
+		if side_scroller:			
+			if level_root and level_root.has_method("get_map_limits"):
+				var limits = level_root.get_map_limits()
+				$Camera2D.limit_left = int(limits.position.x)
+				$Camera2D.limit_top = int(limits.position.y)
+				$Camera2D.limit_right = int(limits.end.x)
+				$Camera2D.limit_bottom = int(limits.end.y)
+			if not is_on_floor():
+				var gravity_force = get_gravity()
+				var fall_limit = max_fall_speed
+
+				if is_gravity_level:
+
+					if Input.is_action_pressed("action2"):
+
+						gravity_force *= 2.5
+						fall_limit *= 2.5
+
+				
+				velocity += gravity_force * delta
+				velocity.y = min(velocity.y, fall_limit)
+				
+				if is_gravity_level and (Input.is_action_pressed("move up") or Input.is_action_pressed("jump")):
+					velocity.y *= 0.9
+
+				
+			if Input.is_action_just_pressed("jump") and is_on_floor():
+				velocity.y = JUMP_VELOCITY
+				$JumpSound.play()
 				
 				if move_and_slide():
 					for i in get_slide_collision_count():
@@ -152,6 +196,11 @@ func _update_slope_tilt():
 
 @rpc("any_peer", "call_local")
 func die():
+	
+	if god_mode:
+		print("Player is in God Mode and cannot die.")
+		return
+		
 	if is_dead:
 		return
 
@@ -178,4 +227,6 @@ func die():
 	timer.start()
 
 func _on_timer_complete():
-	get_tree().paused = true
+	Global.player_died.emit()
+	get_tree().reload_current_scene()
+	#get_tree().paused = true
