@@ -31,32 +31,32 @@ properties/6/path = NodePath("CollisionShape2D:position")
 properties/6/spawn = true
 properties/6/replication_mode = 1
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_75vfm"]
-atlas = ExtResource("2_gmlin")
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_lvxji"]
+size = Vector2(10, 10)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_0owmy"]
-atlas = ExtResource("2_gmlin")
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_p47bc"]
+size = Vector2(10, 10)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_qek5x"]
-atlas = ExtResource("2_gmlin")
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_75vfm"]
+size = Vector2(10, 10)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_5gtgg"]
-atlas = ExtResource("2_gmlin")
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_0owmy"]
+size = Vector2(10, 10)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_h17s1"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_75vfm")
+"texture": SubResource("PlaceholderTexture2D_lvxji")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_0owmy")
+"texture": SubResource("PlaceholderTexture2D_p47bc")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_qek5x")
+"texture": SubResource("PlaceholderTexture2D_75vfm")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_5gtgg")
+"texture": SubResource("PlaceholderTexture2D_0owmy")
 }],
 "loop": true,
 "name": &"dizzy",

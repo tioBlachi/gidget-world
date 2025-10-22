@@ -1,11 +1,23 @@
 extends Node
 
 const DEFAULT_MAX_CLIENTS := 2
+const DEFAULT_PORT := 8080
 
 signal players_changed(players)
 
 var players: PackedInt32Array = []
-# ----------------- Helpers -----------------
+			
+func _ready() -> void:
+	if _is_dedicated_server():
+		var port := DEFAULT_PORT
+		if OS.has_environment("PORT"):
+			var s := OS.get_environment("PORT")
+			if s.is_valid_int(): port = int(s)
+		var ok := become_host(port)
+		print("[DEDICATED] features: dedicated_server=", OS.has_feature("dedicated_server"), " headless=", OS.has_feature("headless"))
+		print("[DEDICATED] peer_id=", multiplayer.get_unique_id()," port=", port, " started=", ok)
+		if not ok:
+			push_error("[DEDICATED] Failed to start server on port %d" % port)
 
 func _is_dedicated_server() -> bool:
 	return OS.has_feature("dedicated_server") or OS.has_feature("headless")
