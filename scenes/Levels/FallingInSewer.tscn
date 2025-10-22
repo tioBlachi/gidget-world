@@ -1,6 +1,6 @@
 [gd_scene load_steps=16 format=3 uid="uid://tsj58jcpuirq"]
 
-[ext_resource type="Script" uid="uid://dsc7fdh3f6f8c" path="res://scripts/Levels/falling_in_sewer.gd" id="1_4kqsw"]
+[ext_resource type="Script" path="res://scripts/Levels/falling_in_sewer.gd" id="1_4kqsw"]
 [ext_resource type="Texture2D" uid="uid://dhjnmqtfenj7p" path="res://assets/Tiles/oldTiles/lab_tiles.png" id="2_wrgx2"]
 [ext_resource type="PackedScene" uid="uid://bxpry3684affg" path="res://scenes/player/player.tscn" id="3_ewixd"]
 [ext_resource type="Texture2D" uid="uid://doggahuclldny" path="res://assets/parallax backgrounds/parallax-01.png" id="4_wrgx2"]
@@ -8,8 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://i7vby3wukmbp" path="res://scenes/objects/debris.tscn" id="6_5yfk3"]
 [ext_resource type="PackedScene" uid="uid://bbuqfc4w2cj1a" path="res://scenes/objects/dissolving_platform.tscn" id="7_a2dya"]
 [ext_resource type="PackedScene" uid="uid://q5myivnq8cna" path="res://scenes/objects/key_card.tscn" id="8_nw4bf"]
-[ext_resource type="Script" uid="uid://vchdm8w8dxr8" path="res://scripts/objects/dissolving_platform_2.gd" id="9_nw4bf"]
-[ext_resource type="Script" uid="uid://fae7fqppo4hq" path="res://scripts/objects/exit_line.gd" id="10_2ukmc"]
+[ext_resource type="Script" path="res://scripts/objects/dissolving_platform_2.gd" id="9_nw4bf"]
+[ext_resource type="Script" path="res://scripts/objects/exit_line.gd" id="10_2ukmc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5yfk3"]
 texture = ExtResource("2_wrgx2")

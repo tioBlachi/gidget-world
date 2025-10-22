@@ -1,9 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://bxpry3684affg"]
+[gd_scene load_steps=12 format=3 uid="uid://bxpry3684affg"]
 
 [ext_resource type="Script" uid="uid://gmylnlvujh2e" path="res://scripts/player.gd" id="1_g2els"]
-[ext_resource type="Texture2D" uid="uid://cydsws4q18t5s" path="res://Art/OldTestArt/gRight.png" id="2_gmlin"]
+[ext_resource type="Texture2D" uid="uid://d2sv655j2k3bq" path="res://Art/OldTestArt/gRight.png" id="2_gmlin"]
 [ext_resource type="AudioStream" uid="uid://cqt8c2sa1757t" path="res://assets/sounds/8-bit-jump.mp3" id="3_gmlin"]
-[ext_resource type="AudioStream" uid="uid://b106qhnw2e284" path="res://assets/sounds/080205_life-lost-game-over-89697.mp3" id="4_lvxji"]
+[ext_resource type="AudioStream" uid="uid://cj4ho2calqgeq" path="res://assets/sounds/080205_life-lost-game-over-89697.mp3" id="4_lvxji"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hqtel"]
 size = Vector2(128, 128)
@@ -32,20 +32,16 @@ properties/6/spawn = true
 properties/6/replication_mode = 1
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_75vfm"]
-atlas = ExtResource("5_p47bc")
-region = Rect2(53, 282, 230, 256)
+atlas = ExtResource("2_gmlin")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0owmy"]
-atlas = ExtResource("5_p47bc")
-region = Rect2(283, 282, 230, 256)
+atlas = ExtResource("2_gmlin")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qek5x"]
-atlas = ExtResource("5_p47bc")
-region = Rect2(513, 282, 230, 256)
+atlas = ExtResource("2_gmlin")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5gtgg"]
-atlas = ExtResource("5_p47bc")
-region = Rect2(743, 282, 230, 256)
+atlas = ExtResource("2_gmlin")
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_h17s1"]
 animations = [{

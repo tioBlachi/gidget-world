@@ -13,6 +13,7 @@ func _ready() -> void:
 	if multiplayer.is_server():
 		spawn_players.rpc(Net.players)
 
+
 func _process(delta: float) -> void:
 	var cam_position = level_cam.global_position.y
 	cam_position -= cam_rise_speed * delta

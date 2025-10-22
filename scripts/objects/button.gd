@@ -18,6 +18,7 @@ func _on_body_entered_local(body: Node2D) -> void:
 	if is_pressed:
 		return
 	var pid := body.name.to_int() if body.name.is_valid_int() else body.get_multiplayer_authority()
+	print("Player: ", pid, " pressed the button")
 	if multiplayer.is_server():
 		rpc_request_press(pid)
 	else:

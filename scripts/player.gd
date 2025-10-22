@@ -47,77 +47,55 @@ func _physics_process(delta: float) -> void:
 			move_and_slide()
 			return
 		if not staggered:
-			if side_scroller:			
+			if side_scroller:
 				if level_root and level_root.has_method("get_map_limits"):
 					var limits = level_root.get_map_limits()
 					$Camera2D.limit_left = int(limits.position.x)
 					$Camera2D.limit_top = int(limits.position.y)
 					$Camera2D.limit_right = int(limits.end.x)
 					$Camera2D.limit_bottom = int(limits.end.y)
+
 				if not is_on_floor():
-					velocity += get_gravity() * delta
-					velocity.y = min(velocity.y, max_fall_speed)
-				if not burning:
-					if Input.is_action_just_pressed("jump") and is_on_floor():
-						velocity.y = JUMP_VELOCITY
-						$JumpSound.play()
-						
-						var lab = get_tree().get_first_node_in_group("lab_escape")
-						if lab:
-							var my_id = name.to_int()
-							if multiplayer.is_server():
-								lab.rpc_report_jump(my_id)
-							else:
-								lab.rpc_id(1, "rpc_report_jump", my_id)
-					
-				direction = Input.get_axis("move left", "move right")
+					var gravity_force := get_gravity()
+					var fall_limit := max_fall_speed
+
+					if is_gravity_level and Input.is_action_pressed("action2"):
+						gravity_force *= 2.5
+						fall_limit *= 2.5
+
+					velocity += gravity_force * delta
+					velocity.y = min(velocity.y, fall_limit)
+
+				if is_gravity_level and (Input.is_action_pressed("move up") or Input.is_action_pressed("jump")):
+					velocity.y *= 0.9
+
+				if not burning and Input.is_action_just_pressed("jump") and is_on_floor():
+					velocity.y = JUMP_VELOCITY
+					$JumpSound.play()
+	   				 # (lab reporting)
+					var lab = get_tree().get_first_node_in_group("lab_escape")
+					if lab:
+						var my_id = name.to_int()
+						if multiplayer.is_server():
+							lab.rpc_report_jump(my_id)
+						else:
+							lab.rpc_id(1, "rpc_report_jump", my_id)
+	
+				var direction := Input.get_axis("move left", "move right")
 				if direction:
 					velocity.x = direction * SPEED
 					$Sprite.flip_h = direction < 0
 				else:
 					velocity.x = move_toward(velocity.x, 0, SPEED)
-					
+
 				_update_slope_tilt()
-
-		if side_scroller:			
-			if level_root and level_root.has_method("get_map_limits"):
-				var limits = level_root.get_map_limits()
-				$Camera2D.limit_left = int(limits.position.x)
-				$Camera2D.limit_top = int(limits.position.y)
-				$Camera2D.limit_right = int(limits.end.x)
-				$Camera2D.limit_bottom = int(limits.end.y)
-			if not is_on_floor():
-				var gravity_force = get_gravity()
-				var fall_limit = max_fall_speed
-
-				if is_gravity_level:
-
-					if Input.is_action_pressed("action2"):
-
-						gravity_force *= 2.5
-						fall_limit *= 2.5
-
-				
-				velocity += gravity_force * delta
-				velocity.y = min(velocity.y, fall_limit)
-				
-				if is_gravity_level and (Input.is_action_pressed("move up") or Input.is_action_pressed("jump")):
-					velocity.y *= 0.9
-
-				
-			if Input.is_action_just_pressed("jump") and is_on_floor():
-				velocity.y = JUMP_VELOCITY
-				$JumpSound.play()
-				
 				if move_and_slide():
 					for i in get_slide_collision_count():
 						var c = get_slide_collision(i)
 						var collider = c.get_collider()
-						
 						if collider and collider is RigidBody2D and collider.is_in_group("crates"):
 							var push_direction = -c.get_normal()
-							collider.apply_central_impulse(push_direction * PUSH_FORCE)
-				
+							collider.apply_central_impulse(push_direction * PUSH_FORCE)					#
 			else:
 				var x_direction = Input.get_axis("move left", "move right")
 				var y_direction = Input.get_axis("move up", "move down")
@@ -134,10 +112,8 @@ func _physics_process(delta: float) -> void:
 				if x_direction > 0:
 					$Sprite.flip_h = false
 				elif x_direction < 0:
-					$Sprite.flip_h = true
-
+					$Sprite.flip_h = true		
 				move_and_slide()
-		
 # ----- KEYCARD/KEY HANDLING. UPDATE FOR OTHER WORLDS
 var has_keycard := false
 var keycard_ref: Node = null
@@ -197,15 +173,13 @@ func _update_slope_tilt():
 @rpc("any_peer", "call_local")
 func die():
 	
-	if god_mode:
+	if god_mode or is_dead:
 		print("Player is in God Mode and cannot die.")
-		return
-		
-	if is_dead:
 		return
 
 	is_dead = true
 	self.modulate = Color(1,1,1,1)
+	$Sprite.self_modulate = Color.WHITE
 	velocity.y = -1000
 	velocity.x = 0
 	

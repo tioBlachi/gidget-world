@@ -56,5 +56,3 @@ func _trigger_targets() -> void:
 		var n := get_node_or_null(p)
 		if n and n.has_method(method_name):
 			n.call(method_name)
-
-

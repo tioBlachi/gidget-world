@@ -8,6 +8,7 @@ var jump_count := 0
 
 
 func _ready():
+	add_to_group("cell_floor")
 	freeze = true
 	if is_open:
 		set_deferred("freeze", false)
