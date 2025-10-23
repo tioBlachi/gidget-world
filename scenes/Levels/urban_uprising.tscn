@@ -1,10 +1,12 @@
-[gd_scene load_steps=11 format=4 uid="uid://byukt8eyso7jr"]
+[gd_scene load_steps=18 format=4 uid="uid://byukt8eyso7jr"]
 
-[ext_resource type="Texture2D" uid="uid://8hi45tmofd6b" path="res://Art/OldTestArt/metal2.png" id="1_sqmmr"]
+[ext_resource type="Texture2D" uid="uid://bt8mrued3ie7w" path="res://Art/OldTestArt/metal2.png" id="1_sqmmr"]
 [ext_resource type="Script" uid="uid://chy5ttrcgpkg1" path="res://scripts/Levels/urban_uprising.gd" id="1_tf8py"]
-[ext_resource type="Texture2D" uid="uid://bhwitf88ty575" path="res://Art/NewArt/Big City.png" id="4_5h4xf"]
-[ext_resource type="Texture2D" uid="uid://dgws8vldae8y" path="res://assets/sprites/New Piskel.png" id="6_hb40t"]
+[ext_resource type="Texture2D" uid="uid://cs58b63d0hxtf" path="res://Art/NewArt/Big City.png" id="4_5h4xf"]
+[ext_resource type="PackedScene" uid="uid://r357l4u2vr2q" path="res://scenes/actors/FlameDude.tscn" id="6_5h4xf"]
+[ext_resource type="Texture2D" uid="uid://dvtufbosn1juy" path="res://assets/sprites/New Piskel.png" id="6_hb40t"]
 [ext_resource type="PackedScene" uid="uid://87ms82l1c82e" path="res://scenes/objects/moving_platform.tscn" id="7_5h4xf"]
+[ext_resource type="PackedScene" uid="uid://d1nsqphluchlr" path="res://scenes/actors/can.tscn" id="7_mk1m7"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_5h4xf"]
 
@@ -12,7 +14,6 @@
 texture = ExtResource("6_hb40t")
 1:9/0 = 0
 2:9/0 = 0
-3:9/0 = 0
 4:9/0 = 0
 5:9/0 = 0
 6:9/0 = 0
@@ -8684,6 +8685,33 @@ size = Vector2(10, 10)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5h4xf"]
 size = Vector2(1672, 19)
 
+[sub_resource type="Curve2D" id="Curve2D_5h4xf"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -89, -182, 0, 0, 0, 0, 24, 78, -65.7082, -5.18749, 65.7082, 5.18749, 202, -117, 0, 0, 0, 0, 269, 119, -95.1039, -25.9374, 95.1039, 25.9374, 447, -92, 0, 0, 0, 0, 510, 139, -58.7915, -72.6248, 58.7915, 72.6248, 632, -62, 0, 0, 0, 0, 793, 389, 57.0624, -19.0208, -57.0624, 19.0208, 659, 202, 0, 0, 0, 0, 615, 436, 57.0624, -17.2916, -57.0624, 17.2916, 433, 252, 0, 0, 0, 0, 393, 485, 74.354, -15.5625, -74.354, 15.5625, 224, 307, 0, 0, 0, 0, 144, 549, 115.854, -41.4999, -115.854, 41.4999, -6, 365, 0, 0, 0, 0, -142, 911)
+}
+point_count = 16
+
+[sub_resource type="Curve2D" id="Curve2D_d1sqi"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 109, 61, 39.93, -5.324, -39.93, 5.324, 18, -17, 0, 0, 0, 0, -33, 112, 45.254, -7.09867, -45.254, 7.09867, -120, -12, 0, 0, 0, 0, -176, 151, 43.4793, -7.09867, -43.4793, 7.09867, -292, -1, 0, 0, 0, 0, -328, 179, 48.8033, -11.5353, -48.8033, 11.5353, -411, 9, 0, 0, 0, 0, -608, 494, -64.7753, -12.4227, 64.7753, 12.4227, -415, 312, 0, 0, 0, 0, -363, 525, -56.7893, -5.324, 56.7893, 5.324, -176, 347, 0, 0, 0, 0, -140, 562, -60.3387, -13.31, 60.3387, 13.31, 4, 383, 0, 0, 0, 0, 166, 832)
+}
+point_count = 15
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mk1m7"]
+size = Vector2(657.443, 20)
+
+[sub_resource type="Curve2D" id="Curve2D_mk1m7"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -1, 4, 0, 0, 0, 0, 58, 19, -30.2581, -14.641, 30.2581, 14.641, 129, -42, 0, 0, 0, 0, 132, 46, 0, 0, 0, 0, 229, 79, -42.9469, -13.6649, 42.9469, 13.6649, 307, 15, 0, 0, 0, 0, 322, 109, 0, 0, 0, 0, 408, 138)
+}
+point_count = 8
+
+[sub_resource type="Curve2D" id="Curve2D_8x7pg"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 548, -139, 0, 0, 0, 0, -176, 36)
+}
+point_count = 2
+
 [node name="UrbanUprising" type="Node2D"]
 position = Vector2(-16, 0)
 script = ExtResource("1_tf8py")
@@ -8808,32 +8836,97 @@ origin = Vector2(176, 600)
 max_pos = Vector2(176, 200)
 use_start_as_origin = false
 
-[node name="2nd" parent="." instance=ExtResource("7_5h4xf")]
+[node name="2ndPL" parent="." instance=ExtResource("7_5h4xf")]
 position = Vector2(1216, -48)
 scale = Vector2(10.12, 2.92)
+players_needed = 1
 origin = Vector2(1200, -48)
 max_pos = Vector2(920, -232)
 use_start_as_origin = false
 
-[node name="2nd2" parent="." instance=ExtResource("7_5h4xf")]
+[node name="4thPL" parent="." instance=ExtResource("7_5h4xf")]
 position = Vector2(1072, -840)
 scale = Vector2(10.12, 2.92)
 players_needed = 1
 max_pos = Vector2(800, -1328)
 ping_pong = true
 
-[node name="2nd3" parent="." instance=ExtResource("7_5h4xf")]
+[node name="5thPL" parent="." instance=ExtResource("7_5h4xf")]
 position = Vector2(112, -1256)
 scale = Vector2(10.12, 2.92)
 players_needed = 1
 speed = 200.0
 max_pos = Vector2(264, -1480)
 
-[node name="3rd" parent="." instance=ExtResource("7_5h4xf")]
+[node name="3rdPL" parent="." instance=ExtResource("7_5h4xf")]
 position = Vector2(160, -400)
 scale = Vector2(5.04, 3.15999)
 players_needed = 1
 origin = Vector2(144, -400)
 max_pos = Vector2(464, -648)
 
+[node name="FlameDude1" parent="." instance=ExtResource("6_5h4xf")]
+position = Vector2(382, 137)
+
+[node name="Can1" parent="." instance=ExtResource("7_mk1m7")]
+position = Vector2(315, -418)
+curve = SubResource("Curve2D_5h4xf")
+
+[node name="Can2" parent="." instance=ExtResource("7_mk1m7")]
+position = Vector2(880, -849)
+curve = SubResource("Curve2D_d1sqi")
+paused = true
+
+[node name="PathFollow2D" parent="Can2" index="0"]
+position = Vector2(109, 61)
+rotation = -2.43297
+
+[node name="Sprite2D" parent="Can2/PathFollow2D" index="0"]
+position = Vector2(-16.8167, -18.0732)
+scale = Vector2(0.737239, 0.717606)
+
+[node name="Can2Trigger" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Can2Trigger"]
+position = Vector2(529.149, -341.563)
+rotation = 0.166516
+shape = SubResource("RectangleShape2D_mk1m7")
+
+[node name="FlameDude2" parent="." instance=ExtResource("6_5h4xf")]
+position = Vector2(222, -1255)
+curve = SubResource("Curve2D_mk1m7")
+
+[node name="BigFlameDude" parent="." instance=ExtResource("6_5h4xf")]
+position = Vector2(611, -1494)
+curve = SubResource("Curve2D_8x7pg")
+is_big_flame = true
+
+[node name="PathFollow2D" parent="BigFlameDude" index="0"]
+position = Vector2(548, -139)
+rotation = 2.90443
+
+[node name="Face" parent="BigFlameDude/PathFollow2D/FlameDude" index="0"]
+position = Vector2(-6.7925, 2.42101)
+scale = Vector2(2.39947, 2.70337)
+flip_v = true
+
+[node name="Flames" parent="BigFlameDude/PathFollow2D/FlameDude" index="1"]
+position = Vector2(-8.98616, 19.3972)
+scale = Vector2(4.09971, 2.37563)
+flip_h = true
+flip_v = true
+
+[node name="BurnZone" parent="BigFlameDude/PathFollow2D/FlameDude" index="2"]
+position = Vector2(-14.8682, 2.96866)
+
+[node name="BurnCollision" parent="BigFlameDude/PathFollow2D/FlameDude/BurnZone" index="0"]
+position = Vector2(7.12437, -0.725185)
+
+[node name="BodyCollider" parent="BigFlameDude/PathFollow2D/FlameDude" index="3"]
+position = Vector2(-2.65636, -18.1918)
+
 [connection signal="body_entered" from="Camera2D/BottomBorder" to="." method="_on_bottom_border_body_entered"]
+[connection signal="body_entered" from="Can2Trigger" to="." method="_on_can_2_trigger_body_entered"]
+
+[editable path="Can2"]
+[editable path="BigFlameDude"]

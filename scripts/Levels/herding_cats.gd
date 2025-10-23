@@ -79,6 +79,7 @@ func spawn_players(p_array: PackedInt32Array) -> void:
 
 		pSpawner.add_child(player)
 		if player.get_script():
+			print("Found script")
 			var props = player.get_property_list()
 			for prop in props:
 				if prop.name == "side_scroller":

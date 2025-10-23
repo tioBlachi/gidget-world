@@ -1,0 +1,135 @@
+[gd_scene load_steps=17 format=3 uid="uid://b5lyvi3briu1y"]
+
+[ext_resource type="Texture2D" uid="uid://rdcfie4es35s" path="res://assets/sprites/FlameBall.png" id="1_hmy0p"]
+[ext_resource type="Texture2D" uid="uid://c8qk1t6lo64gw" path="res://assets/sprites/flames.png" id="2_twtko"]
+
+[sub_resource type="GDScript" id="GDScript_hmy0p"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kve5b"]
+atlas = ExtResource("1_hmy0p")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3pykl"]
+atlas = ExtResource("1_hmy0p")
+region = Rect2(0, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l6ahf"]
+atlas = ExtResource("1_hmy0p")
+region = Rect2(32, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8krtc"]
+atlas = ExtResource("1_hmy0p")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fs413"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kve5b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3pykl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l6ahf")
+}],
+"loop": true,
+"name": &"blink",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8krtc")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bneha"]
+atlas = ExtResource("2_twtko")
+region = Rect2(32, 0, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3fl7t"]
+atlas = ExtResource("2_twtko")
+region = Rect2(48, 0, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_twaqb"]
+atlas = ExtResource("2_twtko")
+region = Rect2(0, 24, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tgflb"]
+atlas = ExtResource("2_twtko")
+region = Rect2(16, 24, 16, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_j7s6y"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bneha")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3fl7t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_twaqb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tgflb")
+}],
+"loop": true,
+"name": &"burning",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_txuec"]
+radius = 3.3534
+height = 12.9307
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yshlb"]
+radius = 15.7549
+height = 55.7776
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_aplrf"]
+radius = 10.917
+
+[node name="BigFlameDude" type="CharacterBody2D"]
+script = SubResource("GDScript_hmy0p")
+
+[node name="Face" type="AnimatedSprite2D" parent="."]
+position = Vector2(1.13178, -0.0313759)
+scale = Vector2(1.34787, 1.56348)
+sprite_frames = SubResource("SpriteFrames_fs413")
+animation = &"blink"
+frame_progress = 0.392876
+flip_h = true
+
+[node name="BlinkTimer" type="Timer" parent="Face"]
+
+[node name="Flames" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-1, -20)
+scale = Vector2(2.98205, 3.09342)
+sprite_frames = SubResource("SpriteFrames_j7s6y")
+animation = &"burning"
+frame_progress = 0.619246
+
+[node name="Area2D" type="Area2D" parent="Flames"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Flames/Area2D"]
+shape = SubResource("CapsuleShape2D_txuec")
+
+[node name="PlayerSensor" type="Area2D" parent="."]
+position = Vector2(1.00002, 5.00002)
+rotation = 1.55925
+
+[node name="Sense" type="CollisionShape2D" parent="PlayerSensor"]
+position = Vector2(-0.0115356, 0.999935)
+shape = SubResource("CapsuleShape2D_yshlb")
+
+[node name="FaceCollider" type="CollisionShape2D" parent="."]
+position = Vector2(1, 5)
+shape = SubResource("CircleShape2D_aplrf")
+
+[connection signal="body_entered" from="Flames/Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="PlayerSensor" to="." method="_on_player_sensor_body_entered"]

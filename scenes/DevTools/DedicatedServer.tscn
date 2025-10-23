@@ -1,3 +1,3 @@
-[gd_scene format=3 uid="uid://bsxxc1ervs670"]
+[gd_scene load_steps=0 format=3 uid="uid://bsxxc1ervs670"]
 
 [node name="DedicatedServer" type="Node"]
