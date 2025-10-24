@@ -1,6 +1,8 @@
-[gd_scene load_steps=16 format=3 uid="uid://r357l4u2vr2q"]
+[gd_scene load_steps=19 format=3 uid="uid://r357l4u2vr2q"]
 
 [ext_resource type="Script" uid="uid://bobx2sqjh37op" path="res://scripts/actors/FLAMEDUDE.gd" id="1_qk7ux"]
+[ext_resource type="Texture2D" uid="uid://rdcfie4es35s" path="res://assets/sprites/FlameBall.png" id="2_qk7ux"]
+[ext_resource type="Texture2D" uid="uid://c8qk1t6lo64gw" path="res://assets/sprites/flames.png" id="3_c5qfh"]
 
 [sub_resource type="Curve2D" id="Curve2D_1ccaj"]
 _data = {
@@ -8,69 +10,84 @@ _data = {
 }
 point_count = 3
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_wlk5j"]
-size = Vector2(32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_kve5b"]
+atlas = ExtResource("2_qk7ux")
+region = Rect2(0, 0, 32, 32)
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_c0rrw"]
-size = Vector2(32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_3pykl"]
+atlas = ExtResource("2_qk7ux")
+region = Rect2(32, 96, 32, 32)
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_qk7ux"]
-size = Vector2(32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_l6ahf"]
+atlas = ExtResource("2_qk7ux")
+region = Rect2(32, 0, 32, 32)
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_c5qfh"]
-size = Vector2(32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_8krtc"]
+atlas = ExtResource("2_qk7ux")
+region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_fs413"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("PlaceholderTexture2D_wlk5j")
+"texture": SubResource("AtlasTexture_kve5b")
 }, {
 "duration": 1.0,
-"texture": SubResource("PlaceholderTexture2D_c0rrw")
+"texture": SubResource("AtlasTexture_3pykl")
 }, {
 "duration": 1.0,
-"texture": SubResource("PlaceholderTexture2D_qk7ux")
+"texture": SubResource("AtlasTexture_l6ahf")
 }],
-"loop": false,
+"loop": true,
 "name": &"blink",
-"speed": 20.0
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("PlaceholderTexture2D_c5qfh")
+"texture": SubResource("AtlasTexture_8krtc")
 }],
 "loop": true,
 "name": &"idle",
 "speed": 5.0
 }]
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_kve5b"]
-size = Vector2(16, 24)
+[sub_resource type="AtlasTexture" id="AtlasTexture_fs413"]
+atlas = ExtResource("3_c5qfh")
+region = Rect2(32, 0, 16, 24)
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_3pykl"]
-size = Vector2(16, 24)
+[sub_resource type="AtlasTexture" id="AtlasTexture_bneha"]
+atlas = ExtResource("3_c5qfh")
+region = Rect2(16, 24, 16, 24)
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_l6ahf"]
-size = Vector2(16, 24)
+[sub_resource type="AtlasTexture" id="AtlasTexture_3fl7t"]
+atlas = ExtResource("3_c5qfh")
+region = Rect2(32, 48, 16, 24)
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_8krtc"]
-size = Vector2(16, 24)
+[sub_resource type="AtlasTexture" id="AtlasTexture_twaqb"]
+atlas = ExtResource("3_c5qfh")
+region = Rect2(48, 24, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tgflb"]
+atlas = ExtResource("3_c5qfh")
+region = Rect2(48, 0, 16, 24)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_j7s6y"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("PlaceholderTexture2D_kve5b")
+"texture": SubResource("AtlasTexture_fs413")
 }, {
 "duration": 1.0,
-"texture": SubResource("PlaceholderTexture2D_3pykl")
+"texture": SubResource("AtlasTexture_bneha")
 }, {
 "duration": 1.0,
-"texture": SubResource("PlaceholderTexture2D_l6ahf")
+"texture": SubResource("AtlasTexture_3fl7t")
 }, {
 "duration": 1.0,
-"texture": SubResource("PlaceholderTexture2D_8krtc")
+"texture": SubResource("AtlasTexture_twaqb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tgflb")
 }],
 "loop": true,
 "name": &"burning",
@@ -108,19 +125,19 @@ position = Vector2(-1.13178, 0.0313759)
 position = Vector2(1.13178, -0.0313759)
 scale = Vector2(1.34787, 1.56348)
 sprite_frames = SubResource("SpriteFrames_fs413")
-animation = &"blink"
+animation = &"idle"
+frame_progress = 0.213639
 flip_h = true
 
 [node name="BlinkTimer" type="Timer" parent="PathFollow2D/FlameDude/Face"]
 
 [node name="Flames" type="AnimatedSprite2D" parent="PathFollow2D/FlameDude"]
 texture_filter = 1
-position = Vector2(1.13178, -14.0314)
-scale = Vector2(1.69763, 1.45964)
+position = Vector2(0.131779, -19.0314)
+scale = Vector2(1.84882, 2.43815)
 sprite_frames = SubResource("SpriteFrames_j7s6y")
 animation = &"burning"
-frame = 3
-frame_progress = 0.337442
+frame_progress = 0.415695
 
 [node name="BurnZone" type="Area2D" parent="PathFollow2D/FlameDude"]
 position = Vector2(-0.0168349, -4.99997)
