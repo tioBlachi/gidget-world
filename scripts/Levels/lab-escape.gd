@@ -4,7 +4,7 @@ extends Node2D
 @onready var player_scene = preload("res://scenes/player/player.tscn")
 @onready var cell1 = $LabCell1/CellFloor
 @onready var cell2 = $LabCell2/CellFloor
-@onready var spikes = $Spikes
+@onready var spikes = $Spikes1024
 @onready var pSpawner = $pSpawner
 @onready var player1marker = $PlayerMarkers/Player1Marker
 @onready var player2marker = $PlayerMarkers/Player2Marker

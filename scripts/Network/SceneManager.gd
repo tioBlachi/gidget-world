@@ -8,7 +8,8 @@ const SCENES: Dictionary = {
 	"lawnmower madness": "res://scenes/Levels/lawnmower_madness.tscn",
 	"Title": "res://scenes/UI/Title.tscn",
 	"Testing" : "res://scenes/DevTools/Testing.tscn",
-	"Lobby" : "res://scenes/UI/Lobby.tscn"
+	"Lobby" : "res://scenes/UI/Lobby.tscn",
+	"Final" : "res://scenes/Levels/final.tscn"
 }
 
 func switch_scene(scene_name: String) -> void:
