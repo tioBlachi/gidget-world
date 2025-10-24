@@ -151,12 +151,18 @@ func dizzy():
 			else:
 				s.visible = true
 				s.play("dizzy")
+		await get_tree().create_timer(1).timeout
+		recover()
 	
 func recover():
 	staggered = false
 	sprite.texture = original_texture
 	if int(self.name) == Net.players[1]:
 		sprite.self_modulate = Color.hex(0xE0FFFF)
+	var stars = $Stars.get_children()
+	for s in stars:
+		s.stop()
+		s.visible = false
 		
 
 func _update_slope_tilt():

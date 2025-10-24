@@ -1,9 +1,10 @@
 [gd_scene load_steps=12 format=3 uid="uid://bxpry3684affg"]
 
 [ext_resource type="Script" uid="uid://gmylnlvujh2e" path="res://scripts/player.gd" id="1_g2els"]
-[ext_resource type="Texture2D" uid="uid://c6ojijtsm0bp7" path="res://Art/OldTestArt/gRight.png" id="2_gmlin"]
+[ext_resource type="Texture2D" uid="uid://d2sv655j2k3bq" path="res://Art/OldTestArt/gRight.png" id="2_gmlin"]
 [ext_resource type="AudioStream" uid="uid://cqt8c2sa1757t" path="res://assets/sounds/8-bit-jump.mp3" id="3_gmlin"]
-[ext_resource type="AudioStream" uid="uid://dxf1msqh3ue5c" path="res://assets/sounds/080205_life-lost-game-over-89697.mp3" id="4_lvxji"]
+[ext_resource type="AudioStream" uid="uid://cj4ho2calqgeq" path="res://assets/sounds/080205_life-lost-game-over-89697.mp3" id="4_lvxji"]
+[ext_resource type="Texture2D" uid="uid://5fuupo0bpdq" path="res://assets/sprites/stars.png" id="5_p47bc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hqtel"]
 size = Vector2(128, 128)
@@ -31,36 +32,33 @@ properties/6/path = NodePath("CollisionShape2D:position")
 properties/6/spawn = true
 properties/6/replication_mode = 1
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_lvxji"]
-size = Vector2(10, 10)
+[sub_resource type="AtlasTexture" id="AtlasTexture_75vfm"]
+atlas = ExtResource("5_p47bc")
+region = Rect2(52, 0, 230, 292)
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_p47bc"]
-size = Vector2(10, 10)
+[sub_resource type="AtlasTexture" id="AtlasTexture_0owmy"]
+atlas = ExtResource("5_p47bc")
+region = Rect2(282, 292, 230, 292)
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_75vfm"]
-size = Vector2(10, 10)
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_0owmy"]
-size = Vector2(10, 10)
+[sub_resource type="AtlasTexture" id="AtlasTexture_qek5x"]
+atlas = ExtResource("5_p47bc")
+region = Rect2(512, 292, 230, 292)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_h17s1"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("PlaceholderTexture2D_lvxji")
+"texture": SubResource("AtlasTexture_75vfm")
 }, {
 "duration": 1.0,
-"texture": SubResource("PlaceholderTexture2D_p47bc")
+"texture": SubResource("AtlasTexture_0owmy")
 }, {
 "duration": 1.0,
-"texture": SubResource("PlaceholderTexture2D_75vfm")
-}, {
-"duration": 1.0,
-"texture": SubResource("PlaceholderTexture2D_0owmy")
+"texture": SubResource("AtlasTexture_qek5x")
 }],
 "loop": true,
 "name": &"dizzy",
-"speed": 14.0
+"speed": 8.0
 }]
 
 [node name="Player" type="CharacterBody2D"]
@@ -104,8 +102,7 @@ position = Vector2(33.6538, -108.442)
 scale = Vector2(0.275919, 0.201172)
 sprite_frames = SubResource("SpriteFrames_h17s1")
 animation = &"dizzy"
-frame = 3
-frame_progress = 0.688718
+frame_progress = 0.759928
 flip_h = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Stars"]
@@ -115,5 +112,4 @@ position = Vector2(-31.7307, -108.442)
 scale = Vector2(0.275919, 0.201172)
 sprite_frames = SubResource("SpriteFrames_h17s1")
 animation = &"dizzy"
-frame = 1
-frame_progress = 0.843746
+frame_progress = 0.800212

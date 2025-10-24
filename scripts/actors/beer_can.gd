@@ -18,8 +18,16 @@ func _process(delta: float) -> void:
 	if follower.progress_ratio >= 0.99:
 		queue_free()
 	
-func _on_can_collides_with_player(body: Node2D) -> void:
-	if body.is_in_group("players"):
-		body.staggered = true
-		body.dizzy()
+func _on_can_collides_with_player(player: Node2D) -> void:
+	if player.is_in_group("players"):
+		const DROP_SPEED := 900.0
+		
+		player.velocity.x = 0
+		
+		while not player.is_on_floor():
+			player.velocity.y = DROP_SPEED
+			await get_tree().physics_frame
+			
+		player.staggered = true	
+		player.dizzy()
 		queue_free()
