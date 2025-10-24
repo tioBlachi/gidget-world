@@ -1,10 +1,10 @@
 [gd_scene load_steps=18 format=4 uid="uid://byukt8eyso7jr"]
 
-[ext_resource type="Texture2D" uid="uid://bt8mrued3ie7w" path="res://Art/OldTestArt/metal2.png" id="1_sqmmr"]
+[ext_resource type="Texture2D" uid="uid://8hi45tmofd6b" path="res://Art/OldTestArt/metal2.png" id="1_sqmmr"]
 [ext_resource type="Script" uid="uid://chy5ttrcgpkg1" path="res://scripts/Levels/urban_uprising.gd" id="1_tf8py"]
-[ext_resource type="Texture2D" uid="uid://cs58b63d0hxtf" path="res://Art/NewArt/Big City.png" id="4_5h4xf"]
+[ext_resource type="Texture2D" uid="uid://bhwitf88ty575" path="res://Art/NewArt/Big City.png" id="4_5h4xf"]
 [ext_resource type="PackedScene" uid="uid://r357l4u2vr2q" path="res://scenes/actors/FlameDude.tscn" id="6_5h4xf"]
-[ext_resource type="Texture2D" uid="uid://dvtufbosn1juy" path="res://assets/sprites/New Piskel.png" id="6_hb40t"]
+[ext_resource type="Texture2D" uid="uid://dgws8vldae8y" path="res://assets/sprites/New Piskel.png" id="6_hb40t"]
 [ext_resource type="PackedScene" uid="uid://87ms82l1c82e" path="res://scenes/objects/moving_platform.tscn" id="7_5h4xf"]
 [ext_resource type="PackedScene" uid="uid://d1nsqphluchlr" path="res://scenes/actors/can.tscn" id="7_mk1m7"]
 
