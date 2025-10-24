@@ -126,7 +126,7 @@ position = Vector2(1.13178, -0.0313759)
 scale = Vector2(1.34787, 1.56348)
 sprite_frames = SubResource("SpriteFrames_fs413")
 animation = &"idle"
-frame_progress = 0.213639
+frame_progress = 0.698018
 flip_h = true
 
 [node name="BlinkTimer" type="Timer" parent="PathFollow2D/FlameDude/Face"]
@@ -137,7 +137,7 @@ position = Vector2(0.131779, -19.0314)
 scale = Vector2(1.84882, 2.43815)
 sprite_frames = SubResource("SpriteFrames_j7s6y")
 animation = &"burning"
-frame_progress = 0.415695
+frame_progress = 0.900073
 
 [node name="BurnZone" type="Area2D" parent="PathFollow2D/FlameDude"]
 position = Vector2(-0.0168349, -4.99997)
