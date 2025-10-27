@@ -103,6 +103,7 @@ func _physics_process(delta: float) -> void:
 					$Camera2D.limit_top = int(limits.position.y)
 					$Camera2D.limit_right = int(limits.end.x)
 					$Camera2D.limit_bottom = int(limits.end.y)
+					
 				var x_direction = Input.get_axis("move left", "move right")
 				var y_direction = Input.get_axis("move up", "move down")
 				var dir = Vector2(x_direction, y_direction)
@@ -114,7 +115,7 @@ func _physics_process(delta: float) -> void:
 				else:
 					velocity.x = move_toward(velocity.x, 0.0, SPEED)
 					velocity.y = move_toward(velocity.y, 0.0, SPEED)
-
+				
 				if x_direction > 0:
 					$Sprite.flip_h = false
 				elif x_direction < 0:

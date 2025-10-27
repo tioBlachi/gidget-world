@@ -7,12 +7,16 @@ signal portal_defeated
 @onready var timer: Timer = $Timer
 @onready var explosion_template: AnimatedSprite2D = $Explosions
 @onready var boom: AudioStreamPlayer2D = $Boom
+@onready var pull_zone := $PortalPullZone
 
 @export var explosion_radius = 250.0
 @export var explosions_total = 7
 @export var boom_interval = 0.7
+@export var pull_speed := 175.0
+@export var pull_accel := 500.0
 
 var explosions_started = false
+var pulled := {}
 
 var colors = [Color.WHITE, Color.AQUA, Color.FOREST_GREEN, Color.ORANGE, Color.RED, Color.RED ]
 var phase:= 0
@@ -23,8 +27,24 @@ func _ready() -> void:
 	timer.wait_time = 1.0
 	timer.one_shot = false
 	timer.timeout.connect(_on_timer_timeout)
-	timer.start()
+	#timer.start()
 	
+func _physics_process(delta: float) -> void:
+	for id in pulled.keys():
+		var p = pulled[id]
+		if not is_instance_valid(p):
+			pulled.erase(id)
+			continue
+			
+		var to_center = global_position - p.global_position
+		var dist = to_center.length()
+		
+		if dist < 0.5:
+			continue
+			
+		var dir = to_center / dist
+		var step = min(pull_speed * delta, dist)
+		p.global_position += dir * step
 func _process(delta: float) -> void:
 	match phase:
 		0:
@@ -111,3 +131,14 @@ func spawn_explosions(duration: float):
 	
 	await get_tree().create_timer(duration).timeout
 	e.queue_free()
+
+
+func _on_portal_pull_zone_body_entered(body: Node2D) -> void:
+	if body.is_in_group("players"):
+		pulled[body.name] = body
+		print(pulled)
+
+func _on_portal_pull_zone_body_exited(body: Node2D) -> void:
+	if pulled.has(body.name):
+		pulled.erase(body.name)
+		print(pulled)

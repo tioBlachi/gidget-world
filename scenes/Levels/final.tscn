@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=4 uid="uid://b18e8xpu1xg1g"]
 
-[ext_resource type="Texture2D" uid="uid://gpufj5wv3tf3" path="res://assets/Tiles/marble.png" id="1_3lefc"]
+[ext_resource type="Texture2D" uid="uid://dfiaq77335nxd" path="res://assets/Tiles/marble.png" id="1_3lefc"]
 [ext_resource type="PackedScene" uid="uid://cvlhi5bunpi4d" path="res://scenes/actors/PortalBoss.tscn" id="1_h1cn2"]
 [ext_resource type="Script" uid="uid://0hgdu3v8flss" path="res://scripts/Levels/final.gd" id="1_lm5nn"]
 
@@ -124,10 +124,10 @@ spawn_path = NodePath("../Players")
 [node name="PlayerMarkers" type="Node2D" parent="."]
 
 [node name="Player1Marker" type="Marker2D" parent="PlayerMarkers"]
-position = Vector2(173, 190)
+position = Vector2(871, 266)
 
 [node name="Player2Marker" type="Marker2D" parent="PlayerMarkers"]
-position = Vector2(296, 188)
+position = Vector2(994, 264)
 
 [node name="Players" type="Node2D" parent="."]
 
