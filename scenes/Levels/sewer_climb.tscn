@@ -1,16 +1,16 @@
 [gd_scene load_steps=27 format=4 uid="uid://bw426uewyu1ti"]
 
-[ext_resource type="PackedScene" path="res://scenes/objects/sewage.tscn" id="1_dk0sx"]
+[ext_resource type="PackedScene" uid="uid://byf0t5frhhx6r" path="res://scenes/objects/sewage.tscn" id="1_dk0sx"]
 [ext_resource type="PackedScene" path="res://scenes/objects/button_once.tscn" id="2_dk0sx"]
 [ext_resource type="PackedScene" path="res://scenes/objects/one_shot_mover.tscn" id="3_dk0sx"]
-[ext_resource type="Texture2D" uid="uid://bkuouxcowxnc7" path="res://assets/Tiles/marble.png" id="5_1g2y4"]
+[ext_resource type="Texture2D" uid="uid://dfiaq77335nxd" path="res://assets/Tiles/marble.png" id="5_1g2y4"]
 [ext_resource type="Script" uid="uid://076niupbrtvo" path="res://scripts/Levels/sewer_climb.gd" id="5_script"]
-[ext_resource type="Texture2D" uid="uid://brp763x2rpc8y" path="res://assets/Tiles/rock.png" id="6_yd7do"]
-[ext_resource type="Texture2D" uid="uid://djfcan6756x2m" path="res://assets/Tiles/tilemap_industrial.png" id="7_6v2ta"]
-[ext_resource type="Texture2D" uid="uid://cpkkibt87aunn" path="res://assets/Tiles/sand.png" id="7_yy6s6"]
-[ext_resource type="Texture2D" uid="uid://cxiaftsnawb21" path="res://assets/Tiles/stone.png" id="8_bf676"]
-[ext_resource type="Texture2D" uid="uid://drrvmitvw5qh2" path="res://assets/Tiles/BackgroundRock.png" id="9_webr0"]
-[ext_resource type="Texture2D" uid="uid://b0pa3ya73spk2" path="res://Art/OldTestArt/button.png" id="10_6v2ta"]
+[ext_resource type="Texture2D" uid="uid://bl3xa35qafjr" path="res://assets/Tiles/rock.png" id="6_yd7do"]
+[ext_resource type="Texture2D" uid="uid://bl8uq42vmbtrc" path="res://assets/Tiles/tilemap_industrial.png" id="7_6v2ta"]
+[ext_resource type="Texture2D" uid="uid://540pbya5ww6v" path="res://assets/Tiles/sand.png" id="7_yy6s6"]
+[ext_resource type="Texture2D" uid="uid://uglny5y03yek" path="res://assets/Tiles/stone.png" id="8_bf676"]
+[ext_resource type="Texture2D" uid="uid://bgmbgx1nohmd3" path="res://assets/Tiles/BackgroundRock.png" id="9_webr0"]
+[ext_resource type="Texture2D" uid="uid://dqqphhy4l5e4x" path="res://Art/OldTestArt/button.png" id="10_6v2ta"]
 [ext_resource type="PackedScene" uid="uid://jylojstufht1" path="res://scenes/player/BowenPlayer.tscn" id="14_ftp6k"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_31be5"]
@@ -621,7 +621,7 @@ texture_region_size = Vector2i(18, 18)
 tile_size = Vector2i(18, 18)
 sources/0 = SubResource("TileSetAtlasSource_5hkml")
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5e8uc"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bf676"]
 texture = ExtResource("7_6v2ta")
 separation = Vector2i(1, 1)
 texture_region_size = Vector2i(18, 18)
@@ -817,7 +817,7 @@ texture_region_size = Vector2i(18, 18)
 [sub_resource type="TileSet" id="TileSet_31be5"]
 tile_size = Vector2i(18, 18)
 physics_layer_0/collision_layer = 1
-sources/0 = SubResource("TileSetAtlasSource_5e8uc")
+sources/0 = SubResource("TileSetAtlasSource_bf676")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_webr0"]
 size = Vector2(1658, 796)

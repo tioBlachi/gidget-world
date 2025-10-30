@@ -8,19 +8,26 @@ extends Node2D
 @onready var player_scene = preload("res://scenes/player/player.tscn")
 @onready var white_fade: ColorRect = $CanvasLayer/WhiteFade
 @onready var boss = $PortalBoss
+@onready var phase1_turret = $Turret
 
 var _shake_time := 0.0
 var _shake_duration := 0.0
 var _shake_strength := 0.0
 var _original_offset := Vector2.ZERO
+@export var _start_phase_1 := 0
 
-func _ready():
+func _ready():		
 	if multiplayer.is_server():
 		spawn_players.rpc(Net.players)
-		
+	boss.phase = 0
 	white_fade.color = Color(1,1,1,0)
-	#white_fade.modulate.a = 0.0
+	# ---------- CONNECT SIGNALS -------------
 	boss.portal_defeated.connect(fade_to_white)
+
+	var phase1_buttons = $Phase1Buttons.get_children()
+	for b in phase1_buttons:
+		b.button_pressed.connect(on_p1_btn_pressed)
+		b.button_released.connect(on_p1_btn_released)
 		
 @rpc("authority", "call_local", "reliable")
 func spawn_players(p_array: PackedInt32Array) -> void:
@@ -47,13 +54,12 @@ func spawn_players(p_array: PackedInt32Array) -> void:
 			
 func _process(delta: float) -> void:
 	_apply_screen_shake(delta)
-			
-		
+
+
 func get_map_limits() -> Rect2:
 	return map_limits	
 	
-func fade_to_white(duration: float = 9.0) -> void:
-	print("Signal received")
+func fade_to_white(duration: float = 8.0) -> void:
 	var tween = create_tween()
 	tween.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	tween.tween_property(white_fade, "color:a", 1.0, duration)
@@ -87,3 +93,27 @@ func _apply_screen_shake(delta: float) -> void:
 	)
 
 	cam.offset = jitter
+
+func on_p1_btn_pressed():
+	if multiplayer.is_server():
+		_start_phase_1 += 1
+		clamp(_start_phase_1, 0, Net.players.size())
+		if _start_phase_1 == Net.players.size():
+			var players = get_tree().get_nodes_in_group("players")
+			for p in players:
+				p.staggered = true
+			var buttons := get_tree().get_nodes_in_group("buttons")
+			for b in buttons:
+				b.turn_off_collision.rpc()
+			await get_tree().create_timer(2).timeout
+			boss.phase = 1
+			phase1_turret.activated = true
+			
+			for p in players:
+				p.staggered = false
+
+func on_p1_btn_released():
+	if multiplayer.is_server():
+		_start_phase_1 -= 1
+		clamp(_start_phase_1, 0, Net.players.size())
+		print("Activated Buttons: ", _start_phase_1)

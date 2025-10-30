@@ -1,7 +1,8 @@
-[gd_scene load_steps=25 format=3 uid="uid://cvlhi5bunpi4d"]
+[gd_scene load_steps=38 format=3 uid="uid://cvlhi5bunpi4d"]
 
 [ext_resource type="Script" uid="uid://d06f17hxlfiyv" path="res://scripts/actors/portal_boss.gd" id="1_40dn3"]
 [ext_resource type="Shader" uid="uid://4xoyamqdpcmq" path="res://scenes/actors/PortalBoss.gdshader" id="1_ftgki"]
+[ext_resource type="Texture2D" uid="uid://by2w1q003x85n" path="res://assets/sprites/pixilart-sprite (1).png" id="3_s72ma"]
 [ext_resource type="Texture2D" uid="uid://ci0kjxllfmyhu" path="res://assets/sprites/Explosion.png" id="3_wr8qb"]
 [ext_resource type="AudioStream" uid="uid://diqgbk7t8hcg6" path="res://assets/sounds/8-bit-explosion.wav" id="4_2w0qw"]
 [ext_resource type="AudioStream" uid="uid://b0dy28rofr1ik" path="res://assets/sounds/earth-shattering-rumble-quake-sound-effect-243330.mp3" id="5_2w0qw"]
@@ -29,6 +30,89 @@ height = 500
 fill = 1
 fill_from = Vector2(0.504065, 0.51626)
 fill_to = Vector2(0.800813, 0.101626)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_65hca"]
+atlas = ExtResource("3_s72ma")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2wrb1"]
+atlas = ExtResource("3_s72ma")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j6qmc"]
+atlas = ExtResource("3_s72ma")
+region = Rect2(200, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mtsoa"]
+atlas = ExtResource("3_s72ma")
+region = Rect2(300, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n0pnw"]
+atlas = ExtResource("3_s72ma")
+region = Rect2(400, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7v0hd"]
+atlas = ExtResource("3_s72ma")
+region = Rect2(500, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yrmh7"]
+atlas = ExtResource("3_s72ma")
+region = Rect2(600, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kx37b"]
+atlas = ExtResource("3_s72ma")
+region = Rect2(700, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8qgfc"]
+atlas = ExtResource("3_s72ma")
+region = Rect2(800, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s72ma"]
+atlas = ExtResource("3_s72ma")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_n0pnw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_65hca")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2wrb1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j6qmc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mtsoa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n0pnw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7v0hd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yrmh7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kx37b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8qgfc")
+}],
+"loop": true,
+"name": &"blackhole",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s72ma")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ftgki"]
 radius = 487.173
@@ -130,12 +214,24 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_s72ma"]
+properties/0/path = NodePath(".:phase")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
 [node name="PortalBoss" type="Node2D"]
 script = ExtResource("1_40dn3")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_40dn3")
 texture = SubResource("GradientTexture2D_wr8qb")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Sprite2D"]
+z_index = -1
+position = Vector2(-5, 76)
+scale = Vector2(18.1106, 19.6939)
+sprite_frames = SubResource("SpriteFrames_n0pnw")
+animation = &"idle"
 
 [node name="PortalPullZone" type="Area2D" parent="."]
 
@@ -166,6 +262,10 @@ volume_db = -5.9
 
 [node name="Rumble" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_2w0qw")
+volume_db = -4.0
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_s72ma")
 
 [connection signal="body_entered" from="PortalPullZone" to="." method="_on_portal_pull_zone_body_entered"]
 [connection signal="body_exited" from="PortalPullZone" to="." method="_on_portal_pull_zone_body_exited"]

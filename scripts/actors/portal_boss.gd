@@ -19,7 +19,7 @@ var explosions_started = false
 var pulled := {}
 
 var colors = [Color.WHITE, Color.AQUA, Color.FOREST_GREEN, Color.ORANGE, Color.RED, Color.RED ]
-var phase:= 0
+@export var phase:= 0
 
 func _ready() -> void:
 	mat.set_shader_parameter("color_a", colors[phase])
@@ -27,7 +27,9 @@ func _ready() -> void:
 	timer.wait_time = 1.0
 	timer.one_shot = false
 	timer.timeout.connect(_on_timer_timeout)
+	$Sprite2D/AnimatedSprite2D.play("idle")
 	#timer.start()
+	phase = 0
 	
 func _physics_process(delta: float) -> void:
 	for id in pulled.keys():
@@ -75,12 +77,13 @@ func _process(delta: float) -> void:
 			mat.set_shader_parameter("tightness", 2.0)
 			mat.set_shader_parameter("color_a", colors[phase])
 			mat.set_shader_parameter("speed", 4.0)
-			mat.set_shader_parameter("border_color", Color.RED)
+			mat.set_shader_parameter("border_color", Color.BLACK)
 			mat.set_shader_parameter("border_softness", 0.1)
 		5:
 			mat.set_shader_parameter("tightness", 0.0)
 			mat.set_shader_parameter("color_a", colors[phase])
 			mat.set_shader_parameter("speed", 0.0)
+			$Sprite2D/AnimatedSprite2D.stop()
 			
 	if phase == 5 and not explosions_started:
 		explosions_started = true

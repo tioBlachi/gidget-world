@@ -186,7 +186,7 @@ func _update_slope_tilt():
 @rpc("any_peer", "call_local")
 func die():
 	
-	if god_mode or is_dead:
+	if god_mode:
 		print("Player is in God Mode and cannot die.")
 		return
 
