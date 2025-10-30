@@ -1,5 +1,7 @@
 extends Node2D
 
+signal generator_destroyed
+
 @export var find_time := 3.0
 @export var aim_delay := 0.5
 @export var lock_time := 1.0
@@ -134,6 +136,16 @@ func _on_laser_hit(collider: Object) -> void:
 			n.die.rpc()
 		elif n.is_in_group("generators"):
 			print("Hitting :", n.name)
+			var anim = n.get_child(0)
+			await get_tree().create_timer(1).timeout
+			anim.scale.x = 1.4
+			anim.scale.y = 1.4
+			anim.play("explosion")
+			await anim.animation_finished
+			emit_signal("generator_destroyed")
+			var coll: CollisionShape2D = n.get_child(1)
+			await get_tree().physics_frame
+			coll.set_deferred("disabled", true)
 
 func _on_laser_finished() -> void:
 	_enter_find()
