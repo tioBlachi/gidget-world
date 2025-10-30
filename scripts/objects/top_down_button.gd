@@ -17,6 +17,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.is_in_group("players"):
 		pressed = true
 		button.play("activated")
+		$ClickSound.play()
 		emit_signal("button_pressed")
 
 
@@ -26,6 +27,7 @@ func _on_area_2d_body_exited(body: Node2D) -> void:
 		if button.is_playing():
 			button.stop()
 		button.play("idle")
+		$ClickSound.play()
 		emit_signal("button_released")
 
 @rpc("authority", "call_local", "reliable")

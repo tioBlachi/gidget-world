@@ -81,7 +81,7 @@ func _physics_process(delta: float) -> void:
 						else:
 							lab.rpc_id(1, "rpc_report_jump", my_id)
 	
-				var direction := Input.get_axis("move left", "move right")
+				direction = Input.get_axis("move left", "move right")
 				if direction:
 					velocity.x = direction * SPEED
 					$Sprite.flip_h = direction < 0
@@ -205,13 +205,13 @@ func die():
 	
 	$MultiplayerSynchronizer.set_process(false)
 	$DeathSFX.play()
-	var timer = Timer.new()
-	timer.one_shot = true
-	timer.wait_time = 1.5
-	add_child(timer)
-	timer.timeout.connect(_on_timer_complete)
-	timer.timeout.connect(self.queue_free)
-	timer.start()
+	var d_timer = Timer.new()
+	d_timer.one_shot = true
+	d_timer.wait_time = 1.5
+	add_child(d_timer)
+	d_timer.timeout.connect(_on_timer_complete)
+	d_timer.timeout.connect(self.queue_free)
+	d_timer.start()
 
 func _on_timer_complete():
 	Global.player_died.emit()

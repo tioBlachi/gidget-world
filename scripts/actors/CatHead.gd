@@ -19,6 +19,7 @@ extends CharacterBody2D
 @export var max_pause: float = 1.25
 
 var is_herded = false
+@export var active : bool = true
 @export var moving: bool = false
 @export var player_nearby: Node2D = null
 @export var direction: Vector2 = Vector2.ZERO
@@ -26,6 +27,12 @@ var distance_left: float = 0.0
 var rng := RandomNumberGenerator.new()
 var pause_timer: Timer
 var meow_timer: Timer
+
+var cat_frames = [
+	preload("res://scenes/actors/calico_frames.tres"),
+	preload("res://scenes/actors/black_frames.tres"),
+	preload("res://scenes/actors/siamese_frames.tres")
+]
 
 # 8 directions the cat can choose from
 const DIRECTIONS := [
@@ -41,13 +48,14 @@ const DIRECTIONS := [
 
 
 func _ready() -> void:
-	add_to_group("cats", true)
+	add_to_group("cats")
 	rng.randomize()
 	
-	if frames:
-		anim.sprite_frames = frames
-		if not anim.is_playing():
-			anim.play("idle")
+	var cat_skin = cat_frames[rng.randi_range(0, cat_frames.size() - 1)]
+	anim.sprite_frames = cat_skin
+	
+	if not anim.is_playing():
+		anim.play("idle")
 	# Timers
 	pause_timer = Timer.new()
 	meow_timer = Timer.new()
@@ -62,32 +70,34 @@ func _ready() -> void:
 	_start_move()
 
 func _physics_process(delta: float) -> void:
-	# Animation
-	if moving:
-		$Anim.play("run")
-	else:
-		$Anim.play("idle")
+	if active:
+		if is_multiplayer_authority():
+			# Animation
+			if moving:
+				$Anim.play("run")
+			else:
+				$Anim.play("idle")
 
-	# Movement (only when moving is true)
-	if player_nearby:
-		var away = (global_position - player_nearby.global_position).normalized()
-		var step = flee_speed * delta
-		var collision_info = move_and_collide(away * step)
-		if collision_info:
-			_apply_bounce(collision_info, true)
-		return
-		
-	if moving:
-		var step = min(speed * delta, distance_left)
-		var step_vector = direction.normalized() * step
+			# Movement (only when moving is true)
+			if player_nearby:
+				var away = (global_position - player_nearby.global_position).normalized()
+				var step = flee_speed * delta
+				var collision_info = move_and_collide(away * step)
+				if collision_info:
+					_apply_bounce(collision_info, true)
+				return
+				
+			if moving:
+				var step = min(speed * delta, distance_left)
+				var step_vector = direction.normalized() * step
 
-		var collision = move_and_collide(step_vector)
-		if collision:
-			_apply_bounce(collision, false)
-		else:
-			distance_left -= step
-			if distance_left <= 0:
-				_stop_move()
+				var collision = move_and_collide(step_vector)
+				if collision:
+					_apply_bounce(collision, false)
+				else:
+					distance_left -= step
+					if distance_left <= 0:
+						_stop_move()
 
 
 func _start_move() -> void:
@@ -108,12 +118,13 @@ func _on_pause_timeout() -> void:
 	
 	
 func _on_meow_timer_timeout():
-	if is_herded:
-		return
-	else:
-		match rng.randi() % 2:
-			0: if not meow1.playing: meow1.play()
-			1: if not meow2.playing: meow2.play()
+	if active: 
+		if is_herded:
+			return
+		else:
+			match rng.randi() % 2:
+				0: if not meow1.playing: meow1.play()
+				1: if not meow2.playing: meow2.play()
 	_reset_meow_timer()
 	
 	

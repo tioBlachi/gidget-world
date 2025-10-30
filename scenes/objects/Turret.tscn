@@ -1,8 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://cjb4jac725fq5"]
+[gd_scene load_steps=8 format=3 uid="uid://cjb4jac725fq5"]
 
 [ext_resource type="Texture2D" uid="uid://bhvpk66hdur8" path="res://assets/sprites/turret.png" id="1_262e8"]
 [ext_resource type="Script" uid="uid://5nhjdrcw6vlq" path="res://scripts/objects/turret.gd" id="1_obvvu"]
 [ext_resource type="PackedScene" uid="uid://c5te30dqk4c2t" path="res://scenes/objects/LaserRay.tscn" id="2_nag2a"]
+[ext_resource type="AudioStream" uid="uid://dp06clbt3obgn" path="res://assets/sounds/laser_beam.mp3" id="4_oavcs"]
+[ext_resource type="AudioStream" uid="uid://c4wxev04tiydt" path="res://assets/sounds/laser_charge.mp3" id="5_vx1ie"]
+[ext_resource type="AudioStream" uid="uid://diqgbk7t8hcg6" path="res://assets/sounds/8-bit-explosion.wav" id="6_og30h"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_obvvu"]
 properties/0/path = NodePath(".:rotation")
@@ -32,3 +35,13 @@ gizmo_extents = 0.0
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_obvvu")
+
+[node name="ShootingSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_oavcs")
+
+[node name="ChargingSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_vx1ie")
+volume_db = -8.0
+
+[node name="Boom" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_og30h")

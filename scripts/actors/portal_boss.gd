@@ -1,6 +1,7 @@
 extends Node2D
 
 signal portal_defeated
+signal cat_engulfed(CharacterBody2D)
 
 @onready var portal_sprite = $Sprite2D
 @onready var mat = portal_sprite.material
@@ -17,6 +18,7 @@ signal portal_defeated
 
 var explosions_started = false
 var pulled := {}
+var dying := {}
 
 var colors = [Color.WHITE, Color.AQUA, Color.FOREST_GREEN, Color.ORANGE, Color.RED, Color.RED ]
 @export var phase:= 0
@@ -47,7 +49,7 @@ func _physics_process(delta: float) -> void:
 		var dir = to_center / dist
 		var step = min(pull_speed * delta, dist)
 		p.global_position += dir * step
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	match phase:
 		0:
 			mat.set_shader_parameter("tightness", 12.0)
@@ -137,11 +139,24 @@ func spawn_explosions(duration: float):
 
 
 func _on_portal_pull_zone_body_entered(body: Node2D) -> void:
-	if body.is_in_group("players"):
+	if body.is_in_group("players") or body.is_in_group("cats"):
 		pulled[body.name] = body
-		print(pulled)
 
 func _on_portal_pull_zone_body_exited(body: Node2D) -> void:
 	if pulled.has(body.name):
 		pulled.erase(body.name)
-		print(pulled)
+
+
+func _on_kill_zone_body_entered(body: Node2D) -> void:
+	if body.is_in_group("players"):
+		dying[body.name] = body
+		await get_tree().create_timer(1.5).timeout
+		if dying.has(body.name):
+			body.die.rpc()
+	elif body.is_in_group("cats"):
+		emit_signal("cat_engulfed", body)
+
+
+func _on_kill_zone_body_exited(body: Node2D) -> void:
+	if body.is_in_group("players"):
+		dying.erase(body.name)

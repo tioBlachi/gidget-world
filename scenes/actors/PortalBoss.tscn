@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://cvlhi5bunpi4d"]
+[gd_scene load_steps=39 format=3 uid="uid://cvlhi5bunpi4d"]
 
 [ext_resource type="Script" uid="uid://d06f17hxlfiyv" path="res://scripts/actors/portal_boss.gd" id="1_40dn3"]
 [ext_resource type="Shader" uid="uid://4xoyamqdpcmq" path="res://scenes/actors/PortalBoss.gdshader" id="1_ftgki"]
@@ -116,6 +116,9 @@ animations = [{
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ftgki"]
 radius = 453.054
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_s72ma"]
+radius = 266.272
 
 [sub_resource type="Gradient" id="Gradient_ftgki"]
 
@@ -239,6 +242,11 @@ animation = &"idle"
 position = Vector2(1, 5)
 shape = SubResource("CircleShape2D_ftgki")
 
+[node name="KillZone" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KillZone"]
+shape = SubResource("CircleShape2D_s72ma")
+
 [node name="PointLight2D" type="PointLight2D" parent="."]
 color = Color(0.617988, 0.967661, 0.966135, 1)
 energy = 2.0
@@ -270,3 +278,5 @@ replication_config = SubResource("SceneReplicationConfig_s72ma")
 
 [connection signal="body_entered" from="PortalPullZone" to="." method="_on_portal_pull_zone_body_entered"]
 [connection signal="body_exited" from="PortalPullZone" to="." method="_on_portal_pull_zone_body_exited"]
+[connection signal="body_entered" from="KillZone" to="." method="_on_kill_zone_body_entered"]
+[connection signal="body_exited" from="KillZone" to="." method="_on_kill_zone_body_exited"]

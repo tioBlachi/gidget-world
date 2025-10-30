@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=4 uid="uid://b18e8xpu1xg1g"]
+[gd_scene load_steps=18 format=4 uid="uid://b18e8xpu1xg1g"]
 
 [ext_resource type="Texture2D" uid="uid://dfiaq77335nxd" path="res://assets/Tiles/marble.png" id="1_3lefc"]
 [ext_resource type="PackedScene" uid="uid://cvlhi5bunpi4d" path="res://scenes/actors/PortalBoss.tscn" id="1_h1cn2"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dbpxprhw7dxmc" path="res://scenes/objects/top_down_button.tscn" id="5_2k3ip"]
 [ext_resource type="Texture2D" uid="uid://bl8uq42vmbtrc" path="res://assets/Tiles/tilemap_industrial.png" id="7_1hw80"]
 [ext_resource type="PackedScene" uid="uid://d36nbwp02xbmf" path="res://scenes/objects/one_shot_mover.tscn" id="8_behx8"]
+[ext_resource type="PackedScene" uid="uid://ug4dtfp4td5v" path="res://scenes/actors/catHead.tscn" id="9_0taj4"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lm5nn"]
 texture = ExtResource("1_3lefc")
@@ -131,6 +132,9 @@ sources/0 = SubResource("TileSetAtlasSource_lm5nn")
 properties/0/path = NodePath(".:_start_phase_1")
 properties/0/spawn = true
 properties/0/replication_mode = 1
+properties/1/path = NodePath("Camera2D:position")
+properties/1/spawn = true
+properties/1/replication_mode = 1
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_behx8"]
 texture = ExtResource("7_1hw80")
@@ -542,10 +546,10 @@ spawn_path = NodePath("../Players")
 position = Vector2(-474, -49)
 
 [node name="Player1Marker" type="Marker2D" parent="PlayerMarkers"]
-position = Vector2(871, 266)
+position = Vector2(874, 495)
 
 [node name="Player2Marker" type="Marker2D" parent="PlayerMarkers"]
-position = Vector2(994, 264)
+position = Vector2(997, 493)
 
 [node name="Players" type="Node2D" parent="."]
 
@@ -720,5 +724,32 @@ anchor_mode = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="2ndRoom"]
 position = Vector2(439, 779)
 shape = SubResource("RectangleShape2D_behx8")
+
+[node name="Cats" type="Node2D" parent="."]
+
+[node name="CatHead" parent="Cats" instance=ExtResource("9_0taj4")]
+position = Vector2(145, 1061)
+
+[node name="CatHead2" parent="Cats" instance=ExtResource("9_0taj4")]
+position = Vector2(394, 1192)
+
+[node name="CatHead3" parent="Cats" instance=ExtResource("9_0taj4")]
+position = Vector2(276, 825)
+
+[node name="CatHead4" parent="Cats" instance=ExtResource("9_0taj4")]
+position = Vector2(697, 1341)
+
+[node name="CatHead5" parent="Cats" instance=ExtResource("9_0taj4")]
+position = Vector2(1052, 1314)
+
+[node name="Phase2Turrets" type="Node2D" parent="."]
+
+[node name="Turret2" parent="Phase2Turrets" instance=ExtResource("4_jqpx0")]
+position = Vector2(117, 1304)
+scale = Vector2(0.12, 0.12)
+
+[node name="Turret3" parent="Phase2Turrets" instance=ExtResource("4_jqpx0")]
+position = Vector2(731, 802)
+scale = Vector2(0.12, 0.12)
 
 [connection signal="body_entered" from="2ndRoom" to="." method="_on_2nd_room_body_entered"]

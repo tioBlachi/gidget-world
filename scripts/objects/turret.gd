@@ -13,6 +13,8 @@ signal generator_destroyed
 const SPRITE_UP_OFFSET := -PI / 2.0
 
 @onready var barrel: Marker2D = $BarrelTip
+@onready var shooting:= $ShootingSFX
+@onready var charging_sfx:= $ChargingSFX
 
 # --- States ---
 @export var activated = false
@@ -26,6 +28,10 @@ var firing := false
 func _ready() -> void:
 	randomize()
 	_enter_find()
+	
+func _process(delta: float) -> void:
+	if not activated and charging_sfx.is_playing():
+		charging_sfx.stop()
 
 func _physics_process(delta: float) -> void:
 	if activated:
@@ -65,6 +71,7 @@ func _do_charge(delta: float) -> void:
 		_enter_fire()
 
 func _enter_find() -> void:
+	charging_sfx.play()
 	finding = true
 	charging = false
 	firing = false
@@ -112,6 +119,7 @@ func _enter_fire() -> void:
 		get_tree().create_timer(lock_time).timeout.connect(Callable(self, "_on_laser_finished"))
 
 	laser.set("is_casting", true)
+	shooting.play()
 
 # -------------------- UTIL --------------------
 func _pick_target() -> void:
@@ -140,12 +148,17 @@ func _on_laser_hit(collider: Object) -> void:
 			await get_tree().create_timer(1).timeout
 			anim.scale.x = 1.4
 			anim.scale.y = 1.4
+			$Boom.play()
 			anim.play("explosion")
 			await anim.animation_finished
 			emit_signal("generator_destroyed")
 			var coll: CollisionShape2D = n.get_child(1)
 			await get_tree().physics_frame
 			coll.set_deferred("disabled", true)
+		elif n.is_in_group("cats"):
+			n.active = false
+			await get_tree().create_timer(1.5).timeout
+			n.active = true
 
 func _on_laser_finished() -> void:
 	_enter_find()
