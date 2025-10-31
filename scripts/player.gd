@@ -13,6 +13,7 @@ extends CharacterBody2D
 @export var max_fall_speed: float = 500.0 #allows other scenes to access max fall speed
 @export var is_gravity_level: bool = false
 @export var god_mode: bool = false
+@export var is_locally_paused := false
 
 const PUSH_FORCE = 15.0
 const MIN_PUSH_FORCE = 10.0
@@ -29,6 +30,8 @@ func _ready():
 
 
 func _physics_process(delta: float) -> void:
+	if is_locally_paused:
+		return
 	#print("Player velocity.y = ", velocity.y)
 	#print("This is gravity level ", is_gravity_level)
 	#print("We are not on floor ", not is_on_floor())
@@ -157,7 +160,9 @@ func recover():
 	sprite.texture = original_texture
 	if int(self.name) == Net.players[1]:
 		sprite.self_modulate = Color.hex(0xE0FFFF)
-		
+
+func set_paused(value: bool) -> void:
+	is_locally_paused = value
 
 func _update_slope_tilt():
 	if is_on_floor():

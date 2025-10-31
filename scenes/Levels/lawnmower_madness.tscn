@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=4 uid="uid://b5g7eb7pdyncf"]
+[gd_scene load_steps=26 format=4 uid="uid://b5g7eb7pdyncf"]
 
 [ext_resource type="Script" uid="uid://ky4ql3m5py7w" path="res://scripts/Levels/lawnmower_madness.gd" id="1_1m4jy"]
 [ext_resource type="Texture2D" uid="uid://bed2txbrkgni4" path="res://assets/Tiles/oldTiles/park_tiles.png" id="2_qtf7v"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://cp8stcjlg42px" path="res://assets/sprites/lawnmower.png" id="7_qvew4"]
 [ext_resource type="PackedScene" uid="uid://cj7q37bwul0sb" path="res://scenes/objects/killzone.tscn" id="8_eihww"]
 [ext_resource type="Script" uid="uid://du7m7uksnqxr4" path="res://scenes/Levels/KeyZone.gd" id="10_chk2d"]
+[ext_resource type="PackedScene" uid="uid://bf72f4j7c2i3f" path="res://scenes/UI/pause_menu.tscn" id="11_cots3"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_cots3"]
 texture = ExtResource("2_qtf7v")
@@ -186,8 +187,20 @@ properties/1/replication_mode = 1
 properties/2/path = NodePath(".:rotation")
 properties/2/spawn = true
 properties/2/replication_mode = 1
+properties/3/path = NodePath(".:up_direction")
+properties/3/spawn = true
+properties/3/replication_mode = 1
+properties/4/path = NodePath(".:direction")
+properties/4/spawn = true
+properties/4/replication_mode = 1
+properties/5/path = NodePath(".:current_speed")
+properties/5/spawn = true
+properties/5/replication_mode = 1
+properties/6/path = NodePath(".:turning")
+properties/6/spawn = true
+properties/6/replication_mode = 1
 
-[node name="LawnmowerMadness" type="Node2D"]
+[node name="lawnmower_madness" type="Node2D"]
 script = ExtResource("1_1m4jy")
 
 [node name="pSpawner" type="MultiplayerSpawner" parent="."]
@@ -251,5 +264,9 @@ shape = SubResource("RectangleShape2D_chk2d")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="Lawnmower"]
 replication_config = SubResource("SceneReplicationConfig_chk2d")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("11_cots3")]
 
 [connection signal="body_entered" from="Lawnmower/Area2D" to="Lawnmower/Area2D" method="_on_body_entered"]
