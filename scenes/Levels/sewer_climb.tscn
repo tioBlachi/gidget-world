@@ -1,7 +1,7 @@
 [gd_scene load_steps=32 format=4 uid="uid://bw426uewyu1ti"]
 
 [ext_resource type="PackedScene" path="res://scenes/objects/sewage.tscn" id="1_dk0sx"]
-[ext_resource type="PackedScene" path="res://scenes/objects/button_once.tscn" id="2_dk0sx"]
+[ext_resource type="PackedScene" uid="uid://bc2hnyo407l47" path="res://scenes/objects/button_once.tscn" id="2_dk0sx"]
 [ext_resource type="PackedScene" uid="uid://ct8ip3qr0bu73" path="res://scenes/objects/one_shot_mover.tscn" id="3_dk0sx"]
 [ext_resource type="Texture2D" uid="uid://bkuouxcowxnc7" path="res://assets/Tiles/marble.png" id="5_1g2y4"]
 [ext_resource type="Script" uid="uid://076niupbrtvo" path="res://scripts/Levels/sewer_climb.gd" id="5_script"]
