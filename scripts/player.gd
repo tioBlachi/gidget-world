@@ -26,7 +26,9 @@ var burned_texture = preload("res://Art/OldTestArt/deathGidget.png")
 
 func _ready():
 	add_to_group("players")
-
+	if get_tree().current_scene and get_tree().current_scene.name == "Alligator Dentistry":
+		SPEED *= 2.5
+		JUMP_VELOCITY *= 2.0
 
 func _physics_process(delta: float) -> void:
 	#print("Player velocity.y = ", velocity.y)

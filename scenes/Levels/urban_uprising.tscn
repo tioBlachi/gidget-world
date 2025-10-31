@@ -8913,7 +8913,7 @@ flip_v = true
 [node name="Flames" parent="BigFlameDude/PathFollow2D/FlameDude" index="1"]
 position = Vector2(-8.98616, 19.3972)
 scale = Vector2(4.09971, 2.37563)
-frame = 0
+frame_progress = 0.0
 flip_h = true
 flip_v = true
 

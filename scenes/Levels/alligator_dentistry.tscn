@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=4 uid="uid://dmxfaox45d8k6"]
+[gd_scene load_steps=21 format=4 uid="uid://dmxfaox45d8k6"]
 
 [ext_resource type="Script" uid="uid://bkllaeomrwfbs" path="res://scripts/Levels/alligator_dentistry.gd" id="1_rwegt"]
 [ext_resource type="Texture2D" uid="uid://csocrbo0t3mt7" path="res://Art/OldTestArt/spikeBall.png" id="2_py8lq"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://2xqq7ta54neb" path="res://assets/Tiles/basic_tileset_and_assets_standard/water_and_island_tiles_v2.png" id="4_py8lq"]
 [ext_resource type="Texture2D" uid="uid://c0jif0s5jg2nh" path="res://assets/sprites/Top Alligator Jaw.png" id="5_7qt0h"]
 [ext_resource type="Script" uid="uid://drfy2svy6iv1c" path="res://scripts/objects/alligator.gd" id="5_t55p0"]
+[ext_resource type="PackedScene" uid="uid://cdutjed0mug2x" path="res://scenes/objects/death_tooth.tscn" id="6_4mk0g"]
 [ext_resource type="PackedScene" uid="uid://csdw5uylok8n2" path="res://scenes/objects/platform 1.tscn" id="8_t55p0"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_u8x4h"]
@@ -515,6 +516,20 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector2(1827.83, -880.338), Vector2(1707, -412), Vector2(1707, -412), Vector2(1827.83, -880.338)]
 }
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1.46667),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [null],
+"method": &"_kill_player"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_t55p0"]
 resource_name = "fake bite"
@@ -618,6 +633,14 @@ texture = ExtResource("2_py8lq")
 [node name="Alligator" type="Node2D" parent="."]
 script = ExtResource("5_t55p0")
 
+[node name="Teeth" type="Node2D" parent="Alligator"]
+position = Vector2(406, -420)
+scale = Vector2(5, 5)
+
+[node name="Tooth1" parent="Alligator/Teeth" instance=ExtResource("6_4mk0g")]
+position = Vector2(61.8, 30.2)
+scale = Vector2(0.2, 0.2)
+
 [node name="Bottom" type="StaticBody2D" parent="Alligator"]
 position = Vector2(1.52588e-05, -6.10352e-05)
 
@@ -663,6 +686,13 @@ position = Vector2(-2, -69)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 shape = SubResource("WorldBoundaryShape2D_7qt0h")
 
-[node name="Node2D" parent="." instance=ExtResource("8_t55p0")]
-position = Vector2(220, -398)
+[node name="Platform2" parent="." instance=ExtResource("8_t55p0")]
+position = Vector2(406, -420)
 scale = Vector2(5, 5)
+
+[node name="Platform" parent="." instance=ExtResource("8_t55p0")]
+position = Vector2(238, -354)
+scale = Vector2(5, 5)
+
+[connection signal="body_entered" from="Alligator/MouthArea" to="Alligator" method="_on_mouth_area_body_entered"]
+[connection signal="body_exited" from="Alligator/MouthArea" to="Alligator" method="_on_mouth_area_body_exited"]

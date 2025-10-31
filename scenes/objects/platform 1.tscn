@@ -11,6 +11,7 @@ size = Vector2(64, 8)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 shape = SubResource("RectangleShape2D_s8v0f")
+one_way_collision = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(8, 1)
