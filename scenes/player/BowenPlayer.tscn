@@ -43,6 +43,7 @@ stream = ExtResource("3_v86yd")
 volume_db = -10.651
 
 [node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2.6, 2.6)
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_bf3la")

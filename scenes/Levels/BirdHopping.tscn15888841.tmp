@@ -1769,91 +1769,23 @@ position = Vector2(-1351, 469)
 
 [node name="Birds" type="Node2D" parent="."]
 
-[node name="weakBlueBird" parent="Birds" instance=ExtResource("2_y5g0m")]
+[node name="BlueBird" parent="Birds" instance=ExtResource("2_y5g0m")]
 position = Vector2(-1143, 497)
 scale = Vector2(2, 2)
 is_weak = true
 
-[node name="weakBlueBird2" parent="Birds" instance=ExtResource("2_y5g0m")]
-position = Vector2(-612, 508)
-scale = Vector2(2, 2)
-is_weak = true
-
-[node name="weakBlueBird3" parent="Birds" instance=ExtResource("2_y5g0m")]
-position = Vector2(-515, 541)
-scale = Vector2(2, 2)
-is_weak = true
-
-[node name="weakBlueBird4" parent="Birds" instance=ExtResource("2_y5g0m")]
-position = Vector2(-424, 548)
-scale = Vector2(2, 2)
-is_weak = true
-
-[node name="weakBlueBird5" parent="Birds" instance=ExtResource("2_y5g0m")]
-position = Vector2(-159, 510)
-scale = Vector2(2, 2)
-is_weak = true
-
-[node name="weakBlueBird6" parent="Birds" instance=ExtResource("2_y5g0m")]
-position = Vector2(-94, 472)
-scale = Vector2(2, 2)
-is_weak = true
-
-[node name="weakBlueBird7" parent="Birds" instance=ExtResource("2_y5g0m")]
-position = Vector2(-22, 417)
-scale = Vector2(2, 2)
-is_weak = true
-
-[node name="weakBlueBird8" parent="Birds" instance=ExtResource("2_y5g0m")]
-position = Vector2(-80, 366)
-scale = Vector2(2, 2)
-is_weak = true
-
-[node name="weakBlueBird9" parent="Birds" instance=ExtResource("2_y5g0m")]
-position = Vector2(-149, 291)
-scale = Vector2(2, 2)
-is_weak = true
-
-[node name="weakBlueBird10" parent="Birds" instance=ExtResource("2_y5g0m")]
-position = Vector2(-68, 227)
-scale = Vector2(2, 2)
-is_weak = true
-
-[node name="weakBlueBird11" parent="Birds" instance=ExtResource("2_y5g0m")]
-position = Vector2(-573, 314)
-scale = Vector2(2, 2)
-is_weak = true
-
 [node name="BlueBird2" parent="Birds" instance=ExtResource("2_y5g0m")]
-position = Vector2(-1043, 441)
-scale = Vector2(4, 4)
-movement_mode = 1
+position = Vector2(-1037, 493)
+scale = Vector2(2, 2)
+movement_mode = 2
 speed = 50.0
-point_a = Vector2(-1037, 611)
-point_b = Vector2(-1043, 441)
+point_a = Vector2(-325.5, 249.541)
+point_b = Vector2(-325.5, 249.541)
 circle_center = Vector2(-325.5, 249.541)
 use_start_as_circle_center = true
 
 [node name="BlueBird3" parent="Birds" instance=ExtResource("2_y5g0m")]
 position = Vector2(-979, 563)
-scale = Vector2(2, 2)
-movement_mode = 2
-point_a = Vector2(-325.5, 249.541)
-point_b = Vector2(-325.5, 249.541)
-circle_center = Vector2(-325.5, 249.541)
-use_start_as_circle_center = true
-
-[node name="BlueBird4" parent="Birds" instance=ExtResource("2_y5g0m")]
-position = Vector2(-1206, 408)
-scale = Vector2(2, 2)
-movement_mode = 2
-point_a = Vector2(-325.5, 249.541)
-point_b = Vector2(-325.5, 249.541)
-circle_center = Vector2(-325.5, 249.541)
-use_start_as_circle_center = true
-
-[node name="BlueBird5" parent="Birds" instance=ExtResource("2_y5g0m")]
-position = Vector2(-916, 453)
 scale = Vector2(2, 2)
 movement_mode = 2
 point_a = Vector2(-325.5, 249.541)

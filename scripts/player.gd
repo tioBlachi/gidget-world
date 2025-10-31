@@ -107,6 +107,9 @@ var death_texture = preload("res://Art/OldTestArt/gDeath.png")
 
 func _ready():
 	add_to_group("players")
+	# Improve riding stability on moving platforms
+	floor_snap_length = 24.0
+	platform_on_leave = CharacterBody2D.PLATFORM_ON_LEAVE_ADD_VELOCITY
 
 func _physics_process(delta: float) -> void:
 	if is_multiplayer_authority():

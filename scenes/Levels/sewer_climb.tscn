@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=4 uid="uid://bw426uewyu1ti"]
+[gd_scene load_steps=33 format=4 uid="uid://bw426uewyu1ti"]
 
 [ext_resource type="PackedScene" path="res://scenes/objects/sewage.tscn" id="1_dk0sx"]
 [ext_resource type="PackedScene" uid="uid://bc2hnyo407l47" path="res://scenes/objects/button_once.tscn" id="2_dk0sx"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" uid="uid://bd4lps7vgjrgc" path="res://scripts/objects/StaticSewage.gd" id="13_ftp6k"]
 [ext_resource type="PackedScene" uid="uid://q5myivnq8cna" path="res://scenes/objects/key_card.tscn" id="14_6v2ta"]
 [ext_resource type="PackedScene" uid="uid://dbh40ehfj6b7n" path="res://scenes/objects/lab_exit_door.tscn" id="15_61xjq"]
+[ext_resource type="PackedScene" uid="uid://jylojstufht1" path="res://scenes/player/BowenPlayer.tscn" id="16_61xjq"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_31be5"]
 texture = ExtResource("9_webr0")
@@ -1352,3 +1353,9 @@ scale = Vector2(0.36, 0.36)
 z_index = -1
 position = Vector2(1440, -16)
 scale = Vector2(1.103, 1.189)
+
+[node name="Player2" parent="." instance=ExtResource("16_61xjq")]
+position = Vector2(685, 808)
+
+[node name="Player3" parent="." instance=ExtResource("16_61xjq")]
+position = Vector2(699, 775)
