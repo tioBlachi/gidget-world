@@ -1,9 +1,8 @@
-[gd_scene load_steps=35 format=4 uid="uid://bwdcir8bt8vsk"]
+[gd_scene load_steps=36 format=4 uid="uid://bwdcir8bt8vsk"]
 
 [ext_resource type="Texture2D" uid="uid://ngpcuovhe3by" path="res://Art/NewArt/Big City.png" id="1_eqgpf"]
 [ext_resource type="Texture2D" uid="uid://0vq45rgxcl1" path="res://assets/Tiles/tilemap-backgrounds.png" id="1_m7hoc"]
 [ext_resource type="Texture2D" uid="uid://cpjj4epkskgkq" path="res://assets/Tiles/tilemap.png" id="2_eqgpf"]
-[ext_resource type="PackedScene" uid="uid://j484ek8haxyy" path="res://scenes/objects/Birds/BlueBird.tscn" id="2_y5g0m"]
 [ext_resource type="Texture2D" uid="uid://ddhaggknaaejj" path="res://assets/Tiles/tilemap_farm.png" id="3_acnx1"]
 [ext_resource type="Texture2D" uid="uid://djfcan6756x2m" path="res://assets/Tiles/tilemap_industrial.png" id="4_m0io1"]
 [ext_resource type="Texture2D" uid="uid://ccewt4wsjae8e" path="res://assets/Tiles/tilemap_normal.png" id="5_y5g0m"]
@@ -14,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://drrvmitvw5qh2" path="res://assets/Tiles/BackgroundRock.png" id="10_5s71w"]
 [ext_resource type="Texture2D" uid="uid://ckkqy1fhk50c4" path="res://assets/Tiles/spritesheet_complete.png" id="12_acnx1"]
 [ext_resource type="PackedScene" uid="uid://jylojstufht1" path="res://scenes/player/BowenPlayer.tscn" id="13_m0io1"]
+[ext_resource type="PackedScene" uid="uid://bnkd0mkld0eoa" path="res://scenes/objects/Birds/TestBird.tscn" id="16_3b7wr"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xo8v6"]
 texture = ExtResource("1_m7hoc")
@@ -1620,6 +1620,12 @@ tile_size = Vector2i(18, 18)
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_grkuv")
 
+[sub_resource type="Curve2D" id="Curve2D_3b7wr"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 169, 0, 0, 0, 0, 0, 225, 3, 0, 0, 0, 0, 295, -28, 0, 0, 0, 0, 284, -97, 0, 0, 0, 0, 207, -115, 0, 0, 0, 0, 124, -71, 0, 0, 0, 0, 53, -103, 0, 0, 0, 0, -25, -76, 0, 0, 0, 0, -90, -52, 0, 0, 0, 0, -41, -22, 0, 0, 0, 0, 25, -26, 0, 0, 0, 0, 78, -37, 0, 0, 0, 0, 129, -19, 0, 0, 0, 0, 169, 0)
+}
+point_count = 14
+
 [node name="BirdHopping" type="Node2D"]
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
@@ -1767,96 +1773,9 @@ position = Vector2(-1373, 473.75)
 [node name="Player3" parent="Node2D2" instance=ExtResource("13_m0io1")]
 position = Vector2(-1351, 469)
 
-[node name="Birds" type="Node2D" parent="."]
+[node name="TestBird" type="Node2D" parent="."]
+position = Vector2(-314, 158)
 
-[node name="weakBlueBird" parent="Birds" instance=ExtResource("2_y5g0m")]
-position = Vector2(-1143, 497)
-scale = Vector2(2, 2)
-is_weak = true
-
-[node name="weakBlueBird2" parent="Birds" instance=ExtResource("2_y5g0m")]
-position = Vector2(-612, 508)
-scale = Vector2(2, 2)
-is_weak = true
-
-[node name="weakBlueBird3" parent="Birds" instance=ExtResource("2_y5g0m")]
-position = Vector2(-515, 541)
-scale = Vector2(2, 2)
-is_weak = true
-
-[node name="weakBlueBird4" parent="Birds" instance=ExtResource("2_y5g0m")]
-position = Vector2(-424, 548)
-scale = Vector2(2, 2)
-is_weak = true
-
-[node name="weakBlueBird5" parent="Birds" instance=ExtResource("2_y5g0m")]
-position = Vector2(-159, 510)
-scale = Vector2(2, 2)
-is_weak = true
-
-[node name="weakBlueBird6" parent="Birds" instance=ExtResource("2_y5g0m")]
-position = Vector2(-94, 472)
-scale = Vector2(2, 2)
-is_weak = true
-
-[node name="weakBlueBird7" parent="Birds" instance=ExtResource("2_y5g0m")]
-position = Vector2(-22, 417)
-scale = Vector2(2, 2)
-is_weak = true
-
-[node name="weakBlueBird8" parent="Birds" instance=ExtResource("2_y5g0m")]
-position = Vector2(-80, 366)
-scale = Vector2(2, 2)
-is_weak = true
-
-[node name="weakBlueBird9" parent="Birds" instance=ExtResource("2_y5g0m")]
-position = Vector2(-149, 291)
-scale = Vector2(2, 2)
-is_weak = true
-
-[node name="weakBlueBird10" parent="Birds" instance=ExtResource("2_y5g0m")]
-position = Vector2(-68, 227)
-scale = Vector2(2, 2)
-is_weak = true
-
-[node name="weakBlueBird11" parent="Birds" instance=ExtResource("2_y5g0m")]
-position = Vector2(-573, 314)
-scale = Vector2(2, 2)
-is_weak = true
-
-[node name="BlueBird2" parent="Birds" instance=ExtResource("2_y5g0m")]
-position = Vector2(-1043, 441)
-scale = Vector2(4, 4)
-movement_mode = 1
-speed = 50.0
-point_a = Vector2(-1037, 611)
-point_b = Vector2(-1043, 441)
-circle_center = Vector2(-325.5, 249.541)
-use_start_as_circle_center = true
-
-[node name="BlueBird3" parent="Birds" instance=ExtResource("2_y5g0m")]
-position = Vector2(-979, 563)
-scale = Vector2(2, 2)
-movement_mode = 2
-point_a = Vector2(-325.5, 249.541)
-point_b = Vector2(-325.5, 249.541)
-circle_center = Vector2(-325.5, 249.541)
-use_start_as_circle_center = true
-
-[node name="BlueBird4" parent="Birds" instance=ExtResource("2_y5g0m")]
-position = Vector2(-1206, 408)
-scale = Vector2(2, 2)
-movement_mode = 2
-point_a = Vector2(-325.5, 249.541)
-point_b = Vector2(-325.5, 249.541)
-circle_center = Vector2(-325.5, 249.541)
-use_start_as_circle_center = true
-
-[node name="BlueBird5" parent="Birds" instance=ExtResource("2_y5g0m")]
-position = Vector2(-916, 453)
-scale = Vector2(2, 2)
-movement_mode = 2
-point_a = Vector2(-325.5, 249.541)
-point_b = Vector2(-325.5, 249.541)
-circle_center = Vector2(-325.5, 249.541)
-use_start_as_circle_center = true
+[node name="TestBird2" parent="TestBird" instance=ExtResource("16_3b7wr")]
+position = Vector2(-1043, 306)
+curve = SubResource("Curve2D_3b7wr")

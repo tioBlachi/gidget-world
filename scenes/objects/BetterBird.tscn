@@ -1,61 +1,61 @@
-[gd_scene load_steps=19 format=3 uid="uid://j484ek8haxyy"]
+[gd_scene load_steps=20 format=3 uid="uid://tfbh3xcymhei"]
 
-[ext_resource type="Texture2D" uid="uid://bbe23562jc1be" path="res://Art/NewArt/BirdSprite.png" id="1_n8ynp"]
-[ext_resource type="Script" uid="uid://il7bjxf4e7m7" path="res://scripts/objects/blue_bird.gd" id="2_5y2r1"]
+[ext_resource type="Script" path="res://scripts/objects/moving_platform.gd" id="1_2qxys"]
+[ext_resource type="Texture2D" uid="uid://bbe23562jc1be" path="res://Art/NewArt/BirdSprite.png" id="2_2qxys"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6ybag"]
-atlas = ExtResource("1_n8ynp")
+atlas = ExtResource("2_2qxys")
 region = Rect2(0, 32, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r4bug"]
-atlas = ExtResource("1_n8ynp")
+atlas = ExtResource("2_2qxys")
 region = Rect2(16, 32, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dwvse"]
-atlas = ExtResource("1_n8ynp")
+atlas = ExtResource("2_2qxys")
 region = Rect2(32, 32, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_um0yu"]
-atlas = ExtResource("1_n8ynp")
+atlas = ExtResource("2_2qxys")
 region = Rect2(0, 16, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qumqm"]
-atlas = ExtResource("1_n8ynp")
+atlas = ExtResource("2_2qxys")
 region = Rect2(16, 16, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dhhtj"]
-atlas = ExtResource("1_n8ynp")
+atlas = ExtResource("2_2qxys")
 region = Rect2(32, 16, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_etahv"]
-atlas = ExtResource("1_n8ynp")
+atlas = ExtResource("2_2qxys")
 region = Rect2(48, 16, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rma7a"]
-atlas = ExtResource("1_n8ynp")
+atlas = ExtResource("2_2qxys")
 region = Rect2(64, 16, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6mpt5"]
-atlas = ExtResource("1_n8ynp")
+atlas = ExtResource("2_2qxys")
 region = Rect2(80, 16, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7fw58"]
-atlas = ExtResource("1_n8ynp")
+atlas = ExtResource("2_2qxys")
 region = Rect2(96, 16, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_74q3a"]
-atlas = ExtResource("1_n8ynp")
+atlas = ExtResource("2_2qxys")
 region = Rect2(112, 16, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ime5q"]
-atlas = ExtResource("1_n8ynp")
+atlas = ExtResource("2_2qxys")
 region = Rect2(0, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hlh0j"]
-atlas = ExtResource("1_n8ynp")
+atlas = ExtResource("2_2qxys")
 region = Rect2(16, 0, 16, 16)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_ysuju"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_cnwd2"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -112,29 +112,49 @@ animations = [{
 "speed": 1.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_sensor"]
-size = Vector2(12, 12)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ll65p"]
+size = Vector2(26.6667, 20)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_n8ynp"]
-size = Vector2(6, 5)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fja67"]
+size = Vector2(18, 8)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ll65p"]
+properties/0/path = NodePath(".:speed")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:constant_linear_velocity")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath(".:position")
+properties/2/spawn = true
+properties/2/replication_mode = 1
 
 [node name="BlueBird" type="AnimatableBody2D"]
-script = ExtResource("2_5y2r1")
+script = ExtResource("1_2qxys")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_ysuju")
+scale = Vector2(1.4, 1.48)
+sprite_frames = SubResource("SpriteFrames_cnwd2")
 animation = &"Flying"
 autoplay = "Flying"
-frame_progress = 0.563183
-
-[node name="Area2D" type="Area2D" parent="."]
-visible = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-visible = false
-position = Vector2(0, -4)
-shape = SubResource("RectangleShape2D_sensor")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
-shape = SubResource("RectangleShape2D_n8ynp")
+position = Vector2(0, 2)
+scale = Vector2(0.520001, 0.720002)
+shape = SubResource("RectangleShape2D_ll65p")
+
+[node name="Area2D" type="Area2D" parent="."]
+visible = false
+position = Vector2(0, 2)
+
+[node name="PlayerSensor" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -8)
+scale = Vector2(0.759998, 0.319999)
+shape = SubResource("RectangleShape2D_fja67")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_ll65p")
+
+[connection signal="body_entered" from="Area2D" to="." method="_player_on_platform"]
+[connection signal="body_exited" from="Area2D" to="." method="_player_left_platform"]

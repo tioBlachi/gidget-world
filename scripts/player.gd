@@ -108,8 +108,13 @@ var death_texture = preload("res://Art/OldTestArt/gDeath.png")
 func _ready():
 	add_to_group("players")
 	# Improve riding stability on moving platforms
-	floor_snap_length = 24.0
+	floor_snap_length = 48.0
 	platform_on_leave = CharacterBody2D.PLATFORM_ON_LEAVE_ADD_VELOCITY
+	# Ensure grounded behavior with moving platforms
+	motion_mode = CharacterBody2D.MOTION_MODE_GROUNDED
+	# Reduce camera jitter on moving platforms: avoid smoothing-induced lag
+	if is_instance_valid(cam):
+		cam.position_smoothing_enabled = false
 
 func _physics_process(delta: float) -> void:
 	if is_multiplayer_authority():

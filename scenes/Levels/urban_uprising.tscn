@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=4 uid="uid://byukt8eyso7jr"]
+[gd_scene load_steps=12 format=4 uid="uid://byukt8eyso7jr"]
 
 [ext_resource type="Texture2D" uid="uid://daekjnkkdhlxs" path="res://Art/OldTestArt/metal2.png" id="1_sqmmr"]
-[ext_resource type="Script" path="res://scripts/Levels/urban_uprising.gd" id="1_tf8py"]
+[ext_resource type="Script" uid="uid://chy5ttrcgpkg1" path="res://scripts/Levels/urban_uprising.gd" id="1_tf8py"]
 [ext_resource type="Texture2D" uid="uid://ngpcuovhe3by" path="res://Art/NewArt/Big City.png" id="4_5h4xf"]
+[ext_resource type="PackedScene" uid="uid://jylojstufht1" path="res://scenes/player/BowenPlayer.tscn" id="6_5h4xf"]
 [ext_resource type="Texture2D" uid="uid://0n81g7arp8a2" path="res://assets/sprites/New Piskel.png" id="6_hb40t"]
-[ext_resource type="PackedScene" path="res://scenes/objects/moving_platform.tscn" id="7_5h4xf"]
+[ext_resource type="PackedScene" uid="uid://csna0g1nst4im" path="res://scenes/objects/moving_platform.tscn" id="7_5h4xf"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_5h4xf"]
 
@@ -8830,10 +8831,14 @@ speed = 200.0
 max_pos = Vector2(264, -1480)
 
 [node name="3rd" parent="." instance=ExtResource("7_5h4xf")]
-position = Vector2(148, -414)
+position = Vector2(131, -399)
 scale = Vector2(5.04, 3.15999)
 players_needed = 1
 origin = Vector2(144, -400)
 max_pos = Vector2(464, -648)
+
+[node name="Player2" parent="." instance=ExtResource("6_5h4xf")]
+position = Vector2(309, -537)
+scale = Vector2(1, 1)
 
 [connection signal="body_entered" from="Camera2D/BottomBorder" to="." method="_on_bottom_border_body_entered"]
