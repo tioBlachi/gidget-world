@@ -130,7 +130,7 @@ position = Vector2(1.01047, -0.989419)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_im2r0")
 autoplay = "default"
-frame_progress = 0.897313
+frame_progress = 0.437845
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatableBody2D"]
 position = Vector2(2.02094, -1.4736)

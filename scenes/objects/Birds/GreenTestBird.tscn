@@ -131,7 +131,7 @@ position = Vector2(1.01047, -0.989419)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_im2r0")
 autoplay = "default"
-frame_progress = 0.405727
+frame_progress = 0.911353
 
 [node name="Killbox" type="CollisionShape2D" parent="AnimatableBody2D"]
 position = Vector2(0.231092, 2.74722)

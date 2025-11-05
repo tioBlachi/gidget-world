@@ -2,6 +2,7 @@ extends Path2D
 
 @export var chase_speed: float = 150.0
 @export var detect_radius: float = 320.0
+@export var horizontal_only: bool = false
 
 @onready var body: AnimatableBody2D = $AnimatableBody2D
 @onready var anim: AnimationPlayer = $AnimationPlayer
@@ -14,6 +15,12 @@ func _ready() -> void:
 		anim.stop()
 	if is_instance_valid(follow) and follow.has_node("RemoteTransform2D"):
 		follow.get_node("RemoteTransform2D").set_process(false)
+
+	# Ensure a dummy curve exists so the scene doesn't complain about PathFollow2D lacking a Curve
+	if curve == null:
+		curve = Curve2D.new()
+		curve.add_point(Vector2.ZERO)
+		curve.add_point(Vector2(1, 0))
 
 	# Make all body contacts lethal via an Area2D overlay (non-blocking)
 	var kill_area := Area2D.new()
@@ -40,17 +47,30 @@ func _physics_process(delta: float) -> void:
 	var target := _get_nearest_player()
 	if target == null:
 		return
-	var to_target := target.global_position - body.global_position
-	var dist := to_target.length()
-	if dist > detect_radius:
-		return
-	if dist > 1.0:
-		var step: float = minf(chase_speed * delta, dist)
-		var move_vec: Vector2 = to_target.normalized() * step
-		body.global_position += move_vec
-		if abs(move_vec.x) > 0.01:
-			# Default sprite faces left; flip when moving right
-			sprite.flip_h = move_vec.x > 0.0
+	var delta_vec: Vector2 = target.global_position - body.global_position
+	if horizontal_only:
+		var dx: float = delta_vec.x
+		var abs_dx: float = absf(dx)
+		if abs_dx > detect_radius:
+			return
+		if abs_dx > 1.0:
+			var step_h: float = minf(chase_speed * delta, abs_dx)
+			var move_vec_h: Vector2 = Vector2(sign(dx) * step_h, 0.0)
+			body.global_position += move_vec_h
+			if abs(move_vec_h.x) > 0.01:
+				# Default sprite faces left; flip when moving right
+				sprite.flip_h = move_vec_h.x > 0.0
+	else:
+		var dist: float = delta_vec.length()
+		if dist > detect_radius:
+			return
+		if dist > 1.0:
+			var step: float = minf(chase_speed * delta, dist)
+			var move_vec: Vector2 = delta_vec.normalized() * step
+			body.global_position += move_vec
+			if abs(move_vec.x) > 0.01:
+				# Default sprite faces left; flip when moving right
+				sprite.flip_h = move_vec.x > 0.0
 
 func _get_nearest_player() -> Node2D:
 	var nearest: Node2D = null
