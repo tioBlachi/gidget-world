@@ -16,11 +16,6 @@ func _ready() -> void:
 	if is_instance_valid(follow) and follow.has_node("RemoteTransform2D"):
 		follow.get_node("RemoteTransform2D").set_process(false)
 
-	# Ensure a dummy curve exists so the scene doesn't complain about PathFollow2D lacking a Curve
-	if curve == null:
-		curve = Curve2D.new()
-		curve.add_point(Vector2.ZERO)
-		curve.add_point(Vector2(1, 0))
 
 	# Make all body contacts lethal via an Area2D overlay (non-blocking)
 	var kill_area := Area2D.new()
