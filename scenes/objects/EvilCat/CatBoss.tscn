@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=3 uid="uid://2lntdlomdt6o"]
+
+[ext_resource type="Texture2D" uid="uid://b3crl0h7doq3v" path="res://scenes/objects/EvilCat/EvilCat.png" id="1_b2aih"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tof08"]
+atlas = ExtResource("1_b2aih")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gj2r8"]
+atlas = ExtResource("1_b2aih")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1603r"]
+atlas = ExtResource("1_b2aih")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d2r12"]
+atlas = ExtResource("1_b2aih")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0atwy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tof08")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gj2r8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1603r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d2r12")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="CatBoss" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(16, -16)
+sprite_frames = SubResource("SpriteFrames_0atwy")
+autoplay = "default"
+frame_progress = 0.61851

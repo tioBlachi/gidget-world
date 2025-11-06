@@ -1,0 +1,145 @@
+[gd_scene load_steps=17 format=3 uid="uid://lommrbd42bf3"]
+
+[ext_resource type="Script" uid="uid://sdna67mvcsn0" path="res://scenes/objects/Birds/red_test_bird.gd" id="1_peg3b"]
+[ext_resource type="Texture2D" uid="uid://bkin3w0sy1ypc" path="res://Art/NewArt/RedBird.png" id="2_peg3b"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x61ki"]
+atlas = ExtResource("2_peg3b")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_og6gj"]
+atlas = ExtResource("2_peg3b")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dtgyo"]
+atlas = ExtResource("2_peg3b")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_84ykk"]
+atlas = ExtResource("2_peg3b")
+region = Rect2(48, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4q7p7"]
+atlas = ExtResource("2_peg3b")
+region = Rect2(64, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p3g3p"]
+atlas = ExtResource("2_peg3b")
+region = Rect2(80, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wkpbu"]
+atlas = ExtResource("2_peg3b")
+region = Rect2(96, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s21rm"]
+atlas = ExtResource("2_peg3b")
+region = Rect2(112, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_im2r0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x61ki")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_og6gj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dtgyo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_84ykk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4q7p7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p3g3p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wkpbu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s21rm")
+}],
+"loop": true,
+"name": &"default",
+"speed": 15.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_54l76"]
+size = Vector2(16.9991, 6.01019)
+
+[sub_resource type="Animation" id="Animation_gsmwb"]
+resource_name = "Move"
+length = 2.0
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PathFollow2D:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(-1.55, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_eig2o"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PathFollow2D:progress_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6mymo"]
+_data = {
+&"Move": SubResource("Animation_gsmwb"),
+&"RESET": SubResource("Animation_eig2o")
+}
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_pp5i6"]
+
+[node name="RedBird" type="Path2D"]
+script = ExtResource("1_peg3b")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="."]
+position = Vector2(164.74, -0.744634)
+rotation = -0.0105259
+progress = 165.733
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="PathFollow2D"]
+remote_path = NodePath("../../AnimatableBody2D")
+
+[node name="AnimatableBody2D" type="AnimatableBody2D" parent="."]
+position = Vector2(164.74, -0.744634)
+rotation = -0.0105259
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="AnimatableBody2D"]
+position = Vector2(1.01047, -0.989419)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_im2r0")
+autoplay = "default"
+frame_progress = 0.76114
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatableBody2D"]
+position = Vector2(0.752075, -0.247352)
+shape = SubResource("RectangleShape2D_54l76")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_6mymo")
+}
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_pp5i6")
