@@ -30,4 +30,8 @@ func _on_can_collides_with_player(player: Node2D) -> void:
 			
 		player.staggered = true	
 		player.dizzy()
-		queue_free()
+		rpc("despawn_can")
+		
+@rpc("call_local", "any_peer")
+func despawn_can():
+	queue_free()

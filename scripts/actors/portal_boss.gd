@@ -21,7 +21,7 @@ var pulled := {}
 var dying := {}
 
 var colors = [Color.WHITE, Color.AQUA, Color.FOREST_GREEN, Color.ORANGE, Color.RED, Color.RED ]
-@export var phase:= 0
+@export var phase: int
 
 func _ready() -> void:
 	mat.set_shader_parameter("color_a", colors[phase])

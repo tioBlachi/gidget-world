@@ -215,5 +215,6 @@ func die():
 
 func _on_timer_complete():
 	Global.player_died.emit()
-	get_tree().reload_current_scene()
+	SceneManager.switch_scene("Lobby")
+	#get_tree().reload_current_scene()
 	#get_tree().paused = true

@@ -15,10 +15,15 @@ func _ready() -> void:
 	Net.rpc_id(1, "rpc_request_players")
 
 	var skip := ["Title", "Lobby", "Testing"]
+	var scene_names: Array = []
 	for scene_name in SceneManager.SCENES.keys():
 		if scene_name in skip:
 			continue
-		level_select.add_item(scene_name)
+		scene_names.append(scene_name)
+	scene_names.sort()
+	for name in scene_names:
+		level_select.add_item(name)
+	
 	if level_select.item_count > 0:
 		level_select.select(0)
 	selected_level = level_select.text

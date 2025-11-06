@@ -29,7 +29,7 @@ func _ready() -> void:
 	randomize()
 	_enter_find()
 	
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if not activated and charging_sfx.is_playing():
 		charging_sfx.stop()
 

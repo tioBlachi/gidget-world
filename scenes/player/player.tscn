@@ -1,10 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://bxpry3684affg"]
+[gd_scene load_steps=11 format=3 uid="uid://bxpry3684affg"]
 
 [ext_resource type="Script" uid="uid://gmylnlvujh2e" path="res://scripts/player.gd" id="1_g2els"]
 [ext_resource type="Texture2D" uid="uid://bphjbeak2bagr" path="res://Art/OldTestArt/gRight.png" id="2_gmlin"]
 [ext_resource type="AudioStream" uid="uid://cqt8c2sa1757t" path="res://assets/sounds/8-bit-jump.mp3" id="3_gmlin"]
 [ext_resource type="AudioStream" uid="uid://duqhd3i6wedit" path="res://assets/sounds/080205_life-lost-game-over-89697.mp3" id="4_lvxji"]
-[ext_resource type="Texture2D" uid="uid://dywpxg7ogaka5" path="res://assets/sprites/stars.png" id="5_p47bc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hqtel"]
 size = Vector2(128, 128)
@@ -31,30 +30,33 @@ properties/5/replication_mode = 1
 properties/6/path = NodePath("CollisionShape2D:position")
 properties/6/spawn = true
 properties/6/replication_mode = 1
+properties/7/path = NodePath(".:staggered")
+properties/7/spawn = true
+properties/7/replication_mode = 1
+properties/8/path = NodePath(".:burning")
+properties/8/spawn = true
+properties/8/replication_mode = 1
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_75vfm"]
-atlas = ExtResource("5_p47bc")
-region = Rect2(52, 0, 230, 292)
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_lvxji"]
+size = Vector2(230, 292)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_0owmy"]
-atlas = ExtResource("5_p47bc")
-region = Rect2(282, 292, 230, 292)
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_p47bc"]
+size = Vector2(230, 292)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_qek5x"]
-atlas = ExtResource("5_p47bc")
-region = Rect2(512, 292, 230, 292)
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_75vfm"]
+size = Vector2(230, 292)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_h17s1"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_75vfm")
+"texture": SubResource("PlaceholderTexture2D_lvxji")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_0owmy")
+"texture": SubResource("PlaceholderTexture2D_p47bc")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_qek5x")
+"texture": SubResource("PlaceholderTexture2D_75vfm")
 }],
 "loop": true,
 "name": &"dizzy",

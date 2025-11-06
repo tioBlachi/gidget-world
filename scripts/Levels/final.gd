@@ -1,5 +1,6 @@
 extends Node2D
 
+
 @export var map_limits: Rect2 = Rect2(0, 0, 2550, 1440)
 
 @onready var pSpawner = $pSpawner
@@ -12,17 +13,25 @@ extends Node2D
 @onready var phase1_turret = $Turret
 @onready var p1_doors : Array = $Phase1Doors.get_children()
 @onready var p1_generators : Array = $Phase1Generators2.get_children()
+@onready var p2_doors : Array = $Phase2Doors.get_children()
+@onready var final_doors : Array = $FinalDoors.get_children()
 @onready var cam = $Camera2D
-@onready var cat_array := $Cats.get_children()
+@onready var cat_array : Array = $Cats.get_children()
+@onready var rumble := $PortalRumble
 
 @export var _start_phase_1 := 0
 @export var p1_generators_destroyed := 0
-var p1_L_target
-var p1_R_target 
+var p1_L_target:= Vector2.ZERO
+var p1_R_target:= Vector2.ZERO 
+var p2_T_target:= Vector2.ZERO
+var p2_B_target:= Vector2.ZERO
+var f_L_target:= Vector2.ZERO
+var f_R_target:= Vector2.ZERO
 var players_in_r2 := 0
 var _shake_time := 0.0
 var _shake_duration := 0.0
 var _shake_strength := 0.0
+var tween
 
 
 func _ready():		
@@ -38,6 +47,19 @@ func _ready():
 			p1_L_target = d.origin
 		else:
 			p1_R_target = d.origin
+			
+	for d in p2_doors:
+		if d.name.begins_with("Top"):
+			p2_T_target = d.origin
+		else:
+			p2_B_target = d.origin
+			
+	for d in final_doors:
+		if d.name.begins_with("Left"):
+			f_L_target = d.origin
+		else:
+			f_R_target = d.origin
+			
 	boss.phase = 0
 	white_fade.color = Color(1,1,1,0)
 	# ---------- CONNECT SIGNALS -------------
@@ -96,7 +118,6 @@ func _apply_screen_shake(delta: float) -> void:
 		return
 	
 	_shake_time -= delta
-	#var cam := get_viewport().get_camera_2d()
 	if not cam:
 		return
 
@@ -114,16 +135,26 @@ func _apply_screen_shake(delta: float) -> void:
 func on_p1_btn_pressed():
 	if multiplayer.is_server():
 		_start_phase_1 += 1
+		tween = get_tree().create_tween()
 		clamp(_start_phase_1, 0, Net.players.size())
 		if _start_phase_1 == Net.players.size():
 			var players = get_tree().get_nodes_in_group("players")
 			for p in players:
 				p.staggered = true
+				
 			var buttons := get_tree().get_nodes_in_group("buttons")
 			for b in buttons:
 				b.turn_off_collision.rpc()
-			await get_tree().create_timer(2).timeout
+				
+			tween.tween_property(cam, "position", Vector2(boss.global_position.x / 2, boss.global_position.y / 2), 2.0)
+			await get_tree().create_timer(3.0).timeout
 			boss.phase = 1
+			# play a sound here?
+			rumble.play()
+			await rumble.finished
+			tween = get_tree().create_tween()
+			tween.tween_property(cam, "position", Vector2.ZERO, 2.0)
+			await get_tree().create_timer(3.0).timeout
 			phase1_turret.activated = true
 			phase1_turret.get_child(4).play()
 			
@@ -142,7 +173,7 @@ func on_generator_destroyed():
 	print("Destroyed Generators: ", p1_generators_destroyed)
 	if p1_generators_destroyed >= get_tree().get_nodes_in_group("generators").size():
 		phase1_turret.activated = false
-		var tween = get_tree().create_tween()
+		tween = get_tree().create_tween()
 		tween.tween_property(cam, "position", Vector2(boss.global_position.x / 2, boss.global_position.y / 2), 2.0)
 		for i in range(2):
 			tween = get_tree().create_tween()
@@ -153,7 +184,9 @@ func on_generator_destroyed():
 				tween.tween_property(player, "position", Vector2(444.0, 653.0), 2.0)
 		await get_tree().create_timer(2.0).timeout
 		boss.phase += 2
-		await get_tree().create_timer(2.0).timeout
+		rumble.play()
+		await rumble.finished
+		#await get_tree().create_timer(2.0).timeout
 		tween = get_tree().create_tween()
 		tween.tween_property(cam, "position", Vector2(0, boss.global_position.y / 2), 2.0)
 		await get_tree().create_timer(1.0).timeout
@@ -161,7 +194,7 @@ func on_generator_destroyed():
 			for d in p1_doors:
 				d.activate()
 
-@rpc("any_peer", "call_local")
+@rpc("authority", "call_local")
 func _on_2nd_room_body_entered(body: Node2D) -> void:
 	if not body.is_in_group("players"):
 		return
@@ -194,9 +227,11 @@ func start_phase_2():
 		var turrets = $Phase2Turrets.get_children()
 		for t in turrets:
 			t.activated = true
+			await get_tree().create_timer(1.0)
 		
 		
 func on_cat_engulfed(cat: CharacterBody2D):
 	print("Cat: ", cat.name, " Has died")
 	cat.queue_free()
+
 	

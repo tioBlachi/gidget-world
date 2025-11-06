@@ -27,7 +27,7 @@ func _ready() -> void:
 	_line.visible = false
 
 	collide_with_bodies = true
-	collide_with_areas = true
+	collide_with_areas = false
 	hit_from_inside = true
 	exclude_parent = true
 
