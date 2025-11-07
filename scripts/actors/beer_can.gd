@@ -13,7 +13,6 @@ func _process(delta: float) -> void:
 		follower.progress_ratio += delta * speed
 		
 		can_sprite.rotation = follower.rotation * 2
-		#can_sprite.rotation = follower.rotation + deg_to_rad(90)
 	
 	if follower.progress_ratio >= 0.99:
 		queue_free()
