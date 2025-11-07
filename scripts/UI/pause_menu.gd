@@ -5,9 +5,10 @@ var player: Node = null
 var is_paused = false
 
 func _ready():
+	hide()
 	await get_tree().process_frame
 	_find_local_player()
-	$AnimationPlayer.play("RESET")
+	$AnimationPlayer.play("RESET_restart")
 
 func _find_local_player() -> void:
 	for p in get_tree().get_nodes_in_group("players"):
@@ -18,6 +19,7 @@ func _find_local_player() -> void:
 	print("[PauseMenu] No local player found!")
 
 func pause():
+	show()
 	if not player:
 		_find_local_player()
 	if player:
@@ -26,15 +28,16 @@ func pause():
 		is_paused = true
 	else:
 		print("no player found for this peer")
-	$AnimationPlayer.play("blur")
+	$AnimationPlayer.play("blur_restart")
 
 func resume():
+	hide()
 	if not player:
 		_find_local_player()
 	if player:
 		player.set_paused(false)
 		is_paused = false
-	$AnimationPlayer.play_backwards("blur")
+	$AnimationPlayer.play_backwards("blur_restart")
 
 func testEsc():
 	if Input.is_action_just_pressed("esc") and !is_paused:

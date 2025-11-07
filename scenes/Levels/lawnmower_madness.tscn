@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=4 uid="uid://b5g7eb7pdyncf"]
+[gd_scene load_steps=27 format=4 uid="uid://b5g7eb7pdyncf"]
 
 [ext_resource type="Script" uid="uid://ky4ql3m5py7w" path="res://scripts/Levels/lawnmower_madness.gd" id="1_1m4jy"]
 [ext_resource type="Texture2D" uid="uid://bed2txbrkgni4" path="res://assets/Tiles/oldTiles/park_tiles.png" id="2_qtf7v"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://cj7q37bwul0sb" path="res://scenes/objects/killzone.tscn" id="8_eihww"]
 [ext_resource type="Script" uid="uid://du7m7uksnqxr4" path="res://scenes/Levels/KeyZone.gd" id="10_chk2d"]
 [ext_resource type="PackedScene" uid="uid://bf72f4j7c2i3f" path="res://scenes/UI/pause_menu.tscn" id="11_cots3"]
+[ext_resource type="PackedScene" uid="uid://coo3efhcvxiar" path="res://scenes/UI/restart_screen.tscn" id="12_046b5"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_cots3"]
 texture = ExtResource("2_qtf7v")
@@ -266,6 +267,8 @@ shape = SubResource("RectangleShape2D_chk2d")
 replication_config = SubResource("SceneReplicationConfig_chk2d")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="restart_screen" parent="CanvasLayer" instance=ExtResource("12_046b5")]
 
 [node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("11_cots3")]
 

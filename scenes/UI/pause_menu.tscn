@@ -1,14 +1,26 @@
-[gd_scene load_steps=8 format=3 uid="uid://bf72f4j7c2i3f"]
+[gd_scene load_steps=11 format=3 uid="uid://bf72f4j7c2i3f"]
 
 [ext_resource type="Script" uid="uid://crq6733ivcjfn" path="res://scripts/UI/pause_menu.gd" id="1_bl585"]
 [ext_resource type="Shader" uid="uid://h4b8ehavycak" path="res://Art/blur.gdshader" id="1_qo2fb"]
 [ext_resource type="Theme" uid="uid://c3jd5hfl65max" path="res://assets/Theme/Button_Default.tres" id="3_mko1u"]
+[ext_resource type="Texture2D" uid="uid://d2bwv7a4gpdoq" path="res://assets/sprites/Complete_UI_Essential_Pack_Free/01_Flat_Theme/Spritesheets/Spritesheet_UI_Flat.png" id="3_w67w4"]
+[ext_resource type="Theme" uid="uid://dapn0300q5ffg" path="res://assets/Theme/Menu_Title.tres" id="4_feath"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bl585"]
 shader = ExtResource("1_qo2fb")
 shader_parameter/lod = 0.0
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_sipkl"]
+texture = ExtResource("3_w67w4")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+region_rect = Rect2(32, 32, 96, 64)
+modulate_color = Color(0.43134, 0.43134, 0.43134, 1)
+
 [sub_resource type="Animation" id="Animation_feath"]
+resource_name = "RESET_restart"
 length = 0.001
 tracks/0/type = "bezier"
 tracks/0/imported = false
@@ -67,7 +79,7 @@ tracks/4/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_mko1u"]
-resource_name = "blur"
+resource_name = "blur_restart"
 length = 0.4
 tracks/0/type = "bezier"
 tracks/0/imported = false
@@ -127,8 +139,8 @@ tracks/4/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_w67w4"]
 _data = {
-&"RESET": SubResource("Animation_feath"),
-&"blur": SubResource("Animation_mko1u")
+&"RESET_restart": SubResource("Animation_feath"),
+&"blur_restart": SubResource("Animation_mko1u")
 }
 
 [node name="PauseMenu" type="Control"]
@@ -164,11 +176,31 @@ offset_right = 238.0
 offset_bottom = 175.5
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_sipkl")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
 layout_mode = 2
 
+[node name="Buffer" type="Label" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Pause Menu Text" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("4_feath")
+text = "Pause Menu"
+horizontal_alignment = 1
+
+[node name="Buffer3" type="Label" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+
 [node name="Resume" type="Button" parent="PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 35)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
@@ -176,6 +208,7 @@ theme = ExtResource("3_mko1u")
 text = "Resume"
 
 [node name="Restart" type="Button" parent="PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 35)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
@@ -183,6 +216,7 @@ theme = ExtResource("3_mko1u")
 text = "Restart"
 
 [node name="Level_Select" type="Button" parent="PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 35)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
@@ -190,6 +224,7 @@ theme = ExtResource("3_mko1u")
 text = "Level Select"
 
 [node name="Quit_Menu" type="Button" parent="PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 35)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
@@ -197,11 +232,15 @@ theme = ExtResource("3_mko1u")
 text = "Quit to Main Menu"
 
 [node name="Quit_Desktop" type="Button" parent="PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 35)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
 theme = ExtResource("3_mko1u")
 text = "Quit to Desktop"
+
+[node name="Buffer2" type="Label" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

@@ -201,8 +201,8 @@ func die():
 	timer.one_shot = true
 	timer.wait_time = 1.5
 	add_child(timer)
-	timer.timeout.connect(_on_timer_complete)
-	timer.timeout.connect(self.queue_free)
+	# timer.timeout.connect(_on_timer_complete)
+	# timer.timeout.connect(self.queue_free)
 	timer.start()
 
 func _on_timer_complete():
