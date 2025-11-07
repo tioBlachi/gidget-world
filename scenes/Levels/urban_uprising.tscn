@@ -1,12 +1,14 @@
-[gd_scene load_steps=18 format=4 uid="uid://byukt8eyso7jr"]
+[gd_scene load_steps=20 format=4 uid="uid://byukt8eyso7jr"]
 
-[ext_resource type="Texture2D" uid="uid://8hi45tmofd6b" path="res://Art/OldTestArt/metal2.png" id="1_sqmmr"]
+[ext_resource type="Texture2D" uid="uid://djmc6fypsxrpw" path="res://Art/OldTestArt/metal2.png" id="1_sqmmr"]
 [ext_resource type="Script" uid="uid://chy5ttrcgpkg1" path="res://scripts/Levels/urban_uprising.gd" id="1_tf8py"]
-[ext_resource type="Texture2D" uid="uid://bhwitf88ty575" path="res://Art/NewArt/Big City.png" id="4_5h4xf"]
+[ext_resource type="Texture2D" uid="uid://bl7wc5mfn4cvf" path="res://Art/NewArt/Big City.png" id="4_5h4xf"]
 [ext_resource type="PackedScene" uid="uid://r357l4u2vr2q" path="res://scenes/actors/FlameDude.tscn" id="6_5h4xf"]
-[ext_resource type="Texture2D" uid="uid://dgws8vldae8y" path="res://assets/sprites/New Piskel.png" id="6_hb40t"]
+[ext_resource type="Texture2D" uid="uid://3uhm0xf7fhhg" path="res://assets/sprites/New Piskel.png" id="6_hb40t"]
 [ext_resource type="PackedScene" uid="uid://87ms82l1c82e" path="res://scenes/objects/moving_platform.tscn" id="7_5h4xf"]
 [ext_resource type="PackedScene" uid="uid://d1nsqphluchlr" path="res://scenes/actors/can.tscn" id="7_mk1m7"]
+[ext_resource type="PackedScene" uid="uid://coo3efhcvxiar" path="res://scenes/UI/restart_screen.tscn" id="8_8x7pg"]
+[ext_resource type="PackedScene" uid="uid://bf72f4j7c2i3f" path="res://scenes/UI/pause_menu.tscn" id="9_d1sqi"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_5h4xf"]
 
@@ -8712,7 +8714,7 @@ _data = {
 }
 point_count = 2
 
-[node name="UrbanUprising" type="Node2D"]
+[node name="urban_uprising" type="Node2D"]
 position = Vector2(-16, 0)
 script = ExtResource("1_tf8py")
 
@@ -8913,7 +8915,7 @@ flip_v = true
 [node name="Flames" parent="BigFlameDude/PathFollow2D/FlameDude" index="1"]
 position = Vector2(-8.98616, 19.3972)
 scale = Vector2(4.09971, 2.37563)
-frame = 0
+frame_progress = 0.0
 flip_h = true
 flip_v = true
 
@@ -8925,6 +8927,12 @@ position = Vector2(7.12437, -0.725185)
 
 [node name="BodyCollider" parent="BigFlameDude/PathFollow2D/FlameDude" index="3"]
 position = Vector2(-2.65636, -18.1918)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="restart_screen" parent="CanvasLayer" instance=ExtResource("8_8x7pg")]
+
+[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("9_d1sqi")]
 
 [connection signal="body_entered" from="Camera2D/BottomBorder" to="." method="_on_bottom_border_body_entered"]
 [connection signal="body_entered" from="Can2Trigger" to="." method="_on_can_2_trigger_body_entered"]

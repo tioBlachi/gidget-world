@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=4 uid="uid://bw426uewyu1ti"]
+[gd_scene load_steps=29 format=4 uid="uid://bw426uewyu1ti"]
 
 [ext_resource type="PackedScene" path="res://scenes/objects/sewage.tscn" id="1_dk0sx"]
 [ext_resource type="PackedScene" path="res://scenes/objects/button_once.tscn" id="2_dk0sx"]
@@ -11,6 +11,8 @@
 [ext_resource type="Texture2D" uid="uid://dag6662w1oxlq" path="res://assets/Tiles/stone.png" id="8_bf676"]
 [ext_resource type="Texture2D" uid="uid://cv21q8jd55clh" path="res://assets/Tiles/BackgroundRock.png" id="9_webr0"]
 [ext_resource type="Texture2D" uid="uid://f4hfqh4jtm5n" path="res://Art/OldTestArt/button.png" id="10_6v2ta"]
+[ext_resource type="PackedScene" uid="uid://coo3efhcvxiar" path="res://scenes/UI/restart_screen.tscn" id="13_ftp6k"]
+[ext_resource type="PackedScene" uid="uid://bf72f4j7c2i3f" path="res://scenes/UI/pause_menu.tscn" id="14_6v2ta"]
 [ext_resource type="PackedScene" uid="uid://jylojstufht1" path="res://scenes/player/BowenPlayer.tscn" id="14_ftp6k"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_31be5"]
@@ -935,3 +937,9 @@ scale = Vector2(0.13, 0.13)
 [node name="Camera2D" type="Camera2D" parent="Player3"]
 visible = false
 zoom = Vector2(3.625, 3.625)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="restart_screen" parent="CanvasLayer" instance=ExtResource("13_ftp6k")]
+
+[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("14_6v2ta")]

@@ -3,7 +3,6 @@ extends Control
 var player: Node = null
 
 var is_paused = false
-@onready var killzone = get_node("../killzone")
 var has_been_triggered = false
 
 func _ready():

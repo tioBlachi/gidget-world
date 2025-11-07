@@ -25,8 +25,11 @@ var original_texture = preload("res://Art/OldTestArt/gRight.png")
 var death_texture = preload("res://Art/OldTestArt/gDeath.png")
 var burned_texture = preload("res://Art/OldTestArt/deathGidget.png")
 
+signal character_died
+
 func _ready():
 	add_to_group("players")
+	add_to_group("killzones")
 
 
 func _physics_process(delta: float) -> void:
@@ -195,17 +198,19 @@ func die():
 	if is_instance_valid($Camera2D):
 		$Camera2D.process_mode = self.PROCESS_MODE_DISABLED
 	
+	
 	$MultiplayerSynchronizer.set_process(false)
 	$DeathSFX.play()
 	var timer = Timer.new()
 	timer.one_shot = true
 	timer.wait_time = 1.5
 	add_child(timer)
-	# timer.timeout.connect(_on_timer_complete)
+	timer.timeout.connect(_on_timer_complete)
 	# timer.timeout.connect(self.queue_free)
 	timer.start()
 
 func _on_timer_complete():
 	Global.player_died.emit()
-	get_tree().reload_current_scene()
+	emit_signal("character_died")
+	# get_tree().reload_current_scene()
 	#get_tree().paused = true

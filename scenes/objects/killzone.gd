@@ -11,7 +11,6 @@ func _on_body_entered(body: Node2D) -> void:
 		print("You Died")
 		if body.has_method("die"):
 			body.die()
-		emit_signal("character_died")
 		# body.queue_free()
 	else:
 		print("Tried to kill non player body")
