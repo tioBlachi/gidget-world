@@ -13,6 +13,7 @@ extends CharacterBody2D
 @export var max_fall_speed: float = 500.0 #allows other scenes to access max fall speed
 @export var is_gravity_level: bool = false
 @export var god_mode: bool = false
+@export var is_locally_paused := false
 
 const PUSH_FORCE = 15.0
 const MIN_PUSH_FORCE = 10.0
@@ -24,11 +25,16 @@ var original_texture = preload("res://Art/OldTestArt/gRight.png")
 var death_texture = preload("res://Art/OldTestArt/gDeath.png")
 var burned_texture = preload("res://Art/OldTestArt/deathGidget.png")
 
+signal character_died
+
 func _ready():
 	add_to_group("players")
+	add_to_group("killzones")
 
 
 func _physics_process(delta: float) -> void:
+	if is_locally_paused:
+		return
 	#print("Player velocity.y = ", velocity.y)
 	#print("This is gravity level ", is_gravity_level)
 	#print("We are not on floor ", not is_on_floor())
@@ -157,7 +163,9 @@ func recover():
 	sprite.texture = original_texture
 	if int(self.name) == Net.players[1]:
 		sprite.self_modulate = Color.hex(0xE0FFFF)
-		
+
+func set_paused(value: bool) -> void:
+	is_locally_paused = value
 
 func _update_slope_tilt():
 	if is_on_floor():
@@ -190,6 +198,7 @@ func die():
 	if is_instance_valid($Camera2D):
 		$Camera2D.process_mode = self.PROCESS_MODE_DISABLED
 	
+	
 	$MultiplayerSynchronizer.set_process(false)
 	$DeathSFX.play()
 	var timer = Timer.new()
@@ -197,10 +206,11 @@ func die():
 	timer.wait_time = 1.5
 	add_child(timer)
 	timer.timeout.connect(_on_timer_complete)
-	timer.timeout.connect(self.queue_free)
+	# timer.timeout.connect(self.queue_free)
 	timer.start()
 
 func _on_timer_complete():
 	Global.player_died.emit()
-	get_tree().reload_current_scene()
+	emit_signal("character_died")
+	# get_tree().reload_current_scene()
 	#get_tree().paused = true

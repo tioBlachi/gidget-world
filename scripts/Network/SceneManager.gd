@@ -3,9 +3,9 @@ extends Node
 const SCENES: Dictionary = {
 	"Herding Cats": "res://scenes/Levels/herding_cats.tscn",
 	"Lab Escape": "res://scenes/Levels/lab-escape.tscn",
-	"Urban Uprising": "res://scenes/Levels/urban_uprising.tscn",
+	"urban_uprising": "res://scenes/Levels/urban_uprising.tscn",
 	"Car Dodge": "res://scenes/Levels/carDodge.tscn",
-	"lawnmower madness": "res://scenes/Levels/lawnmower_madness.tscn",
+	"lawnmower_madness": "res://scenes/Levels/lawnmower_madness.tscn",
 	"Title": "res://scenes/UI/Title.tscn",
 	"Testing" : "res://scenes/DevTools/Testing.tscn",
 	"Lobby" : "res://scenes/UI/Lobby.tscn"
