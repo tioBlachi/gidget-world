@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://tsj58jcpuirq"]
+[gd_scene load_steps=15 format=3 uid="uid://tsj58jcpuirq"]
 
 [ext_resource type="Script" uid="uid://dsc7fdh3f6f8c" path="res://scripts/Levels/falling_in_sewer.gd" id="1_4kqsw"]
 [ext_resource type="Texture2D" uid="uid://b6vnyfhoqgumk" path="res://assets/Tiles/oldTiles/lab_tiles.png" id="2_wrgx2"]
@@ -7,7 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://21mg3ph851wb" path="res://assets/parallax backgrounds/parallax-02.png" id="5_ewixd"]
 [ext_resource type="PackedScene" uid="uid://i7vby3wukmbp" path="res://scenes/objects/debris.tscn" id="6_5yfk3"]
 [ext_resource type="PackedScene" uid="uid://bbuqfc4w2cj1a" path="res://scenes/objects/dissolving_platform.tscn" id="7_a2dya"]
-[ext_resource type="PackedScene" uid="uid://q5myivnq8cna" path="res://scenes/objects/key_card.tscn" id="8_nw4bf"]
 [ext_resource type="Script" uid="uid://vchdm8w8dxr8" path="res://scripts/objects/dissolving_platform_2.gd" id="9_nw4bf"]
 [ext_resource type="Script" uid="uid://fae7fqppo4hq" path="res://scripts/objects/exit_line.gd" id="10_2ukmc"]
 
@@ -109,9 +108,6 @@ shape = SubResource("WorldBoundaryShape2D_5yfk3")
 position = Vector2(-79, -773)
 rotation = 3.14159
 shape = SubResource("WorldBoundaryShape2D_5yfk3")
-
-[node name="KeyCard" parent="." instance=ExtResource("8_nw4bf")]
-position = Vector2(596, 385)
 
 [node name="Debris" type="Node" parent="."]
 
@@ -325,4 +321,3 @@ shape = SubResource("WorldBoundaryShape2D_nw4bf")
 [connection signal="body_entered" from="Exit Line" to="." method="_on_exit_line_body_entered"]
 
 [editable path="1"]
-[editable path="KeyCard"]

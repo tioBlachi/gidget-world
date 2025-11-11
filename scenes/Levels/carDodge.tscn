@@ -1,12 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://dhpdxn5g33vpp"]
+[gd_scene load_steps=15 format=3 uid="uid://dhpdxn5g33vpp"]
 
 [ext_resource type="Texture2D" uid="uid://b6vnyfhoqgumk" path="res://assets/Tiles/oldTiles/lab_tiles.png" id="1_dnvpt"]
+[ext_resource type="Script" uid="uid://ds61fpcbhgyig" path="res://scripts/Levels/car_dodge.gd" id="1_e8t8o"]
 [ext_resource type="PackedScene" uid="uid://bxpry3684affg" path="res://scenes/player/player.tscn" id="2_p5aq2"]
 [ext_resource type="Script" uid="uid://bttad68wyxtf0" path="res://camera_2d.gd" id="3_p5aq2"]
-
-[ext_resource type="Texture2D" uid="uid://ctijq3u5aqe1v" path="res://assets/Tiles/oldTiles/lab_tiles.png" id="1_dnvpt"]
-[ext_resource type="Script" path="res://scripts/Levels/car_dodge.gd" id="1_e8t8o"]
-
 [ext_resource type="Script" uid="uid://by67bhfq2l8jb" path="res://scripts/Levels/killbox_spawner.gd" id="4_rfpyh"]
 [ext_resource type="PackedScene" uid="uid://bexy1hnpe0tel" path="res://scenes/objects/Cars/BlueCar.tscn" id="5_q40wf"]
 [ext_resource type="PackedScene" uid="uid://bsknfknpkqnoc" path="res://scenes/objects/Cars/GreenCar.tscn" id="6_redad"]
@@ -14,11 +11,6 @@
 [ext_resource type="Texture2D" uid="uid://bhwitf88ty575" path="res://Art/NewArt/Big City.png" id="8_e8t8o"]
 [ext_resource type="Texture2D" uid="uid://bsvk5sdffvkpq" path="res://Art/NewArt/Night City.png" id="9_kivjt"]
 [ext_resource type="AudioStream" uid="uid://dacq5v51wocfx" path="res://Sounds/TrafficSounds.mp3" id="10_e8t8o"]
-
-[ext_resource type="Texture2D" uid="uid://ngpcuovhe3by" path="res://Art/NewArt/Big City.png" id="8_e8t8o"]
-[ext_resource type="Texture2D" uid="uid://dndlx7hiwrpxb" path="res://Art/NewArt/Night City.png" id="9_kivjt"]
-[ext_resource type="AudioStream" uid="uid://by1m6krpqin2b" path="res://Sounds/TrafficSounds.mp3" id="10_e8t8o"]
-
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e8t8o"]
 texture = ExtResource("1_dnvpt")

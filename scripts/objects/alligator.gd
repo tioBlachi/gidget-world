@@ -3,24 +3,23 @@ extends Node2D
 @onready var anim: AnimationPlayer = $AnimationPlayer
 @onready var mouth_area: Area2D = $MouthArea
 
-# Tracks if the player is inside the mouth
-var player_in_mouth: Node = null
+# Change from a single Node reference to an Array of Nodes
+var players_in_mouth: Array[Node] = []
 
-# Timing for fake bite cycle
-@export var fake_bite_interval := 3.0 # seconds between bites
-@export var fake_bite_randomness := 2.0 # adds some randomness
+# ... (Timing variables remain the same) ...
+@export var fake_bite_interval := 3.0 
+@export var fake_bite_randomness := 2.0 
 var bite_timer := 0.0
 
 func _ready():
 	# Connect to the global signal to allow external triggering
-	Global.alligator_triggered_bite.connect(bite)
-	# Start idle animation on load
+	if Global:
+		Global.alligator_triggered_bite.connect(bite)
+		
 	anim.play("idle")
-	# Start fake bite cycle
 	_reset_fake_bite_timer()
 
 func _process(delta: float) -> void:
-	# Countdown timer for fake bites
 	bite_timer -= delta
 	if bite_timer <= 0 and not anim.is_playing():
 		fake_bite()
@@ -29,52 +28,57 @@ func _process(delta: float) -> void:
 # --- 🪱 FUNCTION: FAKE BITE ---
 func fake_bite() -> void:
 	print("🐊 Fake bite triggered!")
-	anim.play("bite")
-	await anim.animation_finished
-	anim.play("idle")
-	if player_in_mouth:
-		_kill_player(player_in_mouth)
+	# The bite should kill ALL players currently in the mouth
+	_process_bite_logic()
+
 
 # --- 🪱 FUNCTION: REAL BITE (for traps or triggers) ---
 func bite() -> void:
 	print("💥 Real bite triggered!")
+	# The real bite should also kill ALL players currently in the mouth
+	_process_bite_logic()
+	
+# --- 🔧 HELPER: Centralized Bite Logic ---
+func _process_bite_logic() -> void:
 	anim.play("bite")
 	await anim.animation_finished
 	anim.play("idle")
+	
 
 
 # --- 🔧 HELPER: Reset timer ---
 func _reset_fake_bite_timer() -> void:
 	bite_timer = fake_bite_interval + randf() * fake_bite_randomness
-
-# --- ⚙️ Mouth area detection ---
-func _on_body_entered(body: Node) -> void:
-	print("Body entered mouth area")
-	if body.is_in_group("players"):
-		player_in_mouth = body
-
-func _on_body_exited(body: Node) -> void:
-	print("Body exited mouth area")
-	if body == player_in_mouth:
-		player_in_mouth = null
+	
+	
+func _animation_kill() -> void:
+	for player in players_in_mouth.duplicate():
+		_kill_player(player)
 
 
-
-# --- 💀 Kill player (you can replace this with your own death logic) ---
 func _kill_player(player: Node) -> void:
-	print("💀 Player got chomped by the alligator!")
-	if player_in_mouth:
-		player.die() # or call your custom death method
- 
+	# Use is_instance_valid for safety
+	
+	if is_instance_valid(player):
+		print("💀 Player got chomped by the alligator!")
+		player.die() 
+		# Remove the player from our tracking array after killing them
+		if players_in_mouth.has(player):
+			players_in_mouth.erase(player)
 
 
+# --- ⚙️ Mouth area detection (UPDATED FOR ARRAY) ---
 func _on_mouth_area_body_entered(body: Node2D) -> void:
-	print("Body entered mouth area")
-	if body.is_in_group("players"):
-		player_in_mouth = body
+	
+	if body.is_in_group("players") and not players_in_mouth.has(body):
+		# Add player to the list if they aren't already tracked
+		players_in_mouth.append(body)
+		print("Body entered mouth area. Players tracked: ", players_in_mouth.size())
 
 
 func _on_mouth_area_body_exited(body: Node2D) -> void:
-	print("Body exited mouth area")
-	if body == player_in_mouth:
-		player_in_mouth = null
+	
+	if players_in_mouth.has(body):
+		# Remove player from the list
+		players_in_mouth.erase(body)
+		print("Body exited mouth area. Players tracked: ", players_in_mouth.size())

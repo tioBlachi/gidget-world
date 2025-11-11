@@ -116,6 +116,69 @@ func _physics_process(delta: float) -> void:
 				elif x_direction < 0:
 					$Sprite.flip_h = true		
 				move_and_slide()
+
+
+
+var held_item = null
+var float_offset = Vector2(-30, -80) 
+
+func _process(delta):
+	# Handle pickup/drop action
+	if Input.is_action_just_pressed("pickup_drop"):
+		if held_item:
+			drop_item()
+		else:
+			try_pickup_item()
+
+	# Update held item position if one exists
+	if held_item:
+		# Use global_position for accurate world positioning
+		held_item.global_position = global_position + float_offset
+
+func try_pickup_item():
+	# Assuming the player has an Area2D named "PickupZone" to detect items
+	var pickup_zone = $PickupZone 
+	var overlapping_items = pickup_zone.get_overlapping_areas() # Adjust for body detection if needed
+
+	for item_area in overlapping_items:
+		if item_area.is_in_group("CollectableItems"): # Ensure items are in this group
+			pickup_item(item_area)
+			break # Only pick up one item at a time
+
+func pickup_item(item_node):
+	if held_item == null:
+		# Remove the item from its original parent in the scene tree
+		item_node.get_parent().remove_child(item_node)
+		# Make the player the new parent
+		add_child(item_node)
+		held_item = item_node
+		# Optionally, disable its physics/collision while held
+		if item_node is RigidBody2D:
+			item_node.set_physics_process(false)
+			item_node.set_collision_layer_value(1, false)
+			item_node.set_collision_mask_value(1, false)
+
+func drop_item():
+	if held_item:
+		# Reparent the item back to the main world scene (e.g., "/root/World")
+		# You may need a reference to your main world node
+		var world_node = get_tree().current_scene # Gets the current main scene
+		remove_child(held_item)
+		world_node.add_child(held_item)
+		
+		# Set its global position where the player is (or in front of them)
+		held_item.global_position = global_position
+		
+		# Re-enable physics/collision
+		if held_item is RigidBody2D:
+			held_item.set_physics_process(true)
+			held_item.set_collision_layer_value(1, true)
+			held_item.set_collision_mask_value(1, true)
+
+		held_item = null
+
+
+
 # ----- KEYCARD/KEY HANDLING. UPDATE FOR OTHER WORLDS
 var has_keycard := false
 var keycard_ref: Node = null
@@ -124,6 +187,8 @@ func pickup_keycard(keycard: Node):
 	has_keycard = true
 	keycard_ref = keycard
 	
+	
+
 func set_side_scroller(value: bool):
 	side_scroller = value
 	if not side_scroller:
@@ -206,3 +271,17 @@ func _on_timer_complete():
 	Global.player_died.emit()
 	get_tree().reload_current_scene()
 	#get_tree().paused = true
+
+
+func _on_pickup_zone_area_entered(area: Area2D) -> void:
+	if area.is_in_group("CollectableItems"):
+		print("An item is nearby and overlapping: ", area.name)
+		
+
+# Optional: Add a message for when an item leaves the zoned
+
+
+
+func _on_pickup_zone_area_exited(area: Area2D) -> void:
+	if area.is_in_group("CollectableItems"):
+		print(area.name, " has left the pickup zone.")
