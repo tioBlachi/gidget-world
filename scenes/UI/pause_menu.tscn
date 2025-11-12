@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://crq6733ivcjfn" path="res://scripts/UI/pause_menu.gd" id="1_bl585"]
 [ext_resource type="Shader" uid="uid://h4b8ehavycak" path="res://Art/blur.gdshader" id="1_qo2fb"]
 [ext_resource type="Theme" uid="uid://c3jd5hfl65max" path="res://assets/Theme/Button_Default.tres" id="3_mko1u"]
-[ext_resource type="Texture2D" uid="uid://d2bwv7a4gpdoq" path="res://assets/sprites/Complete_UI_Essential_Pack_Free/01_Flat_Theme/Spritesheets/Spritesheet_UI_Flat.png" id="3_w67w4"]
+[ext_resource type="Texture2D" uid="uid://b4xijs7oyeewe" path="res://assets/sprites/Complete_UI_Essential_Pack_Free/01_Flat_Theme/Spritesheets/Spritesheet_UI_Flat.png" id="3_w67w4"]
 [ext_resource type="Theme" uid="uid://dapn0300q5ffg" path="res://assets/Theme/Menu_Title.tres" id="4_feath"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bl585"]
@@ -143,17 +143,21 @@ _data = {
 &"blur_restart": SubResource("Animation_mko1u")
 }
 
-[node name="PauseMenu" type="Control"]
+[node name="UILayer" type="CanvasLayer"]
+
+[node name="PauseMenu" type="Control" parent="."]
 process_mode = 3
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_bl585")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="PauseMenu"]
 material = SubResource("ShaderMaterial_bl585")
 layout_mode = 1
 anchors_preset = 15
@@ -162,7 +166,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="PauseMenu"]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 8
@@ -178,17 +182,17 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_sipkl")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu/PanelContainer"]
 layout_mode = 2
 
-[node name="Buffer" type="Label" parent="PanelContainer/VBoxContainer"]
+[node name="Buffer" type="Label" parent="PauseMenu/PanelContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PauseMenu/PanelContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="Pause Menu Text" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer"]
+[node name="Pause Menu Text" type="Label" parent="PauseMenu/PanelContainer/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -196,10 +200,10 @@ theme = ExtResource("4_feath")
 text = "Pause Menu"
 horizontal_alignment = 1
 
-[node name="Buffer3" type="Label" parent="PanelContainer/VBoxContainer"]
+[node name="Buffer3" type="Label" parent="PauseMenu/PanelContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Resume" type="Button" parent="PanelContainer/VBoxContainer"]
+[node name="Resume" type="Button" parent="PauseMenu/PanelContainer/VBoxContainer"]
 custom_minimum_size = Vector2(200, 35)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -207,7 +211,7 @@ size_flags_vertical = 6
 theme = ExtResource("3_mko1u")
 text = "Resume"
 
-[node name="Restart" type="Button" parent="PanelContainer/VBoxContainer"]
+[node name="Restart" type="Button" parent="PauseMenu/PanelContainer/VBoxContainer"]
 custom_minimum_size = Vector2(200, 35)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -215,7 +219,7 @@ size_flags_vertical = 6
 theme = ExtResource("3_mko1u")
 text = "Restart"
 
-[node name="Level_Select" type="Button" parent="PanelContainer/VBoxContainer"]
+[node name="Level_Select" type="Button" parent="PauseMenu/PanelContainer/VBoxContainer"]
 custom_minimum_size = Vector2(200, 35)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -223,7 +227,7 @@ size_flags_vertical = 6
 theme = ExtResource("3_mko1u")
 text = "Level Select"
 
-[node name="Quit_Menu" type="Button" parent="PanelContainer/VBoxContainer"]
+[node name="Quit_Menu" type="Button" parent="PauseMenu/PanelContainer/VBoxContainer"]
 custom_minimum_size = Vector2(200, 35)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -231,7 +235,7 @@ size_flags_vertical = 6
 theme = ExtResource("3_mko1u")
 text = "Quit to Main Menu"
 
-[node name="Quit_Desktop" type="Button" parent="PanelContainer/VBoxContainer"]
+[node name="Quit_Desktop" type="Button" parent="PauseMenu/PanelContainer/VBoxContainer"]
 custom_minimum_size = Vector2(200, 35)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -239,16 +243,16 @@ size_flags_vertical = 6
 theme = ExtResource("3_mko1u")
 text = "Quit to Desktop"
 
-[node name="Buffer2" type="Label" parent="PanelContainer/VBoxContainer"]
+[node name="Buffer2" type="Label" parent="PauseMenu/PanelContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PauseMenu"]
 libraries = {
 &"": SubResource("AnimationLibrary_w67w4")
 }
 
-[connection signal="pressed" from="PanelContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
-[connection signal="pressed" from="PanelContainer/VBoxContainer/Restart" to="." method="_on_restart_pressed"]
-[connection signal="pressed" from="PanelContainer/VBoxContainer/Level_Select" to="." method="_on_level_select_pressed"]
-[connection signal="pressed" from="PanelContainer/VBoxContainer/Quit_Menu" to="." method="_on_quit_menu_pressed"]
-[connection signal="pressed" from="PanelContainer/VBoxContainer/Quit_Desktop" to="." method="_on_quit_desktop_pressed"]
+[connection signal="pressed" from="PauseMenu/PanelContainer/VBoxContainer/Resume" to="PauseMenu" method="_on_resume_pressed"]
+[connection signal="pressed" from="PauseMenu/PanelContainer/VBoxContainer/Restart" to="PauseMenu" method="_on_restart_pressed"]
+[connection signal="pressed" from="PauseMenu/PanelContainer/VBoxContainer/Level_Select" to="PauseMenu" method="_on_level_select_pressed"]
+[connection signal="pressed" from="PauseMenu/PanelContainer/VBoxContainer/Quit_Menu" to="PauseMenu" method="_on_quit_menu_pressed"]
+[connection signal="pressed" from="PauseMenu/PanelContainer/VBoxContainer/Quit_Desktop" to="PauseMenu" method="_on_quit_desktop_pressed"]

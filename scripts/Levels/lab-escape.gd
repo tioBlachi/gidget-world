@@ -10,11 +10,20 @@ extends Node2D
 @onready var player2marker = $PlayerMarkers/Player2Marker
 		
 		
-func _ready() -> void:
+func _ready() -> void:	
 	add_to_group("lab_escape")
 	if multiplayer.is_server():
 		spawn_players.rpc(Net.players)
 		_set_initial_flimsy_cell()
+	
+	for p in pSpawner.get_children():
+		if p.has_signal("character_died"):
+			p.character_died.connect(on_player_died)
+			print("Connected character_died for", p.name)
+		else:
+			print(p.name, "does NOT have character_died signal")
+
+	
 		
 func _set_initial_flimsy_cell():
 	randomize()
@@ -82,3 +91,8 @@ func _on_trap_anim_finished(anim_name: StringName) -> void:
 func _on_spikes_body_entered(body: Node2D) -> void:
 	if body.is_in_group("players"):
 		body.die()
+		
+func on_player_died():
+	for p in pSpawner.get_children():
+		p.is_locally_paused = true
+	print("Player dies signal received")

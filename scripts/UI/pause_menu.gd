@@ -18,6 +18,7 @@ func _find_local_player() -> void:
 			return
 	print("[PauseMenu] No local player found!")
 
+@rpc("any_peer", "call_local")
 func pause():
 	show()
 	if not player:
@@ -30,6 +31,7 @@ func pause():
 		print("no player found for this peer")
 	$AnimationPlayer.play("blur_restart")
 
+@rpc("any_peer", "call_local")
 func resume():
 	hide()
 	if not player:
@@ -41,17 +43,17 @@ func resume():
 
 func testEsc():
 	if Input.is_action_just_pressed("esc") and !is_paused:
-		pause()
+		pause.rpc()
 	elif Input.is_action_just_pressed("esc") and is_paused:
 		print("resuming")
-		resume()
+		resume.rpc()
 
 @rpc("any_peer", "call_local")
 func change_scene_rpc(scene_name: String) -> void:
 	SceneManager.switch_scene(scene_name)
 
 func _on_resume_pressed() -> void:
-	resume()
+	resume.rpc()
 	
 
 @rpc("any_peer", "call_local")
@@ -61,7 +63,7 @@ func request_restart() -> void:
 
 @rpc("any_peer", "call_local")
 func _on_restart_pressed() -> void:
-	resume()
+	resume.rpc()
 	request_restart.rpc()
 
 func _on_level_select_pressed() -> void:
@@ -70,6 +72,7 @@ func _on_level_select_pressed() -> void:
 @rpc("any_peer", "call_local")
 func request_main_menu() -> void:
 	if multiplayer.get_unique_id() == 1:
+		Net.players.clear()
 		Net.rpc_start_game("Title")
 
 func _on_quit_menu_pressed() -> void:
