@@ -268,8 +268,8 @@ replication_config = SubResource("SceneReplicationConfig_chk2d")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="restart_screen" parent="CanvasLayer" instance=ExtResource("12_046b5")]
-
 [node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("11_cots3")]
+
+[node name="restart_screen" parent="CanvasLayer" instance=ExtResource("12_046b5")]
 
 [connection signal="body_entered" from="Lawnmower/Area2D" to="Lawnmower/Area2D" method="_on_body_entered"]

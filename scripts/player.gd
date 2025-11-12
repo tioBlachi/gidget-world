@@ -13,6 +13,7 @@ extends CharacterBody2D
 @export var max_fall_speed: float = 500.0 #allows other scenes to access max fall speed
 @export var is_gravity_level: bool = false
 @export var god_mode: bool = false
+@export var is_locally_paused := false
 
 const PUSH_FORCE = 15.0
 const MIN_PUSH_FORCE = 10.0
@@ -24,11 +25,16 @@ var original_texture = preload("res://Art/OldTestArt/gRight.png")
 var death_texture = preload("res://Art/OldTestArt/gDeath.png")
 var burned_texture = preload("res://Art/OldTestArt/deathGidget.png")
 
+signal character_died
+
 func _ready():
 	add_to_group("players")
+	add_to_group("killzones")
 
 
 func _physics_process(delta: float) -> void:
+	if is_locally_paused:
+		return
 	#print("Player velocity.y = ", velocity.y)
 	#print("This is gravity level ", is_gravity_level)
 	#print("We are not on floor ", not is_on_floor())
@@ -81,7 +87,7 @@ func _physics_process(delta: float) -> void:
 						else:
 							lab.rpc_id(1, "rpc_report_jump", my_id)
 	
-				direction = Input.get_axis("move left", "move right")
+				var direction := Input.get_axis("move left", "move right")
 				if direction:
 					velocity.x = direction * SPEED
 					$Sprite.flip_h = direction < 0
@@ -97,13 +103,6 @@ func _physics_process(delta: float) -> void:
 							var push_direction = -c.get_normal()
 							collider.apply_central_impulse(push_direction * PUSH_FORCE)					#
 			else:
-				if level_root and level_root.has_method("get_map_limits"):
-					var limits = level_root.get_map_limits()
-					$Camera2D.limit_left = int(limits.position.x)
-					$Camera2D.limit_top = int(limits.position.y)
-					$Camera2D.limit_right = int(limits.end.x)
-					$Camera2D.limit_bottom = int(limits.end.y)
-					
 				var x_direction = Input.get_axis("move left", "move right")
 				var y_direction = Input.get_axis("move up", "move down")
 				var dir = Vector2(x_direction, y_direction)
@@ -115,7 +114,7 @@ func _physics_process(delta: float) -> void:
 				else:
 					velocity.x = move_toward(velocity.x, 0.0, SPEED)
 					velocity.y = move_toward(velocity.y, 0.0, SPEED)
-				
+
 				if x_direction > 0:
 					$Sprite.flip_h = false
 				elif x_direction < 0:
@@ -158,19 +157,15 @@ func dizzy():
 			else:
 				s.visible = true
 				s.play("dizzy")
-		await get_tree().create_timer(1).timeout
-		recover()
 	
 func recover():
 	staggered = false
 	sprite.texture = original_texture
 	if int(self.name) == Net.players[1]:
 		sprite.self_modulate = Color.hex(0xE0FFFF)
-	var stars = $Stars.get_children()
-	for s in stars:
-		s.stop()
-		s.visible = false
-		
+
+func set_paused(value: bool) -> void:
+	is_locally_paused = value
 
 func _update_slope_tilt():
 	if is_on_floor():
@@ -186,7 +181,7 @@ func _update_slope_tilt():
 @rpc("any_peer", "call_local")
 func die():
 	
-	if god_mode:
+	if god_mode or is_dead:
 		print("Player is in God Mode and cannot die.")
 		return
 
@@ -203,18 +198,19 @@ func die():
 	if is_instance_valid($Camera2D):
 		$Camera2D.process_mode = self.PROCESS_MODE_DISABLED
 	
+	
 	$MultiplayerSynchronizer.set_process(false)
 	$DeathSFX.play()
-	var d_timer = Timer.new()
-	d_timer.one_shot = true
-	d_timer.wait_time = 1.5
-	add_child(d_timer)
-	d_timer.timeout.connect(_on_timer_complete)
-	d_timer.timeout.connect(self.queue_free)
-	d_timer.start()
+	var timer = Timer.new()
+	timer.one_shot = true
+	timer.wait_time = 1.5
+	add_child(timer)
+	timer.timeout.connect(_on_timer_complete)
+	# timer.timeout.connect(self.queue_free)
+	timer.start()
 
 func _on_timer_complete():
 	Global.player_died.emit()
-	SceneManager.switch_scene("Lobby")
-	#get_tree().reload_current_scene()
+	emit_signal("character_died")
+	# get_tree().reload_current_scene()
 	#get_tree().paused = true
