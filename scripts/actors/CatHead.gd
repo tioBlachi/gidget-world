@@ -124,16 +124,6 @@ func another_cat_is_meowing() -> bool:
 			return true
 	return false
 
-#func _on_meow_timer_timeout():
-	#if active: 
-		#if is_herded or another_cat_is_meowing():
-			#return
-		#else:
-			#match rng.randi() % 2:
-				#0: if not meow1.playing: meow1.play()
-				#1: if not meow2.playing: meow2.play()
-	#_reset_meow_timer()
-	
 func _on_meow_timer_timeout():
 	# Only the server decides when a cat meows
 	if not multiplayer.is_server():
@@ -155,7 +145,6 @@ func rpc_play_meow(which_meow: int) -> void:
 func _reset_meow_timer():
 	meow_timer.wait_time = rng.randf_range(3.0, 6.0)
 	meow_timer.start()
-
 
 func _apply_bounce(c: KinematicCollision2D, is_fleeing: bool) -> void:
 	var n := c.get_normal()                  # surface normal

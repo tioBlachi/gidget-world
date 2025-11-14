@@ -92,8 +92,7 @@ animations = [{
 radius = 15.7549
 height = 55.7776
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_aplrf"]
-radius = 11.9077
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_svwkq"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_c5qfh"]
 properties/0/path = NodePath("..:position")
@@ -109,6 +108,7 @@ scale = Vector2(1.34787, 1.56348)
 sprite_frames = SubResource("SpriteFrames_fs413")
 animation = &"idle"
 frame_progress = 0.698018
+flip_h = true
 
 [node name="BlinkTimer" type="Timer" parent="Face"]
 
@@ -132,7 +132,7 @@ shape = SubResource("CapsuleShape2D_yshlb")
 
 [node name="BodyCollider" type="CollisionShape2D" parent="."]
 position = Vector2(1.13178, 4.96862)
-shape = SubResource("CircleShape2D_aplrf")
+shape = SubResource("RectangleShape2D_svwkq")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 root_path = NodePath(".")
@@ -142,5 +142,9 @@ replication_config = SubResource("SceneReplicationConfig_c5qfh")
 one_shot = true
 
 [node name="Timer" type="Timer" parent="."]
+
+[node name="LeftBounds" type="Marker2D" parent="."]
+
+[node name="RightBounds" type="Marker2D" parent="."]
 
 [connection signal="body_entered" from="BurnZone" to="." method="_on_burn_zone_body_entered"]

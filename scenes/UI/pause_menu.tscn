@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://crq6733ivcjfn" path="res://scripts/UI/pause_menu.gd" id="1_bl585"]
 [ext_resource type="Shader" uid="uid://h4b8ehavycak" path="res://Art/blur.gdshader" id="1_qo2fb"]
 [ext_resource type="Theme" uid="uid://c3jd5hfl65max" path="res://assets/Theme/Button_Default.tres" id="3_mko1u"]
-[ext_resource type="Texture2D" uid="uid://b4xijs7oyeewe" path="res://assets/sprites/Complete_UI_Essential_Pack_Free/01_Flat_Theme/Spritesheets/Spritesheet_UI_Flat.png" id="3_w67w4"]
+[ext_resource type="Texture2D" uid="uid://cfrhpnfw0xam7" path="res://assets/sprites/Complete_UI_Essential_Pack_Free/01_Flat_Theme/Spritesheets/Spritesheet_UI_Flat.png" id="3_w67w4"]
 [ext_resource type="Theme" uid="uid://dapn0300q5ffg" path="res://assets/Theme/Menu_Title.tres" id="4_feath"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bl585"]
@@ -143,7 +143,7 @@ _data = {
 &"blur_restart": SubResource("Animation_mko1u")
 }
 
-[node name="UILayer" type="CanvasLayer"]
+[node name="PauseMenu" type="CanvasLayer"]
 
 [node name="PauseMenu" type="Control" parent="."]
 process_mode = 3

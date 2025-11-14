@@ -4,6 +4,8 @@ extends CharacterBody2D
 @export var SPEED: int = 200
 @export var CHASE_SPEED: int = 350
 @export var ACCELERATION: int = 300
+@onready var left_bounds: Marker2D = $LeftBounds
+@onready var right_bounds: Marker2D = $RightBounds
 
 @onready var dude: CharacterBody2D = $"."
 @onready var face: AnimatedSprite2D = $Face
@@ -15,8 +17,9 @@ extends CharacterBody2D
 
 var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 var direction: Vector2
-var right_bounds: Vector2
-var left_bounds: Vector2
+var left_limit: float
+var right_limit: float
+
 
 enum States {
 	WANDER,
@@ -31,9 +34,8 @@ func _ready() -> void:
 	flames.play("burning")
 	blink_timer.timeout.connect(_on_blink_timer_timeout)
 	
-	left_bounds = self.position + Vector2(-250, 0)
-	right_bounds = self.position + Vector2(250, 0)
-
+	left_limit = left_bounds.global_position.x
+	right_limit = right_bounds.global_position.x
 
 	_restart_blink_timer()
 
@@ -57,32 +59,38 @@ func look_for_player():
 			stop_chase()
 	elif current_state == States.CHASE:
 		stop_chase()
-		
+
 func change_direction():
 	if current_state == States.WANDER:
+
 		if face.flip_h:
 			# moving right
-			if self.position.x <= right_bounds.x:
-				direction = Vector2(1, 0)
-			else:
+			if self.position.x >= right_limit:
 				face.flip_h = false
 				player_detector.target_position = Vector2(-125, 0)
-		else:
-			# moving left
-			if self.position.x >= left_bounds.x:
 				direction = Vector2(-1, 0)
 			else:
+				direction = Vector2(1, 0)
+
+		else:
+			# moving left
+			if self.position.x <= left_limit:
 				face.flip_h = true
 				player_detector.target_position = Vector2(125, 0)
+				direction = Vector2(1, 0)
+			else:
+				direction = Vector2(-1, 0)
+
 	else:
-		direction - (player.position - self.position).normalized()
-		direction = sign(direction)
-		if direction.x == 1:
+		# chasing the player
+		direction = (player.position - self.position).normalized()
+		if direction.x > 0:
 			face.flip_h = true
 			player_detector.target_position = Vector2(125, 0)
 		else:
 			face.flip_h = false
 			player_detector.target_position = Vector2(-125, 0)
+
 		
 func chase_player():
 	chase_timer.stop()
