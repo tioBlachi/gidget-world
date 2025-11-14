@@ -87,7 +87,7 @@ func _physics_process(delta: float) -> void:
 						else:
 							lab.rpc_id(1, "rpc_report_jump", my_id)
 	
-				var direction := Input.get_axis("move left", "move right")
+				direction = Input.get_axis("move left", "move right")
 				if direction:
 					velocity.x = direction * SPEED
 					$Sprite.flip_h = direction < 0

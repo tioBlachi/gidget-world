@@ -8,13 +8,23 @@ extends Node2D
 @onready var pSpawner = $pSpawner
 @onready var player1marker = $PlayerMarkers/Player1Marker
 @onready var player2marker = $PlayerMarkers/Player2Marker
+@onready var door = $LabExitDoor
+@onready var popup := $PopupUI/restart_screen
+
+var players_in_game := Net.players.size()
 		
 		
 func _ready() -> void:	
 	add_to_group("lab_escape")
 	if multiplayer.is_server():
+		await get_tree().physics_frame
 		spawn_players.rpc(Net.players)
 		_set_initial_flimsy_cell()
+		
+	door.player_left.connect( func():
+		players_in_game -= 1
+		check_win()
+		)
 	
 	for p in pSpawner.get_children():
 		if p.has_signal("character_died"):
@@ -23,12 +33,18 @@ func _ready() -> void:
 		else:
 			print(p.name, "does NOT have character_died signal")
 
-	
 		
 func _set_initial_flimsy_cell():
 	randomize()
 	var choice = randi() % 2
 	set_flimsy_cell.rpc(choice)
+	
+func check_win() -> void:
+	print("Checking for win...")
+	print(players_in_game)
+	if players_in_game <= 0:
+		popup.current_state = popup.LEVEL_STATE.COMPLETE
+		popup.pause()
 	
 @rpc("call_local", "reliable")
 func set_flimsy_cell(choice: int):

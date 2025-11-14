@@ -116,22 +116,35 @@ func _stop_move() -> void:
 func _on_pause_timeout() -> void:
 	_start_move()
 	
-	
-func _on_meow_timer_timeout():
-	if active: 
-		if is_herded:
-			return
-		else:
-			match rng.randi() % 2:
-				0: if not meow1.playing: meow1.play()
-				1: if not meow2.playing: meow2.play()
-	_reset_meow_timer()
-	
-	
-func _reset_meow_timer():
-	meow_timer.wait_time = rng.randf_range(2.0, 6.0)
-	meow_timer.start()
+func another_cat_is_meowing() -> bool:
+	for cat in get_tree().get_nodes_in_group("cats"):
+		if cat == self:
+			continue
+		if cat.meow1.playing or cat.meow2.playing:
+			return true
+	return false
 
+func _on_meow_timer_timeout():
+	# Only the server decides when a cat meows
+	if not multiplayer.is_server():
+		return
+
+	if active and not is_herded and not another_cat_is_meowing():
+		var which_meow = rng.randi() % 2
+		rpc("rpc_play_meow", which_meow)
+
+	_reset_meow_timer()
+
+@rpc("any_peer", "call_local")
+func rpc_play_meow(which_meow: int) -> void:
+	if which_meow == 0:
+		meow1.play()
+	else:
+		meow2.play()
+
+func _reset_meow_timer():
+	meow_timer.wait_time = rng.randf_range(3.0, 6.0)
+	meow_timer.start()
 
 func _apply_bounce(c: KinematicCollision2D, is_fleeing: bool) -> void:
 	var n := c.get_normal()                  # surface normal

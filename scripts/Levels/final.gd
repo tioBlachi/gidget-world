@@ -138,9 +138,9 @@ func on_p1_btn_pressed():
 		tween = get_tree().create_tween()
 		clamp(_start_phase_1, 0, Net.players.size())
 		if _start_phase_1 == Net.players.size():
-			var players = get_tree().get_nodes_in_group("players")
+			var players = pSpawner.get_children()
 			for p in players:
-				p.staggered = true
+				p.is_locally_paused = true
 				
 			var buttons := get_tree().get_nodes_in_group("buttons")
 			for b in buttons:
@@ -159,7 +159,7 @@ func on_p1_btn_pressed():
 			phase1_turret.get_child(4).play()
 			
 			for p in players:
-				p.staggered = false
+				p.is_locally_paused = false
 
 func on_p1_btn_released():
 	if multiplayer.is_server():

@@ -20,26 +20,32 @@ func _find_local_player() -> void:
 
 @rpc("any_peer", "call_local")
 func pause():
-	show()
-	if not player:
-		_find_local_player()
-	if player:
-		print("player paused")
-		player.set_paused(true)
-		is_paused = true
+	if multiplayer.is_server():
+		pause_all.rpc()
 	else:
-		print("no player found for this peer")
+		pause.rpc_id(1)
+	
+@rpc("authority", "call_local")
+func pause_all():
+	get_tree().paused = true
+	is_paused = true
+	show()
 	$AnimationPlayer.play("blur_restart")
 
 @rpc("any_peer", "call_local")
 func resume():
+	if multiplayer.is_server():
+		resume_all.rpc()
+	else:
+		resume.rpc_id(1)
+	
+@rpc("authority", "call_local")
+func resume_all():
+	get_tree().paused = false
+	is_paused = false
 	hide()
-	if not player:
-		_find_local_player()
-	if player:
-		player.set_paused(false)
-		is_paused = false
 	$AnimationPlayer.play_backwards("blur_restart")
+
 
 func testEsc():
 	if Input.is_action_just_pressed("esc") and !is_paused:
@@ -58,8 +64,10 @@ func _on_resume_pressed() -> void:
 
 @rpc("any_peer", "call_local")
 func request_restart() -> void:
-	if multiplayer.get_unique_id() == 1:
-		Net.rpc_start_game(get_tree().current_scene.name)
+	#if multiplayer.get_unique_id() == 1:
+	await get_tree().physics_frame
+	var scene = get_tree().current_scene.name
+	Net.rpc_start_game(scene)
 
 @rpc("any_peer", "call_local")
 func _on_restart_pressed() -> void:
@@ -71,9 +79,9 @@ func _on_level_select_pressed() -> void:
 
 @rpc("any_peer", "call_local")
 func request_main_menu() -> void:
-	if multiplayer.get_unique_id() == 1:
-		Net.players.clear()
-		Net.rpc_start_game("Title")
+	#if multiplayer.get_unique_id() == 1:
+	Net.players.clear()
+	Net.rpc_start_game("Title")
 
 func _on_quit_menu_pressed() -> void:
 	resume()

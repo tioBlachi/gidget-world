@@ -1,13 +1,13 @@
-[gd_scene load_steps=20 format=4 uid="uid://ul54drirfied"]
+[gd_scene load_steps=20 format=4 uid="uid://dmxfaox45d8k6"]
 
 [ext_resource type="Script" uid="uid://bkllaeomrwfbs" path="res://scripts/Levels/alligator_dentistry.gd" id="1_rwegt"]
-[ext_resource type="Texture2D" uid="uid://ceciwuj44j5k4" path="res://Art/OldTestArt/spikeBall.png" id="2_py8lq"]
+[ext_resource type="Texture2D" uid="uid://b3670dem531ly" path="res://Art/OldTestArt/spikeBall.png" id="2_py8lq"]
 [ext_resource type="PackedScene" uid="uid://bxpry3684affg" path="res://scenes/player/player.tscn" id="3_u8x4h"]
-[ext_resource type="Texture2D" uid="uid://d4ho01yhwke0" path="res://assets/sprites/Bottom Alligator Jaw.png" id="4_1sjml"]
-[ext_resource type="Texture2D" uid="uid://b2tjb0axwyx4p" path="res://assets/Tiles/basic_tileset_and_assets_standard/water_and_island_tiles_v2.png" id="4_py8lq"]
-[ext_resource type="Texture2D" uid="uid://b3xidv3e7xevf" path="res://assets/sprites/Top Alligator Jaw.png" id="5_7qt0h"]
+[ext_resource type="Texture2D" uid="uid://d0hlorb58psmj" path="res://assets/sprites/Bottom Alligator Jaw.png" id="4_1sjml"]
+[ext_resource type="Texture2D" uid="uid://oadhk4cffscn" path="res://assets/Tiles/basic_tileset_and_assets_standard/water_and_island_tiles_v2.png" id="4_py8lq"]
+[ext_resource type="Texture2D" uid="uid://bjlshhwnsppmw" path="res://assets/sprites/Top Alligator Jaw.png" id="5_7qt0h"]
 [ext_resource type="Script" uid="uid://drfy2svy6iv1c" path="res://scripts/objects/alligator.gd" id="5_t55p0"]
-[ext_resource type="PackedScene" path="res://scenes/objects/platform 1.tscn" id="8_t55p0"]
+[ext_resource type="PackedScene" uid="uid://csdw5uylok8n2" path="res://scenes/objects/platform 1.tscn" id="8_t55p0"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_u8x4h"]
 texture = ExtResource("4_py8lq")

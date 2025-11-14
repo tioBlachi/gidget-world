@@ -116,7 +116,6 @@ func rpc_send_players(server_players: PackedInt32Array) -> void:
 func rpc_start_game(level_name: String) -> void:
 	if not multiplayer.is_server():
 		return
-	# (optional) validate players/count here, then broadcast:
 	rpc("rpc_open_level", level_name)
 
 # Server → Everyone (call_local): open that level on all peers

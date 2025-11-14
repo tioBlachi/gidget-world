@@ -1,7 +1,7 @@
 [gd_scene load_steps=20 format=3 uid="uid://tfbh3xcymhei"]
 
-[ext_resource type="Script" path="res://scripts/objects/moving_platform.gd" id="1_2qxys"]
-[ext_resource type="Texture2D" uid="uid://bbe23562jc1be" path="res://Art/NewArt/BirdSprite.png" id="2_2qxys"]
+[ext_resource type="Script" uid="uid://dkycc55huw0n0" path="res://scripts/objects/moving_platform.gd" id="1_2qxys"]
+[ext_resource type="Texture2D" uid="uid://72x8000b4oso" path="res://Art/NewArt/BirdSprite.png" id="2_2qxys"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6ybag"]
 atlas = ExtResource("2_2qxys")
@@ -113,10 +113,10 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ll65p"]
-size = Vector2(26.6667, 20)
+size = Vector2(42.9773, 4.47618)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fja67"]
-size = Vector2(18, 8)
+size = Vector2(25.8567, 8)
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ll65p"]
 properties/0/path = NodePath(".:speed")
