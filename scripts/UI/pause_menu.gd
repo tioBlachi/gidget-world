@@ -64,8 +64,10 @@ func _on_resume_pressed() -> void:
 
 @rpc("any_peer", "call_local")
 func request_restart() -> void:
-	if multiplayer.get_unique_id() == 1:
-		Net.rpc_start_game(get_tree().current_scene.name)
+	#if multiplayer.get_unique_id() == 1:
+	await get_tree().physics_frame
+	var scene = get_tree().current_scene.name
+	Net.rpc_start_game(scene)
 
 @rpc("any_peer", "call_local")
 func _on_restart_pressed() -> void:

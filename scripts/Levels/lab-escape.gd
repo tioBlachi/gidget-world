@@ -17,6 +17,7 @@ var players_in_game := Net.players.size()
 func _ready() -> void:	
 	add_to_group("lab_escape")
 	if multiplayer.is_server():
+		await get_tree().physics_frame
 		spawn_players.rpc(Net.players)
 		_set_initial_flimsy_cell()
 		
