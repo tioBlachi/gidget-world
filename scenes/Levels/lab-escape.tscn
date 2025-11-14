@@ -2,13 +2,13 @@
 
 [ext_resource type="Script" uid="uid://kwqdtogko814" path="res://scripts/Levels/lab-escape.gd" id="1_r6deh"]
 [ext_resource type="PackedScene" uid="uid://c2mmmw150y6yj" path="res://scenes/objects/lab_cell.tscn" id="3_hrlo7"]
-[ext_resource type="Texture2D" uid="uid://fhoq4atbdmbq" path="res://assets/Tiles/oldTiles/lab_tiles.png" id="4_mi8k0"]
+[ext_resource type="Texture2D" uid="uid://dhjnmqtfenj7p" path="res://assets/Tiles/oldTiles/lab_tiles.png" id="4_mi8k0"]
 [ext_resource type="PackedScene" uid="uid://cyxa25yg2hfwc" path="res://scenes/objects/button.tscn" id="5_7nrcb"]
 [ext_resource type="PackedScene" uid="uid://q5myivnq8cna" path="res://scenes/objects/key_card.tscn" id="7_85sb4"]
-[ext_resource type="Texture2D" uid="uid://c6uewffwe4xno" path="res://Art/OldTestArt/spike.png" id="7_modnx"]
+[ext_resource type="Texture2D" uid="uid://cenj22yc65knm" path="res://Art/OldTestArt/spike.png" id="7_modnx"]
 [ext_resource type="PackedScene" uid="uid://dbh40ehfj6b7n" path="res://scenes/objects/lab_exit_door.tscn" id="8_fg2n0"]
-[ext_resource type="Texture2D" uid="uid://c2hhch0j2uw2j" path="res://Art/OldTestArt/metal.png" id="8_hrlo7"]
-[ext_resource type="Texture2D" uid="uid://d2t5e33rxtui1" path="res://Art/OldTestArt/crate.png" id="9_mi8k0"]
+[ext_resource type="Texture2D" uid="uid://b4bqqu8h53eca" path="res://Art/OldTestArt/metal.png" id="8_hrlo7"]
+[ext_resource type="Texture2D" uid="uid://cq021cu83hs7i" path="res://Art/OldTestArt/crate.png" id="9_mi8k0"]
 [ext_resource type="PackedScene" uid="uid://bf72f4j7c2i3f" path="res://scenes/UI/pause_menu.tscn" id="10_hrlo7"]
 [ext_resource type="PackedScene" uid="uid://coo3efhcvxiar" path="res://scenes/UI/restart_screen.tscn" id="11_mi8k0"]
 
@@ -231,4 +231,3 @@ texture = ExtResource("8_hrlo7")
 [editable path="LabCell2"]
 [editable path="LabCell1"]
 [editable path="Button"]
-[editable path="PopupUI"]

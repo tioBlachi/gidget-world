@@ -22,6 +22,7 @@ func _ready() -> void:
 		
 	door.player_left.connect( func():
 		players_in_game -= 1
+		check_win()
 		)
 	
 	for p in pSpawner.get_children():
@@ -37,7 +38,9 @@ func _set_initial_flimsy_cell():
 	var choice = randi() % 2
 	set_flimsy_cell.rpc(choice)
 	
-func _process(delta: float) -> void:
+func check_win() -> void:
+	print("Checking for win...")
+	print(players_in_game)
 	if players_in_game <= 0:
 		popup.current_state = popup.LEVEL_STATE.COMPLETE
 		popup.pause()

@@ -49,22 +49,20 @@ func _on_pen_body_entered(body: Node2D) -> void:
 		cats_left -= 1
 		print(cats_left, " cats left to herd")
 		if cats_left <= 0:
-			#print("All cats herded! You win!")
+			trigger_win.rpc()
 			#get_tree().paused = true
-			popup.current_state = popup.LEVEL_STATE.COMPLETE
-			# TODO: Level complete UI
-			popup.pause()
+			#popup.current_state = popup.LEVEL_STATE.COMPLETE
+			## TODO: Level complete UI
+			#popup.pause()
+
+@rpc("any_peer", "call_local")
+func trigger_win():
+	popup.current_state = popup.LEVEL_STATE.COMPLETE
+	popup.pause()
 
 func _on_pen_body_exited(body: Node2D) -> void:
 	if body.is_in_group("cats"):
 		cats_left += 1
-
-func set_side_scroller_now(id: int, value: bool):
-	if multiplayer.is_server() and pSpawner:
-		if id >= 0 and id < pSpawner.get_child_count():
-			var node = pSpawner.get_child(id)
-			if node and node.has_method("set_side_scroller"):
-				node.set_side_scroller.rpc(value)
 
 @rpc("authority", "call_local", "reliable")
 func spawn_players(p_array: PackedInt32Array) -> void:

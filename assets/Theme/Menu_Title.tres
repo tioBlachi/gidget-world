@@ -1,6 +1,6 @@
 [gd_resource type="Theme" load_steps=20 format=4 uid="uid://dapn0300q5ffg"]
 
-[ext_resource type="Texture2D" uid="uid://b4xijs7oyeewe" path="res://assets/sprites/Complete_UI_Essential_Pack_Free/01_Flat_Theme/Spritesheets/Spritesheet_UI_Flat.png" id="1_6w60o"]
+[ext_resource type="Texture2D" uid="uid://cfrhpnfw0xam7" path="res://assets/sprites/Complete_UI_Essential_Pack_Free/01_Flat_Theme/Spritesheets/Spritesheet_UI_Flat.png" id="1_6w60o"]
 
 [sub_resource type="Image" id="Image_57q26"]
 data = {
