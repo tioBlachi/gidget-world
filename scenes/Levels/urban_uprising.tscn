@@ -1,11 +1,12 @@
-[gd_scene load_steps=12 format=4 uid="uid://byukt8eyso7jr"]
+[gd_scene load_steps=13 format=4 uid="uid://byukt8eyso7jr"]
 
-[ext_resource type="Texture2D" uid="uid://bt8mrued3ie7w" path="res://Art/OldTestArt/metal2.png" id="1_sqmmr"]
+[ext_resource type="Texture2D" uid="uid://c7f3sl0eldmyp" path="res://Art/OldTestArt/metal2.png" id="1_sqmmr"]
 [ext_resource type="Script" uid="uid://chy5ttrcgpkg1" path="res://scripts/Levels/urban_uprising.gd" id="1_tf8py"]
-[ext_resource type="Texture2D" uid="uid://cs58b63d0hxtf" path="res://Art/NewArt/Big City.png" id="4_5h4xf"]
-[ext_resource type="PackedScene" uid="uid://dc43tddn6t8xj" path="res://scenes/actors/FlameDudeRC.tscn" id="6_5h4xf"]
-[ext_resource type="Texture2D" uid="uid://dvtufbosn1juy" path="res://assets/sprites/New Piskel.png" id="6_hb40t"]
-[ext_resource type="PackedScene" uid="uid://csna0g1nst4im" path="res://scenes/objects/moving_platform.tscn" id="7_5h4xf"]
+[ext_resource type="Texture2D" uid="uid://biteud63uieua" path="res://Art/NewArt/Big City.png" id="4_5h4xf"]
+[ext_resource type="PackedScene" path="res://scenes/actors/FlameDudeRC.tscn" id="6_5h4xf"]
+[ext_resource type="Texture2D" uid="uid://dneu22rr5fcdw" path="res://assets/sprites/New Piskel.png" id="6_hb40t"]
+[ext_resource type="PackedScene" uid="uid://87ms82l1c82e" path="res://scenes/objects/moving_platform.tscn" id="7_5h4xf"]
+[ext_resource type="PackedScene" uid="uid://bf72f4j7c2i3f" path="res://scenes/UI/pause_menu.tscn" id="7_mk1m7"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_5h4xf"]
 
@@ -8685,7 +8686,7 @@ size = Vector2(10, 10)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5h4xf"]
 size = Vector2(1672, 19)
 
-[node name="UrbanUprising" type="Node2D"]
+[node name="Urban Uprising" type="Node2D"]
 position = Vector2(-16, 0)
 script = ExtResource("1_tf8py")
 
@@ -8844,6 +8845,8 @@ SPEED = 80
 
 [node name="RayCast2D" parent="FlameDudeRC/Face" index="1"]
 target_position = Vector2(128.995, -26.2035)
+
+[node name="UILayer" parent="." instance=ExtResource("7_mk1m7")]
 
 [connection signal="body_entered" from="Camera2D/BottomBorder" to="." method="_on_bottom_border_body_entered"]
 

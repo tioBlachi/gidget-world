@@ -1,6 +1,7 @@
 extends Area2D
 
 signal lab_door_opened
+signal player_left
 
 @export var is_open := false
 
@@ -33,6 +34,7 @@ func rpc_request_open(requester_id: int):
 func rpc_remove_player(peer_id: int):
 	var p := find_player(peer_id)
 	if p:
+		emit_signal("player_left")
 		p.queue_free()
 
 @rpc("authority", "call_local", "reliable")

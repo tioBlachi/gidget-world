@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=4 uid="uid://bsihlmawq5jbq"]
+[gd_scene load_steps=21 format=4 uid="uid://bsihlmawq5jbq"]
 
 [ext_resource type="Script" uid="uid://kwqdtogko814" path="res://scripts/Levels/lab-escape.gd" id="1_r6deh"]
 [ext_resource type="PackedScene" uid="uid://c2mmmw150y6yj" path="res://scenes/objects/lab_cell.tscn" id="3_hrlo7"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://c2hhch0j2uw2j" path="res://Art/OldTestArt/metal.png" id="8_hrlo7"]
 [ext_resource type="Texture2D" uid="uid://d2t5e33rxtui1" path="res://Art/OldTestArt/crate.png" id="9_mi8k0"]
 [ext_resource type="PackedScene" uid="uid://bf72f4j7c2i3f" path="res://scenes/UI/pause_menu.tscn" id="10_hrlo7"]
+[ext_resource type="PackedScene" uid="uid://coo3efhcvxiar" path="res://scenes/UI/restart_screen.tscn" id="11_mi8k0"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_max5s"]
 texture = ExtResource("4_mi8k0")
@@ -223,8 +224,11 @@ texture = ExtResource("8_hrlo7")
 
 [node name="PauseMenu" parent="." instance=ExtResource("10_hrlo7")]
 
+[node name="PopupUI" parent="." instance=ExtResource("11_mi8k0")]
+
 [connection signal="body_entered" from="Spikes" to="." method="_on_spikes_body_entered"]
 
 [editable path="LabCell2"]
 [editable path="LabCell1"]
 [editable path="Button"]
+[editable path="PopupUI"]

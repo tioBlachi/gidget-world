@@ -4,7 +4,8 @@ signal portal_defeated
 signal cat_engulfed(CharacterBody2D)
 
 @onready var portal_sprite = $Sprite2D
-@onready var mat = portal_sprite.material
+#@onready var mat = portal_sprite.material
+@onready var mat: ShaderMaterial = (portal_sprite.material as ShaderMaterial)
 @onready var timer: Timer = $Timer
 @onready var explosion_template: AnimatedSprite2D = $Explosions
 @onready var boom: AudioStreamPlayer2D = $Boom
@@ -23,15 +24,32 @@ var dying := {}
 var colors = [Color.WHITE, Color.AQUA, Color.FOREST_GREEN, Color.ORANGE, Color.RED, Color.RED ]
 @export var phase: int
 
-func _ready() -> void:
-	mat.set_shader_parameter("color_a", colors[phase])
+#func _ready() -> void:
+	#mat.set_shader_parameter("color_a", colors[phase])
+#
+	#timer.wait_time = 1.0
+	#timer.one_shot = false
+	#timer.timeout.connect(_on_timer_timeout)
+	#$Sprite2D/AnimatedSprite2D.play("idle")
+	##timer.start()
+	#phase = 0
+	
 
-	timer.wait_time = 1.0
-	timer.one_shot = false
-	timer.timeout.connect(_on_timer_timeout)
-	$Sprite2D/AnimatedSprite2D.play("idle")
-	#timer.start()
-	phase = 0
+
+func _ready() -> void:
+	# On dedicated/headless servers, skip all visual work
+	if OS.has_feature("server") or DisplayServer.get_name() == "headless":
+		return
+
+	if mat == null:
+		var sh: Shader = preload("res://scenes/actors/PortalBoss.gdshader")
+		mat = ShaderMaterial.new()
+		mat.shader = sh
+		portal_sprite.material = mat
+	else:
+		mat = mat.duplicate() as ShaderMaterial
+		portal_sprite.material = mat
+
 	
 func _physics_process(delta: float) -> void:
 	for id in pulled.keys():
@@ -49,50 +67,83 @@ func _physics_process(delta: float) -> void:
 		var dir = to_center / dist
 		var step = min(pull_speed * delta, dist)
 		p.global_position += dir * step
+		
+#func _process(_delta: float) -> void:
+	#match phase:
+		#0:
+			#mat.set_shader_parameter("tightness", 12.0)
+			#mat.set_shader_parameter("color_a", colors[phase])
+			#mat.set_shader_parameter("speed", 0.1)
+			#mat.set_shader_parameter("border_color", Color.BLACK)
+			#mat.set_shader_parameter("border_softness", 0.0)
+		#1:
+			#mat.set_shader_parameter("tightness", 12.0)
+			#mat.set_shader_parameter("color_a", colors[phase])
+			#mat.set_shader_parameter("speed", 1.0)
+			#mat.set_shader_parameter("border_color", Color.BLACK)
+			#mat.set_shader_parameter("border_softness", 0.0)
+		#2:
+			#mat.set_shader_parameter("tightness", 8.0)
+			#mat.set_shader_parameter("color_a", colors[phase])
+			#mat.set_shader_parameter("speed", 2.0)
+			#mat.set_shader_parameter("border_color", Color.BLACK)
+			#mat.set_shader_parameter("border_softness", 0.0)
+		#3:
+			#mat.set_shader_parameter("tightness", 4.0)
+			#mat.set_shader_parameter("color_a", colors[phase])
+			#mat.set_shader_parameter("speed", 3.0)
+			#mat.set_shader_parameter("border_color", Color.BLACK)
+			#mat.set_shader_parameter("border_softness", 0.0)
+		#4:
+			#mat.set_shader_parameter("tightness", 2.0)
+			#mat.set_shader_parameter("color_a", colors[phase])
+			#mat.set_shader_parameter("speed", 4.0)
+			#mat.set_shader_parameter("border_color", Color.BLACK)
+			#mat.set_shader_parameter("border_softness", 0.1)
+		#5:
+			#mat.set_shader_parameter("tightness", 0.0)
+			#mat.set_shader_parameter("color_a", colors[phase])
+			#mat.set_shader_parameter("speed", 0.0)
+			#$Sprite2D/AnimatedSprite2D.stop()
+			#
+	#if phase == 5 and not explosions_started:
+		#explosions_started = true
+		#await get_tree().create_timer(1).timeout
+		#$Rumble.play()
+		#emit_signal("portal_defeated")
+		#start_explosions()
+		
 func _process(_delta: float) -> void:
+	# Skip visuals on server/headless
+	if OS.has_feature("server") or DisplayServer.get_name() == "headless":
+		return
+	if mat == null:
+		return 
+
 	match phase:
 		0:
-			mat.set_shader_parameter("tightness", 12.0)
-			mat.set_shader_parameter("color_a", colors[phase])
-			mat.set_shader_parameter("speed", 0.1)
-			mat.set_shader_parameter("border_color", Color.BLACK)
-			mat.set_shader_parameter("border_softness", 0.0)
+			_set_mat(12.0, colors[phase], 0.1, Color.BLACK, 0.0)
 		1:
-			mat.set_shader_parameter("tightness", 12.0)
-			mat.set_shader_parameter("color_a", colors[phase])
-			mat.set_shader_parameter("speed", 1.0)
-			mat.set_shader_parameter("border_color", Color.BLACK)
-			mat.set_shader_parameter("border_softness", 0.0)
+			_set_mat(12.0, colors[phase], 1.0, Color.BLACK, 0.0)
 		2:
-			mat.set_shader_parameter("tightness", 8.0)
-			mat.set_shader_parameter("color_a", colors[phase])
-			mat.set_shader_parameter("speed", 2.0)
-			mat.set_shader_parameter("border_color", Color.BLACK)
-			mat.set_shader_parameter("border_softness", 0.0)
+			_set_mat(8.0,  colors[phase], 2.0, Color.BLACK, 0.0)
 		3:
-			mat.set_shader_parameter("tightness", 4.0)
-			mat.set_shader_parameter("color_a", colors[phase])
-			mat.set_shader_parameter("speed", 3.0)
-			mat.set_shader_parameter("border_color", Color.BLACK)
-			mat.set_shader_parameter("border_softness", 0.0)
+			_set_mat(4.0,  colors[phase], 3.0, Color.BLACK, 0.0)
 		4:
-			mat.set_shader_parameter("tightness", 2.0)
-			mat.set_shader_parameter("color_a", colors[phase])
-			mat.set_shader_parameter("speed", 4.0)
-			mat.set_shader_parameter("border_color", Color.BLACK)
-			mat.set_shader_parameter("border_softness", 0.1)
+			_set_mat(2.0,  colors[phase], 4.0, Color.BLACK, 0.1)
 		5:
 			mat.set_shader_parameter("tightness", 0.0)
 			mat.set_shader_parameter("color_a", colors[phase])
 			mat.set_shader_parameter("speed", 0.0)
 			$Sprite2D/AnimatedSprite2D.stop()
-			
-	if phase == 5 and not explosions_started:
-		explosions_started = true
-		await get_tree().create_timer(1).timeout
-		$Rumble.play()
-		emit_signal("portal_defeated")
-		start_explosions()
+
+func _set_mat(tight: float, col: Color, spd: float, bcol: Color, bsoft: float) -> void:
+	mat.set_shader_parameter("tightness", tight)
+	mat.set_shader_parameter("color_a", col)
+	mat.set_shader_parameter("speed", spd)
+	mat.set_shader_parameter("border_color", bcol)
+	mat.set_shader_parameter("border_softness", bsoft)
+
 			
 func _on_timer_timeout() -> void:
 	phase += 1

@@ -1,16 +1,17 @@
-[gd_scene load_steps=20 format=4 uid="uid://b18e8xpu1xg1g"]
+[gd_scene load_steps=21 format=4 uid="uid://qlbomw7x4wxk"]
 
 [ext_resource type="Script" uid="uid://0hgdu3v8flss" path="res://scripts/Levels/final.gd" id="1_s4e8r"]
-[ext_resource type="Texture2D" uid="uid://gpufj5wv3tf3" path="res://assets/Tiles/marble.png" id="2_2wbhh"]
-[ext_resource type="PackedScene" uid="uid://cvlhi5bunpi4d" path="res://scenes/actors/PortalBoss.tscn" id="3_rv6ag"]
-[ext_resource type="PackedScene" uid="uid://cjb4jac725fq5" path="res://scenes/objects/Turret.tscn" id="4_80p5q"]
-[ext_resource type="PackedScene" uid="uid://dbpxprhw7dxmc" path="res://scenes/objects/top_down_button.tscn" id="5_hkbtv"]
-[ext_resource type="Texture2D" uid="uid://dm4ynga7tc6wf" path="res://assets/Tiles/tilemap_industrial.png" id="6_5evji"]
-[ext_resource type="PackedScene" uid="uid://ct8ip3qr0bu73" path="res://scenes/objects/one_shot_mover.tscn" id="7_j1fn8"]
-[ext_resource type="PackedScene" uid="uid://bpyqekk1pkhwm" path="res://scenes/objects/Generator.tscn" id="8_w76ae"]
+[ext_resource type="Texture2D" uid="uid://dfiaq77335nxd" path="res://assets/Tiles/marble.png" id="2_2wbhh"]
+[ext_resource type="PackedScene" uid="uid://bek2i5883be1h" path="res://scenes/actors/PortalBoss.tscn" id="3_rv6ag"]
+[ext_resource type="PackedScene" path="res://scenes/objects/Turret.tscn" id="4_80p5q"]
+[ext_resource type="PackedScene" path="res://scenes/objects/top_down_button.tscn" id="5_hkbtv"]
+[ext_resource type="Texture2D" uid="uid://bl8uq42vmbtrc" path="res://assets/Tiles/tilemap_industrial.png" id="6_5evji"]
+[ext_resource type="PackedScene" path="res://scenes/objects/one_shot_mover.tscn" id="7_j1fn8"]
+[ext_resource type="PackedScene" path="res://scenes/objects/Generator.tscn" id="8_w76ae"]
 [ext_resource type="PackedScene" uid="uid://ug4dtfp4td5v" path="res://scenes/actors/catHead.tscn" id="9_4r5wh"]
-[ext_resource type="AudioStream" uid="uid://c0dmnlhfuhhmm" path="res://assets/sounds/portal_rumble.mp3" id="10_2wbhh"]
-[ext_resource type="PackedScene" uid="uid://cglbfkh1bci5v" path="res://scenes/objects/terminal.tscn" id="11_rv6ag"]
+[ext_resource type="AudioStream" uid="uid://djuh1m2mw2wl0" path="res://assets/sounds/portal_rumble.mp3" id="10_2wbhh"]
+[ext_resource type="PackedScene" path="res://scenes/objects/terminal.tscn" id="11_rv6ag"]
+[ext_resource type="PackedScene" uid="uid://bf72f4j7c2i3f" path="res://scenes/UI/pause_menu.tscn" id="12_80p5q"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lm5nn"]
 texture = ExtResource("2_2wbhh")
@@ -545,9 +546,6 @@ size = Vector2(134, 75)
 
 [node name="Final" type="Node2D"]
 script = ExtResource("1_s4e8r")
-map_limits = null
-_start_phase_1 = null
-p1_generators_destroyed = null
 
 [node name="pSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("uid://bxpry3684affg")
@@ -787,5 +785,7 @@ scale = Vector2(0.44, 0.32001)
 position = Vector2(104, 806)
 rotation = 3.14159
 scale = Vector2(0.44, 0.32001)
+
+[node name="UILayer" parent="." instance=ExtResource("12_80p5q")]
 
 [connection signal="body_entered" from="2ndRoom" to="." method="_on_2nd_room_body_entered"]
