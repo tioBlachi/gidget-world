@@ -8752,7 +8752,6 @@ texture = ExtResource("1_sqmmr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="2nd4"]
 position = Vector2(0.0117764, -1.52588e-05)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_sqmmr")
 
 [node name="3rd2" type="StaticBody2D" parent="."]
@@ -8795,7 +8794,6 @@ texture = ExtResource("1_sqmmr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Highest"]
 position = Vector2(-0.508174, -0.000183105)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_sqmmr")
 
 [node name="Camera2D" type="Camera2D" parent="."]
