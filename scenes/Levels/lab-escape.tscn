@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dbh40ehfj6b7n" path="res://scenes/objects/lab_exit_door.tscn" id="8_fg2n0"]
 [ext_resource type="Texture2D" uid="uid://b4bqqu8h53eca" path="res://Art/OldTestArt/metal.png" id="8_hrlo7"]
 [ext_resource type="Texture2D" uid="uid://cq021cu83hs7i" path="res://Art/OldTestArt/crate.png" id="9_mi8k0"]
-[ext_resource type="PackedScene" uid="uid://bf72f4j7c2i3f" path="res://scenes/UI/pause_menu.tscn" id="10_hrlo7"]
+[ext_resource type="PackedScene" uid="uid://bf72f4j7c2i3f" path="res://scripts/UI/pause_menu.tscn" id="10_hrlo7"]
 [ext_resource type="PackedScene" uid="uid://coo3efhcvxiar" path="res://scenes/UI/restart_screen.tscn" id="11_mi8k0"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_max5s"]

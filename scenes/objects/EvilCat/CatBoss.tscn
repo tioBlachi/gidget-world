@@ -1,47 +1,121 @@
-[gd_scene load_steps=7 format=3 uid="uid://2lntdlomdt6o"]
+[gd_scene load_steps=16 format=3 uid="uid://2lntdlomdt6o"]
 
-[ext_resource type="Texture2D" uid="uid://b3crl0h7doq3v" path="res://scenes/objects/EvilCat/EvilCat.png" id="1_b2aih"]
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_dvumr"]
+size = Vector2(32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_tof08"]
-atlas = ExtResource("1_b2aih")
-region = Rect2(0, 0, 32, 32)
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_b2aih"]
+size = Vector2(32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_gj2r8"]
-atlas = ExtResource("1_b2aih")
-region = Rect2(32, 0, 32, 32)
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_tof08"]
+size = Vector2(32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_1603r"]
-atlas = ExtResource("1_b2aih")
-region = Rect2(64, 0, 32, 32)
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_gj2r8"]
+size = Vector2(32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_d2r12"]
-atlas = ExtResource("1_b2aih")
-region = Rect2(96, 0, 32, 32)
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_1603r"]
+size = Vector2(32, 32)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_d2r12"]
+size = Vector2(32, 32)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_0atwy"]
+size = Vector2(32, 32)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_7ndaw"]
+size = Vector2(32, 32)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_onpoj"]
+size = Vector2(32, 32)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_x4ag1"]
+size = Vector2(32, 32)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_g7i86"]
+size = Vector2(32, 32)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_uhds1"]
+size = Vector2(32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_0atwy"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_tof08")
+"texture": SubResource("PlaceholderTexture2D_dvumr")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_gj2r8")
+"texture": SubResource("PlaceholderTexture2D_b2aih")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_1603r")
+"texture": SubResource("PlaceholderTexture2D_tof08")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_d2r12")
+"texture": SubResource("PlaceholderTexture2D_gj2r8")
 }],
 "loop": true,
-"name": &"default",
+"name": &"angry",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("PlaceholderTexture2D_1603r")
+}, {
+"duration": 1.0,
+"texture": SubResource("PlaceholderTexture2D_d2r12")
+}, {
+"duration": 1.0,
+"texture": SubResource("PlaceholderTexture2D_0atwy")
+}, {
+"duration": 1.0,
+"texture": SubResource("PlaceholderTexture2D_7ndaw")
+}],
+"loop": true,
+"name": &"no_patch",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("PlaceholderTexture2D_onpoj")
+}, {
+"duration": 1.0,
+"texture": SubResource("PlaceholderTexture2D_x4ag1")
+}, {
+"duration": 1.0,
+"texture": SubResource("PlaceholderTexture2D_g7i86")
+}, {
+"duration": 1.0,
+"texture": SubResource("PlaceholderTexture2D_uhds1")
+}],
+"loop": true,
+"name": &"patch",
 "speed": 5.0
 }]
 
-[node name="CatBoss" type="Node2D"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_gj2r8"]
+radius = 137.015
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(16, -16)
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_gj2r8"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath("Anim:animation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath("Anim:flip_h")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+
+[node name="CatBoss" type="CharacterBody2D"]
+
+[node name="Anim" type="AnimatedSprite2D" parent="."]
+position = Vector2(1, 3)
+scale = Vector2(10, 10)
 sprite_frames = SubResource("SpriteFrames_0atwy")
-autoplay = "default"
-frame_progress = 0.61851
+animation = &"patch"
+flip_h = true
+
+[node name="Body" type="CollisionShape2D" parent="."]
+position = Vector2(2, 22)
+shape = SubResource("CircleShape2D_gj2r8")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_gj2r8")

@@ -1,0 +1,61 @@
+[gd_scene load_steps=9 format=3 uid="uid://c345ml4nswnab"]
+
+[ext_resource type="Script" uid="uid://hfk2t5jjeb1v" path="res://scenes/player/player_ship.gd" id="1_62scy"]
+[ext_resource type="Texture2D" uid="uid://delia7ww6o2ic" path="res://scenes/player/GidgetSpaceship.png" id="1_qlqj5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3elve"]
+atlas = ExtResource("1_qlqj5")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ln5b4"]
+atlas = ExtResource("1_qlqj5")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wrnfd"]
+atlas = ExtResource("1_qlqj5")
+region = Rect2(0, 128, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_a6ke5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3elve")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ln5b4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wrnfd")
+}],
+"loop": true,
+"name": &"flying",
+"speed": 20.0
+}]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_05h1u"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath("AnimatedSprite2D:flip_h")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dvg5m"]
+radius = 35.0
+height = 114.0
+
+[node name="PlayerShip" type="CharacterBody2D"]
+script = ExtResource("1_62scy")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_a6ke5")
+animation = &"flying"
+autoplay = "flying"
+frame_progress = 0.388968
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_05h1u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_dvg5m")

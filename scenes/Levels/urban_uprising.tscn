@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dc43tddn6t8xj" path="res://scenes/actors/FlameDudeRC.tscn" id="6_5h4xf"]
 [ext_resource type="Texture2D" uid="uid://dvtufbosn1juy" path="res://assets/sprites/New Piskel.png" id="6_hb40t"]
 [ext_resource type="PackedScene" uid="uid://csna0g1nst4im" path="res://scenes/objects/moving_platform.tscn" id="7_5h4xf"]
-[ext_resource type="PackedScene" uid="uid://bf72f4j7c2i3f" path="res://scenes/UI/pause_menu.tscn" id="7_mk1m7"]
+[ext_resource type="PackedScene" uid="uid://bf72f4j7c2i3f" path="res://scripts/UI/pause_menu.tscn" id="7_mk1m7"]
 [ext_resource type="PackedScene" uid="uid://coo3efhcvxiar" path="res://scenes/UI/restart_screen.tscn" id="8_d1sqi"]
 [ext_resource type="PackedScene" uid="uid://bxpry3684affg" path="res://scenes/player/player.tscn" id="8_mk1m7"]
 [ext_resource type="PackedScene" uid="uid://tfbh3xcymhei" path="res://scenes/objects/BetterBird.tscn" id="9_8x7pg"]
