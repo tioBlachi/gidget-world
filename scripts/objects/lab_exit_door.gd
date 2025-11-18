@@ -12,6 +12,15 @@ func _on_body_entered_local(body: Node):
 	if not body.is_in_group("players"):
 		return
 	var requester_id := body.name.to_int() if body.name.is_valid_int() else body.get_multiplayer_authority()
+	# Single-player
+	# treat as open trigger locally.
+	if not multiplayer.has_multiplayer_peer():
+		if is_open:
+			if body.has_method("die"):
+				body.die()
+			else:
+				body.queue_free()
+		return
 	if multiplayer.is_server():
 		rpc_request_open(requester_id)
 	else:
@@ -46,6 +55,7 @@ func rpc_open_door():
 func _start_open_anim():
 	$AnimatedSprite2D.play("opening")
 	$LabDoorOpenSfx.play()
+	return null
 
 func _requester_has_keycard(pid: int) -> bool:
 	for k in get_tree().get_nodes_in_group("keycards"):

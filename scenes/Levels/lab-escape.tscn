@@ -1,6 +1,6 @@
 [gd_scene load_steps=19 format=4 uid="uid://bsihlmawq5jbq"]
 
-[ext_resource type="Script" path="res://scripts/Levels/lab-escape.gd" id="1_r6deh"]
+[ext_resource type="Script" uid="uid://kwqdtogko814" path="res://scripts/Levels/lab-escape.gd" id="1_r6deh"]
 [ext_resource type="PackedScene" uid="uid://c2mmmw150y6yj" path="res://scenes/objects/lab_cell.tscn" id="3_hrlo7"]
 [ext_resource type="Texture2D" uid="uid://ctijq3u5aqe1v" path="res://assets/Tiles/oldTiles/lab_tiles.png" id="4_mi8k0"]
 [ext_resource type="PackedScene" uid="uid://cyxa25yg2hfwc" path="res://scenes/objects/button.tscn" id="5_7nrcb"]
