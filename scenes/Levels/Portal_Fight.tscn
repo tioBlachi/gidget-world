@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://bgv34gcuxiuqr"]
+[gd_scene load_steps=38 format=3 uid="uid://bgv34gcuxiuqr"]
 
 [ext_resource type="Script" uid="uid://r7mntc1kketq" path="res://scripts/Levels/portal_fight.gd" id="1_7rmao"]
 [ext_resource type="Texture2D" uid="uid://c210jtig88gik" path="res://assets/sprites/PortalBG.png" id="1_ekbpn"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://ci0kjxllfmyhu" path="res://assets/sprites/Explosion.png" id="4_greg0"]
 [ext_resource type="PackedScene" uid="uid://bf72f4j7c2i3f" path="res://scripts/UI/pause_menu.tscn" id="5_13yns"]
 [ext_resource type="PackedScene" uid="uid://coo3efhcvxiar" path="res://scenes/UI/restart_screen.tscn" id="6_imk1x"]
+[ext_resource type="AudioStream" uid="uid://56bjd8k8doix" path="res://assets/sounds/Music/Boss Battle.ogg" id="7_imk1x"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_greg0"]
 atlas = ExtResource("1_ekbpn")
@@ -207,7 +208,7 @@ properties/1/path = NodePath("CanvasLayer/BossHP:value")
 properties/1/spawn = true
 properties/1/replication_mode = 1
 
-[node name="PortalFight" type="Node2D"]
+[node name="Portal Fight" type="Node2D"]
 script = ExtResource("1_7rmao")
 
 [node name="Background" type="AnimatedSprite2D" parent="."]
@@ -283,7 +284,7 @@ offset_bottom = 49.0
 text = "CatBoss"
 
 [node name="Fader" type="CanvasLayer" parent="."]
-layer = 100
+layer = 3
 
 [node name="WhiteFade" type="ColorRect" parent="Fader"]
 z_index = 20
@@ -299,9 +300,13 @@ color = Color(1, 1, 1, 0)
 replication_config = SubResource("SceneReplicationConfig_greg0")
 
 [node name="PauseMenu" parent="." instance=ExtResource("5_13yns")]
+layer = 4
 
 [node name="PopupUI" parent="." instance=ExtResource("6_imk1x")]
 
-[connection signal="body_entered" from="CatBoss/Area2D" to="." method="_on_area_2d_body_entered"]
+[node name="Music" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_imk1x")
+autoplay = true
+parameters/looping = true
 
 [editable path="CatBoss"]

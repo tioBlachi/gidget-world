@@ -34,6 +34,9 @@ func _physics_process(delta: float) -> void:
 		elif x_direction < 0:
 			sprite.flip_h = true
 			SPEED = 200.0
+		elif y_direction < 0 or y_direction > 0:
+			#sprite.flip_h = true
+			SPEED = 200.0
 		if Input.is_action_pressed("action") && ready_to_fire:
 			ready_to_fire = false
 			cooldown_timer.start()

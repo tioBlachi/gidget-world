@@ -7,18 +7,26 @@ extends Node2D
 @onready var player2marker := $PlayerMarkers/Player2Marker
 @onready var pSpawner := $pSpawner
 @onready var player_scene = preload("res://scenes/player/PlayerShip.tscn")
+@onready var music := $Music
 # Boss stuff
 @onready var white_fade: ColorRect = $Fader/WhiteFade
 @onready var explosion_template: AnimatedSprite2D = $Explosions
 @export var explosion_radius = 150.0
 @export var explosions_total = 7
-@export var boss_hp := 10;
+@export var boss_hp := 20;
+
+var players : Array
 
 func _ready() -> void:
+	$CanvasLayer/BossHP.max_value = boss_hp
 	bg.play("default")
 	$CanvasLayer/BossHP.value = boss_hp
 	if multiplayer.is_server():
 		spawn_players.rpc(Net.players)
+		
+	Global.boss_hit.connect(on_boss_hit_by_laser)
+	
+	players = pSpawner.get_children()
 	
 func _process(delta: float) -> void:
 	pass
@@ -29,7 +37,11 @@ func boss_take_damage(amount: float):
 	boss_hp = max(0, boss_hp)
 	$CanvasLayer/BossHP.value = boss_hp
 	if boss_hp <= 0:
+		for p in players:
+			p.disabled = true
+			
 		bg.stop()
+		music.stop()
 		boss_anim.play("angry")
 		spawn_explosions_over_time.rpc(5.0, 0.12)
 		fade_to_white.rpc()
@@ -102,8 +114,6 @@ func fade_to_white(duration: float = 5.0) -> void:
 	tween.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	tween.tween_property(white_fade, "color:a", 1.0, duration)
 
-
-func _on_area_2d_body_entered(body: Node2D) -> void:
-	if body.is_in_group("bullets"):
-		print("Boss hit!")
-		boss_take_damage.rpc_id(1, "boss_take_damage", 1)
+func on_boss_hit_by_laser():
+	
+	boss_take_damage.rpc(1)
