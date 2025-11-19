@@ -1,16 +1,22 @@
-[gd_scene load_steps=16 format=3 uid="uid://2lntdlomdt6o"]
+[gd_scene load_steps=18 format=3 uid="uid://2lntdlomdt6o"]
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_dvumr"]
-size = Vector2(32, 32)
+[ext_resource type="Texture2D" uid="uid://ddeyv7ati5flg" path="res://scenes/objects/EvilCat/AngryEvilCat.png" id="1_gj2r8"]
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_b2aih"]
-size = Vector2(32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_b2aih"]
+atlas = ExtResource("1_gj2r8")
+region = Rect2(0, 0, 32, 32)
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_tof08"]
-size = Vector2(32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_tof08"]
+atlas = ExtResource("1_gj2r8")
+region = Rect2(32, 0, 32, 32)
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_gj2r8"]
-size = Vector2(32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_gj2r8"]
+atlas = ExtResource("1_gj2r8")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1603r"]
+atlas = ExtResource("1_gj2r8")
+region = Rect2(96, 0, 32, 32)
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_1603r"]
 size = Vector2(32, 32)
@@ -40,16 +46,16 @@ size = Vector2(32, 32)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("PlaceholderTexture2D_dvumr")
+"texture": SubResource("AtlasTexture_b2aih")
 }, {
 "duration": 1.0,
-"texture": SubResource("PlaceholderTexture2D_b2aih")
+"texture": SubResource("AtlasTexture_tof08")
 }, {
 "duration": 1.0,
-"texture": SubResource("PlaceholderTexture2D_tof08")
+"texture": SubResource("AtlasTexture_gj2r8")
 }, {
 "duration": 1.0,
-"texture": SubResource("PlaceholderTexture2D_gj2r8")
+"texture": SubResource("AtlasTexture_1603r")
 }],
 "loop": true,
 "name": &"angry",
@@ -91,7 +97,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_gj2r8"]
-radius = 137.015
+radius = 136.235
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_gj2r8"]
 properties/0/path = NodePath(".:position")
@@ -104,18 +110,27 @@ properties/2/path = NodePath("Anim:flip_h")
 properties/2/spawn = true
 properties/2/replication_mode = 1
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gj2r8"]
+size = Vector2(280, 283)
+
 [node name="CatBoss" type="CharacterBody2D"]
 
 [node name="Anim" type="AnimatedSprite2D" parent="."]
 position = Vector2(1, 3)
 scale = Vector2(10, 10)
 sprite_frames = SubResource("SpriteFrames_0atwy")
-animation = &"patch"
+animation = &"angry"
 flip_h = true
 
 [node name="Body" type="CollisionShape2D" parent="."]
-position = Vector2(2, 22)
+position = Vector2(1, 56)
 shape = SubResource("CircleShape2D_gj2r8")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_gj2r8")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 23.5)
+shape = SubResource("RectangleShape2D_gj2r8")

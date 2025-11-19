@@ -7,7 +7,7 @@ extends Node2D
 @onready var player2marker := $PlayerMarkers/Player2Marker
 @onready var pSpawner := $pSpawner
 @onready var player_scene = preload("res://scenes/player/PlayerShip.tscn")
-# Boss is dead stuff
+# Boss stuff
 @onready var white_fade: ColorRect = $Fader/WhiteFade
 @onready var explosion_template: AnimatedSprite2D = $Explosions
 @export var explosion_radius = 150.0
@@ -21,8 +21,7 @@ func _ready() -> void:
 		spawn_players.rpc(Net.players)
 	
 func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("jump"):
-		boss_take_damage.rpc(1)
+	pass
 
 @rpc("any_peer", "call_local")
 func boss_take_damage(amount: float):
@@ -102,3 +101,9 @@ func fade_to_white(duration: float = 5.0) -> void:
 	var tween = create_tween()
 	tween.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	tween.tween_property(white_fade, "color:a", 1.0, duration)
+
+
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	if body.is_in_group("bullets"):
+		print("Boss hit!")
+		boss_take_damage.rpc_id(1, "boss_take_damage", 1)
