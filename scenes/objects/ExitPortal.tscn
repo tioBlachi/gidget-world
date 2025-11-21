@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://dnrylt81aslg8"]
+
+[ext_resource type="Script" uid="uid://cxw4hg76dyv8j" path="res://scripts/objects/lab_exit_door.gd" id="1_fuf5p"]
+[ext_resource type="AudioStream" uid="uid://dl2syysxb73jf" path="res://assets/sounds/lab_door_open_sfx.mp3" id="3_wb3wq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dne46"]
+size = Vector2(728, 28)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_dne46"]
+properties/0/path = NodePath(".:is_open")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
+[node name="LabExitDoor" type="Area2D"]
+script = ExtResource("1_fuf5p")
+is_open = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_dne46")
+
+[node name="LabDoorOpenSfx" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_wb3wq")
+volume_db = -1.71
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_dne46")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered_local"]

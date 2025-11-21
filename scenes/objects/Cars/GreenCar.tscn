@@ -33,9 +33,10 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m8v0c"]
-size = Vector2(669.833, 226.667)
+size = Vector2(631.583, 226.667)
 
 [node name="Car" type="Area2D"]
+scale = Vector2(0.5, 0.5)
 script = ExtResource("1_m4526")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -46,6 +47,6 @@ autoplay = "default"
 frame_progress = 0.0677478
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1, 0)
+position = Vector2(4.73748, 0)
 scale = Vector2(0.3, 0.3)
 shape = SubResource("RectangleShape2D_m8v0c")

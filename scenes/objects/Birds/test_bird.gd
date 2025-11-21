@@ -25,5 +25,5 @@ func _process(delta):
 	# Flip facing based on the tangent direction (rotation) of the PathFollow2D
 	var dir_x: float = cos(path.rotation)
 	if absf(dir_x) > 0.0001:
-		# Default art faces left; flip when tangent points right
+		# flip when tangent points right
 		sprite.flip_h = dir_x > 0.0
