@@ -9,7 +9,6 @@ extends Node2D
 @onready var player2marker := $PlayerMarkers/Player2Marker
 @onready var pSpawner := $pSpawner
 @onready var player_scene = preload("res://scenes/player/PlayerShip.tscn")
-@onready var music := $Music
 @onready var turrets := $CatBoss/Turrets.get_children()
 @onready var popup := $PopupUI/restart_screen
 # Boss stuff
@@ -33,10 +32,11 @@ var phase_over := false
 
 
 func _ready() -> void:
+	bg.play()
 	boss_float_base_pos = CatBoss.position
 	boss_float_base_y = CatBoss.position.y
 	$CanvasLayer/BossHP.max_value = boss_hp
-	bg.play("default")
+	SoundManager.play_track("boss", -30.0)
 	$CanvasLayer/BossHP.value = boss_hp
 	if multiplayer.is_server():
 		spawn_players.rpc(Net.players)
@@ -269,7 +269,7 @@ func boss_take_damage(amount: float):
 		phase_over = true
 		deactivate_players.rpc()
 		bg.stop()
-		music.stop()
+		SoundManager.stop_track()
 		boss_anim.play("angry")
 		$CatDeath.play()
 		await $CatDeath.finished
