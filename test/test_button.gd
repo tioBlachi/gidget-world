@@ -40,7 +40,6 @@ func test_button_presses_and_unfreezes_floors():
 	add_child_autofree(f2); f2.add_to_group("cell_floor")
 	add_child_autofree(f3); f3.add_to_group("cell_floor")
 
-	# Call the server-side handler directly (no networking setup needed)
 	btn.rpc_request_press(1)
 	await get_tree().process_frame
 

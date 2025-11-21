@@ -1,6 +1,6 @@
-[gd_scene format=4]
+[gd_scene load_steps=3 format=3 uid="uid://ct8ip3qr0bu73"]
 
-[ext_resource type="Script" path="res://scripts/objects/one_shot_mover.gd" id="1_b7gk9"]
+[ext_resource type="Script" uid="uid://finnk4us4un0" path="res://scripts/objects/one_shot_mover.gd" id="1_b7gk9"]
 
 [sub_resource type="RectangleShape2D" id="RectShape_platform"]
 size = Vector2(64, 16)
@@ -10,5 +10,3 @@ script = ExtResource("1_b7gk9")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectShape_platform")
-
-
