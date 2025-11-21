@@ -130,9 +130,8 @@ size = Vector2(280, 283)
 position = Vector2(1, 3)
 scale = Vector2(10, 10)
 sprite_frames = SubResource("SpriteFrames_0atwy")
-animation = &"angry"
+animation = &"patch"
 autoplay = "patch"
-frame_progress = 0.663568
 flip_h = true
 
 [node name="Body" type="CollisionShape2D" parent="."]

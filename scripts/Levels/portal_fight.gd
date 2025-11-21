@@ -18,6 +18,7 @@ extends Node2D
 @export var explosions_total = 7
 @export var spike_ring_scene: PackedScene
 @export var boss_hp := 20;
+@export var random_num: int
 
 
 var players : Array
@@ -39,20 +40,24 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 	
-func activate_players(players: Array):
-	for p in players:
+@rpc("any_peer", "call_local")
+func activate_players():
+	for p in pSpawner.get_children():
 		p.disabled = false
-		
-func deactivate_players(players: Array):
-	for p in players:
+
+@rpc("any_peer", "call_local")
+func deactivate_players():
+	for p in pSpawner.get_children():
 		p.disabled = true
 
-func reverse_players(players: Array):
-	for p in players:
+@rpc("any_peer", "call_local")
+func reverse_players():
+	for p in pSpawner.get_children():
 		p.reversed = true
-		
-func unreverse_players(players: Array):
-	for p in players:
+
+@rpc("any_peer", "call_local")
+func unreverse_players():
+	for p in pSpawner.get_children():
 		p.reversed = false
 
 @rpc("authority", "call_local")
@@ -67,22 +72,45 @@ func end_phase_1():
 	for t in turrets:
 		t.activated = false
 		t.queue_free()
-	deactivate_players(players)
+	deactivate_players.rpc()
 	boss_anim.play("angry")
 	await get_tree().create_timer(2.0).timeout
 	phase_2.rpc()
 
 
-@rpc("authority", "call_local")
+@rpc("authority", "call_local", "reliable")
 func phase_2():
-	reverse_players(players)
-	activate_players(players)
+	if not multiplayer.is_server():
+		return
+
+	reverse_players.rpc()
+	activate_players.rpc()
 	boss_anim.play("patch")
-	spawn_all_spike_rings()
+
+	spawn_all_spike_rings.rpc()
+
+	while phase_2_entered:
+		await get_tree().create_timer(3.0).timeout
+		var choice := randi_range(1, 4)
+
+		match choice:
+			1:
+				spawn_spike_ring_at.rpc(0)
+			2:
+				spawn_spike_ring_at.rpc(1)
+			3:
+				spawn_spike_ring_at.rpc(2)
+			_:
+				spawn_all_spike_rings.rpc()
+
+		if phase_3_entered:
+			break
+
+
 	
 @rpc("authority", "call_local")
 func end_phase_2():
-	deactivate_players(players)
+	deactivate_players.rpc()
 	boss_anim.play("angry")
 	await get_tree().create_timer(2.0).timeout
 	phase_3.rpc()
@@ -90,13 +118,13 @@ func end_phase_2():
 @rpc("authority", "call_local")
 func phase_3():
 	print("Phase 3 Entered")
-	unreverse_players(players)
-	activate_players(players)
+	unreverse_players.rpc()
+	activate_players.rpc()
 	boss_anim.play("patch")
 	# TODO: final phase setup
 
 # ----------------- Spike Rings -------------------
-@rpc("authority", "call_local")
+@rpc("any_peer", "call_local")
 func spawn_spike_ring_at(index: int) -> void:
 	if index < 0 or index >= spike_spawn_points.size():
 		return
@@ -105,7 +133,7 @@ func spawn_spike_ring_at(index: int) -> void:
 	ring.global_position = spike_spawn_points[index].global_position
 	add_child(ring)
 	
-@rpc("authority", "call_local")
+@rpc("any_peer", "call_local")
 func spawn_all_spike_rings() -> void:
 	for m in spike_spawn_points:
 		var ring := spike_ring_scene.instantiate()
@@ -129,20 +157,9 @@ func boss_take_damage(amount: float):
 	var max_hp: float = $CanvasLayer/BossHP.max_value
 	var hp_ratio: float = float(boss_hp) / float(max_hp)
 
-	# Lost at least 1/3 of max HP, enter Phase 2 (once)
-	if not phase_2_entered and hp_ratio <= 2.0 / 3.0:
-		phase_2_entered = true
-		end_phase_1()      # or phase_2.rpc() directly if you prefer
-
-	# Lost at least 2/3 of max HP, enter Phase 3 (once)
-	elif not phase_3_entered and hp_ratio <= 1.0 / 3.0:
-		phase_3_entered = true
-		end_phase_2()
-		
-
-	# ---- Death check ----
-	elif boss_hp <= 0:
-		deactivate_players(players)
+	# Death check first – always highest priority
+	if boss_hp <= 0:
+		deactivate_players.rpc()
 		bg.stop()
 		music.stop()
 		boss_anim.play("angry")
@@ -150,6 +167,22 @@ func boss_take_damage(amount: float):
 		fade_to_white.rpc()
 		await get_tree().create_timer(6.5).timeout
 		trigger_win.rpc()
+		return
+
+	# Phase 2 threshold
+	if not phase_2_entered and hp_ratio <= 2.0 / 3.0:
+		phase_2_entered = true
+		end_phase_1()
+
+	# Phase 3 threshold
+	if not phase_3_entered and hp_ratio <= 1.0 / 3.0:
+		phase_3_entered = true
+		end_phase_2()
+
+@rpc("any_peer", "call_local")
+func update_boss_hp(new_hp: int):
+	boss_hp = new_hp
+	$CanvasLayer/BossHP.value = boss_hp
 
 @rpc("any_peer", "call_local", "reliable")
 func spawn_players(p_array: PackedInt32Array) -> void:
@@ -196,7 +229,7 @@ func spawn_single_explosion():
 		var count := frames.get_frame_count(anim)
 		if fps > 0 and count > 0:
 			var length := float(count) / float(fps)
-			e.speed_scale = length / 1.0  # 1 second explosion by default
+			e.speed_scale = length / 1.0
 
 	e.frame = 0
 	e.play(anim)

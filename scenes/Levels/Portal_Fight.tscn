@@ -175,6 +175,9 @@ bg_color = Color(0, 0, 0, 1)
 bg_color = Color(0.553774, 0.0668073, 0.146792, 1)
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_greg0"]
+properties/0/path = NodePath(".:random_num")
+properties/0/spawn = true
+properties/0/replication_mode = 1
 
 [node name="Portal Fight" type="Node2D"]
 script = ExtResource("1_7rmao")
