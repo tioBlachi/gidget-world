@@ -1,64 +1,62 @@
-[gd_scene load_steps=21 format=3 uid="uid://2lntdlomdt6o"]
+[gd_scene load_steps=22 format=3 uid="uid://2lntdlomdt6o"]
 
+[ext_resource type="Script" uid="uid://dar733aq48nbf" path="res://scenes/objects/EvilCat/cat_boss.gd" id="1_d2r12"]
 [ext_resource type="Texture2D" uid="uid://dex3mn7eumn7y" path="res://scenes/objects/EvilCat/AngryEvilCat.png" id="1_gj2r8"]
 [ext_resource type="Texture2D" uid="uid://qhel0rfloqbn" path="res://scenes/objects/EvilCat/Idle.png" id="2_1603r"]
 [ext_resource type="Texture2D" uid="uid://bnur0254gwauu" path="res://scenes/objects/EvilCat/EvilCat.png" id="3_d2r12"]
 [ext_resource type="PackedScene" uid="uid://cjb4jac725fq5" path="res://scenes/objects/Turret.tscn" id="4_1603r"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_1603r"]
-atlas = ExtResource("1_gj2r8")
-region = Rect2(0, 0, 32, 32)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_d2r12"]
 atlas = ExtResource("1_gj2r8")
-region = Rect2(32, 0, 32, 32)
+region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0atwy"]
 atlas = ExtResource("1_gj2r8")
-region = Rect2(64, 0, 32, 32)
+region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7ndaw"]
 atlas = ExtResource("1_gj2r8")
-region = Rect2(96, 0, 32, 32)
+region = Rect2(64, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_onpoj"]
-atlas = ExtResource("2_1603r")
-region = Rect2(0, 0, 32, 32)
+atlas = ExtResource("1_gj2r8")
+region = Rect2(96, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_x4ag1"]
 atlas = ExtResource("2_1603r")
-region = Rect2(32, 0, 32, 32)
+region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g7i86"]
 atlas = ExtResource("2_1603r")
-region = Rect2(64, 0, 32, 32)
+region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uhds1"]
 atlas = ExtResource("2_1603r")
-region = Rect2(96, 0, 32, 32)
+region = Rect2(64, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_iewdo"]
-atlas = ExtResource("3_d2r12")
-region = Rect2(0, 0, 32, 32)
+atlas = ExtResource("2_1603r")
+region = Rect2(96, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vbwii"]
 atlas = ExtResource("3_d2r12")
-region = Rect2(32, 0, 32, 32)
+region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_w0d1x"]
 atlas = ExtResource("3_d2r12")
-region = Rect2(64, 0, 32, 32)
+region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sjdwf"]
+atlas = ExtResource("3_d2r12")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dqut6"]
 atlas = ExtResource("3_d2r12")
 region = Rect2(96, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_0atwy"]
 animations = [{
 "frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_1603r")
-}, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_d2r12")
 }, {
@@ -67,15 +65,15 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_7ndaw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_onpoj")
 }],
 "loop": true,
 "name": &"angry",
 "speed": 14.0
 }, {
 "frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_onpoj")
-}, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_x4ag1")
 }, {
@@ -84,15 +82,15 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_uhds1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iewdo")
 }],
 "loop": true,
 "name": &"no_patch",
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_iewdo")
-}, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_vbwii")
 }, {
@@ -101,6 +99,9 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_sjdwf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dqut6")
 }],
 "loop": true,
 "name": &"patch",
@@ -125,12 +126,13 @@ properties/2/replication_mode = 1
 size = Vector2(280, 283)
 
 [node name="CatBoss" type="CharacterBody2D"]
+script = ExtResource("1_d2r12")
 
 [node name="Anim" type="AnimatedSprite2D" parent="."]
 position = Vector2(1, 3)
 scale = Vector2(10, 10)
 sprite_frames = SubResource("SpriteFrames_0atwy")
-animation = &"no_patch"
+animation = &"patch"
 autoplay = "patch"
 flip_h = true
 

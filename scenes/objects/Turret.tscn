@@ -49,6 +49,7 @@ replication_config = SubResource("SceneReplicationConfig_obvvu")
 
 [node name="ShootingSFX" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_oavcs")
+volume_db = -9.079
 
 [node name="ChargingSFX" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_vx1ie")

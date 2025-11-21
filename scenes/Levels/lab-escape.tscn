@@ -12,7 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://bf72f4j7c2i3f" path="res://scripts/UI/pause_menu.tscn" id="10_hrlo7"]
 [ext_resource type="PackedScene" uid="uid://coo3efhcvxiar" path="res://scenes/UI/restart_screen.tscn" id="11_mi8k0"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_max5s"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mi8k0"]
 texture = ExtResource("4_mi8k0")
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
@@ -47,7 +47,7 @@ texture = ExtResource("4_mi8k0")
 
 [sub_resource type="TileSet" id="TileSet_lnb5p"]
 physics_layer_0/collision_layer = 1
-sources/0 = SubResource("TileSetAtlasSource_max5s")
+sources/0 = SubResource("TileSetAtlasSource_mi8k0")
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_rxhor"]
 properties/0/path = NodePath("Crate:position")

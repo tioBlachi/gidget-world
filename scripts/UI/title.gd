@@ -1,9 +1,18 @@
 extends Control
+@onready var logo := $GidgetWorldLogo
 
 var default_ip := "localhost"
 var default_port := 8080
+var logo_pulse_tween : Tween
 
+func _ready() -> void:
+	$AnimationPlayer.play("Intro")
+	$CutPlayer/Camera2D.set_enabled(false)
+
+	
 func join_lobby():
+	$Select.play()
+	await $Select.finished
 	if Net._is_dedicated_server():
 		print("[TITLE] Dedicated server build: skipping client join.")
 		return

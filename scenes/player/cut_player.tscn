@@ -1,0 +1,121 @@
+[gd_scene load_steps=11 format=3 uid="uid://bc8xykakus2vi"]
+
+[ext_resource type="Script" uid="uid://fc5cgofv6ugq" path="res://scenes/player/cut_player.gd" id="1_1f04x"]
+[ext_resource type="Texture2D" uid="uid://d2sv655j2k3bq" path="res://Art/OldTestArt/gRight.png" id="2_mpw2f"]
+[ext_resource type="AudioStream" uid="uid://cqt8c2sa1757t" path="res://assets/sounds/8-bit-jump.mp3" id="3_lnvfg"]
+[ext_resource type="AudioStream" uid="uid://cj4ho2calqgeq" path="res://assets/sounds/080205_life-lost-game-over-89697.mp3" id="4_3enjk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hqtel"]
+size = Vector2(128, 128)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_gmlin"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath("Sprite:flip_h")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath("Sprite:flip_v")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath("Sprite:rotation")
+properties/3/spawn = true
+properties/3/replication_mode = 1
+properties/4/path = NodePath("CollisionShape2D:rotation")
+properties/4/spawn = true
+properties/4/replication_mode = 1
+properties/5/path = NodePath("CollisionShape2D:position")
+properties/5/spawn = true
+properties/5/replication_mode = 1
+properties/6/path = NodePath(".:direction")
+properties/6/spawn = true
+properties/6/replication_mode = 1
+properties/7/path = NodePath(".:staggered")
+properties/7/spawn = true
+properties/7/replication_mode = 1
+properties/8/path = NodePath(".:burning")
+properties/8/spawn = true
+properties/8/replication_mode = 1
+properties/9/path = NodePath(".:is_locally_paused")
+properties/9/spawn = true
+properties/9/replication_mode = 1
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_1f04x"]
+size = Vector2(230, 292)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_mpw2f"]
+size = Vector2(230, 292)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_lnvfg"]
+size = Vector2(230, 292)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_h17s1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("PlaceholderTexture2D_1f04x")
+}, {
+"duration": 1.0,
+"texture": SubResource("PlaceholderTexture2D_mpw2f")
+}, {
+"duration": 1.0,
+"texture": SubResource("PlaceholderTexture2D_lnvfg")
+}],
+"loop": true,
+"name": &"dizzy",
+"speed": 8.0
+}]
+
+[node name="CutPlayer" type="CharacterBody2D"]
+scale = Vector2(0.520001, 0.520001)
+collision_layer = 3
+collision_mask = 3
+floor_stop_on_slope = false
+floor_max_angle = 1.22173
+platform_on_leave = 2
+script = ExtResource("1_1f04x")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(3.8147e-06, 0.961533)
+scale = Vector2(12.6923, 12.8846)
+texture = ExtResource("2_mpw2f")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_hqtel")
+
+[node name="JumpSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_lnvfg")
+volume_db = -37.889
+
+[node name="DeathSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_3enjk")
+volume_db = -10.651
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_gmlin")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="Stars" type="Node2D" parent="."]
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="Stars"]
+visible = false
+texture_filter = 1
+position = Vector2(33.6538, -108.442)
+scale = Vector2(0.275919, 0.201172)
+sprite_frames = SubResource("SpriteFrames_h17s1")
+animation = &"dizzy"
+frame_progress = 0.759928
+flip_h = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Stars"]
+visible = false
+texture_filter = 1
+position = Vector2(-31.7307, -108.442)
+scale = Vector2(0.275919, 0.201172)
+sprite_frames = SubResource("SpriteFrames_h17s1")
+animation = &"dizzy"
+frame_progress = 0.800212

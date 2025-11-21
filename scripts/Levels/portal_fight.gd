@@ -26,8 +26,15 @@ extends Node2D
 var players : Array
 var phase_2_entered := false
 var phase_3_entered := false
+var boss_float_base_y: float
+var boss_float_time := 0.0
+var boss_float_base_pos: Vector2
+var phase_over := false
+
 
 func _ready() -> void:
+	boss_float_base_pos = CatBoss.position
+	boss_float_base_y = CatBoss.position.y
 	$CanvasLayer/BossHP.max_value = boss_hp
 	bg.play("default")
 	$CanvasLayer/BossHP.value = boss_hp
@@ -40,17 +47,28 @@ func _ready() -> void:
 	
 	
 func _process(delta: float) -> void:
-	pass
+	boss_float_time += delta
+
+	var amplitude_y := 10.0
+	var amplitude_x := 5.0
+	var speed := 1.0
+
+	CatBoss.position.y = boss_float_base_pos.y + sin(boss_float_time * speed) * amplitude_y
+	CatBoss.position.x = boss_float_base_pos.x + cos(boss_float_time * speed * 0.7) * amplitude_x
+
+
 	
 @rpc("any_peer", "call_local")
 func activate_players():
 	for p in pSpawner.get_children():
 		p.disabled = false
+		p.invincible = false
 
 @rpc("any_peer", "call_local")
 func deactivate_players():
 	for p in pSpawner.get_children():
 		p.disabled = true
+		p.invincible = true
 
 @rpc("any_peer", "call_local")
 func reverse_players():
@@ -71,6 +89,7 @@ func phase_1():
 
 @rpc("authority", "call_local")
 func end_phase_1():
+	phase_over = true
 	for t in turrets:
 		t.activated = false
 		t.queue_free()
@@ -79,22 +98,26 @@ func end_phase_1():
 	await get_tree().create_timer(2.0).timeout
 	phase_2.rpc()
 
-
 @rpc("authority", "call_local", "reliable")
 func phase_2():
 	if not multiplayer.is_server():
 		return
 
+	phase_over = false
 	reverse_players.rpc()
 	activate_players.rpc()
 	boss_anim.play("patch")
 
 	spawn_all_spike_rings.rpc()
 
-	while phase_2_entered:
-		await get_tree().create_timer(3.0).timeout
-		var choice := randi_range(1, 4)
+	while phase_2_entered and not phase_over:
+		var t := get_tree().create_timer(3.0)
+		await t.timeout
 
+		if phase_over or not phase_2_entered or phase_3_entered:
+			break
+
+		var choice := randi_range(1, 4)
 		match choice:
 			1:
 				spawn_spike_ring_at.rpc(0)
@@ -105,12 +128,11 @@ func phase_2():
 			_:
 				spawn_all_spike_rings.rpc()
 
-		if phase_3_entered:
-			break
 
 
 @rpc("authority", "call_local")
 func end_phase_2():
+	phase_over = true
 	deactivate_players.rpc()
 	boss_anim.play("angry")
 	await get_tree().create_timer(2.0).timeout
@@ -119,18 +141,16 @@ func end_phase_2():
 
 @rpc("authority", "call_local")
 func phase_3():
-	print("Phase 3 Entered")
+	phase_over = false
 
 	if not multiplayer.is_server():
 		return
 
-	# Normalize player controls for final phase
 	unreverse_players.rpc()
 	activate_players.rpc()
 
 	boss_anim.play("patch")
 
-	# Initial dramatic pause before the chaos
 	await get_tree().create_timer(1.0).timeout
 
 	# Begin spawning homing bird waves
@@ -145,7 +165,7 @@ func start_bird_flocks():
 	await get_tree().create_timer(3.0).timeout
 
 	# While the boss is alive, keep spawning waves
-	while boss_hp > 0:
+	while boss_hp > 0 and not phase_over:
 		var count := calculate_wave_size()
 		var positions := get_bird_spawn_positions(count)
 		spawn_bird_wave.rpc(positions)
@@ -154,6 +174,8 @@ func start_bird_flocks():
 
 @rpc("any_peer", "call_local")
 func spawn_bird_wave(positions: Array):
+	if phase_over:
+		return
 	for pos in positions:
 		var bird := red_bird_scene.instantiate()
 		bird.global_position = pos
@@ -244,10 +266,13 @@ func boss_take_damage(amount: float):
 
 	# Death check first – always highest priority
 	if boss_hp <= 0:
+		phase_over = true
 		deactivate_players.rpc()
 		bg.stop()
 		music.stop()
 		boss_anim.play("angry")
+		$CatDeath.play()
+		await $CatDeath.finished
 		spawn_explosions_over_time.rpc(5.0, 0.15)
 		fade_to_white.rpc()
 		await get_tree().create_timer(6.5).timeout

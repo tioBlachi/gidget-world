@@ -12,6 +12,7 @@ extends CharacterBody2D
 @export var reversed := false
 @export var Bullet = preload("res://scenes/player/Bullet.tscn")
 @export var player_health : int = 100
+var invincible := false
 
 var ready_to_fire := true
 
@@ -63,6 +64,8 @@ func _physics_process(delta: float) -> void:
 
 
 func lower_hp(id: int):
+	if invincible:
+		return
 	if id != get_multiplayer_authority():
 		return
 	if multiplayer.is_server():

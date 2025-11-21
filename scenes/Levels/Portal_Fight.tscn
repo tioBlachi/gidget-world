@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://bgv34gcuxiuqr"]
+[gd_scene load_steps=38 format=3 uid="uid://bgv34gcuxiuqr"]
 
 [ext_resource type="Script" uid="uid://r7mntc1kketq" path="res://scripts/Levels/portal_fight.gd" id="1_7rmao"]
 [ext_resource type="Texture2D" uid="uid://qyjfkgfgbpk0" path="res://assets/sprites/PortalBG.png" id="1_ekbpn"]
@@ -10,6 +10,7 @@
 [ext_resource type="AudioStream" uid="uid://b1cu6c5xy3gt8" path="res://assets/sounds/Music/Boss Battle.ogg" id="7_imk1x"]
 [ext_resource type="AudioStream" uid="uid://diqgbk7t8hcg6" path="res://assets/sounds/8-bit-explosion.wav" id="8_ou0jd"]
 [ext_resource type="PackedScene" uid="uid://lommrbd42bf3" path="res://scenes/objects/Birds/RedTestBird.tscn" id="10_akggb"]
+[ext_resource type="AudioStream" uid="uid://dehh0f3xb24ne" path="res://scenes/objects/EvilCat/funny-cat-meow-246012.mp3" id="11_v1q8v"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ou0jd"]
 atlas = ExtResource("1_ekbpn")
@@ -292,11 +293,17 @@ layer = 4
 
 [node name="Music" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("7_imk1x")
+volume_db = -9.905
 autoplay = true
 parameters/looping = true
 
 [node name="Boom" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("8_ou0jd")
+volume_db = -25.587
+
+[node name="CatDeath" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("11_v1q8v")
+volume_db = 14.032
 
 [editable path="CatBoss"]
 [editable path="PopupUI"]
