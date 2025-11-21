@@ -10,14 +10,14 @@ extends Path2D
 @onready var sprite: AnimatedSprite2D = $AnimatableBody2D/AnimatedSprite2D
 
 func _ready() -> void:
-	# Disable path/remote transform driven motion; we drive the body directly.
+	# Disable path
 	if is_instance_valid(anim) and anim.is_playing():
 		anim.stop()
 	if is_instance_valid(follow) and follow.has_node("RemoteTransform2D"):
 		follow.get_node("RemoteTransform2D").set_process(false)
 
 
-	# Make all body contacts lethal via an Area2D overlay (non-blocking)
+	# Make all body contacts lethal via an Area2D
 	var kill_area := Area2D.new()
 	kill_area.name = "KillAreaAll"
 	kill_area.monitoring = true
@@ -53,7 +53,7 @@ func _physics_process(delta: float) -> void:
 			var move_vec_h: Vector2 = Vector2(sign(dx) * step_h, 0.0)
 			body.global_position += move_vec_h
 			if abs(move_vec_h.x) > 0.01:
-				# Default sprite faces left; flip when moving right
+				# flip when moving right
 				sprite.flip_h = move_vec_h.x > 0.0
 	else:
 		var dist: float = delta_vec.length()
@@ -64,7 +64,7 @@ func _physics_process(delta: float) -> void:
 			var move_vec: Vector2 = delta_vec.normalized() * step
 			body.global_position += move_vec
 			if abs(move_vec.x) > 0.01:
-				# Default sprite faces left; flip when moving right
+				# flip when moving right
 				sprite.flip_h = move_vec.x > 0.0
 
 func _get_nearest_player() -> Node2D:
