@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://c1e75iq14sjs2"]
 
 [ext_resource type="Script" uid="uid://cu8f17jv2urb0" path="res://scripts/objects/trap_door.gd" id="1_3oep3"]
-[ext_resource type="Texture2D" uid="uid://bknnec5n6r1p6" path="res://assets/BowenStuff/metal.png" id="1_igfcu"]
+[ext_resource type="Texture2D" uid="uid://dh3qpgv5wov8e" path="res://assets/BowenStuff/metal.png" id="1_igfcu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3oep3"]
 size = Vector2(9.41175, 9.85715)

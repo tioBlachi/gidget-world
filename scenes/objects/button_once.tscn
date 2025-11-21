@@ -1,6 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://bc2hnyo407l47"]
+[gd_scene format=4]
 
-[ext_resource type="Script" uid="uid://b486wfkcu7qgx" path="res://scripts/objects/button_once.gd" id="1_7s8qk"]
+[ext_resource type="Script" path="res://scripts/objects/button_once.gd" id="1_7s8qk"]
 
 [sub_resource type="RectangleShape2D" id="RectShape_btn"]
 size = Vector2(20, 12)
@@ -12,3 +12,5 @@ script = ExtResource("1_7s8qk")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectShape_btn")
+
+
