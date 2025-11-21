@@ -2,19 +2,19 @@
 
 [ext_resource type="Script" uid="uid://d06f17hxlfiyv" path="res://scripts/actors/portal_boss.gd" id="1_40dn3"]
 [ext_resource type="Shader" uid="uid://4xoyamqdpcmq" path="res://scenes/actors/PortalBoss.gdshader" id="1_ftgki"]
-[ext_resource type="Texture2D" uid="uid://by2w1q003x85n" path="res://assets/sprites/pixilart-sprite (1).png" id="3_s72ma"]
+[ext_resource type="Texture2D" uid="uid://cnbi7p14euide" path="res://assets/sprites/pixilart-sprite (1).png" id="3_s72ma"]
 [ext_resource type="Texture2D" uid="uid://ci0kjxllfmyhu" path="res://assets/sprites/Explosion.png" id="3_wr8qb"]
 [ext_resource type="AudioStream" uid="uid://diqgbk7t8hcg6" path="res://assets/sounds/8-bit-explosion.wav" id="4_2w0qw"]
-[ext_resource type="AudioStream" uid="uid://b0dy28rofr1ik" path="res://assets/sounds/earth-shattering-rumble-quake-sound-effect-243330.mp3" id="5_2w0qw"]
+[ext_resource type="AudioStream" uid="uid://dpfno2gvb45tb" path="res://assets/sounds/earth-shattering-rumble-quake-sound-effect-243330.mp3" id="5_2w0qw"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_40dn3"]
 shader = ExtResource("1_ftgki")
 shader_parameter/arms = 2
 shader_parameter/tightness = 12.0
-shader_parameter/speed = 5.0
+shader_parameter/speed = 2.957
 shader_parameter/edge_softness = 0.02
-shader_parameter/color_a = Color(0.168627, 0.533333, 0.941176, 1)
-shader_parameter/color_b = Color(0.00366586, 0.00385465, 0.000768481, 1)
+shader_parameter/color_a = Color(0.168627, 0.298039, 0.941176, 1)
+shader_parameter/color_b = Color(0.709804, 0.00392157, 0.909804, 1)
 shader_parameter/border_thickness = 0.092
 shader_parameter/border_softness = 0.0
 shader_parameter/border_color = Color(0, 0, 0, 1)
@@ -227,14 +227,16 @@ script = ExtResource("1_40dn3")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_40dn3")
+position = Vector2(0.5, 0.5)
+scale = Vector2(1.002, 0.998)
 texture = SubResource("GradientTexture2D_wr8qb")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Sprite2D"]
 z_index = -1
-position = Vector2(-5, 76)
-scale = Vector2(18.1106, 19.6939)
+position = Vector2(-1.49698, 46.5932)
+scale = Vector2(12.6647, 12.976)
 sprite_frames = SubResource("SpriteFrames_n0pnw")
-animation = &"idle"
+animation = &"blackhole"
 
 [node name="PortalPullZone" type="Area2D" parent="."]
 visible = false

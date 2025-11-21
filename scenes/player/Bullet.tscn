@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://plsgcby3ox2f"]
+
+[ext_resource type="Script" uid="uid://bxuoq0sguge37" path="res://scenes/player/bullet.gd" id="1_be0i8"]
+[ext_resource type="Texture2D" uid="uid://cu62g71ncsuvn" path="res://assets/sprites/03.png" id="2_sttck"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sttck"]
+radius = 6.03343
+height = 14.0
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_l3uqw"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
+[node name="Bullet" type="Area2D"]
+rotation = 1.5708
+scale = Vector2(1, 0.994459)
+script = ExtResource("1_be0i8")
+
+[node name="BulletHead" type="Sprite2D" parent="."]
+texture = ExtResource("2_sttck")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(5, -2.19775e-07)
+rotation = 1.57079
+shape = SubResource("CapsuleShape2D_sttck")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_l3uqw")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

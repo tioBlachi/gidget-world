@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://d2n2fifoxltum"]
 
-[ext_resource type="Texture2D" uid="uid://bv5r1cfcygul" path="res://scenes/objects/EvilCat/AngryEvilCat.png" id="1_elwos"]
+[ext_resource type="Texture2D" uid="uid://ddeyv7ati5flg" path="res://scenes/objects/EvilCat/AngryEvilCat.png" id="1_elwos"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5sxnn"]
 atlas = ExtResource("1_elwos")
@@ -41,7 +41,6 @@ animations = [{
 [node name="CatBoss" type="Node2D"]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(16, -16)
+scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_85g10")
 autoplay = "default"
-frame_progress = 0.791747

@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://xa3na3ip73g6"]
 
-[ext_resource type="Texture2D" uid="uid://bmuunkg3mluug" path="res://scenes/objects/EvilCat/Idle.png" id="1_v7o7s"]
+[ext_resource type="Texture2D" uid="uid://bem88lyddyru7" path="res://scenes/objects/EvilCat/Idle.png" id="1_v7o7s"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tws64"]
 atlas = ExtResource("1_v7o7s")
@@ -35,13 +35,13 @@ animations = [{
 }],
 "loop": true,
 "name": &"default",
-"speed": 5.0
+"speed": 6.0
 }]
 
 [node name="CatBoss" type="Node2D"]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(16, -16)
+scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_edoq4")
 autoplay = "default"
-frame_progress = 0.424169
+frame_progress = 0.186282

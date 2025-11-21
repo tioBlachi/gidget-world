@@ -26,7 +26,9 @@ var charging := false
 var firing := false
 
 func _ready() -> void:
+	add_to_group("turrets")
 	randomize()
+	Global.turret_hit.connect(on_turret_hit)
 	_enter_find()
 	
 func _process(_delta: float) -> void:
@@ -127,6 +129,7 @@ func _pick_target() -> void:
 		return
 		
 	var players := get_tree().get_nodes_in_group("players")
+	
 	if players.is_empty():
 		target = null
 		return
@@ -135,13 +138,14 @@ func _pick_target() -> void:
 	rpc_set_target.rpc(new_target)
 
 func _on_laser_hit(collider: Object) -> void:
+	if not multiplayer.is_server():
+		return
 	if collider and collider is Node:
 		var n := collider as Node
 		if n.is_in_group("players"):
 			print("Player: ", n.name, " hit!")
-			n.staggered = true
-			await get_tree().create_timer(1).timeout
-			n.die.rpc()
+			#Global.emit_signal("player_hit_by_turret")
+			Global.player_hit_by_turret.emit(int(n.name))
 		elif n.is_in_group("generators"):
 			print("Hitting :", n.name)
 			var anim = n.get_child(0)
@@ -159,6 +163,8 @@ func _on_laser_hit(collider: Object) -> void:
 			n.active = false
 			await get_tree().create_timer(1.5).timeout
 			n.active = true
+		elif n.is_in_group("player_ships"):
+			print(n.name, " ship has been hit!")
 
 func _on_laser_finished() -> void:
 	_enter_find()
@@ -167,3 +173,6 @@ func _on_laser_finished() -> void:
 func rpc_set_target(player: Node2D):
 	target = player
 	target_pos = player.global_position
+	
+func on_turret_hit():
+	$Clink.play()
