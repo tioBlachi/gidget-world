@@ -34,6 +34,7 @@ func pause_all():
 
 @rpc("any_peer", "call_local")
 func resume():
+	await get_tree().physics_frame
 	if multiplayer.is_server():
 		resume_all.rpc()
 	else:

@@ -1,76 +1,50 @@
-[gd_scene load_steps=38 format=3 uid="uid://bgv34gcuxiuqr"]
+[gd_scene load_steps=36 format=3 uid="uid://bgv34gcuxiuqr"]
 
 [ext_resource type="Script" uid="uid://r7mntc1kketq" path="res://scripts/Levels/portal_fight.gd" id="1_7rmao"]
-[ext_resource type="Texture2D" uid="uid://c210jtig88gik" path="res://assets/sprites/PortalBG.png" id="1_ekbpn"]
+[ext_resource type="Texture2D" uid="uid://qyjfkgfgbpk0" path="res://assets/sprites/PortalBG.png" id="1_ekbpn"]
+[ext_resource type="PackedScene" uid="uid://bdw5tfrelqrd2" path="res://scenes/objects/EvilCat/SpikeRing.tscn" id="2_6s1gy"]
 [ext_resource type="PackedScene" uid="uid://2lntdlomdt6o" path="res://scenes/objects/EvilCat/CatBoss.tscn" id="2_7rmao"]
 [ext_resource type="Texture2D" uid="uid://ci0kjxllfmyhu" path="res://assets/sprites/Explosion.png" id="4_greg0"]
 [ext_resource type="PackedScene" uid="uid://bf72f4j7c2i3f" path="res://scripts/UI/pause_menu.tscn" id="5_13yns"]
 [ext_resource type="PackedScene" uid="uid://coo3efhcvxiar" path="res://scenes/UI/restart_screen.tscn" id="6_imk1x"]
-[ext_resource type="AudioStream" uid="uid://56bjd8k8doix" path="res://assets/sounds/Music/Boss Battle.ogg" id="7_imk1x"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_greg0"]
-atlas = ExtResource("1_ekbpn")
-region = Rect2(0, 0, 384, 341)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_w7ni5"]
-atlas = ExtResource("1_ekbpn")
-region = Rect2(384, 0, 384, 341)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_13yns"]
-atlas = ExtResource("1_ekbpn")
-region = Rect2(768, 0, 384, 341)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_imk1x"]
-atlas = ExtResource("1_ekbpn")
-region = Rect2(1152, 0, 384, 341)
+[ext_resource type="AudioStream" uid="uid://b1cu6c5xy3gt8" path="res://assets/sounds/Music/Boss Battle.ogg" id="7_imk1x"]
+[ext_resource type="AudioStream" uid="uid://diqgbk7t8hcg6" path="res://assets/sounds/8-bit-explosion.wav" id="8_ou0jd"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ou0jd"]
 atlas = ExtResource("1_ekbpn")
-region = Rect2(0, 341, 384, 341)
+region = Rect2(0, 0, 383, 293)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6s1gy"]
 atlas = ExtResource("1_ekbpn")
-region = Rect2(384, 341, 384, 341)
+region = Rect2(383, 0, 383, 293)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_akggb"]
 atlas = ExtResource("1_ekbpn")
-region = Rect2(768, 341, 384, 341)
+region = Rect2(766, 0, 383, 293)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_v1q8v"]
 atlas = ExtResource("1_ekbpn")
-region = Rect2(1152, 341, 384, 341)
+region = Rect2(1149, 0, 383, 293)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fxtwf"]
 atlas = ExtResource("1_ekbpn")
-region = Rect2(0, 682, 384, 341)
+region = Rect2(0, 308, 383, 293)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_w80d0"]
 atlas = ExtResource("1_ekbpn")
-region = Rect2(384, 682, 384, 341)
+region = Rect2(383, 308, 383, 293)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bf6y1"]
 atlas = ExtResource("1_ekbpn")
-region = Rect2(768, 682, 384, 341)
+region = Rect2(766, 308, 383, 293)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wagta"]
 atlas = ExtResource("1_ekbpn")
-region = Rect2(1152, 682, 384, 341)
+region = Rect2(1149, 308, 383, 293)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_8m176"]
 animations = [{
 "frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_greg0")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_w7ni5")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_13yns")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_imk1x")
-}, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ou0jd")
 }, {
@@ -201,22 +175,17 @@ bg_color = Color(0, 0, 0, 1)
 bg_color = Color(0.553774, 0.0668073, 0.146792, 1)
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_greg0"]
-properties/0/path = NodePath(".:boss_hp")
-properties/0/spawn = true
-properties/0/replication_mode = 1
-properties/1/path = NodePath("CanvasLayer/BossHP:value")
-properties/1/spawn = true
-properties/1/replication_mode = 1
 
 [node name="Portal Fight" type="Node2D"]
 script = ExtResource("1_7rmao")
+spike_ring_scene = ExtResource("2_6s1gy")
 
 [node name="Background" type="AnimatedSprite2D" parent="."]
 z_index = -10
 texture_filter = 1
-scale = Vector2(3.33073, 2.11144)
+scale = Vector2(3.33073, 2.45392)
 sprite_frames = SubResource("SpriteFrames_8m176")
-frame_progress = 0.610588
+frame_progress = 0.0525663
 centered = false
 
 [node name="pSpawner" type="MultiplayerSpawner" parent="."]
@@ -255,6 +224,17 @@ shape = SubResource("WorldBoundaryShape2D_greg0")
 
 [node name="CatBoss" parent="." instance=ExtResource("2_7rmao")]
 position = Vector2(1000, 345)
+
+[node name="SpikeSpawnPoints" type="Node2D" parent="CatBoss"]
+
+[node name="Spawn1" type="Marker2D" parent="CatBoss/SpikeSpawnPoints"]
+position = Vector2(-292, 37)
+
+[node name="Spawn2" type="Marker2D" parent="CatBoss/SpikeSpawnPoints"]
+position = Vector2(-227, -117)
+
+[node name="Spawn3" type="Marker2D" parent="CatBoss/SpikeSpawnPoints"]
+position = Vector2(-216, 220)
 
 [node name="Explosions" type="AnimatedSprite2D" parent="."]
 visible = false
@@ -303,10 +283,15 @@ replication_config = SubResource("SceneReplicationConfig_greg0")
 layer = 4
 
 [node name="PopupUI" parent="." instance=ExtResource("6_imk1x")]
+layer = 4
 
 [node name="Music" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("7_imk1x")
 autoplay = true
 parameters/looping = true
 
+[node name="Boom" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_ou0jd")
+
 [editable path="CatBoss"]
+[editable path="PopupUI"]

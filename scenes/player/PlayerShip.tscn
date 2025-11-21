@@ -1,8 +1,54 @@
-[gd_scene load_steps=10 format=3 uid="uid://c345ml4nswnab"]
+[gd_scene load_steps=25 format=3 uid="uid://c345ml4nswnab"]
 
 [ext_resource type="Script" uid="uid://hfk2t5jjeb1v" path="res://scenes/player/player_ship.gd" id="1_62scy"]
-[ext_resource type="Texture2D" uid="uid://cjtrd26bkydpi" path="res://scenes/player/GidgetSpaceship.png" id="1_qlqj5"]
-[ext_resource type="AudioStream" uid="uid://cm1fcvtbquudy" path="res://assets/sounds/laserfire01.ogg" id="4_dvg5m"]
+[ext_resource type="Texture2D" uid="uid://delia7ww6o2ic" path="res://scenes/player/GidgetSpaceship.png" id="1_qlqj5"]
+[ext_resource type="AudioStream" uid="uid://cf6qr6xrgtxh7" path="res://assets/sounds/laserfire01.ogg" id="4_dvg5m"]
+[ext_resource type="AudioStream" uid="uid://diqgbk7t8hcg6" path="res://assets/sounds/8-bit-explosion.wav" id="4_fie2v"]
+[ext_resource type="Texture2D" uid="uid://ci0kjxllfmyhu" path="res://assets/sprites/Explosion.png" id="5_quy40"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8a1bh"]
+atlas = ExtResource("5_quy40")
+region = Rect2(0, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_khikj"]
+atlas = ExtResource("5_quy40")
+region = Rect2(96, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8os1m"]
+atlas = ExtResource("5_quy40")
+region = Rect2(192, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hpw3p"]
+atlas = ExtResource("5_quy40")
+region = Rect2(288, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fwr64"]
+atlas = ExtResource("5_quy40")
+region = Rect2(384, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y0j1h"]
+atlas = ExtResource("5_quy40")
+region = Rect2(480, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aujj3"]
+atlas = ExtResource("5_quy40")
+region = Rect2(576, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2cqbp"]
+atlas = ExtResource("5_quy40")
+region = Rect2(672, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4ng08"]
+atlas = ExtResource("5_quy40")
+region = Rect2(768, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kyj4u"]
+atlas = ExtResource("5_quy40")
+region = Rect2(864, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_reqrf"]
+atlas = ExtResource("5_quy40")
+region = Rect2(960, 0, 96, 96)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3elve"]
 atlas = ExtResource("1_qlqj5")
@@ -18,6 +64,44 @@ region = Rect2(0, 128, 128, 128)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_a6ke5"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8a1bh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_khikj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8os1m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hpw3p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fwr64")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y0j1h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aujj3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2cqbp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4ng08")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kyj4u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_reqrf")
+}],
+"loop": false,
+"name": &"explosion",
+"speed": 12.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_3elve")
@@ -45,14 +129,21 @@ properties/1/replication_mode = 1
 radius = 32.0
 height = 114.0
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_05h1u"]
+bg_color = Color(1, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dvg5m"]
+bg_color = Color(0.41898, 0.790553, 3.85046e-07, 1)
+
 [node name="PlayerShip" type="CharacterBody2D"]
 script = ExtResource("1_62scy")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_a6ke5")
-animation = &"flying"
+animation = &"explosion"
 autoplay = "flying"
-frame_progress = 0.388968
+frame = 10
+frame_progress = 1.0
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_05h1u")
@@ -69,5 +160,18 @@ wait_time = 0.5
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_dvg5m")
+
+[node name="HP" type="ProgressBar" parent="."]
+offset_left = -65.0
+offset_top = 46.0
+offset_right = 66.0
+offset_bottom = 60.0
+theme_override_styles/background = SubResource("StyleBoxFlat_05h1u")
+theme_override_styles/fill = SubResource("StyleBoxFlat_dvg5m")
+max_value = 10.0
+show_percentage = false
+
+[node name="Boom" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_fie2v")
 
 [connection signal="timeout" from="CooldownTimer" to="." method="_on_cooldown_timer_timeout"]

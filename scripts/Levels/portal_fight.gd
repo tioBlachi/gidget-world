@@ -8,14 +8,21 @@ extends Node2D
 @onready var pSpawner := $pSpawner
 @onready var player_scene = preload("res://scenes/player/PlayerShip.tscn")
 @onready var music := $Music
+@onready var turrets := $CatBoss/Turrets.get_children()
+@onready var popup := $PopupUI/restart_screen
 # Boss stuff
 @onready var white_fade: ColorRect = $Fader/WhiteFade
 @onready var explosion_template: AnimatedSprite2D = $Explosions
+@onready var spike_spawn_points := $CatBoss/SpikeSpawnPoints.get_children()
 @export var explosion_radius = 150.0
 @export var explosions_total = 7
+@export var spike_ring_scene: PackedScene
 @export var boss_hp := 20;
 
+
 var players : Array
+var phase_2_entered := false
+var phase_3_entered := false
 
 func _ready() -> void:
 	$CanvasLayer/BossHP.max_value = boss_hp
@@ -25,29 +32,124 @@ func _ready() -> void:
 		spawn_players.rpc(Net.players)
 		
 	Global.boss_hit.connect(on_boss_hit_by_laser)
+	Global.player_died.connect(on_player_died)
+	phase_1.rpc()
 	
-	players = pSpawner.get_children()
 	
 func _process(delta: float) -> void:
 	pass
+	
+func activate_players(players: Array):
+	for p in players:
+		p.disabled = false
+		
+func deactivate_players(players: Array):
+	for p in players:
+		p.disabled = true
 
-@rpc("any_peer", "call_local")
+func reverse_players(players: Array):
+	for p in players:
+		p.reversed = true
+		
+func unreverse_players(players: Array):
+	for p in players:
+		p.reversed = false
+
+@rpc("authority", "call_local")
+func phase_1():
+	for t in turrets:
+		t.activated = true
+		await get_tree().create_timer(1.0).timeout
+
+
+@rpc("authority", "call_local")
+func end_phase_1():
+	for t in turrets:
+		t.activated = false
+		t.queue_free()
+	deactivate_players(players)
+	boss_anim.play("angry")
+	await get_tree().create_timer(2.0).timeout
+	phase_2.rpc()
+
+
+@rpc("authority", "call_local")
+func phase_2():
+	reverse_players(players)
+	activate_players(players)
+	boss_anim.play("patch")
+	spawn_all_spike_rings()
+	
+@rpc("authority", "call_local")
+func end_phase_2():
+	deactivate_players(players)
+	boss_anim.play("angry")
+	await get_tree().create_timer(2.0).timeout
+	phase_3.rpc()
+
+@rpc("authority", "call_local")
+func phase_3():
+	print("Phase 3 Entered")
+	unreverse_players(players)
+	activate_players(players)
+	boss_anim.play("patch")
+	# TODO: final phase setup
+
+# ----------------- Spike Rings -------------------
+@rpc("authority", "call_local")
+func spawn_spike_ring_at(index: int) -> void:
+	if index < 0 or index >= spike_spawn_points.size():
+		return
+
+	var ring := spike_ring_scene.instantiate()
+	ring.global_position = spike_spawn_points[index].global_position
+	add_child(ring)
+	
+@rpc("authority", "call_local")
+func spawn_all_spike_rings() -> void:
+	for m in spike_spawn_points:
+		var ring := spike_ring_scene.instantiate()
+		ring.global_position = m.global_position
+		add_child(ring)
+# -------------------------------------------------
+
+@rpc("any_peer")
+func request_boss_hit(amount: float):
+	if not multiplayer.is_server():
+		return
+	boss_take_damage.rpc(amount)
+
+	
+@rpc("authority", "call_local")
 func boss_take_damage(amount: float):
 	boss_hp -= amount
 	boss_hp = max(0, boss_hp)
 	$CanvasLayer/BossHP.value = boss_hp
-	if boss_hp <= 0:
-		for p in players:
-			p.disabled = true
-			
+
+	var max_hp: float = $CanvasLayer/BossHP.max_value
+	var hp_ratio: float = float(boss_hp) / float(max_hp)
+
+	# Lost at least 1/3 of max HP, enter Phase 2 (once)
+	if not phase_2_entered and hp_ratio <= 2.0 / 3.0:
+		phase_2_entered = true
+		end_phase_1()      # or phase_2.rpc() directly if you prefer
+
+	# Lost at least 2/3 of max HP, enter Phase 3 (once)
+	elif not phase_3_entered and hp_ratio <= 1.0 / 3.0:
+		phase_3_entered = true
+		end_phase_2()
+		
+
+	# ---- Death check ----
+	elif boss_hp <= 0:
+		deactivate_players(players)
 		bg.stop()
 		music.stop()
 		boss_anim.play("angry")
-		spawn_explosions_over_time.rpc(5.0, 0.12)
+		spawn_explosions_over_time.rpc(5.0, 0.15)
 		fade_to_white.rpc()
 		await get_tree().create_timer(6.5).timeout
-		# TODO: End Credit transition
-		
+		trigger_win.rpc()
 
 @rpc("any_peer", "call_local", "reliable")
 func spawn_players(p_array: PackedInt32Array) -> void:
@@ -61,11 +163,14 @@ func spawn_players(p_array: PackedInt32Array) -> void:
 	for i in 2:
 		var peer_id := p_array[i]
 		var player := player_scene.instantiate()
+		var sprite := player.get_child(0)
 		player.name = str(peer_id)
-		player.modulate = tints[i]
+		#player.modulate = tints[i]
+		sprite.self_modulate = tints[i]
 		player.global_position = markers[i].global_position
 		player.set_multiplayer_authority(peer_id)
 		pSpawner.add_child(player)
+	players = pSpawner.get_children()
 
 
 @rpc("authority", "call_local")
@@ -95,7 +200,7 @@ func spawn_single_explosion():
 
 	e.frame = 0
 	e.play(anim)
-
+	$Boom.play()
 	get_tree().create_timer(1.0).timeout.connect(func():
 		if e:
 			e.queue_free())
@@ -114,6 +219,19 @@ func fade_to_white(duration: float = 5.0) -> void:
 	tween.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	tween.tween_property(white_fade, "color:a", 1.0, duration)
 
-func on_boss_hit_by_laser():
+@rpc("authority", "call_local")
+func trigger_win():
+	popup.current_state = popup.LEVEL_STATE.COMPLETE
+	popup.pause()
 	
-	boss_take_damage.rpc(1)
+@rpc("authority", "call_local")
+func trigger_lose():
+	popup.current_state = popup.LEVEL_STATE.FAILED
+	popup.pause()
+	
+@rpc("any_peer", "call_local")
+func on_player_died():
+	trigger_lose.rpc()
+
+func on_boss_hit_by_laser():
+	request_boss_hit.rpc(1.0)
