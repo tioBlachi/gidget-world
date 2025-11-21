@@ -153,10 +153,10 @@ func pickup_item(item_node):
 		add_child(item_node)
 		held_item = item_node
 		# Optionally, disable its physics/collision while held
-		if item_node is RigidBody2D:
-			item_node.set_physics_process(false)
-			item_node.set_collision_layer_value(1, false)
-			item_node.set_collision_mask_value(1, false)
+		#if item_node is RigidBody2D:
+			#item_node.set_physics_process(false)
+			#item_node.set_collision_layer_value(1, false)
+			#item_node.set_collision_mask_value(1, false)
 
 func drop_item():
 	if held_item:
@@ -276,12 +276,22 @@ func _on_timer_complete():
 func _on_pickup_zone_area_entered(area: Area2D) -> void:
 	if area.is_in_group("CollectableItems"):
 		print("An item is nearby and overlapping: ", area.name)
-		
-
-# Optional: Add a message for when an item leaves the zoned
-
-
-
 func _on_pickup_zone_area_exited(area: Area2D) -> void:
 	if area.is_in_group("CollectableItems"):
 		print(area.name, " has left the pickup zone.")
+
+
+func is_holding_extractor() -> bool:
+	if held_item:
+		if held_item.has_method("get_item_data"):
+			# Call the function to get the dictionary
+			var item_data_dict = held_item.get_item_data() 
+			
+			# Use square brackets to access the "name" key
+			if item_data_dict and item_data_dict["name"] == "extractor": 
+				return true
+		else:
+			# Fallback (optional)
+			if held_item.name == "ExtractorItem":
+				return true
+	return false

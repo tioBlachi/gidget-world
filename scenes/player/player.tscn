@@ -68,7 +68,7 @@ animations = [{
 [node name="Player" type="CharacterBody2D"]
 scale = Vector2(0.520001, 0.520001)
 collision_layer = 4
-collision_mask = 3
+collision_mask = 11
 floor_stop_on_slope = false
 platform_on_leave = 2
 script = ExtResource("1_g2els")
