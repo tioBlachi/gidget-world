@@ -140,10 +140,8 @@ script = ExtResource("1_62scy")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_a6ke5")
-animation = &"explosion"
+animation = &"flying"
 autoplay = "flying"
-frame = 10
-frame_progress = 1.0
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_05h1u")
@@ -152,8 +150,12 @@ replication_config = SubResource("SceneReplicationConfig_05h1u")
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_dvg5m")
 
-[node name="Muzzle" type="Marker2D" parent="."]
+[node name="MuzzleRight" type="Marker2D" parent="."]
 position = Vector2(65, 15)
+
+[node name="MuzzleLeft" type="Marker2D" parent="."]
+position = Vector2(-72, 15)
+rotation = 3.14159
 
 [node name="CooldownTimer" type="Timer" parent="."]
 wait_time = 0.5

@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://bgv34gcuxiuqr"]
+[gd_scene load_steps=37 format=3 uid="uid://bgv34gcuxiuqr"]
 
 [ext_resource type="Script" uid="uid://r7mntc1kketq" path="res://scripts/Levels/portal_fight.gd" id="1_7rmao"]
 [ext_resource type="Texture2D" uid="uid://qyjfkgfgbpk0" path="res://assets/sprites/PortalBG.png" id="1_ekbpn"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://coo3efhcvxiar" path="res://scenes/UI/restart_screen.tscn" id="6_imk1x"]
 [ext_resource type="AudioStream" uid="uid://b1cu6c5xy3gt8" path="res://assets/sounds/Music/Boss Battle.ogg" id="7_imk1x"]
 [ext_resource type="AudioStream" uid="uid://diqgbk7t8hcg6" path="res://assets/sounds/8-bit-explosion.wav" id="8_ou0jd"]
+[ext_resource type="PackedScene" uid="uid://lommrbd42bf3" path="res://scenes/objects/Birds/RedTestBird.tscn" id="10_akggb"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ou0jd"]
 atlas = ExtResource("1_ekbpn")
@@ -181,6 +182,7 @@ properties/0/replication_mode = 1
 
 [node name="Portal Fight" type="Node2D"]
 script = ExtResource("1_7rmao")
+red_bird_scene = ExtResource("10_akggb")
 spike_ring_scene = ExtResource("2_6s1gy")
 
 [node name="Background" type="AnimatedSprite2D" parent="."]

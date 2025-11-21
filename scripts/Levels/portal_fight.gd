@@ -1,5 +1,7 @@
 extends Node2D
 
+@export var red_bird_scene: PackedScene
+
 @onready var bg := $Background
 @onready var CatBoss := $CatBoss
 @onready var boss_anim := $CatBoss/Anim
@@ -107,7 +109,6 @@ func phase_2():
 			break
 
 
-	
 @rpc("authority", "call_local")
 func end_phase_2():
 	deactivate_players.rpc()
@@ -115,13 +116,97 @@ func end_phase_2():
 	await get_tree().create_timer(2.0).timeout
 	phase_3.rpc()
 
+
 @rpc("authority", "call_local")
 func phase_3():
 	print("Phase 3 Entered")
+
+	if not multiplayer.is_server():
+		return
+
+	# Normalize player controls for final phase
 	unreverse_players.rpc()
 	activate_players.rpc()
+
 	boss_anim.play("patch")
-	# TODO: final phase setup
+
+	# Initial dramatic pause before the chaos
+	await get_tree().create_timer(1.0).timeout
+
+	# Begin spawning homing bird waves
+	start_bird_flocks()
+	
+func start_bird_flocks():
+	# Initial burst
+	var initial_count := calculate_wave_size()
+	var initial_positions := get_bird_spawn_positions(initial_count)
+	spawn_bird_wave.rpc(initial_positions)
+
+	await get_tree().create_timer(3.0).timeout
+
+	# While the boss is alive, keep spawning waves
+	while boss_hp > 0:
+		var count := calculate_wave_size()
+		var positions := get_bird_spawn_positions(count)
+		spawn_bird_wave.rpc(positions)
+		await get_tree().create_timer(4.0).timeout
+
+
+@rpc("any_peer", "call_local")
+func spawn_bird_wave(positions: Array):
+	for pos in positions:
+		var bird := red_bird_scene.instantiate()
+		bird.global_position = pos
+
+		var bird_body := bird.get_node("AnimatableBody2D") as Node2D
+		if bird_body:
+			bird_body.add_to_group("red_bird_body")
+
+		add_child(bird)
+
+func get_bird_spawn_positions(count: int) -> Array:
+	var positions: Array = []
+	for i in count:
+		positions.append(get_random_bird_spawn_point_front())
+	return positions
+
+func get_random_bird_spawn_point_front() -> Vector2:
+	var boss_pos = CatBoss.global_position
+
+	# Distance in front of the boss
+	var min_dist := 500.0
+	var max_dist := 750.0
+	var dist := randf_range(min_dist, max_dist)
+
+	# Vertical spread around the boss (up/down, but still "in front")
+	var vertical_spread := 150.0
+	var y_offset := randf_range(-vertical_spread, vertical_spread)
+
+	# Front of boss = negative X direction from boss (to the left)
+	var offset := Vector2(-dist, y_offset)
+
+	return boss_pos + offset
+
+
+#func get_random_bird_spawn_point() -> Vector2:
+	#var radius := 500.0  # can tweak for larger arena
+	#var angle := randf() * TAU
+	#var offset := Vector2(cos(angle), sin(angle)) * radius
+	#return CatBoss.global_position + offset
+
+func calculate_wave_size() -> int:
+	var max_hp: float = $CanvasLayer/BossHP.max_value
+	var ratio := float(boss_hp) / max_hp
+
+	if ratio > 0.50:
+		return 3  # easier at start
+	elif ratio > 0.25:
+		return 4
+	elif ratio > 0.10:
+		return 5
+	else:
+		return 6  # final frenzy
+
 
 # ----------------- Spike Rings -------------------
 @rpc("any_peer", "call_local")

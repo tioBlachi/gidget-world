@@ -78,6 +78,24 @@ func _get_nearest_player() -> Node2D:
 				nearest = n
 	return nearest
 
+#func _on_kill_body(hit: Node) -> void:
+	#if hit.is_in_group("players") and hit.has_method("die"):
+		#hit.die()
 func _on_kill_body(hit: Node) -> void:
-	if hit.is_in_group("players") and hit.has_method("die"):
+	if not hit.is_in_group("players"):
+		return
+
+	if not multiplayer.is_server():
+		return
+
+	# Special behavior for your ships
+	if hit.is_in_group("player_ships"):
+		var peer_id := hit.get_multiplayer_authority()
+		Global.player_hit_by_bird.emit(peer_id)
+		# Optional: bird dies on hit
+		queue_free()
+		return
+
+	# Default behavior for other levels/players
+	if hit.has_method("die"):
 		hit.die()

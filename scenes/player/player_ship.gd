@@ -3,8 +3,11 @@ extends CharacterBody2D
 @onready var cooldown_timer = $CooldownTimer
 @onready var sfx = $AudioStreamPlayer2D
 @onready var sprite := $AnimatedSprite2D
+@onready var muzzle_right := $MuzzleRight
+@onready var muzzle_left  := $MuzzleLeft
 
-@export var SPEED: float = 200.0
+
+@export var SPEED: float = 250.0
 @export var disabled := false
 @export var reversed := false
 @export var Bullet = preload("res://scenes/player/Bullet.tscn")
@@ -14,10 +17,13 @@ var ready_to_fire := true
 
 func _ready() -> void:
 	add_to_group("players")
+	add_to_group("player_ships")
 	$HP.max_value = player_health
 	$HP.value = player_health
 	Global.player_hit_by_turret.connect(lower_hp)
 	Global.player_hit_by_spike.connect(lower_hp)
+	Global.player_hit_by_bird.connect(lower_hp)
+
 
 
 func _physics_process(delta: float) -> void:
@@ -84,14 +90,16 @@ func die():
 
 @rpc("any_peer", "call_local")
 func shoot():
-	if sprite.flip_h:
-		return
 	sfx.play()
 	var b = Bullet.instantiate()
 	if b:
-		var root = get_tree().root
-		root.add_child(b)
-		b.transform = $Muzzle.global_transform
+		get_tree().get_current_scene().add_child(b)
+
+		var muzzle := muzzle_right
+		if sprite.flip_h:
+			muzzle = muzzle_left
+
+		b.transform = muzzle.global_transform
 
 
 func _on_cooldown_timer_timeout() -> void:
