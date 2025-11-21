@@ -52,9 +52,11 @@ func _on_level_select_item_selected(index: int) -> void:
 	selected_level = level_select.get_item_text(index)
 
 func start_game():
+	SoundManager.stop_track.rpc()
 	Net.rpc_id(1, "rpc_start_game", selected_level)
 
 
 func _on_new_game_pressed() -> void:
+	SoundManager.stop_track.rpc()
 	selected_level = SceneManager.LEVEL_ORDER[0]
 	Net.rpc_id(1, "rpc_start_game", selected_level)

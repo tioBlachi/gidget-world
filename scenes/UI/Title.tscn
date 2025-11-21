@@ -1,10 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://covk48n1264is"]
+[gd_scene load_steps=8 format=3 uid="uid://covk48n1264is"]
 
 [ext_resource type="Script" uid="uid://c0fliiisa46b6" path="res://scripts/UI/title.gd" id="1_vd34o"]
 [ext_resource type="Texture2D" uid="uid://dbatyjj04cxgb" path="res://Art/NewArt/GidgetWorldLogo.png" id="2_lp2qc"]
 [ext_resource type="PackedScene" uid="uid://bc8xykakus2vi" path="res://scenes/player/cut_player.tscn" id="3_cqwl8"]
 [ext_resource type="PackedScene" uid="uid://2lntdlomdt6o" path="res://scenes/objects/EvilCat/CatBoss.tscn" id="4_b5w1b"]
-[ext_resource type="AudioStream" uid="uid://bbqk23yktj67u" path="res://Sounds/select-003-337609.mp3" id="5_b5w1b"]
 
 [sub_resource type="Animation" id="Animation_lp2qc"]
 resource_name = "Intro"
@@ -264,9 +263,6 @@ position = Vector2(1085, 932)
 
 [node name="Turrets" parent="CatBoss" index="4"]
 visible = false
-
-[node name="Select" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("5_b5w1b")
 
 [connection signal="pressed" from="ButtonVBox/StartButton" to="." method="join_lobby"]
 
