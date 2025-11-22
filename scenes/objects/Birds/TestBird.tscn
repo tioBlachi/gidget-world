@@ -1,7 +1,7 @@
 [gd_scene load_steps=17 format=3 uid="uid://bnkd0mkld0eoa"]
 
 [ext_resource type="Script" uid="uid://kq66fk0rouro" path="res://scenes/objects/Birds/test_bird.gd" id="1_pp5i6"]
-[ext_resource type="Texture2D" uid="uid://bbe23562jc1be" path="res://Art/NewArt/BirdSprite.png" id="2_kh2l3"]
+[ext_resource type="Texture2D" uid="uid://72x8000b4oso" path="res://Art/NewArt/BirdSprite.png" id="2_kh2l3"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_e5nv7"]
 atlas = ExtResource("2_kh2l3")
@@ -120,6 +120,8 @@ progress = 165.733
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="PathFollow2D"]
 remote_path = NodePath("../../AnimatableBody2D")
+update_rotation = false
+update_scale = false
 
 [node name="AnimatableBody2D" type="AnimatableBody2D" parent="."]
 position = Vector2(164.74, -0.744634)

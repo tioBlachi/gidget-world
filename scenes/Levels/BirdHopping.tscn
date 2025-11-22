@@ -1,23 +1,25 @@
-[gd_scene load_steps=50 format=4 uid="uid://bwdcir8bt8vsk"]
+[gd_scene load_steps=52 format=4 uid="uid://bwdcir8bt8vsk"]
 
-[ext_resource type="Texture2D" uid="uid://ngpcuovhe3by" path="res://Art/NewArt/Big City.png" id="1_eqgpf"]
-[ext_resource type="Texture2D" uid="uid://0vq45rgxcl1" path="res://assets/Tiles/tilemap-backgrounds.png" id="1_m7hoc"]
-[ext_resource type="Texture2D" uid="uid://cpjj4epkskgkq" path="res://assets/Tiles/tilemap.png" id="2_eqgpf"]
-[ext_resource type="Texture2D" uid="uid://ddhaggknaaejj" path="res://assets/Tiles/tilemap_farm.png" id="3_acnx1"]
-[ext_resource type="Texture2D" uid="uid://djfcan6756x2m" path="res://assets/Tiles/tilemap_industrial.png" id="4_m0io1"]
-[ext_resource type="Texture2D" uid="uid://ccewt4wsjae8e" path="res://assets/Tiles/tilemap_normal.png" id="5_y5g0m"]
-[ext_resource type="Texture2D" uid="uid://bkuouxcowxnc7" path="res://assets/Tiles/marble.png" id="6_y277y"]
-[ext_resource type="Texture2D" uid="uid://brp763x2rpc8y" path="res://assets/Tiles/rock.png" id="7_3b7wr"]
-[ext_resource type="Texture2D" uid="uid://cpkkibt87aunn" path="res://assets/Tiles/sand.png" id="8_70nyg"]
-[ext_resource type="Texture2D" uid="uid://cxiaftsnawb21" path="res://assets/Tiles/stone.png" id="9_h0dn2"]
-[ext_resource type="Texture2D" uid="uid://drrvmitvw5qh2" path="res://assets/Tiles/BackgroundRock.png" id="10_5s71w"]
-[ext_resource type="Texture2D" uid="uid://ckkqy1fhk50c4" path="res://assets/Tiles/spritesheet_complete.png" id="12_acnx1"]
+[ext_resource type="Texture2D" uid="uid://cs58b63d0hxtf" path="res://Art/NewArt/Big City.png" id="1_eqgpf"]
+[ext_resource type="Texture2D" uid="uid://ci1sw3hbh6d5q" path="res://assets/Tiles/tilemap-backgrounds.png" id="1_m7hoc"]
+[ext_resource type="Texture2D" uid="uid://c40nr7tny6ms7" path="res://assets/Tiles/tilemap.png" id="2_eqgpf"]
+[ext_resource type="Texture2D" uid="uid://c855eei5wmjws" path="res://assets/Tiles/tilemap_farm.png" id="3_acnx1"]
+[ext_resource type="Texture2D" uid="uid://dm4ynga7tc6wf" path="res://assets/Tiles/tilemap_industrial.png" id="4_m0io1"]
+[ext_resource type="Texture2D" uid="uid://cn4i1hmsqqbm5" path="res://assets/Tiles/tilemap_normal.png" id="5_y5g0m"]
+[ext_resource type="Texture2D" uid="uid://gpufj5wv3tf3" path="res://assets/Tiles/marble.png" id="6_y277y"]
+[ext_resource type="Texture2D" uid="uid://d1d5g51eufqir" path="res://assets/Tiles/rock.png" id="7_3b7wr"]
+[ext_resource type="Texture2D" uid="uid://kitkyug2b1qj" path="res://assets/Tiles/sand.png" id="8_70nyg"]
+[ext_resource type="Texture2D" uid="uid://to2hwj6d7drn" path="res://assets/Tiles/stone.png" id="9_h0dn2"]
+[ext_resource type="Texture2D" uid="uid://cs5w64bj3vdqt" path="res://assets/Tiles/BackgroundRock.png" id="10_5s71w"]
+[ext_resource type="Texture2D" uid="uid://eir4y8hlip5g" path="res://assets/Tiles/spritesheet_complete.png" id="12_acnx1"]
 [ext_resource type="PackedScene" uid="uid://lommrbd42bf3" path="res://scenes/objects/Birds/RedTestBird.tscn" id="15_y277y"]
 [ext_resource type="PackedScene" uid="uid://bnkd0mkld0eoa" path="res://scenes/objects/Birds/TestBird.tscn" id="16_3b7wr"]
 [ext_resource type="PackedScene" uid="uid://u3r22v5fvhg3" path="res://scenes/objects/Birds/GreenTestBird.tscn" id="16_70nyg"]
-[ext_resource type="Texture2D" uid="uid://cuj7epyo0oik8" path="res://scenes/objects/pixil-frame-0 (52).png" id="17_70nyg"]
+[ext_resource type="Texture2D" uid="uid://c32i7oym0qbxt" path="res://scenes/objects/pixil-frame-0 (52).png" id="17_70nyg"]
 [ext_resource type="PackedScene" uid="uid://cnjbbv7is5qwu" path="res://scenes/player/smallPlayer.tscn" id="17_h0dn2"]
-[ext_resource type="AudioStream" uid="uid://c85ioh3kb76e5" path="res://assets/BowenStuff/themeMusic.mp3" id="19_5s71w"]
+[ext_resource type="AudioStream" uid="uid://d3j5iidvdpb15" path="res://assets/BowenStuff/themeMusic.mp3" id="19_5s71w"]
+[ext_resource type="PackedScene" uid="uid://bf72f4j7c2i3f" path="res://scripts/UI/pause_menu.tscn" id="19_xo8v6"]
+[ext_resource type="PackedScene" uid="uid://coo3efhcvxiar" path="res://scenes/UI/restart_screen.tscn" id="20_xo8v6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xo8v6"]
 texture = ExtResource("1_m7hoc")
@@ -1691,7 +1693,7 @@ func _on_body_entered(body):
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5s71w"]
 size = Vector2(6664.13, 82.1994)
 
-[node name="BirdHopping" type="Node2D"]
+[node name="Bird Hopping" type="Node2D"]
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 offset = Vector2(0, -555.165)
@@ -2300,3 +2302,7 @@ position = Vector2(2740, 449)
 stream = ExtResource("19_5s71w")
 autoplay = true
 max_distance = 2e+06
+
+[node name="PauseMenu" parent="." instance=ExtResource("19_xo8v6")]
+
+[node name="PopupUI" parent="." instance=ExtResource("20_xo8v6")]

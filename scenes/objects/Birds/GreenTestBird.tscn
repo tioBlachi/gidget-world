@@ -1,7 +1,7 @@
 [gd_scene load_steps=17 format=3 uid="uid://u3r22v5fvhg3"]
 
 [ext_resource type="Script" uid="uid://sdna67mvcsn0" path="res://scenes/objects/Birds/red_test_bird.gd" id="1_32dpy"]
-[ext_resource type="Texture2D" uid="uid://cpvvsxu1bpja0" path="res://Art/NewArt/GreenBird.png" id="2_32dpy"]
+[ext_resource type="Texture2D" uid="uid://b6vv12522sqhv" path="res://Art/NewArt/GreenBird.png" id="2_32dpy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_moonb"]
 atlas = ExtResource("2_32dpy")
@@ -135,8 +135,9 @@ frame_progress = 0.911353
 
 [node name="Killbox" type="CollisionShape2D" parent="AnimatableBody2D"]
 position = Vector2(0.231092, 2.74722)
-rotation = 1.57029
+rotation = 0.021721
 shape = SubResource("CircleShape2D_peg3b")
+one_way_collision = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
