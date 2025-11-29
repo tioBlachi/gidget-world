@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://cjkgyonf0cpif" path="res://assets/Tiles/tilemap_farm.png" id="2_u608k"]
 [ext_resource type="Texture2D" uid="uid://bbfu5ku25ukaa" path="res://assets/Tiles/tilemap_industrial.png" id="3_2umvj"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hlj2j"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_u608k"]
 texture = ExtResource("3_2umvj")
 separation = Vector2i(1, 1)
 texture_region_size = Vector2i(18, 18)
@@ -193,7 +193,7 @@ texture_region_size = Vector2i(18, 18)
 [sub_resource type="TileSet" id="TileSet_r6tuf"]
 tile_size = Vector2i(18, 18)
 physics_layer_0/collision_layer = 1
-sources/0 = SubResource("TileSetAtlasSource_hlj2j")
+sources/0 = SubResource("TileSetAtlasSource_u608k")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_c2wd4"]
 texture = ExtResource("1_pf3l8")
