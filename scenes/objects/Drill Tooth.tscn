@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://tmcmxj34fmxw" path="res://assets/sprites/Decay Tooth.png" id="2_n4vwk"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nqfqk"]
-radius = 44.0
-height = 238.0
+radius = 55.0
+height = 180.0
 
 [node name="Drill Tooth" type="RigidBody2D"]
 collision_layer = 8
@@ -18,7 +18,7 @@ script = ExtResource("1_x3acl")
 texture = ExtResource("2_n4vwk")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-10, 7)
+position = Vector2(-9, -19)
 shape = SubResource("CapsuleShape2D_nqfqk")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

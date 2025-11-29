@@ -25,6 +25,8 @@ func _ready():
 		
 	#Change Layers and Masks
 	configure_players_for_new_interaction_zone()
+	#Change layers and masks
+	Global.configure_players_for_new_interaction_zone()
 	
 
 func _setup_level_logic():

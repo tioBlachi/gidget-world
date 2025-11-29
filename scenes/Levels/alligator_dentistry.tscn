@@ -727,12 +727,15 @@ scale = Vector2(5, 5)
 position = Vector2(151.8, 31.2)
 scale = Vector2(0.2, 0.2)
 disable_mode = 2
-collision_mask = 3
+collision_layer = 4
+collision_mask = 1
 is_key_tooth = true
 
 [node name="Drill Tooth" parent="Teeth" instance=ExtResource("14_xeo0l")]
 position = Vector2(256.4, 30.4)
 scale = Vector2(0.2, 0.2)
+collision_layer = 4
+collision_mask = 1
 
 [node name="Tooth1" parent="Teeth" instance=ExtResource("6_4mk0g")]
 position = Vector2(62, 31.2)

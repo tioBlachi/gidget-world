@@ -123,6 +123,25 @@ var held_item = null
 var float_offset = Vector2(-30, -80) 
 
 func _process(delta):
+	# --- God Mode Toggle Combination ---
+	# Check if both buttons were pressed together in the same frame
+	if Input.is_action_just_pressed("action2") and Input.is_action_pressed("pickup_drop"):
+		god_mode = not god_mode # Toggle the boolean value (flips true to false or false to true)
+		if god_mode:
+			print("GOD MODE ACTIVATED")
+		else:
+			print("GOD MODE DEACTIVATED")
+			
+	# Also check the reverse combination: if pickup_drop was just pressed while holding action2
+	elif Input.is_action_just_pressed("pickup_drop") and Input.is_action_pressed("action2"):
+		god_mode = not god_mode 
+		if god_mode:
+			print("GOD MODE ACTIVATED")
+		else:
+			print("GOD MODE DEACTIVATED")
+	# --- End God Mode Toggle s2---
+	
+	
 	# Handle pickup/drop action
 	if Input.is_action_just_pressed("pickup_drop"):
 		if held_item:

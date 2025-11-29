@@ -54,7 +54,7 @@ func finish_level(item_node_to_despawn: Node):
 	#item_node_to_despawn.queue_free()
 	
 	print("Level End Triggered! Going to next level.")
-	
+	Global.reset_players_to_standard_configuration()
 	get_tree().quit()	
 
 # Helper function to get the item name from the node
