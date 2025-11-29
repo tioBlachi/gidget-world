@@ -53,3 +53,5 @@ func spawn_players(p_array: PackedInt32Array):
 		cam.enabled = true
 		if peer_id == multiplayer.get_unique_id():
 			cam.make_current()
+		var level_root = get_parent().get_parent()
+		cam.limit_bottom = 0

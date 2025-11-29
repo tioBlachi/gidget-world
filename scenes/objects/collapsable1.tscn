@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=4 uid="uid://crt3hl37uat0j"]
+[gd_scene load_steps=14 format=4 uid="uid://crt3hl37uat0j"]
 
-[ext_resource type="Texture2D" uid="uid://cjwvexmaha7kj" path="res://assets/Tiles/rock.png" id="1_pf3l8"]
-[ext_resource type="Texture2D" uid="uid://doslx3h3xh7nm" path="res://assets/Tiles/tilemap_farm.png" id="2_u608k"]
-[ext_resource type="Texture2D" uid="uid://bubel0hify2ql" path="res://assets/Tiles/tilemap_industrial.png" id="3_2umvj"]
+[ext_resource type="Texture2D" uid="uid://c6l5e1uj4fboq" path="res://assets/Tiles/rock.png" id="1_pf3l8"]
+[ext_resource type="Script" uid="uid://cafbyqki4mcs1" path="res://scripts/objects/collapsable_1.gd" id="1_u608k"]
+[ext_resource type="Texture2D" uid="uid://cjkgyonf0cpif" path="res://assets/Tiles/tilemap_farm.png" id="2_u608k"]
+[ext_resource type="Texture2D" uid="uid://bbfu5ku25ukaa" path="res://assets/Tiles/tilemap_industrial.png" id="3_2umvj"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hlj2j"]
 texture = ExtResource("3_2umvj")
@@ -603,11 +604,20 @@ tile_size = Vector2i(18, 18)
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_x5tf4")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u608k"]
+size = Vector2(123, 12)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2umvj"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_c2wd4"]
+height = 20.0
+
 [node name="Building1" type="Node2D"]
+script = ExtResource("1_u608k")
 
 [node name="Industrial" type="TileMapLayer" parent="."]
 position = Vector2(-558, 148)
-tile_map_data = PackedByteArray("AAAhAOH/AAAKAAEAAAAhAOL/AAAKAAIAAAAhAOP/AAAKAAQAAAA=")
+tile_map_data = PackedByteArray("AAAcAOH/AAAKAAEAAAAcAOL/AAAKAAIAAAAcAOP/AAAKAAQAAAA=")
 tile_set = SubResource("TileSet_r6tuf")
 
 [node name="Collapsable_Buildings2" type="TileMapLayer" parent="."]
@@ -618,3 +628,17 @@ tile_set = SubResource("TileSet_nn1as")
 position = Vector2(-539.96, 91)
 tile_map_data = PackedByteArray("AAAcAOr/AAAGAAUAAAAcAO3/AAAGAAUAAAAcAPD/AAAGAAUAAAAcAPP/AAAGAAUAAAAcAPb/AAAGAAUAAAAcAPn/AAAGAAUAAAAfAOr/AAAGAAUAAAAfAO3/AAAGAAUAAAAfAPD/AAAGAAUAAAAfAPP/AAAGAAUAAAAfAPb/AAAGAAUAAAAfAPn/AAAGAAUAAAA=")
 tile_set = SubResource("TileSet_pbfpa")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0.5, -357)
+shape = SubResource("RectangleShape2D_u608k")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(62, -351)
+shape = SubResource("CircleShape2D_2umvj")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-62, -351)
+shape = SubResource("CapsuleShape2D_c2wd4")

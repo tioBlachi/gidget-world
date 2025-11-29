@@ -10,17 +10,15 @@ extends CharacterBody2D
 @onready var cam = $Camera2D
 @onready var collision_shape = $CollisionShape2D
 @onready var timer = $Timer
-@export var max_fall_speed: float = 500.0 #allows other scenes to access max fall speed
+@export var max_fall_speed: float = 500.0
 @export var is_gravity_level: bool = false
 @export var god_mode: bool = false
 @export var is_locally_paused := false
 
 const PUSH_FORCE = 15.0
 const MIN_PUSH_FORCE = 10.0
-const COYOTE_TIME = 0.2 # Duration of coyote time in seconds
 
 var cell_floor: RigidBody2D = null
-
 var is_dead = false
 var original_texture = preload("res://Art/OldTestArt/gRight.png")
 var death_texture = preload("res://Art/OldTestArt/gDeath.png")
@@ -28,40 +26,29 @@ var burned_texture = preload("res://Art/OldTestArt/deathGidget.png")
 
 signal character_died
 
-# New variables for coyote time
-var time_since_leave_floor: float = 0.0
-var was_on_floor: bool = false
+# Coyote Time variables
+var coyote_time: float = 0.2  # Time window for jumping after leaving the ground (in seconds)
+var coyote_timer: float = 0.0  # Timer to track coyote time
 
 func _ready():
 	add_to_group("players")
 	add_to_group("killzones")
 
-
 func _physics_process(delta: float) -> void:
 	if is_locally_paused:
 		return
 	
-	# Handle coyote time
-	if not is_on_floor():
-		time_since_leave_floor += delta
-	else:
-		time_since_leave_floor = 0.0 # Reset time when touching the floor
-
-	if is_multiplayer_authority():
-		var level_root = get_parent().get_parent()
-		if is_dead:
-			velocity += get_gravity() * delta * 2.0 
-			move_and_slide()
-			return
+	# Handle gravity and fall speed
+	if not is_dead:
+		if not is_on_floor():
+			coyote_timer -= delta  # Count down the coyote timer if we're in the air
+		else:
+			coyote_timer = coyote_time  # Reset the coyote timer when we land
+	
+		# Handle jump input with coyote time
 		if not staggered:
 			if side_scroller:
-				if level_root and level_root.has_method("get_map_limits"):
-					var limits = level_root.get_map_limits()
-					$Camera2D.limit_left = int(limits.position.x)
-					$Camera2D.limit_top = int(limits.position.y)
-					$Camera2D.limit_right = int(limits.end.x)
-					$Camera2D.limit_bottom = int(limits.end.y)
-
+				# Apply gravity and max fall speed if not on the floor
 				if not is_on_floor():
 					var gravity_force := get_gravity()
 					var fall_limit := max_fall_speed
@@ -73,22 +60,15 @@ func _physics_process(delta: float) -> void:
 					velocity += gravity_force * delta
 					velocity.y = min(velocity.y, fall_limit)
 
-				if is_gravity_level and (Input.is_action_pressed("move up") or Input.is_action_pressed("jump")):
-					velocity.y *= 0.9
+				# Jump logic with coyote time
+				if not burning and Input.is_action_just_pressed("jump"):
+					# Check if we're on the floor or within coyote time
+					if is_on_floor() or coyote_timer > 0:
+						velocity.y = JUMP_VELOCITY
+						$JumpSound.play()
+						coyote_timer = 0  # Reset coyote timer when we jump
 
-				# Modify jump logic to check coyote time
-				if not burning and Input.is_action_just_pressed("jump") and (is_on_floor() or time_since_leave_floor <= COYOTE_TIME):
-					velocity.y = JUMP_VELOCITY
-					$JumpSound.play()
-	   				 # (lab reporting)
-					var lab = get_tree().get_first_node_in_group("lab_escape")
-					if lab:
-						var my_id = name.to_int()
-						if multiplayer.is_server():
-							lab.rpc_report_jump(my_id)
-						else:
-							lab.rpc_id(1, "rpc_report_jump", my_id)
-	
+				# Handle movement
 				direction = Input.get_axis("move left", "move right")
 				if direction:
 					velocity.x = direction * SPEED
@@ -97,14 +77,9 @@ func _physics_process(delta: float) -> void:
 					velocity.x = move_toward(velocity.x, 0, SPEED)
 
 				_update_slope_tilt()
-				if move_and_slide():
-					for i in get_slide_collision_count():
-						var c = get_slide_collision(i)
-						var collider = c.get_collider()
-						if collider and collider is RigidBody2D and collider.is_in_group("crates"):
-							var push_direction = -c.get_normal()
-							collider.apply_central_impulse(push_direction * PUSH_FORCE)
+				move_and_slide()
 			else:
+				# Handle 8-direction movement
 				var x_direction = Input.get_axis("move left", "move right")
 				var y_direction = Input.get_axis("move up", "move down")
 				var dir = Vector2(x_direction, y_direction)
