@@ -1,10 +1,9 @@
 extends Node2D
 
-@onready var player_scene = preload("res://scenes/player/CollinPlayer.tscn")
+@onready var player_scene = preload("res://scenes/player/player.tscn")
 @onready var player1marker: Node2D = $PlayerMarkers/Player1Marker
 @onready var player2marker: Node2D = $PlayerMarkers/Player2Marker
 @onready var pSpawner: Node = $pSpawner
-
 
 func _ready():
 	if multiplayer.multiplayer_peer == null:

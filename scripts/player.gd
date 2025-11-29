@@ -13,7 +13,6 @@ extends CharacterBody2D
 @export var max_fall_speed: float = 500.0 #allows other scenes to access max fall speed
 @export var is_gravity_level: bool = false
 @export var god_mode: bool = false
-@export var is_locally_paused := false
 
 const PUSH_FORCE = 15.0
 const MIN_PUSH_FORCE = 10.0
@@ -25,16 +24,13 @@ var original_texture = preload("res://Art/OldTestArt/gRight.png")
 var death_texture = preload("res://Art/OldTestArt/gDeath.png")
 var burned_texture = preload("res://Art/OldTestArt/deathGidget.png")
 
-signal character_died
-
 func _ready():
 	add_to_group("players")
-	add_to_group("killzones")
-
+	if get_tree().current_scene and get_tree().current_scene.name == "Alligator Dentistry":
+		SPEED *= 2.5
+		JUMP_VELOCITY *= 2.0
 
 func _physics_process(delta: float) -> void:
-	if is_locally_paused:
-		return
 	#print("Player velocity.y = ", velocity.y)
 	#print("This is gravity level ", is_gravity_level)
 	#print("We are not on floor ", not is_on_floor())
@@ -87,7 +83,7 @@ func _physics_process(delta: float) -> void:
 						else:
 							lab.rpc_id(1, "rpc_report_jump", my_id)
 	
-				direction = Input.get_axis("move left", "move right")
+				var direction := Input.get_axis("move left", "move right")
 				if direction:
 					velocity.x = direction * SPEED
 					$Sprite.flip_h = direction < 0
@@ -120,6 +116,88 @@ func _physics_process(delta: float) -> void:
 				elif x_direction < 0:
 					$Sprite.flip_h = true		
 				move_and_slide()
+
+
+
+var held_item = null
+var float_offset = Vector2(-30, -80) 
+
+func _process(delta):
+	# --- God Mode Toggle Combination ---
+	# Check if both buttons were pressed together in the same frame
+	if Input.is_action_just_pressed("action2") and Input.is_action_pressed("pickup_drop"):
+		god_mode = not god_mode # Toggle the boolean value (flips true to false or false to true)
+		if god_mode:
+			print("GOD MODE ACTIVATED")
+		else:
+			print("GOD MODE DEACTIVATED")
+			
+	# Also check the reverse combination: if pickup_drop was just pressed while holding action2
+	elif Input.is_action_just_pressed("pickup_drop") and Input.is_action_pressed("action2"):
+		god_mode = not god_mode 
+		if god_mode:
+			print("GOD MODE ACTIVATED")
+		else:
+			print("GOD MODE DEACTIVATED")
+	# --- End God Mode Toggle s2---
+	
+	
+	# Handle pickup/drop action
+	if Input.is_action_just_pressed("pickup_drop"):
+		if held_item:
+			drop_item()
+		else:
+			try_pickup_item()
+
+	# Update held item position if one exists
+	if held_item:
+		# Use global_position for accurate world positioning
+		held_item.global_position = global_position + float_offset
+
+func try_pickup_item():
+	# Assuming the player has an Area2D named "PickupZone" to detect items
+	var pickup_zone = $PickupZone 
+	var overlapping_items = pickup_zone.get_overlapping_areas() # Adjust for body detection if needed
+
+	for item_area in overlapping_items:
+		if item_area.is_in_group("CollectableItems"): # Ensure items are in this group
+			pickup_item(item_area)
+			break # Only pick up one item at a time
+
+func pickup_item(item_node):
+	if held_item == null:
+		# Remove the item from its original parent in the scene tree
+		item_node.get_parent().remove_child(item_node)
+		# Make the player the new parent
+		add_child(item_node)
+		held_item = item_node
+		# Optionally, disable its physics/collision while held
+		#if item_node is RigidBody2D:
+			#item_node.set_physics_process(false)
+			#item_node.set_collision_layer_value(1, false)
+			#item_node.set_collision_mask_value(1, false)
+
+func drop_item():
+	if held_item:
+		# Reparent the item back to the main world scene (e.g., "/root/World")
+		# You may need a reference to your main world node
+		var world_node = get_tree().current_scene # Gets the current main scene
+		remove_child(held_item)
+		world_node.add_child(held_item)
+		
+		# Set its global position where the player is (or in front of them)
+		held_item.global_position = global_position
+		
+		# Re-enable physics/collision
+		if held_item is RigidBody2D:
+			held_item.set_physics_process(true)
+			held_item.set_collision_layer_value(1, true)
+			held_item.set_collision_mask_value(1, true)
+
+		held_item = null
+
+
+
 # ----- KEYCARD/KEY HANDLING. UPDATE FOR OTHER WORLDS
 var has_keycard := false
 var keycard_ref: Node = null
@@ -128,6 +206,8 @@ func pickup_keycard(keycard: Node):
 	has_keycard = true
 	keycard_ref = keycard
 	
+	
+
 func set_side_scroller(value: bool):
 	side_scroller = value
 	if not side_scroller:
@@ -163,9 +243,7 @@ func recover():
 	sprite.texture = original_texture
 	if int(self.name) == Net.players[1]:
 		sprite.self_modulate = Color.hex(0xE0FFFF)
-
-func set_paused(value: bool) -> void:
-	is_locally_paused = value
+		
 
 func _update_slope_tilt():
 	if is_on_floor():
@@ -198,7 +276,6 @@ func die():
 	if is_instance_valid($Camera2D):
 		$Camera2D.process_mode = self.PROCESS_MODE_DISABLED
 	
-	
 	$MultiplayerSynchronizer.set_process(false)
 	$DeathSFX.play()
 	var timer = Timer.new()
@@ -206,11 +283,44 @@ func die():
 	timer.wait_time = 1.5
 	add_child(timer)
 	timer.timeout.connect(_on_timer_complete)
-	# timer.timeout.connect(self.queue_free)
+	timer.timeout.connect(self.queue_free)
 	timer.start()
 
 func _on_timer_complete():
 	Global.player_died.emit()
-	emit_signal("character_died")
-	# get_tree().reload_current_scene()
+	get_tree().reload_current_scene()
 	#get_tree().paused = true
+
+
+func _on_pickup_zone_area_entered(area: Area2D) -> void:
+	if area.is_in_group("CollectableItems"):
+		print("An item is nearby and overlapping: ", area.name)
+func _on_pickup_zone_area_exited(area: Area2D) -> void:
+	if area.is_in_group("CollectableItems"):
+		print(area.name, " has left the pickup zone.")
+
+
+func is_holding_extractor() -> bool:
+	if held_item:
+		if held_item.has_method("get_item_data"):
+			# Call the function to get the dictionary
+			var item_data_dict = held_item.get_item_data() 
+			
+			# Use square brackets to access the "name" key
+			if item_data_dict and item_data_dict["name"] == "extractor": 
+				return true
+		else:
+			# Fallback (optional)
+			if held_item.name == "ExtractorItem":
+				return true
+	return false
+
+# In Player.gd
+# Replace the is_holding_extractor function with this:
+
+func get_held_item_name() -> String:
+	if held_item and held_item.has_method("get_item_data"):
+		var item_data_dict = held_item.get_item_data()
+		if item_data_dict:
+			return item_data_dict["name"] # Return the name string (e.g., "Drill", "Filler", "Extractor")
+	return "" # Return empty string if nothing is held or data is missing

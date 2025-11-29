@@ -1,7 +1,5 @@
 extends AnimatableBody2D
 
-signal ready_to_fly
-
 @export var players_needed: int = 2
 @export var speed: float = 160.0
 
@@ -10,8 +8,6 @@ signal ready_to_fly
 @export var use_start_as_origin: bool = true
 
 @export var ping_pong: bool = false
-
-var has_emitted_ready := false
 
 var _riders := {}
 var _prev_pos := Vector2.ZERO
@@ -54,9 +50,6 @@ func _physics_process(delta: float) -> void:
 func _update_rider_gated(delta: float) -> void:
 	# Move toward max_pos if enough riders, else back to origin.
 	var enough := _riders.size() >= players_needed
-	if enough and not has_emitted_ready:
-		has_emitted_ready = true
-		emit_signal("ready_to_fly")
 	_target = max_pos if enough else origin
 	_move_toward_target(delta)
 

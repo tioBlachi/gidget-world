@@ -56,12 +56,7 @@ layout_mode = 2
 [node name="StartButton" type="Button" parent="ButtonContainer"]
 visible = false
 layout_mode = 2
-text = "Start Selected Level"
-
-[node name="NewGame" type="Button" parent="ButtonContainer"]
-visible = false
-layout_mode = 2
-text = "Start New Game"
+text = "Start Game"
 
 [node name="Panel" type="VBoxContainer" parent="."]
 layout_mode = 0
@@ -90,4 +85,3 @@ horizontal_alignment = 1
 
 [connection signal="item_selected" from="ButtonContainer/LevelSelect" to="." method="_on_level_select_item_selected"]
 [connection signal="pressed" from="ButtonContainer/StartButton" to="." method="start_game"]
-[connection signal="pressed" from="ButtonContainer/NewGame" to="." method="_on_new_game_pressed"]
