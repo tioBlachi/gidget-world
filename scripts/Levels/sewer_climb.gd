@@ -34,5 +34,3 @@ func spawn_players(p_array: PackedInt32Array) -> void:
 
 func get_map_limits() -> Rect2:
 	return map_limits
-
-

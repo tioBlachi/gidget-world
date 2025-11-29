@@ -295,3 +295,13 @@ func is_holding_extractor() -> bool:
 			if held_item.name == "ExtractorItem":
 				return true
 	return false
+
+# In Player.gd
+# Replace the is_holding_extractor function with this:
+
+func get_held_item_name() -> String:
+	if held_item and held_item.has_method("get_item_data"):
+		var item_data_dict = held_item.get_item_data()
+		if item_data_dict:
+			return item_data_dict["name"] # Return the name string (e.g., "Drill", "Filler", "Extractor")
+	return "" # Return empty string if nothing is held or data is missing

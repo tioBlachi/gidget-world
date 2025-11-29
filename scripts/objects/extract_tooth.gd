@@ -48,7 +48,7 @@ func extract_tooth():
 	print("Tooth extracted and falling through the world!")
 	if is_key_tooth:
 		spawn_key_tooth_item()
-	# Optional: Queue the tooth for deletion after a few seconds
+	# Queue the tooth for deletion after a few seconds
 	var timer = Timer.new()
 	timer.one_shot = true
 	add_child(timer)
@@ -63,9 +63,10 @@ func spawn_key_tooth_item():
 	# This calls the setter function you defined in Item.gd
 	new_item_instance.item_name = "KeyTooth" 
 	new_item_instance.item_type = "Key"
+	new_item_instance.scale = Vector2(5, 5) 
 	# new_item_instance.sprite_texture = preload("res://Art/key_texture.png") # Set specific texture here
 
-	# Get the main world scene node to add the new item to the tree
+	# Get the main world scene node to add the naew item to the tree
 	var world_node = get_tree().current_scene 
 	world_node.add_child(new_item_instance)
 	new_item_instance.sprite_texture = KEY_TOOTH_TEXTURE 
@@ -73,7 +74,6 @@ func spawn_key_tooth_item():
 	new_item_instance.global_position = global_position
 	
 	print("Spawned a KeyTooth item at location.")
-
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	print("2d body entered called by: ", body.name, " (Extracted state: ", extracted, ")")

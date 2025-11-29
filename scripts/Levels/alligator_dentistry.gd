@@ -7,6 +7,8 @@ extends Node2D
 
 func _ready():
 	
+	
+	
 	if multiplayer.multiplayer_peer == null:
 		_setup_level_logic()
 		return
@@ -19,6 +21,11 @@ func _ready():
 	var net = get_node_or_null("/root/NetworkManager")
 	if net and multiplayer.multiplayer_peer != null:
 		net._level_ready_rpc.rpc_id(1, multiplayer.get_unique_id())
+		
+		
+	#Change Layers and Masks
+	configure_players_for_new_interaction_zone()
+	
 
 func _setup_level_logic():
 	
@@ -56,3 +63,30 @@ func spawn_players(p_array: PackedInt32Array):
 		cam.enabled = true
 		if peer_id == multiplayer.get_unique_id():
 			cam.make_current()
+
+
+func _on_exit_body_entered(body: Node2D) -> void:
+	pass # Replace with function body.
+
+
+
+func configure_players_for_new_interaction_zone():
+	# Retrieve all nodes currently in the "players" group
+	var players = get_tree().get_nodes_in_group("players")
+	
+	# Iterate through each player node found
+	for player in players:
+		# Check if the node is a PhysicsBody2D or Area2D
+		if player is PhysicsBody2D or player is Area2D:
+			
+			# --- Set the Collision Layer: Only Layer 3 is ON ---
+			player.collision_layer = 0 # Clear all layers first
+			player.set_collision_layer_value(3, true)
+			
+			# --- Set the Collision Mask: Only Layers 1, 2, and 4 are ON ---
+			# Using bitwise operation for efficiency: Layer 1(1) | Layer 2(2) | Layer 4(8)
+			player.collision_mask = 1 | 2 | 8 
+			
+			print("Configured player: ", player.name, " -> Layer: 3 only | Mask: 1, 2, and 4 only.")
+		else:
+			print("Node ", player.name, " is in 'players' group but is not a valid physics body.")

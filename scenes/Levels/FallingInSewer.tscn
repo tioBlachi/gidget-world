@@ -61,7 +61,6 @@ script = ExtResource("1_4kqsw")
 [node name="1" parent="." instance=ExtResource("3_ewixd")]
 position = Vector2(630, -538)
 scale = Vector2(0.3, 0.3)
-god_mode = true
 
 [node name="Camera2D" parent="1" index="5"]
 limit_left = 8
