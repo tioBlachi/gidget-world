@@ -26,3 +26,8 @@ func reset_players_to_standard_configuration():
 			player.collision_layer = 1 | 2
 			player.collision_mask = 1 | 2
 			print("Reset player: ", player.name, " to standard configuration.")
+signal boss_hit
+signal turret_hit
+signal player_hit_by_turret(id: int)
+signal player_hit_by_spike(hit_peer_id: int)
+signal player_hit_by_bird(id: int)

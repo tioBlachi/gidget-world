@@ -178,9 +178,11 @@ shape = SubResource("CircleShape2D_laqjk")
 
 [node name="Beep" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_laqjk")
+volume_db = -23.111
 
 [node name="Boom" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_koaxh")
+volume_db = -9.778
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1

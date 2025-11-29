@@ -1,0 +1,302 @@
+[gd_scene load_steps=37 format=3 uid="uid://bgv34gcuxiuqr"]
+
+[ext_resource type="Script" uid="uid://r7mntc1kketq" path="res://scripts/Levels/portal_fight.gd" id="1_7rmao"]
+[ext_resource type="Texture2D" uid="uid://qyjfkgfgbpk0" path="res://assets/sprites/PortalBG.png" id="1_ekbpn"]
+[ext_resource type="PackedScene" uid="uid://bdw5tfrelqrd2" path="res://scenes/objects/EvilCat/SpikeRing.tscn" id="2_6s1gy"]
+[ext_resource type="PackedScene" uid="uid://2lntdlomdt6o" path="res://scenes/objects/EvilCat/CatBoss.tscn" id="2_7rmao"]
+[ext_resource type="Texture2D" uid="uid://ci0kjxllfmyhu" path="res://assets/sprites/Explosion.png" id="4_greg0"]
+[ext_resource type="PackedScene" uid="uid://bf72f4j7c2i3f" path="res://scripts/UI/pause_menu.tscn" id="5_13yns"]
+[ext_resource type="PackedScene" uid="uid://coo3efhcvxiar" path="res://scenes/UI/restart_screen.tscn" id="6_imk1x"]
+[ext_resource type="AudioStream" uid="uid://diqgbk7t8hcg6" path="res://assets/sounds/8-bit-explosion.wav" id="8_ou0jd"]
+[ext_resource type="PackedScene" uid="uid://lommrbd42bf3" path="res://scenes/objects/Birds/RedTestBird.tscn" id="10_akggb"]
+[ext_resource type="AudioStream" uid="uid://dehh0f3xb24ne" path="res://scenes/objects/EvilCat/funny-cat-meow-246012.mp3" id="11_v1q8v"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ou0jd"]
+atlas = ExtResource("1_ekbpn")
+region = Rect2(0, 0, 383, 293)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6s1gy"]
+atlas = ExtResource("1_ekbpn")
+region = Rect2(383, 0, 383, 293)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_akggb"]
+atlas = ExtResource("1_ekbpn")
+region = Rect2(766, 0, 383, 293)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v1q8v"]
+atlas = ExtResource("1_ekbpn")
+region = Rect2(1149, 0, 383, 293)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fxtwf"]
+atlas = ExtResource("1_ekbpn")
+region = Rect2(0, 308, 383, 293)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w80d0"]
+atlas = ExtResource("1_ekbpn")
+region = Rect2(383, 308, 383, 293)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bf6y1"]
+atlas = ExtResource("1_ekbpn")
+region = Rect2(766, 308, 383, 293)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wagta"]
+atlas = ExtResource("1_ekbpn")
+region = Rect2(1149, 308, 383, 293)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8m176"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ou0jd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6s1gy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_akggb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v1q8v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fxtwf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w80d0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bf6y1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wagta")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_greg0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8a1bh"]
+atlas = ExtResource("4_greg0")
+region = Rect2(0, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_khikj"]
+atlas = ExtResource("4_greg0")
+region = Rect2(96, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8os1m"]
+atlas = ExtResource("4_greg0")
+region = Rect2(192, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hpw3p"]
+atlas = ExtResource("4_greg0")
+region = Rect2(288, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fwr64"]
+atlas = ExtResource("4_greg0")
+region = Rect2(384, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y0j1h"]
+atlas = ExtResource("4_greg0")
+region = Rect2(480, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aujj3"]
+atlas = ExtResource("4_greg0")
+region = Rect2(576, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2cqbp"]
+atlas = ExtResource("4_greg0")
+region = Rect2(672, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4ng08"]
+atlas = ExtResource("4_greg0")
+region = Rect2(768, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kyj4u"]
+atlas = ExtResource("4_greg0")
+region = Rect2(864, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_reqrf"]
+atlas = ExtResource("4_greg0")
+region = Rect2(960, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1k02e"]
+atlas = ExtResource("4_greg0")
+region = Rect2(1056, 0, 96, 96)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_w7ni5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8a1bh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_khikj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8os1m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hpw3p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fwr64")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y0j1h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aujj3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2cqbp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4ng08")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kyj4u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_reqrf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1k02e")
+}],
+"loop": false,
+"name": &"explode",
+"speed": 10.0
+}]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7rmao"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_greg0"]
+bg_color = Color(0.553774, 0.0668073, 0.146792, 1)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_greg0"]
+properties/0/path = NodePath(".:random_num")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
+[node name="Portal Fight" type="Node2D"]
+script = ExtResource("1_7rmao")
+red_bird_scene = ExtResource("10_akggb")
+spike_ring_scene = ExtResource("2_6s1gy")
+
+[node name="Background" type="AnimatedSprite2D" parent="."]
+z_index = -10
+texture_filter = 1
+scale = Vector2(3.33073, 2.45392)
+sprite_frames = SubResource("SpriteFrames_8m176")
+frame_progress = 0.0525663
+centered = false
+
+[node name="pSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("uid://c345ml4nswnab")
+spawn_path = NodePath(".")
+
+[node name="PlayerMarkers" type="Node2D" parent="."]
+position = Vector2(-474, -49)
+
+[node name="Player1Marker" type="Marker2D" parent="PlayerMarkers"]
+position = Vector2(649, 328)
+
+[node name="Player2Marker" type="Marker2D" parent="PlayerMarkers"]
+position = Vector2(652, 549)
+
+[node name="Borders" type="StaticBody2D" parent="."]
+
+[node name="Top" type="CollisionShape2D" parent="Borders"]
+position = Vector2(661, 718)
+shape = SubResource("WorldBoundaryShape2D_greg0")
+
+[node name="Left" type="CollisionShape2D" parent="Borders"]
+position = Vector2(1284, 373)
+rotation = -1.5708
+shape = SubResource("WorldBoundaryShape2D_greg0")
+
+[node name="Right" type="CollisionShape2D" parent="Borders"]
+position = Vector2(2, 340)
+rotation = 1.5708
+shape = SubResource("WorldBoundaryShape2D_greg0")
+
+[node name="Bottom" type="CollisionShape2D" parent="Borders"]
+position = Vector2(671, 1)
+rotation = 3.14159
+shape = SubResource("WorldBoundaryShape2D_greg0")
+
+[node name="CatBoss" parent="." instance=ExtResource("2_7rmao")]
+position = Vector2(1000, 345)
+
+[node name="SpikeSpawnPoints" type="Node2D" parent="CatBoss"]
+
+[node name="Spawn1" type="Marker2D" parent="CatBoss/SpikeSpawnPoints"]
+position = Vector2(-292, 37)
+
+[node name="Spawn2" type="Marker2D" parent="CatBoss/SpikeSpawnPoints"]
+position = Vector2(-227, -117)
+
+[node name="Spawn3" type="Marker2D" parent="CatBoss/SpikeSpawnPoints"]
+position = Vector2(-216, 220)
+
+[node name="Explosions" type="AnimatedSprite2D" parent="."]
+visible = false
+texture_filter = 1
+position = Vector2(-50.5, -46.5)
+scale = Vector2(2.05208, 1.96875)
+sprite_frames = SubResource("SpriteFrames_w7ni5")
+animation = &"explode"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="BossHP" type="ProgressBar" parent="CanvasLayer"]
+offset_left = 8.0
+offset_top = 9.0
+offset_right = 1270.0
+offset_bottom = 23.0
+theme_override_styles/background = SubResource("StyleBoxFlat_7rmao")
+theme_override_styles/fill = SubResource("StyleBoxFlat_greg0")
+max_value = 10.0
+show_percentage = false
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_left = 596.0
+offset_top = 26.0
+offset_right = 658.0
+offset_bottom = 49.0
+text = "CatBoss"
+
+[node name="Fader" type="CanvasLayer" parent="."]
+layer = 3
+
+[node name="WhiteFade" type="ColorRect" parent="Fader"]
+z_index = 20
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 1, 1, 0)
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_greg0")
+
+[node name="PauseMenu" parent="." instance=ExtResource("5_13yns")]
+layer = 4
+
+[node name="PopupUI" parent="." instance=ExtResource("6_imk1x")]
+layer = 4
+
+[node name="Boom" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_ou0jd")
+volume_db = -25.587
+
+[node name="CatDeath" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("11_v1q8v")
+volume_db = 14.032
+
+[editable path="CatBoss"]
+[editable path="PopupUI"]

@@ -8,8 +8,10 @@ extends Node2D
 @export var car_speed_min: float = 100.0
 @export var car_speed_max: float = 300.0
 @export var car_despawn_x: float = -1200.0
+@export var use_random_spawning: bool = true
+@export var speed_multiplier: float = 1.0
 
-# Anchor options: keep spawner 500px inside the right edge of the active camera
+# Anchor
 @export var anchor_to_camera_right: bool = true
 @export var right_offset_px: float = -1500.0
 @export var lock_y_to_camera_center: bool = false
@@ -21,14 +23,15 @@ var _rng := RandomNumberGenerator.new()
 func _ready() -> void:
 	if car_scene == null:
 		push_warning("killbox_spawner: car_scene is not assigned")
-	# Create a one-shot timer that we restart after each spawn with a new random delay
+	# Create timer that we restart after each spawn with a new random delay
 	_timer = Timer.new()
 	_timer.one_shot = true
 	add_child(_timer)
 	_rng.randomize()
-	_set_next_wait()
-	_timer.start()
-	_timer.timeout.connect(_on_timeout)
+	if use_random_spawning:
+		_set_next_wait()
+		_timer.start()
+		_timer.timeout.connect(_on_timeout)
 
 func _process(delta: float) -> void:
 	if not anchor_to_camera_right:
@@ -69,7 +72,8 @@ func _on_timeout() -> void:
 			var min_s = min(car_speed_min, car_speed_max)
 			var max_s = max(car_speed_min, car_speed_max)
 			var picked_speed = _rng.randf_range(min_s, max_s)
-			car.speed = picked_speed if picked_speed > 0.0 else car_speed
+			var base_speed = picked_speed if picked_speed > 0.0 else car_speed
+			car.speed = base_speed * max(0.01, speed_multiplier)
 			car.despawn_x = car_despawn_x
 		car.global_position = global_position
 		if get_parent() != null:
@@ -78,3 +82,23 @@ func _on_timeout() -> void:
 			get_tree().current_scene.add_child(car)
 	_set_next_wait()
 	_timer.start()
+
+func spawn_fixed() -> Node:
+	var scene_to_spawn: PackedScene = null
+	if car_scenes.size() > 0:
+		scene_to_spawn = car_scenes[_rng.randi_range(0, car_scenes.size() - 1)]
+	else:
+		scene_to_spawn = car_scene
+	if scene_to_spawn == null:
+		return null
+	var car = scene_to_spawn.instantiate()
+	if car != null:
+		if car is MovingKillbox:
+			car.speed = car_speed * max(0.01, speed_multiplier)
+			car.despawn_x = car_despawn_x
+		car.global_position = global_position
+		if get_parent() != null:
+			get_parent().add_child(car)
+		else:
+			get_tree().current_scene.add_child(car)
+	return car

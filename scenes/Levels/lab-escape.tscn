@@ -1,16 +1,18 @@
-[gd_scene load_steps=19 format=4 uid="uid://bsihlmawq5jbq"]
+[gd_scene load_steps=21 format=4 uid="uid://bsihlmawq5jbq"]
 
 [ext_resource type="Script" uid="uid://kwqdtogko814" path="res://scripts/Levels/lab-escape.gd" id="1_r6deh"]
 [ext_resource type="PackedScene" uid="uid://c2mmmw150y6yj" path="res://scenes/objects/lab_cell.tscn" id="3_hrlo7"]
-[ext_resource type="Texture2D" uid="uid://b6vnyfhoqgumk" path="res://assets/Tiles/oldTiles/lab_tiles.png" id="4_mi8k0"]
+[ext_resource type="Texture2D" uid="uid://dhjnmqtfenj7p" path="res://assets/Tiles/oldTiles/lab_tiles.png" id="4_mi8k0"]
 [ext_resource type="PackedScene" uid="uid://cyxa25yg2hfwc" path="res://scenes/objects/button.tscn" id="5_7nrcb"]
 [ext_resource type="PackedScene" uid="uid://q5myivnq8cna" path="res://scenes/objects/key_card.tscn" id="7_85sb4"]
-[ext_resource type="Texture2D" uid="uid://nw4cuqx2gw0t" path="res://Art/OldTestArt/spike.png" id="7_modnx"]
+[ext_resource type="Texture2D" uid="uid://cenj22yc65knm" path="res://Art/OldTestArt/spike.png" id="7_modnx"]
 [ext_resource type="PackedScene" uid="uid://dbh40ehfj6b7n" path="res://scenes/objects/lab_exit_door.tscn" id="8_fg2n0"]
-[ext_resource type="Texture2D" uid="uid://el0erarhekgt" path="res://Art/OldTestArt/metal.png" id="8_hrlo7"]
-[ext_resource type="Texture2D" uid="uid://dsl7bvsqmingq" path="res://Art/OldTestArt/crate.png" id="9_mi8k0"]
+[ext_resource type="Texture2D" uid="uid://b4bqqu8h53eca" path="res://Art/OldTestArt/metal.png" id="8_hrlo7"]
+[ext_resource type="Texture2D" uid="uid://cq021cu83hs7i" path="res://Art/OldTestArt/crate.png" id="9_mi8k0"]
+[ext_resource type="PackedScene" uid="uid://bf72f4j7c2i3f" path="res://scripts/UI/pause_menu.tscn" id="10_hrlo7"]
+[ext_resource type="PackedScene" uid="uid://coo3efhcvxiar" path="res://scenes/UI/restart_screen.tscn" id="11_mi8k0"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_max5s"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mi8k0"]
 texture = ExtResource("4_mi8k0")
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
@@ -45,7 +47,7 @@ texture = ExtResource("4_mi8k0")
 
 [sub_resource type="TileSet" id="TileSet_lnb5p"]
 physics_layer_0/collision_layer = 1
-sources/0 = SubResource("TileSetAtlasSource_max5s")
+sources/0 = SubResource("TileSetAtlasSource_mi8k0")
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_rxhor"]
 properties/0/path = NodePath("Crate:position")
@@ -106,7 +108,7 @@ _data = {
 &"drop": SubResource("Animation_hrlo7")
 }
 
-[node name="LabEscape" type="Node2D"]
+[node name="Lab Escape" type="Node2D"]
 script = ExtResource("1_r6deh")
 
 [node name="pSpawner" type="MultiplayerSpawner" parent="."]
@@ -219,6 +221,10 @@ libraries = {
 position = Vector2(69, 20)
 scale = Vector2(16, 6.4)
 texture = ExtResource("8_hrlo7")
+
+[node name="PauseMenu" parent="." instance=ExtResource("10_hrlo7")]
+
+[node name="PopupUI" parent="." instance=ExtResource("11_mi8k0")]
 
 [connection signal="body_entered" from="Spikes" to="." method="_on_spikes_body_entered"]
 

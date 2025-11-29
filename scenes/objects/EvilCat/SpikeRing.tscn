@@ -1,0 +1,71 @@
+[gd_scene load_steps=6 format=3 uid="uid://bdw5tfrelqrd2"]
+
+[ext_resource type="Script" uid="uid://bo6k50m8rgabx" path="res://scenes/objects/EvilCat/spike_ring.gd" id="1_mck5m"]
+[ext_resource type="Texture2D" uid="uid://ceciwuj44j5k4" path="res://Art/OldTestArt/spikeBall.png" id="2_lntlx"]
+[ext_resource type="Script" uid="uid://dugyivbu8h1xc" path="res://scenes/objects/EvilCat/SpikeBall.gd" id="2_swlgu"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_swlgu"]
+radius = 14.0
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_lntlx"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
+[node name="SpikeRing" type="Node2D"]
+script = ExtResource("1_mck5m")
+
+[node name="Spikes" type="Node2D" parent="."]
+
+[node name="SpikeBall1" type="Area2D" parent="Spikes"]
+script = ExtResource("2_swlgu")
+
+[node name="Sprite2D" type="Sprite2D" parent="Spikes/SpikeBall1"]
+texture_filter = 1
+texture = ExtResource("2_lntlx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBall1"]
+shape = SubResource("CircleShape2D_swlgu")
+
+[node name="SpikeBall2" type="Area2D" parent="Spikes"]
+script = ExtResource("2_swlgu")
+
+[node name="Sprite2D" type="Sprite2D" parent="Spikes/SpikeBall2"]
+texture_filter = 1
+texture = ExtResource("2_lntlx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBall2"]
+shape = SubResource("CircleShape2D_swlgu")
+
+[node name="SpikeBall3" type="Area2D" parent="Spikes"]
+script = ExtResource("2_swlgu")
+
+[node name="Sprite2D" type="Sprite2D" parent="Spikes/SpikeBall3"]
+texture_filter = 1
+texture = ExtResource("2_lntlx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBall3"]
+shape = SubResource("CircleShape2D_swlgu")
+
+[node name="SpikeBall4" type="Area2D" parent="Spikes"]
+script = ExtResource("2_swlgu")
+
+[node name="Sprite2D" type="Sprite2D" parent="Spikes/SpikeBall4"]
+texture_filter = 1
+texture = ExtResource("2_lntlx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBall4"]
+shape = SubResource("CircleShape2D_swlgu")
+
+[node name="SpikeBall5" type="Area2D" parent="Spikes"]
+script = ExtResource("2_swlgu")
+
+[node name="Sprite2D" type="Sprite2D" parent="Spikes/SpikeBall5"]
+texture_filter = 1
+texture = ExtResource("2_lntlx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes/SpikeBall5"]
+shape = SubResource("CircleShape2D_swlgu")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_lntlx")
