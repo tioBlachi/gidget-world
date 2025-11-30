@@ -1,0 +1,86 @@
+[gd_scene load_steps=12 format=3 uid="uid://dbpxprhw7dxmc"]
+
+[ext_resource type="Script" uid="uid://cteke2pu3kiut" path="res://scripts/objects/top_down_button.gd" id="1_ouded"]
+[ext_resource type="Texture2D" uid="uid://gvvdjevbvg01" path="res://Art/OldTestArt/activation_button.png" id="1_tbodr"]
+[ext_resource type="AudioStream" uid="uid://bygcoguq6yqm4" path="res://assets/sounds/click.1.ogg" id="3_dvm7m"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ouded"]
+atlas = ExtResource("1_tbodr")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dvm7m"]
+atlas = ExtResource("1_tbodr")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n34d3"]
+atlas = ExtResource("1_tbodr")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4utam"]
+atlas = ExtResource("1_tbodr")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q2un3"]
+atlas = ExtResource("1_tbodr")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xjkm7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ouded")
+}],
+"loop": true,
+"name": &"activated",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dvm7m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n34d3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4utam")
+}],
+"loop": true,
+"name": &"activating",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q2un3")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dvm7m"]
+radius = 8.0
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ouded"]
+
+[node name="TopDownButton" type="Node2D"]
+script = ExtResource("1_ouded")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_xjkm7")
+animation = &"activating"
+frame_progress = 0.901981
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -1)
+shape = SubResource("CircleShape2D_dvm7m")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_ouded")
+
+[node name="ClickSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_dvm7m")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

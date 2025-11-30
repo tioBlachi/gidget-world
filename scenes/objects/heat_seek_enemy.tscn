@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://3nowdnpj4o11"]
 
 [ext_resource type="Script" uid="uid://cvphdhrpdisja" path="res://scripts/objects/heat_seek_enemy.gd" id="1_kwd64"]
-[ext_resource type="Texture2D" uid="uid://0g74f65tjhsl" path="res://Art/OldTestArt/deathGidget.png" id="1_xk7j6"]
+[ext_resource type="Texture2D" uid="uid://ccq0dtt77ihve" path="res://Art/OldTestArt/deathGidget.png" id="1_xk7j6"]
 [ext_resource type="PackedScene" uid="uid://vqra6k6rq1db" path="res://scenes/killzone.tscn" id="3_pvbq6"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kwd64"]
