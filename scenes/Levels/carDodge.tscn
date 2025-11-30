@@ -9,12 +9,12 @@
 [ext_resource type="Texture2D" uid="uid://biteud63uieua" path="res://Art/NewArt/Big City.png" id="8_e8t8o"]
 [ext_resource type="Texture2D" uid="uid://bgmbgx1nohmd3" path="res://assets/Tiles/BackgroundRock.png" id="8_kivjt"]
 [ext_resource type="Texture2D" uid="uid://bl3xa35qafjr" path="res://assets/Tiles/rock.png" id="9_3wlja"]
-[ext_resource type="Script" path="res://scripts/Levels/Lanespawner.gd" id="9_58nwc"]
+[ext_resource type="Script" uid="uid://dohslhacf6vpk" path="res://scripts/Levels/Lanespawner.gd" id="9_58nwc"]
 [ext_resource type="Texture2D" uid="uid://d27kmmmdydmf4" path="res://Art/NewArt/Night City.png" id="9_kivjt"]
 [ext_resource type="AudioStream" uid="uid://02t8i8whf8xy" path="res://Sounds/TrafficSounds.mp3" id="10_e8t8o"]
-[ext_resource type="Script" path="res://scripts/Levels/CarManager.gd" id="12_mqpsf"]
+[ext_resource type="Script" uid="uid://cmckejacrmkjh" path="res://scripts/Levels/CarManager.gd" id="12_mqpsf"]
 [ext_resource type="PackedScene" uid="uid://bf72f4j7c2i3f" path="res://scripts/UI/pause_menu.tscn" id="14_iimnj"]
-[ext_resource type="PackedScene" path="res://scenes/UI/restart_screen.tscn" id="15_sko64"]
+[ext_resource type="PackedScene" uid="uid://coo3efhcvxiar" path="res://scenes/UI/restart_screen.tscn" id="15_sko64"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rfpyh"]
 texture = ExtResource("1_dnvpt")

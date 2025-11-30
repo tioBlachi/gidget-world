@@ -51,13 +51,7 @@ func spawn_players(p_array: PackedInt32Array):
 		player.global_position = markers[i].global_position
 		player.set_multiplayer_authority(peer_id)
 		
-		if player.get_script():
-			var props = player.get_property_list()
-			for prop in props:
-				if prop.name == "side_scroller":
-					player.set(prop.name, false)
-					
-		player.set_side_scroller(false)
+		
 		pSpawner.add_child(player)
 		
 
