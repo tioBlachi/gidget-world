@@ -1,3 +1,29 @@
-[gd_scene format=3 uid="uid://csnhq01su4bvy"]
+[gd_scene load_steps=3 format=3 uid="uid://csnhq01su4bvy"]
+
+[ext_resource type="PackedScene" uid="uid://bxpry3684affg" path="res://scenes/player/player.tscn" id="1_5td1o"]
+[ext_resource type="Texture2D" uid="uid://csocrbo0t3mt7" path="res://Art/OldTestArt/spikeBall.png" id="2_e1tpl"]
 
 [node name="Collection" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_5td1o")]
+position = Vector2(176, -498)
+
+[node name="pSpawner" type="MultiplayerSpawner" parent="Player"]
+_spawnable_scenes = PackedStringArray("uid://bxpry3684affg")
+spawn_path = NodePath("../Players")
+
+[node name="PlayerMarkers" type="Node2D" parent="Player"]
+position = Vector2(1, 8)
+
+[node name="Player1Marker" type="Marker2D" parent="Player/PlayerMarkers"]
+position = Vector2(217, 180)
+
+[node name="Player2Marker" type="Marker2D" parent="Player/PlayerMarkers"]
+position = Vector2(510, 182)
+
+[node name="Players" type="Node2D" parent="Player"]
+
+[node name="Sprite2d" type="Sprite2D" parent="Player"]
+position = Vector2(-55.7691, -1167.31)
+scale = Vector2(19.2307, 19.2307)
+texture = ExtResource("2_e1tpl")
