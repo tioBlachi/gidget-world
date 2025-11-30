@@ -10,8 +10,6 @@ extends Control
 var selected_level = ""
 
 func _ready() -> void:
-	get_tree().paused = false
-	
 	if not Net.players_changed.is_connected(_on_players_changed):
 		Net.players_changed.connect(_on_players_changed)
 

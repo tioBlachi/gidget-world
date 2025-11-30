@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://dxeq5dmqrp24e"]
+
+[ext_resource type="Script" uid="uid://b6vmu6wewwra7" path="res://scripts/objects/drill_tooth.gd" id="1_x3acl"]
+[ext_resource type="Texture2D" uid="uid://tmcmxj34fmxw" path="res://assets/sprites/Decay Tooth.png" id="2_n4vwk"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nqfqk"]
+radius = 55.0
+height = 180.0
+
+[node name="Drill Tooth" type="RigidBody2D"]
+collision_layer = 8
+collision_mask = 5
+contact_monitor = true
+max_contacts_reported = 10
+script = ExtResource("1_x3acl")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_n4vwk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-9, -19)
+shape = SubResource("CapsuleShape2D_nqfqk")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

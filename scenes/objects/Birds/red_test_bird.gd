@@ -88,9 +88,11 @@ func _on_kill_body(hit: Node) -> void:
 	if not multiplayer.is_server():
 		return
 
-	if hit.is_in_group("player_ships"):# or hit.is_in_group("players"):
+	# Special behavior for your ships
+	if hit.is_in_group("player_ships"):
 		var peer_id := hit.get_multiplayer_authority()
 		Global.player_hit_by_bird.emit(peer_id)
+		# Optional: bird dies on hit
 		queue_free()
 		return
 

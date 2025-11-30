@@ -1,6 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://byf0t5frhhx6r"]
+[gd_scene format=4]
 
-[ext_resource type="Script" uid="uid://ct4man60v8vot" path="res://scripts/objects/sewage.gd" id="1_mn3q2"]
+[ext_resource type="Script" path="res://scripts/objects/sewage.gd" id="1_mn3q2"]
 
 [sub_resource type="RectangleShape2D" id="RectShape_sewage"]
 size = Vector2(4096, 64)
@@ -10,6 +10,9 @@ script = ExtResource("1_mn3q2")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 0
+collision_mask = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectShape_sewage")
+
+

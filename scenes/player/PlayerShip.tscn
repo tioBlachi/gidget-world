@@ -1,8 +1,8 @@
 [gd_scene load_steps=25 format=3 uid="uid://c345ml4nswnab"]
 
 [ext_resource type="Script" uid="uid://hfk2t5jjeb1v" path="res://scenes/player/player_ship.gd" id="1_62scy"]
-[ext_resource type="Texture2D" uid="uid://cjtrd26bkydpi" path="res://scenes/player/GidgetSpaceship.png" id="1_qlqj5"]
-[ext_resource type="AudioStream" uid="uid://cm1fcvtbquudy" path="res://assets/sounds/laserfire01.ogg" id="4_dvg5m"]
+[ext_resource type="Texture2D" uid="uid://delia7ww6o2ic" path="res://scenes/player/GidgetSpaceship.png" id="1_qlqj5"]
+[ext_resource type="AudioStream" uid="uid://cf6qr6xrgtxh7" path="res://assets/sounds/laserfire01.ogg" id="4_dvg5m"]
 [ext_resource type="AudioStream" uid="uid://diqgbk7t8hcg6" path="res://assets/sounds/8-bit-explosion.wav" id="4_fie2v"]
 [ext_resource type="Texture2D" uid="uid://ci0kjxllfmyhu" path="res://assets/sprites/Explosion.png" id="5_quy40"]
 

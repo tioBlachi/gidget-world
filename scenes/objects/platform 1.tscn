@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://csdw5uylok8n2"]
 
-[ext_resource type="Texture2D" uid="uid://c45erskbwi0mw" path="res://assets/kenney_pico-8-platformer/Default/Tiles/tile_0049.png" id="1_t0er4"]
+[ext_resource type="Texture2D" uid="uid://c22pch1yb51ur" path="res://assets/kenney_pico-8-platformer/Default/Tiles/tile_0049.png" id="1_t0er4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s8v0f"]
 size = Vector2(64, 8)
@@ -11,6 +11,7 @@ size = Vector2(64, 8)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 shape = SubResource("RectangleShape2D_s8v0f")
+one_way_collision = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(8, 1)
