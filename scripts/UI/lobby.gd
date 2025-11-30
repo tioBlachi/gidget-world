@@ -15,7 +15,7 @@ func _ready() -> void:
 
 	Net.rpc_id(1, "rpc_request_players")
 
-	var skip := ["Title", "Lobby", "Testing"]
+	var skip := ["Title", "Lobby", "Testing", "Fin"]
 	var scene_names: Array = []
 	for scene_name in SceneManager.SCENES.keys():
 		if scene_name in skip:

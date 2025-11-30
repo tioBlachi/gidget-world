@@ -1,0 +1,261 @@
+[gd_scene load_steps=11 format=3 uid="uid://coo3efhcvxiar"]
+
+[ext_resource type="Script" uid="uid://01ips4cqrbqu" path="res://scripts/UI/restart_screen.gd" id="1_adgxm"]
+[ext_resource type="Shader" path="res://Art/blur.gdshader" id="2_clp8f"]
+[ext_resource type="Theme" uid="uid://dapn0300q5ffg" path="res://assets/Theme/Menu_Title.tres" id="4_pxaws"]
+[ext_resource type="Theme" uid="uid://c3jd5hfl65max" path="res://assets/Theme/Button_Default.tres" id="5_452mi"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_enlg2"]
+shader = ExtResource("2_clp8f")
+shader_parameter/lod = 0.0
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_hurhl"]
+size = Vector2(736, 288)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_lkdhc"]
+texture = SubResource("PlaceholderTexture2D_hurhl")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 4.0
+texture_margin_bottom = 4.0
+region_rect = Rect2(32, 32, 96, 64)
+modulate_color = Color(0.43134, 0.43134, 0.43134, 1)
+
+[sub_resource type="Animation" id="Animation_feath"]
+resource_name = "RESET_restart"
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:material:shader_parameter/lod")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.2, 0, 0.2, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PanelContainer:modulate:r")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.2, 0, 0.2, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PanelContainer:modulate:g")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.2, 0, 0.2, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PanelContainer:modulate:b")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.2, 0, 0.2, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("PanelContainer:modulate:a")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.2, 0, 0.2, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_mko1u"]
+resource_name = "blur_restart"
+length = 0.4
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:material:shader_parameter/lod")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.2, 0, 0.2, 0, 0.8, -0.2, 0, 0.2, 0),
+"times": PackedFloat32Array(0, 0.4)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PanelContainer:modulate:r")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1, -0.2, 0, 0.2, 0, 1, -0.2, 0, 0.2, 0),
+"times": PackedFloat32Array(0, 0.4)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PanelContainer:modulate:g")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1, -0.2, 0, 0.2, 0, 1, -0.2, 0, 0.2, 0),
+"times": PackedFloat32Array(0, 0.4)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PanelContainer:modulate:b")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1, -0.2, 0, 0.2, 0, 1, -0.2, 0, 0.2, 0),
+"times": PackedFloat32Array(0, 0.4)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("PanelContainer:modulate:a")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.2, 0, 0.2, 0, 1, -0.2, 0, 0.2, 0),
+"times": PackedFloat32Array(0, 0.4)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_w67w4"]
+_data = {
+&"RESET_restart": SubResource("Animation_feath"),
+&"blur_restart": SubResource("Animation_mko1u")
+}
+
+[node name="PopupUI" type="CanvasLayer"]
+
+[node name="restart_screen" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_adgxm")
+
+[node name="ColorRect" type="ColorRect" parent="restart_screen"]
+material = SubResource("ShaderMaterial_enlg2")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="restart_screen"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -238.0
+offset_top = -175.5
+offset_right = 238.0
+offset_bottom = 175.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_lkdhc")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="restart_screen/PanelContainer"]
+layout_mode = 2
+
+[node name="Buffer" type="Label" parent="restart_screen/PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="restart_screen/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Pause Menu Text" type="Label" parent="restart_screen/PanelContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("4_pxaws")
+text = "Level Failed - Retry?"
+horizontal_alignment = 1
+
+[node name="Buffer3" type="Label" parent="restart_screen/PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Restart" type="Button" parent="restart_screen/PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 35)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme = ExtResource("5_452mi")
+text = "Retry"
+
+[node name="Level_Select" type="Button" parent="restart_screen/PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 35)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme = ExtResource("5_452mi")
+text = "Exit to Level Select"
+
+[node name="Buffer4" type="Label" parent="restart_screen/PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="restart_screen/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Quit_Menu" type="Button" parent="restart_screen/PanelContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(175, 35)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme = ExtResource("5_452mi")
+text = "Quit to Main Menu"
+
+[node name="MarginContainer" type="MarginContainer" parent="restart_screen/PanelContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+
+[node name="Quit_Desktop" type="Button" parent="restart_screen/PanelContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(175, 35)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme = ExtResource("5_452mi")
+text = "Quit to Desktop"
+
+[node name="Buffer2" type="Label" parent="restart_screen/PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="restart_screen"]
+libraries = {
+&"": SubResource("AnimationLibrary_w67w4")
+}
+
+[connection signal="pressed" from="restart_screen/PanelContainer/VBoxContainer/Restart" to="restart_screen" method="_on_restart_pressed"]
+[connection signal="pressed" from="restart_screen/PanelContainer/VBoxContainer/Level_Select" to="restart_screen" method="_on_level_select_pressed"]
+[connection signal="pressed" from="restart_screen/PanelContainer/VBoxContainer/HBoxContainer2/Quit_Menu" to="restart_screen" method="_on_quit_menu_pressed"]
+[connection signal="pressed" from="restart_screen/PanelContainer/VBoxContainer/HBoxContainer2/Quit_Desktop" to="restart_screen" method="_on_quit_desktop_pressed"]

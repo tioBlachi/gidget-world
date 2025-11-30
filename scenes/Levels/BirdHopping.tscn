@@ -2300,6 +2300,7 @@ shape = SubResource("RectangleShape2D_5s71w")
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 position = Vector2(2740, 449)
 stream = ExtResource("19_5s71w")
+volume_db = -20.0
 autoplay = true
 max_distance = 2e+06
 
