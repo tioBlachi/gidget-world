@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=4 uid="uid://bw426uewyu1ti"]
+[gd_scene load_steps=27 format=4 uid="uid://dap1kjt3lmyn5"]
 
 [ext_resource type="PackedScene" path="res://scenes/objects/sewage.tscn" id="1_dk0sx"]
 [ext_resource type="PackedScene" path="res://scenes/objects/button_once.tscn" id="2_dk0sx"]
