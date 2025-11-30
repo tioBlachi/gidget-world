@@ -130,9 +130,9 @@ func pickup_keycard(keycard: Node):
 	
 func set_side_scroller(value: bool):
 	side_scroller = value
-	if not side_scroller:
-		if is_instance_valid($Camera2D):
-			$Camera2D.queue_free()
+	#if not side_scroller:
+		#if is_instance_valid($Camera2D):
+			#$Camera2D.queue_free()
 			
 func burn():
 	var stars = $Stars.get_children()
