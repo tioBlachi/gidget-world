@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bexy1hnpe0tel"]
+[gd_scene load_steps=8 format=3 uid="uid://bexy1hnpe0tel"]
 
 [ext_resource type="Script" uid="uid://uqjl7o5h2djp" path="res://scripts/objects/moving_killbox.gd" id="1_pkof2"]
 [ext_resource type="Texture2D" uid="uid://r16kb2vh7fmr" path="res://Art/NewArt/CarAnimationV1.png" id="1_qp7kq"]
@@ -35,11 +35,6 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m8v0c"]
 size = Vector2(669.833, 226.667)
 
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_us724"]
-properties/0/path = NodePath(".:position")
-properties/0/spawn = true
-properties/0/replication_mode = 1
-
 [node name="Car" type="Area2D"]
 scale = Vector2(0.5, 0.5)
 script = ExtResource("1_pkof2")
@@ -57,5 +52,4 @@ position = Vector2(-0.475003, 0)
 scale = Vector2(0.3, 0.3)
 shape = SubResource("RectangleShape2D_m8v0c")
 
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
-replication_config = SubResource("SceneReplicationConfig_us724")
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -2,7 +2,6 @@
 
 [ext_resource type="Texture2D" uid="uid://fhoq4atbdmbq" path="res://assets/Tiles/oldTiles/lab_tiles.png" id="1_dnvpt"]
 [ext_resource type="Script" uid="uid://ds61fpcbhgyig" path="res://scripts/Levels/car_dodge.gd" id="1_e8t8o"]
-[ext_resource type="Script" uid="uid://by67bhfq2l8jb" path="res://scripts/Levels/killbox_spawner.gd" id="4_rfpyh"]
 [ext_resource type="PackedScene" uid="uid://bexy1hnpe0tel" path="res://scenes/objects/Cars/BlueCar.tscn" id="5_q40wf"]
 [ext_resource type="Texture2D" uid="uid://bl8uq42vmbtrc" path="res://assets/Tiles/tilemap_industrial.png" id="6_58nwc"]
 [ext_resource type="PackedScene" uid="uid://bsknfknpkqnoc" path="res://scenes/objects/Cars/GreenCar.tscn" id="6_redad"]
@@ -10,9 +9,10 @@
 [ext_resource type="Texture2D" uid="uid://biteud63uieua" path="res://Art/NewArt/Big City.png" id="8_e8t8o"]
 [ext_resource type="Texture2D" uid="uid://bgmbgx1nohmd3" path="res://assets/Tiles/BackgroundRock.png" id="8_kivjt"]
 [ext_resource type="Texture2D" uid="uid://bl3xa35qafjr" path="res://assets/Tiles/rock.png" id="9_3wlja"]
+[ext_resource type="Script" uid="uid://dohslhacf6vpk" path="res://scripts/Levels/Lanespawner.gd" id="9_58nwc"]
 [ext_resource type="Texture2D" uid="uid://d27kmmmdydmf4" path="res://Art/NewArt/Night City.png" id="9_kivjt"]
 [ext_resource type="AudioStream" uid="uid://02t8i8whf8xy" path="res://Sounds/TrafficSounds.mp3" id="10_e8t8o"]
-[ext_resource type="Script" uid="uid://jn7cxbgkmjtt" path="res://scripts/CarSpawner/car_block_controller.gd" id="13_ctrl"]
+[ext_resource type="Script" uid="uid://cmckejacrmkjh" path="res://scripts/Levels/CarManager.gd" id="12_mqpsf"]
 [ext_resource type="PackedScene" uid="uid://bf72f4j7c2i3f" path="res://scripts/UI/pause_menu.tscn" id="14_iimnj"]
 [ext_resource type="PackedScene" uid="uid://coo3efhcvxiar" path="res://scenes/UI/restart_screen.tscn" id="15_sko64"]
 
@@ -543,7 +543,8 @@ b = Vector2(23.5558, 13.1416)
 a = Vector2(12330.2, -4.30701)
 b = Vector2(81.2769, 1.04117)
 
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_iimnj"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iimnj"]
+size = Vector2(338, 137)
 
 [node name="Car Dodge" type="Node2D"]
 script = ExtResource("1_e8t8o")
@@ -1537,49 +1538,38 @@ texture = ExtResource("8_e8t8o")
 position = Vector2(-11.6921, -147.311)
 motion_scale = Vector2(0.6, 0.6)
 
-[node name="CarSpawners" type="Node2D" parent="."]
+[node name="LaneSpawners" type="Node2D" parent="."]
+position = Vector2(4226, 322)
 
-[node name="CarBlockController" type="Node" parent="CarSpawners"]
-script = ExtResource("13_ctrl")
-column_delay_seconds = 1.3
-block_delay_seconds = 2.0
-
-[node name="CarSpawner2" type="Node2D" parent="CarSpawners/CarBlockController"]
-position = Vector2(5293, 473)
-scale = Vector2(0.2, 0.2)
-script = ExtResource("4_rfpyh")
+[node name="Lane0" type="Node2D" parent="LaneSpawners"]
+position = Vector2(172, 60)
+script = ExtResource("9_58nwc")
 car_scene = ExtResource("5_q40wf")
-car_scenes = Array[PackedScene]([ExtResource("5_q40wf"), ExtResource("6_redad"), ExtResource("7_e8t8o")])
-spawn_interval_max = 10.0
-car_speed = 120.0
-use_random_spawning = false
-anchor_to_camera_right = false
 
-[node name="CarSpawner3" type="Node2D" parent="CarSpawners/CarBlockController"]
-position = Vector2(5290.97, 377.739)
-scale = Vector2(0.2, 0.2)
-script = ExtResource("4_rfpyh")
-car_scene = ExtResource("5_q40wf")
-car_scenes = Array[PackedScene]([ExtResource("5_q40wf"), ExtResource("6_redad"), ExtResource("7_e8t8o")])
-spawn_interval_max = 10.0
-car_speed = 120.0
-use_random_spawning = false
-anchor_to_camera_right = false
+[node name="Lane1" type="Node2D" parent="LaneSpawners"]
+position = Vector2(173, 108)
+script = ExtResource("9_58nwc")
+car_scene = ExtResource("6_redad")
 
-[node name="CarSpawner4" type="Node2D" parent="CarSpawners/CarBlockController"]
-position = Vector2(5291.95, 425.55)
-scale = Vector2(0.2, 0.2)
-script = ExtResource("4_rfpyh")
-car_scene = ExtResource("5_q40wf")
-car_scenes = Array[PackedScene]([ExtResource("5_q40wf"), ExtResource("6_redad"), ExtResource("7_e8t8o")])
-spawn_interval_max = 10.0
-car_speed = 120.0
-use_random_spawning = false
-anchor_to_camera_right = false
+[node name="Lane2" type="Node2D" parent="LaneSpawners"]
+position = Vector2(175, 154)
+script = ExtResource("9_58nwc")
+car_scene = ExtResource("7_e8t8o")
 
 [node name="PauseMenu" parent="." instance=ExtResource("14_iimnj")]
 
 [node name="PopupUI" parent="." instance=ExtResource("15_sko64")]
 
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
-replication_config = SubResource("SceneReplicationConfig_iimnj")
+[node name="CarManager" type="Node" parent="."]
+script = ExtResource("12_mqpsf")
+
+[node name="Goal" type="Area2D" parent="."]
+position = Vector2(3789, 401)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Goal"]
+position = Vector2(135, 26.5)
+shape = SubResource("RectangleShape2D_iimnj")
+
+[connection signal="body_entered" from="Goal" to="." method="_on_goal_body_entered"]
+
+[editable path="PopupUI"]

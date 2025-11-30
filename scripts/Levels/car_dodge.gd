@@ -4,8 +4,10 @@ extends Node2D
 @onready var player1marker: Marker2D = $PlayerMarkers/Player1Marker
 @onready var player2marker: Marker2D = $PlayerMarkers/Player2Marker
 @onready var pSpawner: MultiplayerSpawner = $pSpawner
+@onready var popup := $PopupUI/restart_screen
 
 var players_spawned := false
+var players_in_game := Net.players.size()
 
 func _ready() -> void:
 	if Net.players.size() >= 2:
@@ -55,3 +57,18 @@ func spawn_players(p_array: PackedInt32Array) -> void:
 				cam.make_current()
 		else:
 			push_warning("Player %s has no Camera2D!" % player.name)
+
+
+func _on_goal_body_entered(body: Node2D) -> void:
+	if body.is_in_group("players"):
+		body.queue_free()
+		players_in_game -= 1
+		check_win()
+
+func check_win() -> void:
+	print("Checking for win...")
+	print(players_in_game)
+	if players_in_game <= 0:
+		# Set state on all peers, then pause
+		popup.set_level_state.rpc(popup.LEVEL_STATE.COMPLETE)
+		popup.pause()
