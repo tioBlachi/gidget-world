@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bf72f4j7c2i3f" path="res://scripts/UI/pause_menu.tscn" id="5_13yns"]
 [ext_resource type="AudioStream" uid="uid://diqgbk7t8hcg6" path="res://assets/sounds/8-bit-explosion.wav" id="8_ou0jd"]
 [ext_resource type="PackedScene" uid="uid://lommrbd42bf3" path="res://scenes/objects/Birds/RedTestBird.tscn" id="10_akggb"]
-[ext_resource type="PackedScene" path="res://scenes/UI/restart_screen.tscn" id="10_v1q8v"]
+[ext_resource type="PackedScene" uid="uid://coo3efhcvxiar" path="res://scenes/UI/restart_screen.tscn" id="10_v1q8v"]
 [ext_resource type="AudioStream" uid="uid://cut1cdd8i8y6y" path="res://scenes/objects/EvilCat/funny-cat-meow-246012.mp3" id="11_v1q8v"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ou0jd"]

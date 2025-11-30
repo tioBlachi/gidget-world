@@ -17,7 +17,8 @@ const SCENES: Dictionary = {
 	"Testing" : "res://scenes/DevTools/Testing.tscn",
 	"Lobby" : "res://scenes/UI/Lobby.tscn",
 	"Final" : "res://scenes/Levels/Final.tscn",
-	"Portal Fight" : "res://scenes/Levels/Portal_Fight.tscn"
+	"Portal Fight" : "res://scenes/Levels/Portal_Fight.tscn",
+	"Fin" : "res://scenes/UI/Fin.tscn"
 }
 
 const LEVEL_ORDER := [

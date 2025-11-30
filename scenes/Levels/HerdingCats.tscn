@@ -10,7 +10,7 @@
 [ext_resource type="SpriteFrames" uid="uid://bt6qks6un88y8" path="res://scenes/actors/black_frames.tres" id="9_u5efl"]
 [ext_resource type="PackedScene" uid="uid://bf72f4j7c2i3f" path="res://scripts/UI/pause_menu.tscn" id="12_blnbo"]
 [ext_resource type="PackedScene" uid="uid://bmxxih4b0lrx8" path="res://scenes/objects/mine.tscn" id="12_u4ftb"]
-[ext_resource type="PackedScene" path="res://scenes/UI/restart_screen.tscn" id="13_alwtr"]
+[ext_resource type="PackedScene" uid="uid://coo3efhcvxiar" path="res://scenes/UI/restart_screen.tscn" id="13_alwtr"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8myk5"]
 texture = ExtResource("3_t3gqf")

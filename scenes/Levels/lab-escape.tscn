@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://c2hhch0j2uw2j" path="res://Art/OldTestArt/metal.png" id="8_hrlo7"]
 [ext_resource type="Texture2D" uid="uid://d2t5e33rxtui1" path="res://Art/OldTestArt/crate.png" id="9_mi8k0"]
 [ext_resource type="PackedScene" uid="uid://bf72f4j7c2i3f" path="res://scripts/UI/pause_menu.tscn" id="10_hrlo7"]
-[ext_resource type="PackedScene" path="res://scenes/UI/restart_screen.tscn" id="11_mi8k0"]
+[ext_resource type="PackedScene" uid="uid://coo3efhcvxiar" path="res://scenes/UI/restart_screen.tscn" id="11_mi8k0"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mi8k0"]
 texture = ExtResource("4_mi8k0")

@@ -59,11 +59,17 @@ func _on_finish_body_entered(body: Node2D) -> void:
 		players_in_game -= 1
 		check_win()
 		
+#func check_win() -> void:
+	#print("Checking for win...")
+	#print(players_in_game)
+	#if players_in_game <= 0:
+		#popup.current_state = popup.LEVEL_STATE.COMPLETE
+		#popup.pause()
 func check_win() -> void:
 	print("Checking for win...")
 	print(players_in_game)
 	if players_in_game <= 0:
-		await get_tree().physics_frame
-		popup.current_state = popup.LEVEL_STATE.COMPLETE
+		# Set state on all peers, then pause
+		popup.set_level_state.rpc(popup.LEVEL_STATE.COMPLETE)
 		popup.pause()
 		

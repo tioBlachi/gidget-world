@@ -19,7 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://b8bcwys3m6p8e" path="res://scenes/objects/pixil-frame-0 (52).png" id="17_70nyg"]
 [ext_resource type="AudioStream" uid="uid://cf36evo6dkx3s" path="res://assets/BowenStuff/themeMusic.mp3" id="19_5s71w"]
 [ext_resource type="PackedScene" uid="uid://bf72f4j7c2i3f" path="res://scripts/UI/pause_menu.tscn" id="19_xo8v6"]
-[ext_resource type="PackedScene" path="res://scenes/UI/restart_screen.tscn" id="20_xo8v6"]
+[ext_resource type="PackedScene" uid="uid://coo3efhcvxiar" path="res://scenes/UI/restart_screen.tscn" id="20_xo8v6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xo8v6"]
 texture = ExtResource("1_m7hoc")
@@ -2301,6 +2301,7 @@ shape = SubResource("RectangleShape2D_5s71w")
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 position = Vector2(2740, 449)
 stream = ExtResource("19_5s71w")
+volume_db = -20.0
 autoplay = true
 max_distance = 2e+06
 

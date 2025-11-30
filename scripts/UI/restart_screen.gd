@@ -132,3 +132,15 @@ func _on_player_died():
 
 #func _process(delta):
 	#testEsc()
+@rpc("any_peer", "call_local")
+func set_level_state(state: int) -> void:
+	if multiplayer.is_server():
+		# Tell everyone (including server) to update their state
+		_set_level_state_all.rpc(state)
+	else:
+		# Ask the server to do it
+		set_level_state.rpc_id(1, state)
+
+@rpc("authority", "call_local")
+func _set_level_state_all(state: int) -> void:
+	current_state = state
