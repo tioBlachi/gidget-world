@@ -1,7 +1,7 @@
 [gd_scene load_steps=53 format=4 uid="uid://bwdcir8bt8vsk"]
 
 [ext_resource type="Texture2D" uid="uid://biteud63uieua" path="res://Art/NewArt/Big City.png" id="1_eqgpf"]
-[ext_resource type="Script" uid="uid://k8tcvhrp4iin" path="res://scenes/Levels/bird_hopping.gd" id="1_lyxsl"]
+[ext_resource type="Script" uid="uid://bvfpi4frtd6m0" path="res://scenes/Levels/bird_hopping.gd" id="1_lyxsl"]
 [ext_resource type="Texture2D" uid="uid://qeqin8favs2s" path="res://assets/Tiles/tilemap-backgrounds.png" id="1_m7hoc"]
 [ext_resource type="Texture2D" uid="uid://p7vvl56547cc" path="res://assets/Tiles/tilemap.png" id="2_eqgpf"]
 [ext_resource type="Texture2D" uid="uid://cwdda8jby7lf8" path="res://assets/Tiles/tilemap_farm.png" id="3_acnx1"]

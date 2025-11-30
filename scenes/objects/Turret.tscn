@@ -2,13 +2,11 @@
 
 [ext_resource type="Texture2D" uid="uid://bhvpk66hdur8" path="res://assets/sprites/turret.png" id="1_262e8"]
 [ext_resource type="Script" uid="uid://5nhjdrcw6vlq" path="res://scenes/objects/turret.gd" id="1_obvvu"]
+[ext_resource type="PackedScene" uid="uid://xyn6suvxtgxr" path="res://scenes/objects/LaserRay.tscn" id="2_qhgfe"]
 [ext_resource type="AudioStream" uid="uid://dp06clbt3obgn" path="res://assets/sounds/laser_beam.mp3" id="4_oavcs"]
 [ext_resource type="AudioStream" uid="uid://c4wxev04tiydt" path="res://assets/sounds/laser_charge.mp3" id="5_vx1ie"]
 [ext_resource type="AudioStream" uid="uid://diqgbk7t8hcg6" path="res://assets/sounds/8-bit-explosion.wav" id="6_og30h"]
 [ext_resource type="AudioStream" uid="uid://o7np5k1fpxlu" path="res://assets/sounds/glass-cling-08-83792.mp3" id="7_qhgfe"]
-
-[sub_resource type="Resource" id="Resource_og30h"]
-metadata/__load_path__ = "res://scenes/objects/LaserRay.tscn"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_og30h"]
 size = Vector2(569, 531)
@@ -32,7 +30,7 @@ size = Vector2(637, 618)
 
 [node name="Turret" type="CharacterBody2D"]
 script = ExtResource("1_obvvu")
-laser_ray_scene = SubResource("Resource_og30h")
+laser_ray_scene = ExtResource("2_qhgfe")
 
 [node name="Collider" type="CollisionShape2D" parent="."]
 position = Vector2(17.5, -117.5)

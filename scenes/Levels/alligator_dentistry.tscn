@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=4 uid="uid://dmxfaox45d8k6"]
+[gd_scene load_steps=28 format=4 uid="uid://dmxfaox45d8k6"]
 
 [ext_resource type="Script" uid="uid://bkllaeomrwfbs" path="res://scripts/Levels/alligator_dentistry.gd" id="1_rwegt"]
 [ext_resource type="Texture2D" uid="uid://d0hlorb58psmj" path="res://assets/sprites/Bottom Alligator Jaw.png" id="4_1sjml"]
@@ -12,7 +12,9 @@
 [ext_resource type="Texture2D" uid="uid://uvq26685cnlj" path="res://icon.svg" id="10_u0d4m"]
 [ext_resource type="Texture2D" uid="uid://dl7nwje4lldvg" path="res://assets/craftpix-net-965938-free-effects-for-platformer-pixel-art-pack/6 Extra/Objects/Capsule/4.png" id="12_bifnd"]
 [ext_resource type="PackedScene" path="res://scenes/objects/extract_tooth.tscn" id="13_xeo0l"]
+[ext_resource type="PackedScene" uid="uid://coo3efhcvxiar" path="res://scenes/UI/restart_screen.tscn" id="14_dpgru"]
 [ext_resource type="PackedScene" path="res://scenes/objects/Drill Tooth.tscn" id="14_xeo0l"]
+[ext_resource type="PackedScene" uid="uid://bf72f4j7c2i3f" path="res://scripts/UI/pause_menu.tscn" id="15_bbspm"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_u8x4h"]
 texture = ExtResource("4_py8lq")
@@ -776,6 +778,10 @@ libraries = {
 &"": SubResource("AnimationLibrary_4mk0g")
 }
 autoplay = "idle"
+
+[node name="PopupUI" parent="." instance=ExtResource("14_dpgru")]
+
+[node name="PauseMenu" parent="." instance=ExtResource("15_bbspm")]
 
 [connection signal="body_entered" from="Exit" to="Exit" method="_on_body_entered"]
 [connection signal="body_entered" from="Alligator/MouthArea" to="Alligator" method="_on_mouth_area_body_entered"]
