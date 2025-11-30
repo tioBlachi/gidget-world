@@ -1,7 +1,6 @@
-[gd_scene load_steps=28 format=4 uid="uid://dmxfaox45d8k6"]
+[gd_scene load_steps=27 format=4 uid="uid://dmxfaox45d8k6"]
 
 [ext_resource type="Script" uid="uid://bkllaeomrwfbs" path="res://scripts/Levels/alligator_dentistry.gd" id="1_rwegt"]
-[ext_resource type="Texture2D" uid="uid://csocrbo0t3mt7" path="res://Art/OldTestArt/spikeBall.png" id="2_py8lq"]
 [ext_resource type="PackedScene" uid="uid://bxpry3684affg" path="res://scenes/player/player.tscn" id="3_u8x4h"]
 [ext_resource type="Texture2D" uid="uid://dgdxiewik6u8p" path="res://assets/sprites/Bottom Alligator Jaw.png" id="4_1sjml"]
 [ext_resource type="Texture2D" uid="uid://2xqq7ta54neb" path="res://assets/Tiles/basic_tileset_and_assets_standard/water_and_island_tiles_v2.png" id="4_py8lq"]
@@ -633,11 +632,6 @@ position = Vector2(217, 180)
 position = Vector2(510, 182)
 
 [node name="Players" type="Node2D" parent="Player"]
-
-[node name="Sprite2d" type="Sprite2D" parent="Player"]
-position = Vector2(-55.7691, -1167.31)
-scale = Vector2(19.2307, 19.2307)
-texture = ExtResource("2_py8lq")
 
 [node name="Bottom Boundry" type="StaticBody2D" parent="."]
 position = Vector2(-2, -69)
