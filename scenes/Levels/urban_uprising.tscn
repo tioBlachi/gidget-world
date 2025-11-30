@@ -3,12 +3,12 @@
 [ext_resource type="Texture2D" uid="uid://c7f3sl0eldmyp" path="res://Art/OldTestArt/metal2.png" id="1_sqmmr"]
 [ext_resource type="Script" uid="uid://chy5ttrcgpkg1" path="res://scripts/Levels/urban_uprising.gd" id="1_tf8py"]
 [ext_resource type="Texture2D" uid="uid://biteud63uieua" path="res://Art/NewArt/Big City.png" id="4_5h4xf"]
-[ext_resource type="PackedScene" path="res://scenes/actors/FlameDudeRC.tscn" id="6_5h4xf"]
+[ext_resource type="PackedScene" uid="uid://bq8kpvcnt58vo" path="res://scenes/actors/FlameDudeRC.tscn" id="6_5h4xf"]
 [ext_resource type="Texture2D" uid="uid://dneu22rr5fcdw" path="res://assets/sprites/New Piskel.png" id="6_hb40t"]
 [ext_resource type="PackedScene" uid="uid://csna0g1nst4im" path="res://scenes/objects/moving_platform.tscn" id="7_5h4xf"]
 [ext_resource type="PackedScene" uid="uid://bf72f4j7c2i3f" path="res://scripts/UI/pause_menu.tscn" id="7_mk1m7"]
-[ext_resource type="PackedScene" path="res://scenes/UI/restart_screen.tscn" id="8_d1sqi"]
-[ext_resource type="PackedScene" path="res://scenes/objects/BetterBird.tscn" id="9_8x7pg"]
+[ext_resource type="PackedScene" uid="uid://coo3efhcvxiar" path="res://scenes/UI/restart_screen.tscn" id="8_d1sqi"]
+[ext_resource type="PackedScene" uid="uid://b8s0wxl8xxoe5" path="res://scenes/objects/BetterBird.tscn" id="9_8x7pg"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_5h4xf"]
 
@@ -8697,7 +8697,7 @@ _spawnable_scenes = PackedStringArray("uid://bxpry3684affg")
 spawn_path = NodePath("../Players")
 
 [node name="PlayerMarkers" type="Node2D" parent="."]
-position = Vector2(1, 8)
+position = Vector2(571, -2254)
 
 [node name="Player1Marker" type="Marker2D" parent="PlayerMarkers"]
 position = Vector2(127, 512)
@@ -8965,7 +8965,6 @@ position = Vector2(43, -10)
 [node name="BlueBird" parent="." instance=ExtResource("9_8x7pg")]
 position = Vector2(1215, -1611)
 scale = Vector2(9.90584, 5.57421)
-players_needed = 1
 max_pos = Vector2(1427, -2274)
 
 [node name="CollisionShape2D" parent="BlueBird" index="1"]
