@@ -2306,8 +2306,6 @@ max_distance = 2e+06
 
 [node name="PauseMenu" parent="." instance=ExtResource("19_xo8v6")]
 
-[node name="PopupUI" parent="." instance=ExtResource("20_xo8v6")]
-
 [node name="pSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("uid://bxpry3684affg")
 spawn_path = NodePath(".")
@@ -2327,6 +2325,8 @@ position = Vector2(2439, -392)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Finish"]
 position = Vector2(91, -77)
 shape = SubResource("RectangleShape2D_xo8v6")
+
+[node name="PopupUI" parent="." instance=ExtResource("20_xo8v6")]
 
 [connection signal="body_entered" from="LevelObjects/Spikes" to="." method="_on_spikes_body_entered"]
 [connection signal="body_entered" from="Finish" to="." method="_on_finish_body_entered"]
