@@ -1,7 +1,6 @@
-[gd_scene load_steps=20 format=4 uid="uid://dmxfaox45d8k6"]
+[gd_scene load_steps=27 format=4 uid="uid://dmxfaox45d8k6"]
 
 [ext_resource type="Script" uid="uid://bkllaeomrwfbs" path="res://scripts/Levels/alligator_dentistry.gd" id="1_rwegt"]
-[ext_resource type="Texture2D" uid="uid://b3670dem531ly" path="res://Art/OldTestArt/spikeBall.png" id="2_py8lq"]
 [ext_resource type="PackedScene" uid="uid://bxpry3684affg" path="res://scenes/player/player.tscn" id="3_u8x4h"]
 [ext_resource type="Texture2D" uid="uid://d0hlorb58psmj" path="res://assets/sprites/Bottom Alligator Jaw.png" id="4_1sjml"]
 [ext_resource type="Texture2D" uid="uid://oadhk4cffscn" path="res://assets/Tiles/basic_tileset_and_assets_standard/water_and_island_tiles_v2.png" id="4_py8lq"]
@@ -610,10 +609,107 @@ position = Vector2(510, 182)
 
 [node name="Players" type="Node2D" parent="Player"]
 
-[node name="Sprite2d" type="Sprite2D" parent="Player"]
-position = Vector2(-55.7691, -1167.31)
-scale = Vector2(19.2307, 19.2307)
-texture = ExtResource("2_py8lq")
+[node name="Bottom Boundry" type="StaticBody2D" parent="."]
+position = Vector2(-2, -69)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bottom Boundry"]
+shape = SubResource("WorldBoundaryShape2D_7qt0h")
+
+[node name="Objects" type="Node" parent="."]
+
+[node name="drill" parent="Objects" instance=ExtResource("10_3xdj8")]
+position = Vector2(-1184, -162)
+item_name = "drill"
+sprite_texture = ExtResource("10_u0d4m")
+
+[node name="extractor" parent="Objects" instance=ExtResource("10_3xdj8")]
+position = Vector2(-849, -167)
+item_name = "extractor"
+sprite_texture = ExtResource("10_u0d4m")
+
+[node name="filler" parent="Objects" instance=ExtResource("10_3xdj8")]
+position = Vector2(-1491, -162)
+item_name = "filler"
+sprite_texture = ExtResource("10_u0d4m")
+
+[node name="Labels" type="Node" parent="Objects"]
+
+[node name="Label4" type="Label" parent="Objects/Labels"]
+offset_left = -2024.0
+offset_top = -287.0
+offset_right = -1952.0
+offset_bottom = -264.0
+text = "Exit"
+
+[node name="Label3" type="Label" parent="Objects/Labels"]
+offset_left = -1523.0
+offset_top = -277.0
+offset_right = -1451.0
+offset_bottom = -254.0
+text = "Fill"
+
+[node name="Label2" type="Label" parent="Objects/Labels"]
+offset_left = -1226.0
+offset_top = -273.0
+offset_right = -1154.0
+offset_bottom = -250.0
+text = "Drill"
+
+[node name="Label" type="Label" parent="Objects/Labels"]
+offset_left = -889.0
+offset_top = -277.0
+offset_right = -817.0
+offset_bottom = -254.0
+text = "Extractor"
+
+[node name="Platforms" type="Node" parent="."]
+
+[node name="Platform3" parent="Platforms" instance=ExtResource("8_t55p0")]
+position = Vector2(-1309, -98)
+scale = Vector2(30, 5)
+
+[node name="Platform2" parent="Platforms" instance=ExtResource("8_t55p0")]
+position = Vector2(406, -420)
+scale = Vector2(5, 5)
+
+[node name="Platform" parent="Platforms" instance=ExtResource("8_t55p0")]
+position = Vector2(238, -354)
+scale = Vector2(5, 5)
+
+[node name="Exit" type="Area2D" parent="."]
+position = Vector2(-1993, -192)
+scale = Vector2(3, 3)
+collision_mask = 12
+script = ExtResource("8_xeo0l")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Exit"]
+position = Vector2(-5, 6)
+shape = SubResource("RectangleShape2D_dpgru")
+
+[node name="Sprite2D" type="Sprite2D" parent="Exit"]
+texture = ExtResource("12_bifnd")
+
+[node name="Teeth" type="Node2D" parent="."]
+position = Vector2(406, -420)
+scale = Vector2(5, 5)
+
+[node name="Area2D" parent="Teeth" instance=ExtResource("13_xeo0l")]
+position = Vector2(151.8, 31.2)
+scale = Vector2(0.2, 0.2)
+disable_mode = 2
+collision_layer = 4
+collision_mask = 1
+is_key_tooth = true
+
+[node name="Drill Tooth" parent="Teeth" instance=ExtResource("14_xeo0l")]
+position = Vector2(256.4, 30.4)
+scale = Vector2(0.2, 0.2)
+collision_layer = 4
+collision_mask = 1
+
+[node name="Tooth1" parent="Teeth" instance=ExtResource("6_4mk0g")]
+position = Vector2(62, 31.2)
+scale = Vector2(0.2, 0.2)
 
 [node name="Alligator" type="Node2D" parent="."]
 script = ExtResource("5_t55p0")
