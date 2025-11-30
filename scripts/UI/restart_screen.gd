@@ -107,13 +107,19 @@ func _on_restart_pressed() -> void:
 	request_restart.rpc()
 
 func _on_level_select_pressed() -> void:
-	print("Not implemented yet")
+	print("Going to lobby...")
+	request_lobby.rpc()
+	
+@rpc("any_peer", "call_local")
+func request_lobby() -> void:
+	if multiplayer.get_unique_id() == 1:
+		Net.rpc_start_game("Lobby")
 
 @rpc("any_peer", "call_local")
 func request_main_menu() -> void:
 	if multiplayer.get_unique_id() == 1:
 		Net.rpc_start_game("Title")
-
+		
 func _on_quit_menu_pressed() -> void:
 	resume()
 	request_main_menu.rpc()

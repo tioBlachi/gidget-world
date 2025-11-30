@@ -1,7 +1,7 @@
 [gd_scene load_steps=37 format=3 uid="uid://bgv34gcuxiuqr"]
 
 [ext_resource type="Script" uid="uid://r7mntc1kketq" path="res://scripts/Levels/portal_fight.gd" id="1_7rmao"]
-[ext_resource type="Texture2D" uid="uid://qyjfkgfgbpk0" path="res://assets/sprites/PortalBG.png" id="1_ekbpn"]
+[ext_resource type="Texture2D" uid="uid://c210jtig88gik" path="res://assets/sprites/PortalBG.png" id="1_ekbpn"]
 [ext_resource type="PackedScene" uid="uid://bdw5tfrelqrd2" path="res://scenes/objects/EvilCat/SpikeRing.tscn" id="2_6s1gy"]
 [ext_resource type="PackedScene" uid="uid://2lntdlomdt6o" path="res://scenes/objects/EvilCat/CatBoss.tscn" id="2_7rmao"]
 [ext_resource type="Texture2D" uid="uid://ci0kjxllfmyhu" path="res://assets/sprites/Explosion.png" id="4_greg0"]
@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://coo3efhcvxiar" path="res://scenes/UI/restart_screen.tscn" id="6_imk1x"]
 [ext_resource type="AudioStream" uid="uid://diqgbk7t8hcg6" path="res://assets/sounds/8-bit-explosion.wav" id="8_ou0jd"]
 [ext_resource type="PackedScene" uid="uid://lommrbd42bf3" path="res://scenes/objects/Birds/RedTestBird.tscn" id="10_akggb"]
-[ext_resource type="AudioStream" uid="uid://dehh0f3xb24ne" path="res://scenes/objects/EvilCat/funny-cat-meow-246012.mp3" id="11_v1q8v"]
+[ext_resource type="AudioStream" uid="uid://cut1cdd8i8y6y" path="res://scenes/objects/EvilCat/funny-cat-meow-246012.mp3" id="11_v1q8v"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ou0jd"]
 atlas = ExtResource("1_ekbpn")
