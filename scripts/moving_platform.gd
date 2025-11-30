@@ -12,10 +12,22 @@ var is_player_on_platform: bool = false
 var player_was_on_platform: bool = false
 # Should the platform start falling?
 var start_to_fall: bool = false
+
+@export var move_x: bool = false
+
+@export var little_fall: bool = false
+
 # Falling speed
 @export var fall_speed: float = 200  # Speed at which the platform will fall once it starts
 @export var gravity: float = 400  # Acceleration due to gravity (pixels per second^2)
 @export var max_fall_speed: float = 1000  # Maximum fall speed (terminal velocity)
+
+# for horizontal movement (optional)
+@export var hor_move_speed: float = 200
+@export var hor_distance: float = 20
+@export var max_hor_move_speed: float = 200
+@export var min_hor_move_speed: float = 0
+var asdf: float = 0
 # Platform velocity (how fast it falls)
 var fall_velocity: float = 0  # Initial fall speed is 0
 
@@ -36,6 +48,8 @@ func _on_Player_entered_area(body: Node) -> void:
 		print("Player is on the platform")
 		is_player_on_platform = true
 		player_was_on_platform = true
+	if little_fall:
+		max_height = position.y - 22
 
 # Detect when the player exits the Area2D
 func _on_Player_exited_area(body: Node) -> void:
@@ -45,13 +59,14 @@ func _on_Player_exited_area(body: Node) -> void:
 
 # Platform movement logic
 func _process(delta):
-	if start_to_fall:
+	if start_to_fall and player_was_on_platform:
 		fall_velocity += gravity * delta  # Increase fall velocity over time
 		if fall_velocity > max_fall_speed:
 			fall_velocity = max_fall_speed
 		position.y += fall_velocity * delta  # Make it fall faster over time
+		print("Platform Y position (falling): " + str(position.y))
 
-	elif player_was_on_platform and position.y > max_height + 18:
+	elif player_was_on_platform and position.y > (max_height + 18):
 		# Move the platform upwards to the max height
 		position.y = lerp(position.y, max_height, 0.01)
 		print("Platform Y position: " + str(position.y))
@@ -59,3 +74,6 @@ func _process(delta):
 	elif position.y <= max_height + 18:
 		# Once the platform reaches its top, start the falling process
 		start_to_fall = true
+	
+	if player_was_on_platform and move_x:
+		position.x = lerp(position.x, hor_distance, 0.01)
