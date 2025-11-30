@@ -474,7 +474,7 @@ radius = 260.0
 height = 2450.0
 
 [sub_resource type="Animation" id="Animation_7qt0h"]
-length = 0.001
+length = 4.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true

@@ -4,6 +4,7 @@ extends Node2D
 @onready var player1marker: Node2D = $PlayerMarkers/Player1Marker
 @onready var player2marker: Node2D = $PlayerMarkers/Player2Marker
 @onready var pSpawner: Node = $pSpawner
+@onready var popup = $PopupUI/restart_screen
 
 func _ready():
 	if multiplayer.multiplayer_peer == null:

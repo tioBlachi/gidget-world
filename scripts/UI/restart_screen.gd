@@ -104,7 +104,11 @@ func request_restart() -> void:
 @rpc("any_peer", "call_local")
 func _on_restart_pressed() -> void:
 	resume()
-	request_restart.rpc()
+	
+	if current_state == LEVEL_STATE.COMPLETE:
+		SceneManager.request_next_level.rpc()
+	else:
+		request_restart.rpc()
 
 func _on_level_select_pressed() -> void:
 	print("Going to lobby...")

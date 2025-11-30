@@ -296,9 +296,6 @@ color = Color(1, 1, 1, 0)
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_greg0")
 
-[node name="PauseMenu" parent="." instance=ExtResource("5_13yns")]
-layer = 4
-
 [node name="Boom" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("8_ou0jd")
 volume_db = -25.587
@@ -308,6 +305,8 @@ stream = ExtResource("11_v1q8v")
 volume_db = 14.032
 
 [node name="PopupUI" parent="." instance=ExtResource("10_v1q8v")]
+
+[node name="PauseMenu" parent="." instance=ExtResource("5_13yns")]
 
 [editable path="CatBoss"]
 [editable path="PopupUI"]

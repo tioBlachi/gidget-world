@@ -8697,7 +8697,7 @@ _spawnable_scenes = PackedStringArray("uid://bxpry3684affg")
 spawn_path = NodePath("../Players")
 
 [node name="PlayerMarkers" type="Node2D" parent="."]
-position = Vector2(571, -2254)
+position = Vector2(18, -25)
 
 [node name="Player1Marker" type="Marker2D" parent="PlayerMarkers"]
 position = Vector2(127, 512)

@@ -148,7 +148,7 @@ sources/2 = SubResource("TileSetAtlasSource_oqjtr")
 sources/4 = SubResource("TileSetAtlasSource_5sbvo")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l1kjl"]
-size = Vector2(120, 85)
+size = Vector2(120, 76)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_eihww"]
 atlas = ExtResource("7_qvew4")
@@ -173,7 +173,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eihww"]
-size = Vector2(90, 80)
+size = Vector2(90, 83)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_chk2d"]
 size = Vector2(17, 17)
@@ -241,7 +241,7 @@ collision_layer = 8
 script = ExtResource("7_l1kjl")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Lawnmower"]
-position = Vector2(0, -40)
+position = Vector2(0.00012207, -39.9998)
 shape = SubResource("RectangleShape2D_l1kjl")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Lawnmower"]
@@ -252,7 +252,7 @@ autoplay = "mow"
 [node name="Killzone" parent="Lawnmower" instance=ExtResource("8_eihww")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Lawnmower/Killzone"]
-position = Vector2(0, -40)
+position = Vector2(0.00012207, -41.5)
 shape = SubResource("RectangleShape2D_eihww")
 
 [node name="Area2D" type="Area2D" parent="Lawnmower"]
@@ -266,13 +266,10 @@ shape = SubResource("RectangleShape2D_chk2d")
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="Lawnmower"]
 replication_config = SubResource("SceneReplicationConfig_chk2d")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="PauseMenu" parent="." instance=ExtResource("11_cots3")]
 
-[node name="restart_screen" parent="CanvasLayer" instance=ExtResource("12_046b5")]
-visible = false
-
-[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("11_cots3")]
-
-[node name="UILayer" parent="." instance=ExtResource("11_cots3")]
+[node name="PopupUI" parent="." instance=ExtResource("12_046b5")]
 
 [connection signal="body_entered" from="Lawnmower/Area2D" to="Lawnmower/Area2D" method="_on_body_entered"]
+
+[editable path="PopupUI"]

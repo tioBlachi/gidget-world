@@ -11,3 +11,4 @@ func _ready() -> void:
 	music.play()
 	await music.finished
 	SceneManager.switch_scene("Title")
+	SceneManager.current_level_idx = 0
