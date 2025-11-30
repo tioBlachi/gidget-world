@@ -4,10 +4,15 @@ class FakePlayer:
 	extends Node2D
 	var move_direction := 1.0
 	var picked := false
+	var direction := 1.0
+
 	func _init():
-		name = "1"                  # peer id as string
+		name = "1"
 		add_to_group("players")
-	func pickup_keycard(_k): picked = true
+
+	func pickup_keycard(_k):
+		picked = true
+
 
 func _make_keycard(parent: Node) -> Area2D:
 	var kc := Area2D.new()
