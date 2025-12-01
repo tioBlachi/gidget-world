@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://bubel0hify2ql" path="res://assets/Tiles/tilemap_industrial.png" id="7_d8s2p"]
 [ext_resource type="PackedScene" uid="uid://crt3hl37uat0j" path="res://scenes/objects/collapsable1.tscn" id="10_kmj5p"]
 [ext_resource type="Texture2D" uid="uid://d3wd0tgc4kjac" path="res://Art/NewArt/fog_or_smoke.png" id="11_hi56s"]
-[ext_resource type="PackedScene" path="res://scenes/objects/hidden_collapse.tscn" id="12_7a5k8"]
+[ext_resource type="PackedScene" uid="uid://mlead3pllwv4" path="res://scenes/objects/hidden_collapse.tscn" id="12_7a5k8"]
 [ext_resource type="AudioStream" uid="uid://brj1l6lfygs12" path="res://assets/BowenStuff/themeMusic.mp3" id="12_snjsr"]
 [ext_resource type="AudioStream" uid="uid://dbsgrftdcnpjb" path="res://assets/sounds/080205_life-lost-game-over-89697.mp3" id="13_d8s2p"]
 [ext_resource type="PackedScene" uid="uid://dicma2y7jdpmj" path="res://assets/moving_platform.tscn" id="14_362ly"]
