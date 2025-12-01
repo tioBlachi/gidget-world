@@ -34,6 +34,7 @@ func _on_body_entered(body: Node2D):
 		# Proceed to the next scene only if the state is verified
 		if puzzle_is_complete_globally or animation_is_finished:
 			print("Level conditions met. Loading next scene.")
+			Global.reset_players_to_standard_configuration()
 			get_tree().quit() 
 			# Replace "res://path/to/your/LevelQuitScene.tscn" with your actual scene path
 			# Note: Best practice is often to use a global function to change scenes

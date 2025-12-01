@@ -8,6 +8,20 @@ var portal_animated_sprite: AnimatedSprite2D = null
 enum PuzzleStage { STAGE_ZERO, STAGE_ONE, STAGE_TWO, STAGE_THREE_COMPLETE }
 var current_stage: PuzzleStage = PuzzleStage.STAGE_ZERO
 
+
+func _ready():
+	# Assuming the portal_animated_sprite variable is assigned a value somewhere else 
+	# (e.g., in the parent scene's _ready function or via an export variable)
+	if portal_animated_sprite != null:
+		# Check if already connected before connecting again
+		if not portal_animated_sprite.is_connected("animation_finished", Callable(self, "_on_portal_animated_sprite_animation_finished")):
+			# Connect the signal from the sprite to this function within this script ('self')
+			portal_animated_sprite.connect("animation_finished", Callable(self, "_on_portal_animated_sprite_animation_finished"))
+			print("Signal successfully connected programmatically in _ready().")
+	else:
+		print("Error: portal_animated_sprite is null in _ready(). Cannot connect signal.")
+
+
 # Function called when a specific zone is active
 func configure_players_for_new_interaction_zone():
 	var players = get_tree().get_nodes_in_group("players")
@@ -47,4 +61,16 @@ func update_puzzle_state():
 			portal_animated_sprite.play("Opened 1")
 			print("Stage 3 recorded globally (Level should now end).")
 
-# Add other global functions here, like changing levels
+
+func _on_portal_animated_sprite_animation_finished():
+	print("Animation finished signal received.")
+	print("Current Stage is: ", current_stage)
+	print("Just finished animation: ", portal_animated_sprite.animation)
+	
+	# Check if the just-finished animation was "Opened 1" AND we are in the final stage
+	if current_stage == PuzzleStage.STAGE_THREE_COMPLETE and portal_animated_sprite.animation == "Opened 1":
+		print("Conditions met! Switching to Opened 2.")
+		# Switch to "Opened 2", which should have its 'loop' property enabled in the editor
+		portal_animated_sprite.play("Opened 2")
+	else:
+		print("Conditions failed. Not switching to Opened 2.")
