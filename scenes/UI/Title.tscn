@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://covk48n1264is"]
 
 [ext_resource type="Script" uid="uid://c0fliiisa46b6" path="res://scripts/UI/title.gd" id="1_vd34o"]
-[ext_resource type="Texture2D" uid="uid://dbatyjj04cxgb" path="res://Art/NewArt/GidgetWorldLogo.png" id="2_lp2qc"]
+[ext_resource type="Texture2D" uid="uid://c2fc7mrrx4763" path="res://Art/NewArt/GidgetWorldLogo.png" id="2_lp2qc"]
 [ext_resource type="PackedScene" uid="uid://bc8xykakus2vi" path="res://scenes/player/cut_player.tscn" id="3_cqwl8"]
 [ext_resource type="PackedScene" uid="uid://2lntdlomdt6o" path="res://scenes/objects/EvilCat/CatBoss.tscn" id="4_b5w1b"]
 

@@ -1,0 +1,92 @@
+[gd_scene load_steps=9 format=3 uid="uid://dxcwdnb8sw8h3"]
+
+[ext_resource type="Script" uid="uid://b7dxbv2i3rqo8" path="res://scripts/objects/jump_block.gd" id="1_hkkya"]
+[ext_resource type="Texture2D" uid="uid://ka0jm814buyc" path="res://Art/OldTestArt/mysteryBlock2.png" id="2_jt3eu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3nn17"]
+size = Vector2(10, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6amkh"]
+size = Vector2(10, 1)
+
+[sub_resource type="Animation" id="Animation_4haca"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Box:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_vexpn"]
+resource_name = "idle"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Box:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.1, 1.1), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_3mpxb"]
+resource_name = "launch"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Box:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.13, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 1.2), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_x74ud"]
+_data = {
+&"RESET": SubResource("Animation_4haca"),
+&"idle": SubResource("Animation_vexpn"),
+&"launch": SubResource("Animation_3mpxb")
+}
+
+[node name="JumpBlock" type="Node2D"]
+scale = Vector2(4, 4)
+script = ExtResource("1_hkkya")
+
+[node name="Box" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Box"]
+shape = SubResource("RectangleShape2D_3nn17")
+
+[node name="Sprite2D" type="Sprite2D" parent="Box"]
+texture = ExtResource("2_jt3eu")
+
+[node name="bounce_zone" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bounce_zone"]
+position = Vector2(0, -5.5)
+shape = SubResource("RectangleShape2D_6amkh")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_x74ud")
+}
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+
+[connection signal="body_entered" from="bounce_zone" to="." method="_on_bounce_zone_body_entered"]

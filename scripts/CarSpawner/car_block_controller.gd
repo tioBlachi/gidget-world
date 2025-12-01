@@ -14,11 +14,15 @@ var _speed_multiplier: float = 1.0
 var _spawned_during_boost: Array = []
 
 func _ready() -> void:
+	#if not multiplayer.is_server():
+		#return
+		
 	_collect_lane_spawners()
 	_disable_random_on_spawners()
-	_module = load("res://scripts/CarSpawner/CarModule.gd").new()
-	if auto_start:
-		start()
+	if multiplayer.is_server():
+		_module = load("res://scripts/CarSpawner/CarModule.gd").new()
+		if auto_start:
+			start()
 
 func start() -> void:
 	if _running:
@@ -69,6 +73,35 @@ func _pick_pattern() -> Array:
 	rng.randomize()
 	return patterns[rng.randi_range(0, patterns.size() - 1)]
 
+#func _run_loop() -> void:
+	#await get_tree().process_frame
+	#while _running:
+		#var pattern: Array = _pick_pattern()
+		#if pattern.is_empty():
+			#await get_tree().create_timer(_effective_delay(block_delay_seconds)).timeout
+			#continue
+		#var num_rows := pattern.size()
+		#if num_rows < 3:
+			#await get_tree().create_timer(_effective_delay(block_delay_seconds)).timeout
+			#continue
+		#var num_cols := 0
+		#if num_rows > 0:
+			#num_cols = pattern[0].size()
+		#for col in range(num_cols):
+			## For each column, check each lane 
+			#for row in range(3):
+				#if row < _lane_spawners.size() and col < pattern[row].size():
+					#var should_spawn = int(pattern[row][col]) == 1
+					#if should_spawn:
+						#var car = _lane_spawners[row].spawn_fixed()
+						#if car is MovingKillbox:
+							## Record to normalize speed when boost ends
+							#_spawned_during_boost.append({
+								#"car": car,
+								#"normal_speed": _lane_spawners[row].car_speed
+							#})
+			#await get_tree().create_timer(_effective_delay(column_delay_seconds)).timeout
+		#await get_tree().create_timer(_effective_delay(block_delay_seconds)).timeout
 func _run_loop() -> void:
 	await get_tree().process_frame
 	while _running:
@@ -76,28 +109,29 @@ func _run_loop() -> void:
 		if pattern.is_empty():
 			await get_tree().create_timer(_effective_delay(block_delay_seconds)).timeout
 			continue
+
 		var num_rows := pattern.size()
 		if num_rows < 3:
 			await get_tree().create_timer(_effective_delay(block_delay_seconds)).timeout
 			continue
+
 		var num_cols := 0
 		if num_rows > 0:
 			num_cols = pattern[0].size()
+
 		for col in range(num_cols):
 			# For each column, check each lane 
 			for row in range(3):
 				if row < _lane_spawners.size() and col < pattern[row].size():
-					var should_spawn = int(pattern[row][col]) == 1
+					var should_spawn := int(pattern[row][col]) == 1
 					if should_spawn:
-						var car = _lane_spawners[row].spawn_fixed()
-						if car is MovingKillbox:
-							# Record to normalize speed when boost ends
-							_spawned_during_boost.append({
-								"car": car,
-								"normal_speed": _lane_spawners[row].car_speed
-							})
+						# 🔹 Server broadcasts: “spawn a car in lane <row>”
+						rpc_spawn_car.rpc_id(1, row)
+
 			await get_tree().create_timer(_effective_delay(column_delay_seconds)).timeout
+
 		await get_tree().create_timer(_effective_delay(block_delay_seconds)).timeout
+
 
 func _effective_delay(base_seconds: float) -> float:
 	var mult := _speed_multiplier
@@ -116,3 +150,21 @@ func _reset_boosted_car_speeds() -> void:
 			if is_instance_valid(car):
 				remaining.append(entry)
 	_spawned_during_boost = remaining
+	
+@rpc("authority", "call_local")
+func rpc_spawn_car(row: int) -> void:
+	if row < 0 or row >= _lane_spawners.size():
+		return
+
+	var spawner = _lane_spawners[row]
+	if spawner == null or not spawner.has_method("spawn_fixed"):
+		return
+
+	var car = spawner.spawn_fixed()
+
+	# Only the server needs to track boost bookkeeping
+	if multiplayer.is_server() and car is MovingKillbox:
+		_spawned_during_boost.append({
+			"car": car,
+			"normal_speed": spawner.car_speed
+		})

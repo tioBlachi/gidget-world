@@ -10,12 +10,14 @@ extends Control
 var selected_level = ""
 
 func _ready() -> void:
+	get_tree().paused = false
+	
 	if not Net.players_changed.is_connected(_on_players_changed):
 		Net.players_changed.connect(_on_players_changed)
 
 	Net.rpc_id(1, "rpc_request_players")
 
-	var skip := ["Title", "Lobby", "Testing"]
+	var skip := ["Title", "Lobby", "Testing", "Fin"]
 	var scene_names: Array = []
 	for scene_name in SceneManager.SCENES.keys():
 		if scene_name in skip:

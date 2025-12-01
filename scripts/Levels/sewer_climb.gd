@@ -42,11 +42,19 @@ func spawn_players(p_array: PackedInt32Array) -> void:
 		player.modulate = tints[i]
 		player.global_position = markers[i].global_position
 		player.set_multiplayer_authority(peer_id)
-
+		# I had to scale the players down here
+		# this is just an arbitrary number but
+		# they seem to be a good size for the level
+		# may need to adjust the JUMP_VELOCITY for 
+		# each player so it works for what you need in
+		# the level
+		player.scale = Vector2(0.1, 0.1)
+		player.JUMP_VELOCITY = -400.0
 		pSpawner.add_child(player)
 		if multiplayer.get_unique_id() == peer_id:
 			var cam: Camera2D = player.get_node("Camera2D")
 			cam.make_current()
+			cam.zoom = Vector2(2,2)
 
 func get_map_limits() -> Rect2:
 	return map_limits
