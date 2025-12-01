@@ -6,25 +6,12 @@ extends Node2D
 @onready var pSpawner = $pSpawner
 @onready var player1marker = $PlayerMarkers/Player1Marker
 @onready var player2marker = $PlayerMarkers/Player2Marker
-@onready var blue_bird := $BlueBird/AnimatedSprite2D
-@onready var popup := $PopupUI/restart_screen
 
-@export var cam_rise_speed : float = 35
-var killzone_deactivated := false
-var killzone_top: float
+@export var cam_rise_speed : float = 40
 
 func _ready() -> void:
 	if multiplayer.is_server():
 		spawn_players.rpc(Net.players)
-	killzone_top = $Camera2D/BottomBorder/Not_Active.global_position.y
-	
-	var bird := blue_bird.get_parent()
-	bird.ready_to_fly.connect(flip_the_bird)
-		
-func flip_the_bird():
-	blue_bird.flip_h = true
-	await get_tree().create_timer(5.0).timeout
-	trigger_win.rpc()
 
 
 func _process(delta: float) -> void:
@@ -33,7 +20,6 @@ func _process(delta: float) -> void:
 	
 	if cam_position < level_cam.limit_top:
 		cam_position = level_cam.limit_top
-		killzone_deactivated = true
 		
 	level_cam.global_position.y = cam_position
 		
@@ -61,14 +47,14 @@ func spawn_players(p_array: PackedInt32Array) -> void:
 
 		var cam: Camera2D = player.get_node("Camera2D")
 		cam.enabled = false
-		
-@rpc("any_peer", "call_local")
-func trigger_win():
-	popup.current_state = popup.LEVEL_STATE.COMPLETE
-	popup.pause()
+
 
 func _on_bottom_border_body_entered(body: Node2D) -> void:
-	if killzone_top >= bottom_border.global_position.y:
-		return
-	if body.is_in_group("players") and not killzone_deactivated:
+	if body.is_in_group("players"):
 		body.die.rpc()
+		
+
+func _on_can_2_trigger_body_entered(body: Node2D) -> void:
+	if body.is_in_group("players") and $Can2:
+		if $Can2.paused == true:
+			$Can2.paused = false

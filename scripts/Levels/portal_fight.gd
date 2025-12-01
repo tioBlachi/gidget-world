@@ -364,10 +364,8 @@ func fade_to_white(duration: float = 5.0) -> void:
 
 @rpc("authority", "call_local")
 func trigger_win():
-	#popup.current_state = popup.LEVEL_STATE.COMPLETE
-	#popup.pause()
-	await get_tree().create_timer(3.0).timeout
-	SceneManager.switch_scene("Fin")
+	popup.current_state = popup.LEVEL_STATE.COMPLETE
+	popup.pause()
 	
 @rpc("authority", "call_local")
 func trigger_lose():

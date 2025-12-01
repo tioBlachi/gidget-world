@@ -13,7 +13,6 @@ extends CharacterBody2D
 @export var max_fall_speed: float = 500.0 #allows other scenes to access max fall speed
 @export var is_gravity_level: bool = false
 @export var god_mode: bool = false
-@export var is_locally_paused := false
 
 const PUSH_FORCE = 15.0
 const MIN_PUSH_FORCE = 10.0
@@ -25,11 +24,8 @@ var original_texture = preload("res://Art/OldTestArt/gRight.png")
 var death_texture = preload("res://Art/OldTestArt/gDeath.png")
 var burned_texture = preload("res://Art/OldTestArt/deathGidget.png")
 
-signal character_died
-
 func _ready():
 	add_to_group("players")
-	add_to_group("killzones")
 	if get_tree().current_scene and get_tree().current_scene.name == "Alligator Dentistry":
 		SPEED *= 2.5
 		JUMP_VELOCITY *= 2.0
@@ -38,8 +34,6 @@ func _ready():
 		JUMP_VELOCITY *= 2.0
 
 func _physics_process(delta: float) -> void:
-	if is_locally_paused:
-		return
 	#print("Player velocity.y = ", velocity.y)
 	#print("This is gravity level ", is_gravity_level)
 	#print("We are not on floor ", not is_on_floor())
@@ -297,8 +291,7 @@ func die():
 
 func _on_timer_complete():
 	Global.player_died.emit()
-	emit_signal("character_died")
-	#get_tree().reload_current_scene()
+	get_tree().reload_current_scene()
 	#get_tree().paused = true
 
 

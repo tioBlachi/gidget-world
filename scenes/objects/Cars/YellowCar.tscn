@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://bvv6bjcuycqsv"]
 
 [ext_resource type="Script" uid="uid://uqjl7o5h2djp" path="res://scripts/objects/moving_killbox.gd" id="1_1k8f0"]
-[ext_resource type="Texture2D" uid="uid://p3uq2orvlnem" path="res://Art/NewArt/YellowCarAnimation.png" id="2_r6iua"]
+[ext_resource type="Texture2D" uid="uid://dbdq3msqw2wtx" path="res://Art/NewArt/YellowCarAnimation.png" id="2_r6iua"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bu5w5"]
 atlas = ExtResource("2_r6iua")
@@ -50,5 +50,3 @@ frame_progress = 0.858619
 position = Vector2(-1, 0)
 scale = Vector2(0.3, 0.3)
 shape = SubResource("RectangleShape2D_m8v0c")
-
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]

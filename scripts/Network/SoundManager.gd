@@ -10,9 +10,7 @@ var tracks := {
 }
 
 var sfx := {
-	"select" : preload("res://Sounds/select-003-337609.mp3"),
-	"boing" : preload("res://assets/sounds/boing.mp3"),
-	"chime" : preload("res://assets/sounds/chime.ogg")
+	"select" : preload("res://Sounds/select-003-337609.mp3")
 }
 
 func _ready():
