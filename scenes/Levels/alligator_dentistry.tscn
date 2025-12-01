@@ -15,7 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://bs6m8f017o7f3" path="res://scenes/objects/extract_tooth.tscn" id="13_xeo0l"]
 [ext_resource type="PackedScene" uid="uid://dxeq5dmqrp24e" path="res://scenes/objects/Drill Tooth.tscn" id="14_xeo0l"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_u8x4h"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xeo0l"]
 texture = ExtResource("4_py8lq")
 0:0/0 = 0
 1:0/0 = 0
@@ -455,7 +455,7 @@ texture = ExtResource("4_py8lq")
 29:15/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_1sjml"]
-sources/0 = SubResource("TileSetAtlasSource_u8x4h")
+sources/0 = SubResource("TileSetAtlasSource_xeo0l")
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_7qt0h"]
 

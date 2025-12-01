@@ -1,17 +1,17 @@
 [gd_scene load_steps=28 format=4 uid="uid://dhpdxn5g33vpp"]
 
-[ext_resource type="Texture2D" uid="uid://dhjnmqtfenj7p" path="res://assets/Tiles/oldTiles/lab_tiles.png" id="1_dnvpt"]
+[ext_resource type="Texture2D" uid="uid://b6vnyfhoqgumk" path="res://assets/Tiles/oldTiles/lab_tiles.png" id="1_dnvpt"]
 [ext_resource type="Script" uid="uid://ds61fpcbhgyig" path="res://scripts/Levels/car_dodge.gd" id="1_e8t8o"]
 [ext_resource type="Script" uid="uid://by67bhfq2l8jb" path="res://scripts/Levels/killbox_spawner.gd" id="4_rfpyh"]
 [ext_resource type="PackedScene" uid="uid://bexy1hnpe0tel" path="res://scenes/objects/Cars/BlueCar.tscn" id="5_q40wf"]
-[ext_resource type="Texture2D" uid="uid://dm4ynga7tc6wf" path="res://assets/Tiles/tilemap_industrial.png" id="6_58nwc"]
+[ext_resource type="Texture2D" uid="uid://b20b7l1hcbw8o" path="res://assets/Tiles/tilemap_industrial.png" id="6_58nwc"]
 [ext_resource type="PackedScene" uid="uid://bsknfknpkqnoc" path="res://scenes/objects/Cars/GreenCar.tscn" id="6_redad"]
 [ext_resource type="PackedScene" uid="uid://bvv6bjcuycqsv" path="res://scenes/objects/Cars/YellowCar.tscn" id="7_e8t8o"]
-[ext_resource type="Texture2D" uid="uid://cs58b63d0hxtf" path="res://Art/NewArt/Big City.png" id="8_e8t8o"]
-[ext_resource type="Texture2D" uid="uid://cs5w64bj3vdqt" path="res://assets/Tiles/BackgroundRock.png" id="8_kivjt"]
-[ext_resource type="Texture2D" uid="uid://d1d5g51eufqir" path="res://assets/Tiles/rock.png" id="9_3wlja"]
-[ext_resource type="Texture2D" uid="uid://bw55gs15yarv6" path="res://Art/NewArt/Night City.png" id="9_kivjt"]
-[ext_resource type="AudioStream" uid="uid://dk65rp6d7g3m3" path="res://Sounds/TrafficSounds.mp3" id="10_e8t8o"]
+[ext_resource type="Texture2D" uid="uid://bhwitf88ty575" path="res://Art/NewArt/Big City.png" id="8_e8t8o"]
+[ext_resource type="Texture2D" uid="uid://dtfulyl7rdgak" path="res://assets/Tiles/BackgroundRock.png" id="8_kivjt"]
+[ext_resource type="Texture2D" uid="uid://bxcojnunrxwli" path="res://assets/Tiles/rock.png" id="9_3wlja"]
+[ext_resource type="Texture2D" uid="uid://bsvk5sdffvkpq" path="res://Art/NewArt/Night City.png" id="9_kivjt"]
+[ext_resource type="AudioStream" uid="uid://dacq5v51wocfx" path="res://Sounds/TrafficSounds.mp3" id="10_e8t8o"]
 [ext_resource type="PackedScene" uid="uid://jylojstufht1" path="res://scenes/player/BowenPlayer.tscn" id="12_3wlja"]
 [ext_resource type="Script" uid="uid://jn7cxbgkmjtt" path="res://scripts/CarSpawner/car_block_controller.gd" id="13_ctrl"]
 
@@ -1536,7 +1536,6 @@ motion_scale = Vector2(0.6, 0.6)
 
 [node name="Player2" parent="." instance=ExtResource("12_3wlja")]
 position = Vector2(-757.71, 1211.73)
-side_scroller = false
 
 [node name="CarSpawners" type="Node2D" parent="."]
 

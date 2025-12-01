@@ -21,6 +21,7 @@ Net="*res://scripts/Network/Net.gd"
 SceneManager="*res://scripts/Network/SceneManager.gd"
 Global="*res://scripts/global.gd"
 SoundManager="*res://scripts/Network/SoundManager.gd"
+GlobalGameManager="*res://scripts/GlobalGameManager.gd"
 
 [display]
 

@@ -29,6 +29,9 @@ func _ready():
 	if get_tree().current_scene and get_tree().current_scene.name == "Alligator Dentistry":
 		SPEED *= 2.5
 		JUMP_VELOCITY *= 2.0
+	if get_tree().current_scene and get_tree().current_scene.name == "collection":
+		SPEED *= 2.5
+		JUMP_VELOCITY *= 2.0
 
 func _physics_process(delta: float) -> void:
 	#print("Player velocity.y = ", velocity.y)
@@ -210,9 +213,9 @@ func pickup_keycard(keycard: Node):
 
 func set_side_scroller(value: bool):
 	side_scroller = value
-	if not side_scroller:
-		if is_instance_valid($Camera2D):
-			$Camera2D.queue_free()
+	#if not side_scroller:
+		#if is_instance_valid($Camera2D):
+			#$Camera2D.queue_free()
 			
 func burn():
 	var stars = $Stars.get_children()
