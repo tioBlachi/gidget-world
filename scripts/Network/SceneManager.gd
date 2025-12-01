@@ -19,11 +19,13 @@ const SCENES: Dictionary = {
 	"Lobby" : "res://scenes/UI/Lobby.tscn",
 	"Final" : "res://scenes/Levels/Final.tscn",
 	"Portal Fight" : "res://scenes/Levels/Portal_Fight.tscn",
-	"Fin" : "res://scenes/UI/Fin.tscn"
+	"Fin" : "res://scenes/UI/Fin.tscn",
+	"Keycard Kollector" : "res://scenes/Levels/Keycard Kollector.tscn"
 }
 
 const LEVEL_ORDER := [
 	"Lab Escape",
+	"Keycard Kollector",
 	"Sewer Dive",
 	"Alligator Dentistry",
 	"Sewer Climb",

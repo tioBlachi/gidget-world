@@ -1,0 +1,438 @@
+[gd_scene load_steps=17 format=4 uid="uid://chg5dudtxha64"]
+
+[ext_resource type="Script" uid="uid://cii3kg83bo30n" path="res://scripts/Levels/keycard_kollector.gd" id="1_3cmnv"]
+[ext_resource type="Texture2D" uid="uid://fhoq4atbdmbq" path="res://assets/Tiles/oldTiles/lab_tiles.png" id="1_7ka6q"]
+[ext_resource type="PackedScene" uid="uid://cal6igr6pm15e" path="res://scenes/objects/KeycardKollectables.tscn" id="2_h11fb"]
+[ext_resource type="PackedScene" uid="uid://dxcwdnb8sw8h3" path="res://scenes/objects/jump_block.tscn" id="3_tfvoo"]
+[ext_resource type="FontFile" uid="uid://c8iyk0e4wck81" path="res://assets/sounds/Doto-VariableFont_ROND,wght.ttf" id="6_hxl0d"]
+[ext_resource type="PackedScene" uid="uid://bf72f4j7c2i3f" path="res://scripts/UI/pause_menu.tscn" id="7_b7q7j"]
+[ext_resource type="PackedScene" uid="uid://coo3efhcvxiar" path="res://scenes/UI/restart_screen.tscn" id="8_3qean"]
+[ext_resource type="Texture2D" uid="uid://b3670dem531ly" path="res://Art/OldTestArt/spikeBall.png" id="8_b7q7j"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_h11fb"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tfvoo"]
+texture = ExtResource("1_7ka6q")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:0/0 = 0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:0/0 = 0
+3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:1/0 = 0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:1/0 = 0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:1/0 = 0
+2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:1/0 = 0
+3:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:2/0 = 0
+0:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:2/0 = 0
+1:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:2/0 = 0
+2:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:2/0 = 0
+3:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:3/0 = 0
+0:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:3/0 = 0
+1:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:3/0 = 0
+2:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="TileSet" id="TileSet_3cmnv"]
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_tfvoo")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3qean"]
+size = Vector2(128, 20)
+
+[sub_resource type="Animation" id="Animation_b7q7j"]
+resource_name = "Grind"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Grinder/Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.28319]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Grinder/Sprite2D2:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.28319]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Grinder/Sprite2D3:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.28319]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Grinder/Sprite2D4:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.28319]
+}
+
+[sub_resource type="Animation" id="Animation_3qean"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Grinder/Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Grinder/Sprite2D2:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Grinder/Sprite2D3:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Grinder/Sprite2D4:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dujvu"]
+_data = {
+&"Grind": SubResource("Animation_b7q7j"),
+&"RESET": SubResource("Animation_3qean")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b7q7j"]
+size = Vector2(128, 20)
+
+[node name="Keycard Kollector" type="Node2D"]
+script = ExtResource("1_3cmnv")
+
+[node name="pSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("uid://bxpry3684affg")
+spawn_path = NodePath("../Players")
+
+[node name="PlayerMarkers" type="Node2D" parent="."]
+position = Vector2(284, 243)
+
+[node name="Player1Marker" type="Marker2D" parent="PlayerMarkers"]
+position = Vector2(330, 425)
+
+[node name="Player2Marker" type="Marker2D" parent="PlayerMarkers"]
+position = Vector2(398, 423)
+
+[node name="Players" type="Node2D" parent="."]
+
+[node name="Borders" type="StaticBody2D" parent="."]
+
+[node name="Top" type="CollisionShape2D" parent="Borders"]
+position = Vector2(661, 718)
+shape = SubResource("WorldBoundaryShape2D_h11fb")
+
+[node name="Left" type="CollisionShape2D" parent="Borders"]
+position = Vector2(1284, 373)
+rotation = -1.5708
+shape = SubResource("WorldBoundaryShape2D_h11fb")
+
+[node name="Right" type="CollisionShape2D" parent="Borders"]
+position = Vector2(2, 340)
+rotation = 1.5708
+shape = SubResource("WorldBoundaryShape2D_h11fb")
+
+[node name="Bottom" type="CollisionShape2D" parent="Borders"]
+position = Vector2(671, 1)
+rotation = 3.14159
+shape = SubResource("WorldBoundaryShape2D_h11fb")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+position = Vector2(7, 3)
+scale = Vector2(2, 2)
+tile_map_data = PackedByteArray("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")
+tile_set = SubResource("TileSet_3cmnv")
+
+[node name="Keycards" type="Node2D" parent="."]
+
+[node name="KeycardKollectables" parent="Keycards" instance=ExtResource("2_h11fb")]
+position = Vector2(226, 621)
+
+[node name="KeycardKollectables2" parent="Keycards" instance=ExtResource("2_h11fb")]
+position = Vector2(328, 620)
+
+[node name="KeycardKollectables3" parent="Keycards" instance=ExtResource("2_h11fb")]
+position = Vector2(425, 622)
+
+[node name="KeycardKollectables4" parent="Keycards" instance=ExtResource("2_h11fb")]
+position = Vector2(528, 623)
+
+[node name="KeycardKollectables5" parent="Keycards" instance=ExtResource("2_h11fb")]
+position = Vector2(746, 619)
+
+[node name="KeycardKollectables6" parent="Keycards" instance=ExtResource("2_h11fb")]
+position = Vector2(861, 617)
+
+[node name="KeycardKollectables7" parent="Keycards" instance=ExtResource("2_h11fb")]
+position = Vector2(963, 615)
+
+[node name="KeycardKollectables8" parent="Keycards" instance=ExtResource("2_h11fb")]
+position = Vector2(744, 553)
+
+[node name="KeycardKollectables9" parent="Keycards" instance=ExtResource("2_h11fb")]
+position = Vector2(860, 549)
+
+[node name="KeycardKollectables10" parent="Keycards" instance=ExtResource("2_h11fb")]
+position = Vector2(962, 550)
+
+[node name="KeycardKollectables11" parent="Keycards" instance=ExtResource("2_h11fb")]
+position = Vector2(639, 551)
+
+[node name="KeycardKollectables12" parent="Keycards" instance=ExtResource("2_h11fb")]
+position = Vector2(127, 620)
+
+[node name="KeycardKollectables13" parent="Keycards" instance=ExtResource("2_h11fb")]
+position = Vector2(331, 526)
+
+[node name="KeycardKollectables14" parent="Keycards" instance=ExtResource("2_h11fb")]
+position = Vector2(227, 530)
+
+[node name="KeycardKollectables15" parent="Keycards" instance=ExtResource("2_h11fb")]
+position = Vector2(128, 528)
+
+[node name="KeycardKollectables16" parent="Keycards" instance=ExtResource("2_h11fb")]
+position = Vector2(129, 118)
+
+[node name="KeycardKollectables17" parent="Keycards" instance=ExtResource("2_h11fb")]
+position = Vector2(128, 213)
+
+[node name="KeycardKollectables18" parent="Keycards" instance=ExtResource("2_h11fb")]
+position = Vector2(128, 306)
+
+[node name="KeycardKollectables19" parent="Keycards" instance=ExtResource("2_h11fb")]
+position = Vector2(128, 421)
+
+[node name="KeycardKollectables20" parent="Keycards" instance=ExtResource("2_h11fb")]
+position = Vector2(1083, 513)
+
+[node name="KeycardKollectables21" parent="Keycards" instance=ExtResource("2_h11fb")]
+position = Vector2(1169, 422)
+
+[node name="KeycardKollectables22" parent="Keycards" instance=ExtResource("2_h11fb")]
+position = Vector2(1083, 308)
+
+[node name="KeycardKollectables23" parent="Keycards" instance=ExtResource("2_h11fb")]
+position = Vector2(1168, 211)
+
+[node name="KeycardKollectables24" parent="Keycards" instance=ExtResource("2_h11fb")]
+position = Vector2(1119, 80)
+
+[node name="KeycardKollectables25" parent="Keycards" instance=ExtResource("2_h11fb")]
+position = Vector2(264, 300)
+
+[node name="KeycardKollectables26" parent="Keycards" instance=ExtResource("2_h11fb")]
+position = Vector2(264, 211)
+
+[node name="KeycardKollectables27" parent="Keycards" instance=ExtResource("2_h11fb")]
+position = Vector2(264, 121)
+
+[node name="KeycardKollectables28" parent="Keycards" instance=ExtResource("2_h11fb")]
+position = Vector2(493, 103)
+
+[node name="KeycardKollectables29" parent="Keycards" instance=ExtResource("2_h11fb")]
+position = Vector2(623, 99)
+
+[node name="KeycardKollectables30" parent="Keycards" instance=ExtResource("2_h11fb")]
+position = Vector2(963, 381)
+
+[node name="KeycardKollectables31" parent="Keycards" instance=ExtResource("2_h11fb")]
+position = Vector2(863, 385)
+
+[node name="KeycardKollectables32" parent="Keycards" instance=ExtResource("2_h11fb")]
+position = Vector2(914, 473)
+
+[node name="KeycardKollectables33" parent="Keycards" instance=ExtResource("2_h11fb")]
+position = Vector2(274, 427)
+
+[node name="KeycardKollectables34" parent="Keycards" instance=ExtResource("2_h11fb")]
+position = Vector2(809, 52)
+
+[node name="KeycardKollectables35" parent="Keycards" instance=ExtResource("2_h11fb")]
+position = Vector2(945, 52)
+
+[node name="KeycardKollectables36" parent="Keycards" instance=ExtResource("2_h11fb")]
+position = Vector2(878, 125)
+
+[node name="KeycardKollectables37" parent="Keycards" instance=ExtResource("2_h11fb")]
+position = Vector2(808, 191)
+
+[node name="KeycardKollectables38" parent="Keycards" instance=ExtResource("2_h11fb")]
+position = Vector2(959, 185)
+
+[node name="KeycardKollectables39" parent="Keycards" instance=ExtResource("2_h11fb")]
+position = Vector2(1001, 294)
+
+[node name="KeycardKollectables40" parent="Keycards" instance=ExtResource("2_h11fb")]
+position = Vector2(345, 217)
+
+[node name="KeycardKollectables41" parent="Keycards" instance=ExtResource("2_h11fb")]
+position = Vector2(346, 118)
+
+[node name="KeycardKollectables42" parent="Keycards" instance=ExtResource("2_h11fb")]
+position = Vector2(356, 375)
+
+[node name="KeycardKollectables43" parent="Keycards" instance=ExtResource("2_h11fb")]
+position = Vector2(479, 345)
+
+[node name="KeycardKollectables44" parent="Keycards" instance=ExtResource("2_h11fb")]
+position = Vector2(512, 419)
+
+[node name="KeycardKollectables45" parent="Keycards" instance=ExtResource("2_h11fb")]
+position = Vector2(598, 425)
+
+[node name="KeycardKollectables46" parent="Keycards" instance=ExtResource("2_h11fb")]
+position = Vector2(632, 336)
+
+[node name="KeycardKollectables47" parent="Keycards" instance=ExtResource("2_h11fb")]
+position = Vector2(539, 518)
+
+[node name="KeycardKollectables48" parent="Keycards" instance=ExtResource("2_h11fb")]
+position = Vector2(729, 417)
+
+[node name="KeycardKollectables49" parent="Keycards" instance=ExtResource("2_h11fb")]
+position = Vector2(724, 258)
+
+[node name="KeycardKollectables50" parent="Keycards" instance=ExtResource("2_h11fb")]
+position = Vector2(726, 126)
+
+[node name="JumpBlocks" type="Node2D" parent="."]
+
+[node name="JumpBlock" parent="JumpBlocks" instance=ExtResource("3_tfvoo")]
+position = Vector2(280, 687)
+
+[node name="JumpBlock2" parent="JumpBlocks" instance=ExtResource("3_tfvoo")]
+position = Vector2(818, 687)
+
+[node name="JumpBlock3" parent="JumpBlocks" instance=ExtResource("3_tfvoo")]
+position = Vector2(187, 358)
+
+[node name="JumpBlock4" parent="JumpBlocks" instance=ExtResource("3_tfvoo")]
+position = Vector2(663, 430)
+
+[node name="JumpBlock5" parent="JumpBlocks" instance=ExtResource("3_tfvoo")]
+position = Vector2(425, 429)
+
+[node name="TimeLeftLabel" type="Label" parent="."]
+offset_left = 401.0
+offset_top = 198.0
+offset_right = 702.0
+offset_bottom = 318.0
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("6_hxl0d")
+theme_override_font_sizes/font_size = 100
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LevelTimer" type="Timer" parent="."]
+wait_time = 30.0
+one_shot = true
+autostart = true
+
+[node name="PauseMenu" parent="." instance=ExtResource("7_b7q7j")]
+
+[node name="PopupUI" parent="." instance=ExtResource("8_3qean")]
+
+[node name="Grinder" type="Area2D" parent="."]
+position = Vector2(1062, 647)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Grinder"]
+position = Vector2(65, 0)
+shape = SubResource("RectangleShape2D_3qean")
+
+[node name="Sprite2D" type="Sprite2D" parent="Grinder"]
+position = Vector2(16, 0)
+texture = ExtResource("8_b7q7j")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Grinder"]
+position = Vector2(48, 0)
+texture = ExtResource("8_b7q7j")
+
+[node name="Sprite2D3" type="Sprite2D" parent="Grinder"]
+position = Vector2(80, 0)
+texture = ExtResource("8_b7q7j")
+
+[node name="Sprite2D4" type="Sprite2D" parent="Grinder"]
+position = Vector2(112, 0)
+texture = ExtResource("8_b7q7j")
+
+[node name="GrindTimer" type="Timer" parent="Grinder"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_dujvu")
+}
+
+[node name="Exit" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Exit"]
+position = Vector2(1127, 715)
+shape = SubResource("RectangleShape2D_b7q7j")
+
+[connection signal="body_entered" from="Grinder" to="." method="_on_grinder_body_entered"]
+[connection signal="body_entered" from="Exit" to="." method="_on_exit_body_entered"]
+
+[editable path="PopupUI"]
