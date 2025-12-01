@@ -1887,6 +1887,18 @@ curve = SubResource("Curve2D_h0dn2")
 chase_speed = 50.0
 detect_radius = 10000.0
 
+[node name="PathFollow2D" parent="LevelObjects/Birds/RedBird" index="0"]
+position = Vector2(188, -1)
+rotation = -3.12997
+progress = 0.0
+
+[node name="AnimatableBody2D" parent="LevelObjects/Birds/RedBird" index="1"]
+position = Vector2(145, -1.5)
+rotation = -3.12997
+
+[node name="AnimatedSprite2D" parent="LevelObjects/Birds/RedBird/AnimatableBody2D" index="0"]
+flip_v = true
+
 [node name="GreenBird" parent="LevelObjects/Birds" instance=ExtResource("16_70nyg")]
 position = Vector2(-1289, 356)
 scale = Vector2(2, 2)
@@ -1949,6 +1961,19 @@ scale = Vector2(1.2, 1.2)
 curve = SubResource("Curve2D_h0dn2")
 chase_speed = 30.0
 detect_radius = 10000.0
+
+[node name="PathFollow2D" parent="LevelObjects/Birds/RedBird2" index="0"]
+position = Vector2(188, -1)
+rotation = -3.12997
+progress = 0.0
+
+[node name="AnimatableBody2D" parent="LevelObjects/Birds/RedBird2" index="1"]
+position = Vector2(145, -1.5)
+rotation = -3.12997
+
+[node name="AnimatedSprite2D" parent="LevelObjects/Birds/RedBird2/AnimatableBody2D" index="0"]
+flip_h = true
+flip_v = true
 
 [node name="CrazyBirdKnot" type="Node2D" parent="LevelObjects/Birds"]
 position = Vector2(170, 52)
@@ -2312,7 +2337,7 @@ _spawnable_scenes = PackedStringArray("uid://bxpry3684affg")
 spawn_path = NodePath(".")
 
 [node name="PlayerMarkers" type="Node2D" parent="."]
-position = Vector2(1932, -702)
+position = Vector2(-1569, 281)
 
 [node name="Player1Marker" type="Marker2D" parent="PlayerMarkers"]
 position = Vector2(217, 180)
@@ -2332,4 +2357,6 @@ shape = SubResource("RectangleShape2D_xo8v6")
 [connection signal="body_entered" from="LevelObjects/Spikes" to="." method="_on_spikes_body_entered"]
 [connection signal="body_entered" from="Finish" to="." method="_on_finish_body_entered"]
 
+[editable path="LevelObjects/Birds/RedBird"]
+[editable path="LevelObjects/Birds/RedBird2"]
 [editable path="PopupUI"]

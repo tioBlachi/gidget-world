@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=4 uid="uid://bx1nv6gl5k4s"]
+[gd_scene load_steps=20 format=4 uid="uid://ks8wsp84p0ir"]
 
 [ext_resource type="Script" uid="uid://gs2a1w6kgnm1" path="res://scripts/Levels/herding_cats.gd" id="1_diqqx"]
 [ext_resource type="PackedScene" uid="uid://ug4dtfp4td5v" path="res://scenes/actors/catHead.tscn" id="2_yfx42"]
