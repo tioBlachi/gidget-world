@@ -13,7 +13,7 @@ const SCENES: Dictionary = {
 	"Urban Uprising": "res://scenes/Levels/urban_uprising.tscn",
 	"Car Dodge": "res://scenes/Levels/carDodge.tscn",
 	"Lawnmower Madness": "res://scenes/Levels/lawnmower_madness.tscn",
-	"Rooftop Runners": "res://scenes/Levels/Rooftop_Runner.tscn",
+	"Rooftop Runner": "res://scenes/Levels/Rooftop_Runner.tscn",
 	"Title": "res://scenes/UI/Title.tscn",
 	"Testing" : "res://scenes/DevTools/Testing.tscn",
 	"Lobby" : "res://scenes/UI/Lobby.tscn",
@@ -32,6 +32,7 @@ const LEVEL_ORDER := [
 	"Car Dodge",
 	"Urban Uprising",
 	"Bird Hopping",
+	"Rooftop Runner",
 	"Final",
 ]
 
