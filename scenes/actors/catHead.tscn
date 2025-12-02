@@ -44,12 +44,15 @@ shape = SubResource("CircleShape2D_rj4fp")
 
 [node name="Meow1" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_mpgt1")
+volume_db = -20.0
 
 [node name="Meow2" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_08q3r")
+volume_db = -20.0
 
 [node name="Meow3" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_wgjft")
+volume_db = -20.0
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_mpgt1")
