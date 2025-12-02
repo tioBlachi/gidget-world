@@ -35,7 +35,6 @@ func check_win() -> void:
 	print("Checking for win...")
 	print(players_in_game)
 	if players_in_game <= 0:
-		Global.level_ended.emit() # Cause all heat-seek enemies to despawn
 		# Set state on all peers, then pause
 		popup.set_level_state.rpc(popup.LEVEL_STATE.COMPLETE)
 		popup.pause()
