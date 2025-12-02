@@ -1,16 +1,15 @@
 extends Node2D
 
-@onready var player_scene = preload("res://scenes/player/player.tscn") # optional in tests
+@onready var player_scene = preload("res://scenes/player/player.tscn")
 @onready var player1marker: Node2D = get_node_or_null("PlayerMarkers/Player1Marker")
 @onready var player2marker: Node2D = get_node_or_null("PlayerMarkers/Player2Marker")
 @onready var pSpawner: Node = get_node_or_null("pSpawner")
+@onready var popup: Control = $PopupUI/restart_screen
 
 var cats_left: int = 0
 
 func _ready() -> void:
-	# ---- Single-player / Test mode: skip multiplayer setup entirely ----
 	if multiplayer.multiplayer_peer == null:
-		# Pure level logic for tests
 		_setup_level_logic()
 		return
 
@@ -20,7 +19,6 @@ func _ready() -> void:
 
 	_setup_level_logic()
 
-	# Tell the server this peer finished loading the level (only if manager exists)
 	var net = get_node_or_null("/root/NetworkManager")
 	if net and multiplayer.multiplayer_peer != null:
 		net._level_ready_rpc.rpc_id(1, multiplayer.get_unique_id())
@@ -45,9 +43,8 @@ func _on_pen_body_entered(body: Node2D) -> void:
 		cats_left -= 1
 		print(cats_left, " cats left to herd")
 		if cats_left <= 0:
-			print("All cats herded! You win!")
-			get_tree().paused = true
-			# TODO: Level complete UI
+			popup.current_state = popup.LEVEL_STATE.COMPLETE
+			popup.pause()
 
 func _on_pen_body_exited(body: Node2D) -> void:
 	if body.is_in_group("cats"):

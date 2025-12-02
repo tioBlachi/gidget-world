@@ -7,21 +7,19 @@ extends Node2D
 
 func _ready():
 	if multiplayer.multiplayer_peer == null:
-		_setup_level_logic()
 		return
 	
 	if multiplayer.is_server():
 		spawn_players.rpc(Net.players)
 
-	_setup_level_logic()
+	%"Score Manager".all_keys_collected.connect(func():
+		popup.current_state = popup.LEVEL_STATE.COMPLETE
+		popup.pause()
+		)
 
 	var net = get_node_or_null("/root/NetworkManager")
 	if net and multiplayer.multiplayer_peer != null:
 		net._level_ready_rpc.rpc_id(1, multiplayer.get_unique_id())
-
-func _setup_level_logic():
-	# Placeholder
-	pass
 
 @rpc("authority", "call_local", "reliable")
 func spawn_players(p_array: PackedInt32Array):

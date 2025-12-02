@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://cu8u68o2py436"]
+
+[ext_resource type="Script" path="res://scenes/UI/fin.gd" id="1_bt188"]
+[ext_resource type="FontFile" uid="uid://cp0xfb5ywy0vx" path="res://scenes/UI/MonsieurLaDoulaise-Regular.ttf" id="1_pn0tf"]
+[ext_resource type="AudioStream" uid="uid://b7yg8n7c0qbyb" path="res://assets/sounds/Music/fin.mp3" id="3_oewhf"]
+
+[node name="Fin" type="CanvasLayer"]
+script = ExtResource("1_bt188")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="ColorRect"]
+layout_mode = 0
+offset_right = 1279.0
+offset_bottom = 722.0
+theme_override_fonts/font = ExtResource("1_pn0tf")
+theme_override_font_sizes/font_size = 200
+text = "Fin"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="FinMusic" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_oewhf")
+volume_db = -20.0
