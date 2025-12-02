@@ -1,7 +1,7 @@
 extends Control
 @onready var logo := $GidgetWorldLogo
 
-var default_ip := "localhost"
+var default_ip := "44.223.25.108"
 var default_port := 8080
 var logo_pulse_tween : Tween
 

@@ -44,7 +44,7 @@ func _setup_level_logic() -> void:
 
 func _on_mine_exploded():
 	print("A mine exploded!")
-	get_tree().paused = true
+	popup.pause()
 
 # ----- Cat Counting -----
 func _on_pen_body_entered(body: Node2D) -> void:
