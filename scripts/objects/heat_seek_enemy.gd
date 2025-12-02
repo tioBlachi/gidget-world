@@ -18,8 +18,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 func _ready():
 	player = get_tree().get_first_node_in_group("players") 
 	Global.player_died.connect(remove_self)
-	Global.level_ended.connect(remove_self)
-	
+
 func remove_self():
 	queue_free()
 
