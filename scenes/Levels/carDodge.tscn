@@ -9,10 +9,10 @@
 [ext_resource type="Texture2D" uid="uid://biteud63uieua" path="res://Art/NewArt/Big City.png" id="8_e8t8o"]
 [ext_resource type="Texture2D" uid="uid://bgmbgx1nohmd3" path="res://assets/Tiles/BackgroundRock.png" id="8_kivjt"]
 [ext_resource type="Texture2D" uid="uid://bl3xa35qafjr" path="res://assets/Tiles/rock.png" id="9_3wlja"]
-[ext_resource type="Script" path="res://scripts/Levels/Lanespawner.gd" id="9_58nwc"]
+[ext_resource type="Script" uid="uid://dohslhacf6vpk" path="res://scripts/Levels/Lanespawner.gd" id="9_58nwc"]
 [ext_resource type="Texture2D" uid="uid://d27kmmmdydmf4" path="res://Art/NewArt/Night City.png" id="9_kivjt"]
 [ext_resource type="AudioStream" uid="uid://02t8i8whf8xy" path="res://Sounds/TrafficSounds.mp3" id="10_e8t8o"]
-[ext_resource type="Script" path="res://scripts/Levels/CarManager.gd" id="12_mqpsf"]
+[ext_resource type="Script" uid="uid://cmckejacrmkjh" path="res://scripts/Levels/CarManager.gd" id="12_mqpsf"]
 [ext_resource type="PackedScene" uid="uid://bf72f4j7c2i3f" path="res://scripts/UI/pause_menu.tscn" id="14_iimnj"]
 [ext_resource type="PackedScene" uid="uid://coo3efhcvxiar" path="res://scenes/UI/restart_screen.tscn" id="15_sko64"]
 
@@ -555,12 +555,13 @@ _spawnable_scenes = PackedStringArray("uid://bxpry3684affg")
 spawn_path = NodePath("../Players")
 
 [node name="PlayerMarkers" type="Node2D" parent="."]
+position = Vector2(-67, 2)
 
 [node name="Player1Marker" type="Marker2D" parent="PlayerMarkers"]
-position = Vector2(-717, 1212)
+position = Vector2(-696, 1236)
 
 [node name="Player2Marker" type="Marker2D" parent="PlayerMarkers"]
-position = Vector2(-656, 1211)
+position = Vector2(-698, 1178)
 
 [node name="Players" type="Node2D" parent="."]
 
