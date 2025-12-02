@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=4 uid="uid://bw426uewyu1ti"]
+[gd_scene load_steps=34 format=4 uid="uid://bw426uewyu1ti"]
 
 [ext_resource type="PackedScene" uid="uid://byf0t5frhhx6r" path="res://scenes/objects/sewage.tscn" id="1_dk0sx"]
 [ext_resource type="PackedScene" uid="uid://bc2hnyo407l47" path="res://scenes/objects/button_once.tscn" id="2_dk0sx"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://uglny5y03yek" path="res://assets/Tiles/stone.png" id="8_bf676"]
 [ext_resource type="Texture2D" uid="uid://bgmbgx1nohmd3" path="res://assets/Tiles/BackgroundRock.png" id="9_webr0"]
 [ext_resource type="Texture2D" uid="uid://dqqphhy4l5e4x" path="res://Art/OldTestArt/button.png" id="10_6v2ta"]
+[ext_resource type="Script" uid="uid://dkycc55huw0n0" path="res://scripts/objects/moving_platform.gd" id="12_gmbwg"]
 [ext_resource type="Script" uid="uid://cidmo62j010qv" path="res://scripts/objects/StaticSewage.gd" id="13_ftp6k"]
 [ext_resource type="PackedScene" uid="uid://q5myivnq8cna" path="res://scenes/objects/key_card.tscn" id="14_6v2ta"]
 [ext_resource type="PackedScene" uid="uid://dbh40ehfj6b7n" path="res://scenes/objects/lab_exit_door.tscn" id="15_61xjq"]
@@ -874,7 +875,7 @@ _spawnable_scenes = PackedStringArray("uid://bxpry3684affg")
 spawn_path = NodePath("../Players")
 
 [node name="PlayerMarkers" type="Node2D" parent="."]
-position = Vector2(-6, 6)
+position = Vector2(1031, -637)
 
 [node name="Player1Marker" type="Marker2D" parent="PlayerMarkers"]
 position = Vector2(288, 804)
@@ -977,12 +978,14 @@ tile_map_data = PackedByteArray("AADt/w0AAAAJAAEAAADp/w0AAAAJAAEAAADl/w0AAAAJAAE
 tile_set = SubResource("TileSet_31be5")
 
 [node name="Mover3" parent="ButtonSystem2" instance=ExtResource("3_dk0sx")]
-position = Vector2(557, 529)
+position = Vector2(560, 527)
 rotation = -3.14159
 scale = Vector2(0.995538, 1)
-speed = 100.0
-origin = Vector2(652, 746)
-target = Vector2(557, 613)
+script = ExtResource("12_gmbwg")
+players_needed = 1
+speed = 20.0
+max_pos = Vector2(558, 580)
+ping_pong = true
 
 [node name="Industrial" type="TileMapLayer" parent="ButtonSystem2/Mover3"]
 position = Vector2(236.053, -216)
@@ -1127,9 +1130,11 @@ tile_set = SubResource("TileSet_31be5")
 
 [node name="Platform4" parent="ButtonSystem5" instance=ExtResource("3_dk0sx")]
 position = Vector2(2066, 205)
+script = ExtResource("12_gmbwg")
+players_needed = 1
 speed = 20.0
-origin = Vector2(652, 746)
-target = Vector2(2191, 206)
+max_pos = Vector2(2150, 205)
+ping_pong = true
 
 [node name="Industrial" type="TileMapLayer" parent="ButtonSystem5/Platform4"]
 position = Vector2(322.345, -217.515)

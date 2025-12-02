@@ -1,6 +1,6 @@
 # James Wilcox
 
-extends AnimatableBody2D
+extends StaticBody2D
 
 @export var speed: float = 160.0
 @export var use_start_as_origin := true

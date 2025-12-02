@@ -16,40 +16,54 @@ var is_activated: bool = false
 var is_finished: bool = false
 var players_in_game: int = Net.players.size()
 
-
 func _on_body_entered(body: Node2D) -> void:
 	if not body.is_in_group("players"):
 		return
 
-	var peer_id := body.get_multiplayer_authority()
+	# Only the peer that controls this player should send the request.
+	# That peer actually knows what item is being held.
+	if not body.is_multiplayer_authority():
+		return
 
+	var peer_id := body.get_multiplayer_authority()
 	var held_name := ""
+
 	if body.has_method("get_held_item_name"):
 		held_name = body.get_held_item_name()
 
-	request_exit.rpc(peer_id, held_name)
+	print("[Exit] local peer ", multiplayer.get_unique_id(),
+		" sending exit request for player ", peer_id,
+		" holding '", held_name, "'")
+
+	# Send the request *only* to the server (peer_id 1)
+	server_request_exit.rpc_id(1, peer_id, held_name)
 
 
 @rpc("any_peer", "call_local", "reliable")
-func request_exit(peer_id: int, held_name: String) -> void:
+func server_request_exit(peer_id: int, held_name: String) -> void:
+	# This runs on all peers, but only the server actually processes it
 	if not multiplayer.is_server():
 		return
 
 	if is_finished:
 		return
 
+	print("[Exit][SERVER] got exit request from ", peer_id,
+		" with held item '", held_name, "'")
+
 	# ----- PHASE 1: Exit not activated yet -----
 	if not is_activated:
 		if held_name == "Exit 1":
-			print("Exit activated by peer ", peer_id, " with Exit 1.")
-			activate_exit.rpc()
+			print("[Exit][SERVER] Exit activated by peer ", peer_id, " with Exit 1.")
+			activate_exit.rpc()          # Tell everyone to update visuals
 			handle_player_exit.rpc(peer_id)
 		else:
-			print("Peer ", peer_id, " entered exit but does not have Exit 1.")
+			print("[Exit][SERVER] Peer ", peer_id,
+				" entered exit but does not have Exit 1.")
 		return
 
 	# ----- PHASE 2: Exit already activated -----
-	print("Activated exit reached by peer: ", peer_id)
+	print("[Exit][SERVER] Activated exit reached by peer: ", peer_id)
 	handle_player_exit.rpc(peer_id)
 
 
@@ -57,7 +71,6 @@ func request_exit(peer_id: int, held_name: String) -> void:
 func activate_exit() -> void:
 	if multiplayer.is_server():
 		is_activated = true
-
 	sprite.texture = ACTIVE_TEXTURE
 
 
@@ -69,7 +82,7 @@ func handle_player_exit(peer_id: int) -> void:
 
 	if multiplayer.is_server():
 		players_in_game -= 1
-		print("Player exited. Remaining players in game: ", players_in_game)
+		print("[Exit][SERVER] Player exited. Remaining players in game: ", players_in_game)
 
 		if players_in_game <= 0:
 			trigger_win.rpc()
@@ -77,10 +90,8 @@ func handle_player_exit(peer_id: int) -> void:
 
 @rpc("any_peer", "call_local", "reliable")
 func trigger_win() -> void:
-	# Server tracks finished state
 	if multiplayer.is_server():
 		is_finished = true
 
-	# This is not working as intended but I will just go with it
 	sprite.texture = FINISHED_TEXTURE
 	emit_signal("win_trigger")

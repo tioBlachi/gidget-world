@@ -1,4 +1,4 @@
-extends AnimatableBody2D
+extends StaticBody2D
 
 # Blas Antunez
 
