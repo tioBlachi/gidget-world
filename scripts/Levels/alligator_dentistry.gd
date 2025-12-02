@@ -5,22 +5,24 @@ extends Node2D
 @onready var player2marker: Node2D = $PlayerMarkers/Player2Marker
 @onready var pSpawner: Node = $pSpawner
 
+var players_in_game = Net.players.size()
+
 func _ready():
 	
 	
 	
 	if multiplayer.multiplayer_peer == null:
-		_setup_level_logic()
 		return
 	
 	if multiplayer.is_server():
 		spawn_players.rpc(Net.players)
 
-	_setup_level_logic()
 
 	var net = get_node_or_null("/root/NetworkManager")
 	if net and multiplayer.multiplayer_peer != null:
 		net._level_ready_rpc.rpc_id(1, multiplayer.get_unique_id())
+		
+	$Exit.alligator_exit_opened.connect
 		
 		
 	#Change Layers and Masks
@@ -28,11 +30,6 @@ func _ready():
 	#Change layers and masks
 	Global.configure_players_for_new_interaction_zone()
 	
-
-func _setup_level_logic():
-	
-	# Placeholder
-	pass
 
 @rpc("authority", "call_local", "reliable")
 func spawn_players(p_array: PackedInt32Array):

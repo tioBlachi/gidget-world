@@ -5,6 +5,7 @@ const ACTIVE_TEXTURE = preload("res://assets/craftpix-net-965938-free-effects-fo
 # Preload the texture for the finished state (Crate 1 image)
 const FINISHED_TEXTURE = preload("res://assets/craftpix-net-965938-free-effects-for-platformer-pixel-art-pack/6 Extra/Objects/Capsule/1.png") 
 
+signal alligator_exit_opened
 
 @onready var sprite: Sprite2D = $Sprite2D 
 var is_activated: bool = false 
@@ -33,6 +34,7 @@ func _on_body_entered(body: Node2D) -> void:
 	if not is_activated and item_name == "Exit 1":
 		activate_exit(body)
 		print("Exit activated with Exit 1 item!")
+		body.queue_free()
 
 	# --- Phase 2: Finish the level with "KeyTooth" item ---
 	elif is_activated and item_name == "KeyTooth":
@@ -55,7 +57,8 @@ func finish_level(item_node_to_despawn: Node):
 	
 	print("Level End Triggered! Going to next level.")
 	Global.reset_players_to_standard_configuration()
-	get_tree().quit()	
+	#get_tree().quit()
+	emit_signal("alligator_exit_opened")	
 
 # Helper function to get the item name from the node
 func get_item_name_from_node(node: Node) -> String:
