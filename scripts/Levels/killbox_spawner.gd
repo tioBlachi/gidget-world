@@ -23,26 +23,19 @@ var _rng := RandomNumberGenerator.new()
 func _ready() -> void:
 	if car_scene == null:
 		push_warning("killbox_spawner: car_scene is not assigned")
-		
-	#if not multiplayer.is_server():
-		#return
 	# Create timer that we restart after each spawn with a new random delay
 	_timer = Timer.new()
 	_timer.one_shot = true
 	add_child(_timer)
 	_rng.randomize()
-	if use_random_spawning and multiplayer.is_server():
+	if use_random_spawning:
 		_set_next_wait()
 		_timer.start()
 		_timer.timeout.connect(_on_timeout)
 
 func _process(delta: float) -> void:
-	#if not multiplayer.is_server():
-		#return
-		
 	if not anchor_to_camera_right:
 		return
-		
 	var cam := _get_active_camera()
 	if cam == null:
 		return
@@ -98,13 +91,11 @@ func spawn_fixed() -> Node:
 		scene_to_spawn = car_scene
 	if scene_to_spawn == null:
 		return null
-		
 	var car = scene_to_spawn.instantiate()
 	if car != null:
 		if car is MovingKillbox:
 			car.speed = car_speed * max(0.01, speed_multiplier)
 			car.despawn_x = car_despawn_x
-			car.set_multiplayer_authority(1)
 		car.global_position = global_position
 		if get_parent() != null:
 			get_parent().add_child(car)

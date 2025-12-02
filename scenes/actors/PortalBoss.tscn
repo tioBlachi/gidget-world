@@ -1,10 +1,11 @@
-[gd_scene load_steps=38 format=3 uid="uid://bek2i5883be1h"]
+[gd_scene load_steps=39 format=3 uid="uid://bek2i5883be1h"]
 
 [ext_resource type="Script" uid="uid://d06f17hxlfiyv" path="res://scripts/actors/portal_boss.gd" id="1_40dn3"]
-[ext_resource type="Shader" uid="uid://b24pgp6epol22" path="res://scenes/actors/PortalBoss.gdshader" id="1_ftgki"]
-[ext_resource type="Texture2D" uid="uid://by2w1q003x85n" path="res://assets/sprites/pixilart-sprite (1).png" id="3_s72ma"]
+[ext_resource type="Shader" uid="uid://4xoyamqdpcmq" path="res://scenes/actors/PortalBoss.gdshader" id="1_ftgki"]
+[ext_resource type="Texture2D" uid="uid://cnbi7p14euide" path="res://assets/sprites/pixilart-sprite (1).png" id="3_s72ma"]
 [ext_resource type="Texture2D" uid="uid://ci0kjxllfmyhu" path="res://assets/sprites/Explosion.png" id="3_wr8qb"]
 [ext_resource type="AudioStream" uid="uid://diqgbk7t8hcg6" path="res://assets/sounds/8-bit-explosion.wav" id="4_2w0qw"]
+[ext_resource type="AudioStream" uid="uid://dpfno2gvb45tb" path="res://assets/sounds/earth-shattering-rumble-quake-sound-effect-243330.mp3" id="5_2w0qw"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_40dn3"]
 shader = ExtResource("1_ftgki")
@@ -272,6 +273,10 @@ frame_progress = 1.0
 [node name="Boom" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_2w0qw")
 volume_db = -5.9
+
+[node name="Rumble" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_2w0qw")
+volume_db = -4.0
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_s72ma")

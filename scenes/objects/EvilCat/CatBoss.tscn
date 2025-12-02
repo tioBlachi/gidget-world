@@ -1,9 +1,9 @@
 [gd_scene load_steps=22 format=3 uid="uid://2lntdlomdt6o"]
 
 [ext_resource type="Script" uid="uid://dar733aq48nbf" path="res://scenes/objects/EvilCat/cat_boss.gd" id="1_d2r12"]
-[ext_resource type="Texture2D" uid="uid://ddeyv7ati5flg" path="res://scenes/objects/EvilCat/AngryEvilCat.png" id="1_gj2r8"]
-[ext_resource type="Texture2D" uid="uid://bem88lyddyru7" path="res://scenes/objects/EvilCat/Idle.png" id="2_1603r"]
-[ext_resource type="Texture2D" uid="uid://bf2keet6qab8q" path="res://scenes/objects/EvilCat/EvilCat.png" id="3_d2r12"]
+[ext_resource type="Texture2D" uid="uid://dex3mn7eumn7y" path="res://scenes/objects/EvilCat/AngryEvilCat.png" id="1_gj2r8"]
+[ext_resource type="Texture2D" uid="uid://qhel0rfloqbn" path="res://scenes/objects/EvilCat/Idle.png" id="2_1603r"]
+[ext_resource type="Texture2D" uid="uid://bnur0254gwauu" path="res://scenes/objects/EvilCat/EvilCat.png" id="3_d2r12"]
 [ext_resource type="PackedScene" uid="uid://cjb4jac725fq5" path="res://scenes/objects/Turret.tscn" id="4_1603r"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_d2r12"]

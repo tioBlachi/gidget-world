@@ -10,12 +10,14 @@ extends Path2D
 @onready var sprite: AnimatedSprite2D = $AnimatableBody2D/AnimatedSprite2D
 
 func _ready() -> void:
+	# Disable path/remote transform driven motion; we drive the body directly.
 	if is_instance_valid(anim) and anim.is_playing():
 		anim.stop()
 	if is_instance_valid(follow) and follow.has_node("RemoteTransform2D"):
 		follow.get_node("RemoteTransform2D").set_process(false)
 
 
+	# Make all body contacts lethal via an Area2D overlay (non-blocking)
 	var kill_area := Area2D.new()
 	kill_area.name = "KillAreaAll"
 	kill_area.monitoring = true
@@ -23,7 +25,7 @@ func _ready() -> void:
 	kill_area.collision_layer = 0
 	kill_area.collision_mask = 1
 	body.add_child(kill_area)
-
+	# Reuse main collision shape geometry
 	if body.has_node("CollisionShape2D"):
 		var base_shape: CollisionShape2D = body.get_node("CollisionShape2D")
 		var dup := CollisionShape2D.new()
@@ -86,9 +88,11 @@ func _on_kill_body(hit: Node) -> void:
 	if not multiplayer.is_server():
 		return
 
+	# Special behavior for your ships
 	if hit.is_in_group("player_ships"):
 		var peer_id := hit.get_multiplayer_authority()
 		Global.player_hit_by_bird.emit(peer_id)
+		# Optional: bird dies on hit
 		queue_free()
 		return
 

@@ -1,15 +1,15 @@
-[gd_scene load_steps=38 format=3 uid="uid://bgv34gcuxiuqr"]
+[gd_scene load_steps=37 format=3 uid="uid://bgv34gcuxiuqr"]
 
 [ext_resource type="Script" uid="uid://r7mntc1kketq" path="res://scripts/Levels/portal_fight.gd" id="1_7rmao"]
-[ext_resource type="Texture2D" uid="uid://c210jtig88gik" path="res://assets/sprites/PortalBG.png" id="1_ekbpn"]
+[ext_resource type="Texture2D" uid="uid://qyjfkgfgbpk0" path="res://assets/sprites/PortalBG.png" id="1_ekbpn"]
 [ext_resource type="PackedScene" uid="uid://bdw5tfrelqrd2" path="res://scenes/objects/EvilCat/SpikeRing.tscn" id="2_6s1gy"]
 [ext_resource type="PackedScene" uid="uid://2lntdlomdt6o" path="res://scenes/objects/EvilCat/CatBoss.tscn" id="2_7rmao"]
 [ext_resource type="Texture2D" uid="uid://ci0kjxllfmyhu" path="res://assets/sprites/Explosion.png" id="4_greg0"]
 [ext_resource type="PackedScene" uid="uid://bf72f4j7c2i3f" path="res://scripts/UI/pause_menu.tscn" id="5_13yns"]
+[ext_resource type="PackedScene" uid="uid://coo3efhcvxiar" path="res://scenes/UI/restart_screen.tscn" id="6_imk1x"]
 [ext_resource type="AudioStream" uid="uid://diqgbk7t8hcg6" path="res://assets/sounds/8-bit-explosion.wav" id="8_ou0jd"]
 [ext_resource type="PackedScene" uid="uid://lommrbd42bf3" path="res://scenes/objects/Birds/RedTestBird.tscn" id="10_akggb"]
-[ext_resource type="PackedScene" uid="uid://coo3efhcvxiar" path="res://scenes/UI/restart_screen.tscn" id="10_v1q8v"]
-[ext_resource type="AudioStream" uid="uid://cut1cdd8i8y6y" path="res://scenes/objects/EvilCat/funny-cat-meow-246012.mp3" id="11_v1q8v"]
+[ext_resource type="AudioStream" uid="uid://dehh0f3xb24ne" path="res://scenes/objects/EvilCat/funny-cat-meow-246012.mp3" id="11_v1q8v"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ou0jd"]
 atlas = ExtResource("1_ekbpn")
@@ -76,9 +76,6 @@ animations = [{
 }]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_greg0"]
-
-[sub_resource type="Resource" id="Resource_6s1gy"]
-metadata/__load_path__ = "res://scenes/objects/LaserRay.tscn"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8a1bh"]
 atlas = ExtResource("4_greg0")
@@ -233,15 +230,6 @@ shape = SubResource("WorldBoundaryShape2D_greg0")
 [node name="CatBoss" parent="." instance=ExtResource("2_7rmao")]
 position = Vector2(1000, 345)
 
-[node name="Turret1" parent="CatBoss/Turrets" index="0"]
-laser_ray_scene = SubResource("Resource_6s1gy")
-
-[node name="Turret2" parent="CatBoss/Turrets" index="1"]
-laser_ray_scene = SubResource("Resource_6s1gy")
-
-[node name="Turret3" parent="CatBoss/Turrets" index="2"]
-laser_ray_scene = SubResource("Resource_6s1gy")
-
 [node name="SpikeSpawnPoints" type="Node2D" parent="CatBoss"]
 
 [node name="Spawn1" type="Marker2D" parent="CatBoss/SpikeSpawnPoints"]
@@ -296,6 +284,12 @@ color = Color(1, 1, 1, 0)
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_greg0")
 
+[node name="PauseMenu" parent="." instance=ExtResource("5_13yns")]
+layer = 4
+
+[node name="PopupUI" parent="." instance=ExtResource("6_imk1x")]
+layer = 4
+
 [node name="Boom" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("8_ou0jd")
 volume_db = -25.587
@@ -303,10 +297,6 @@ volume_db = -25.587
 [node name="CatDeath" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("11_v1q8v")
 volume_db = 14.032
-
-[node name="PopupUI" parent="." instance=ExtResource("10_v1q8v")]
-
-[node name="PauseMenu" parent="." instance=ExtResource("5_13yns")]
 
 [editable path="CatBoss"]
 [editable path="PopupUI"]

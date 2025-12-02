@@ -1,74 +1,40 @@
 extends Node2D
 
 @onready var player_scene = preload("res://scenes/player/player.tscn") # optional in tests
-@onready var player1marker: Marker2D = $PlayerMarkers/Player1Marker
-@onready var player2marker: Marker2D = $PlayerMarkers/Player2Marker
-@onready var pSpawner: MultiplayerSpawner = $pSpawner
-@onready var popup := $PopupUI/restart_screen
-
-var players_spawned := false
-var players_in_game := Net.players.size()
+@onready var player1marker: Node2D = get_node_or_null("PlayerMarkers/Player1Marker")
+@onready var player2marker: Node2D = get_node_or_null("PlayerMarkers/Player2Marker")
+@onready var pSpawner: Node = get_node_or_null("pSpawner")
 
 func _ready() -> void:
 	if Net.players.size() >= 2:
 		spawn_players.rpc(Net.players)
 
-
 @rpc("authority", "call_local", "reliable")
 func spawn_players(p_array: PackedInt32Array) -> void:
-	# Prevent double-spawning if this RPC gets called twice
-	if players_spawned:
-		print("CarDodge.spawn_players: already spawned, skipping")
-		return
-	players_spawned = true
-
-	print("CarDodge.spawn_players called on peer", multiplayer.get_unique_id(), "with", p_array)
-
 	if p_array.size() < 2:
 		push_error("spawn_players: need 2 peer IDs, got %d" % p_array.size())
 		return
-
+		
 	var markers := [player1marker, player2marker]
 	var tints := [Color.WHITE, Color.hex(0xE0FFFF)]
-
+	
 	for i in 2:
 		var peer_id := p_array[i]
 		var player := player_scene.instantiate()
-
+		var sprite := player.get_node("Sprite")
+		player.JUMP_VELOCITY = -400
 		player.name = str(peer_id)
+		sprite.self_modulate = tints[i]
 		player.global_position = markers[i].global_position
-		player.scale = Vector2(0.2, 0.2)
 		player.set_multiplayer_authority(peer_id)
 
-		var sprite: Sprite2D = player.get_node("Sprite")
-		sprite.self_modulate = tints[i]
+		pSpawner.add_child(player)
 		if player.get_script():
 			var props = player.get_property_list()
 			for prop in props:
 				if prop.name == "side_scroller":
 					player.set(prop.name, false)
 
-		pSpawner.add_child(player)
-
-		var cam: Camera2D = player.get_node_or_null("Camera2D")
-		if cam:
-			cam.enabled = true
-			if peer_id == multiplayer.get_unique_id():
-				cam.make_current()
-		else:
-			push_warning("Player %s has no Camera2D!" % player.name)
-
-
-func _on_goal_body_entered(body: Node2D) -> void:
-	if body.is_in_group("players"):
-		body.queue_free()
-		players_in_game -= 1
-		check_win()
-
-func check_win() -> void:
-	print("Checking for win...")
-	print(players_in_game)
-	if players_in_game <= 0:
-		# Set state on all peers, then pause
-		popup.set_level_state.rpc(popup.LEVEL_STATE.COMPLETE)
-		popup.pause()
+		if multiplayer.get_unique_id() == peer_id:
+			var cam: Camera2D = player.get_node("Camera2D")
+			cam.make_current()

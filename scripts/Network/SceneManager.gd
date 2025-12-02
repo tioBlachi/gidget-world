@@ -8,33 +8,27 @@ const SCENES: Dictionary = {
 	"Sewer Dive" : "res://scenes/Levels/FallingInSewer.tscn",
 	"Blob Chase" : "res://scenes/Levels/BlobChase.tscn",
 	"Alligator Dentistry" : "res://scenes/Levels/alligator_dentistry.tscn",
-	"Herding Cats": "res://scenes/Levels/herding_cats.tscn",
+	"Herding Cats": "res://scenes/Levels/HerdingCats.tscn",
 	"Lab Escape": "res://scenes/Levels/lab-escape.tscn",
 	"Urban Uprising": "res://scenes/Levels/urban_uprising.tscn",
 	"Car Dodge": "res://scenes/Levels/carDodge.tscn",
 	"Lawnmower Madness": "res://scenes/Levels/lawnmower_madness.tscn",
-	"Rooftop Runner": "res://scenes/Levels/Rooftop_Runner.tscn",
 	"Title": "res://scenes/UI/Title.tscn",
 	"Testing" : "res://scenes/DevTools/Testing.tscn",
 	"Lobby" : "res://scenes/UI/Lobby.tscn",
 	"Final" : "res://scenes/Levels/Final.tscn",
-	"Portal Fight" : "res://scenes/Levels/Portal_Fight.tscn",
-	"Fin" : "res://scenes/UI/Fin.tscn",
-	"Keycard Kollector" : "res://scenes/Levels/Keycard Kollector.tscn"
+	"Portal Fight" : "res://scenes/Levels/Portal_Fight.tscn"
 }
 
 const LEVEL_ORDER := [
 	"Lab Escape",
-	"Keycard Kollector",
 	"Sewer Dive",
 	"Alligator Dentistry",
 	"Sewer Climb",
 	"Herding Cats",
 	"Lawnmower Madness",
-	"Car Dodge",
 	"Urban Uprising",
 	"Bird Hopping",
-	"Rooftop Runner",
 	"Final",
 ]
 
@@ -46,7 +40,7 @@ var level_unlocked := {
 	"Herding Cats": false,
 	"Lawnmower Madness": false,
 	"Urban Uprising": false,
-	"Bird Hopping": false,
+	"BirdHopping": false,
 	"Final": false,
 }
 

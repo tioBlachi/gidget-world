@@ -27,9 +27,20 @@ func reset_players_to_standard_configuration():
 			player.collision_mask = 1 | 2
 			print("Reset player: ", player.name, " to standard configuration.")
 			
+
+func set_all_players_side_scroller(value: bool):
+	var players = get_tree().get_nodes_in_group("players")
+	for player in players:
+		# Check if the player node has the exported 'side_scroller' variable
+		if player.has_node("Sprite") and "side_scroller" in player:
+			player.side_scroller = value
+			player.set_side_scroller(value) # Call the specific function in the player script
+			print("Player ", player.name, " side_scroller set to ", value)
+
+
+
 signal boss_hit
 signal turret_hit
 signal player_hit_by_turret(id: int)
 signal player_hit_by_spike(hit_peer_id: int)
 signal player_hit_by_bird(id: int)
-signal keycard_collected
