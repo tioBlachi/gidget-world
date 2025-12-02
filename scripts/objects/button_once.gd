@@ -1,3 +1,5 @@
+# James Wilcox
+
 extends Node2D
 
 @export var is_pressed := false

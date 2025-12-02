@@ -1,3 +1,5 @@
+# Collin Whitney
+
 extends StaticBody2D
 
 # Speed of the platform movement

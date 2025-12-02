@@ -1,3 +1,5 @@
+# James Wilcox
+
 extends AnimatableBody2D
 
 @export var speed: float = 160.0

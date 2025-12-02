@@ -1,3 +1,8 @@
+# Blas Antunez
+
+# This script was once the code for the orginal final boss idea until scrapped.
+# Now used for the portal animation in FinalCutScene
+
 extends Node2D
 
 @onready var portal_sprite = $Sprite2D

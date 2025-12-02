@@ -1,3 +1,7 @@
+# Blas Antunez
+
+# Script to animate the CatBoss character
+
 extends CharacterBody2D
 
 @onready var anim := $Anim

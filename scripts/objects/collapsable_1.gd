@@ -1,3 +1,5 @@
+# Collin Whitney
+
 extends Node2D
 
 @export var rumble_duration: float = 0.75    # Time for rumbling effect before collapse

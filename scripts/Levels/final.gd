@@ -1,3 +1,7 @@
+# Blas Antunez
+# Cutscene before final boss portal fight
+# Switches immediately to the Portal Fight scene on completion
+
 extends Node2D
 
 @onready var angry_meow := $AudioStreamPlayer2D

@@ -1,3 +1,5 @@
+# Collin Whitney and Blas Antunez
+
 extends Control
 
 @onready var popup_msg = $"PanelContainer/VBoxContainer/HBoxContainer/Pause Menu Text"
@@ -82,12 +84,6 @@ func resume_all():
 	hide()
 	$AnimationPlayer.play_backwards("blur_restart")
 
-
-#func testEsc():
-	#if Input.is_action_just_pressed("esc") and is_paused:
-		#print("restarting")
-		#request_restart()
-
 @rpc("any_peer", "call_local")
 func change_scene_rpc(scene_name: String) -> void:
 	SceneManager.switch_scene.rpc_id(1, scene_name)
@@ -134,15 +130,11 @@ func _on_quit_desktop_pressed() -> void:
 func _on_player_died():
 	pause()
 
-#func _process(delta):
-	#testEsc()
 @rpc("any_peer", "call_local")
 func set_level_state(state: int) -> void:
 	if multiplayer.is_server():
-		# Tell everyone (including server) to update their state
 		_set_level_state_all.rpc(state)
 	else:
-		# Ask the server to do it
 		set_level_state.rpc_id(1, state)
 
 @rpc("authority", "call_local")

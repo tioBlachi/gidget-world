@@ -1,3 +1,8 @@
+# Blas Antunez
+
+# Controls who is holding the keycard, how it is held in reference to the player.
+# Deletes itself once it activates the lab door
+
 extends Area2D
 
 @export var collected := false

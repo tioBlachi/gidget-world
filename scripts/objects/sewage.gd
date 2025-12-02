@@ -1,3 +1,5 @@
+# James Wilcox
+
 extends Node2D
 
 @export var delay_seconds: float = 20.0

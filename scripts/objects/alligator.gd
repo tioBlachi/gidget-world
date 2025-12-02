@@ -29,16 +29,18 @@ func _process(delta: float) -> void:
 func fake_bite() -> void:
 	print("🐊 Fake bite triggered!")
 	# The bite should kill ALL players currently in the mouth
-	_process_bite_logic()
+	_process_bite_logic.rpc()
 
 
 # --- 🪱 FUNCTION: REAL BITE (for traps or triggers) ---
+
 func bite() -> void:
 	print("💥 Real bite triggered!")
 	# The real bite should also kill ALL players currently in the mouth
-	_process_bite_logic()
+	_process_bite_logic.rpc()
 	
 # --- 🔧 HELPER: Centralized Bite Logic ---
+@rpc("any_peer", "call_local")
 func _process_bite_logic() -> void:
 	anim.play("bite")
 	await anim.animation_finished
@@ -61,7 +63,7 @@ func _kill_player(player: Node) -> void:
 	
 	if is_instance_valid(player):
 		print("💀 Player got chomped by the alligator!")
-		player.die() 
+		player.die.rpc() 
 		# Remove the player from our tracking array after killing them
 		if players_in_mouth.has(player):
 			players_in_mouth.erase(player)

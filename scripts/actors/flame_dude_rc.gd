@@ -1,3 +1,8 @@
+# Blas Antunez
+
+# Second version of the enemy of urban uprising. A FlameDude has a Raycast that 
+# detects players. Once detected, they chase that player wrecklessly
+
 extends CharacterBody2D
 
 @export var player: CharacterBody2D

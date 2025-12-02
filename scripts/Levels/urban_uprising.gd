@@ -1,3 +1,9 @@
+# Blas Antuenz
+
+# Players need to climb the building while avoiding FlameDudes. If player touches a flamedude,
+# they will be unable to contro their jump for a few seconds which can lead them to touch the botton
+# border of the rising camera and dying.  
+
 extends Node2D
 
 @onready var level_cam : Camera2D = $Camera2D

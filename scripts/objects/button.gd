@@ -1,3 +1,7 @@
+# Blas Antunez
+
+# Simple script for the button in Lab Escape
+
 extends Node2D
 
 @export var is_pressed := false

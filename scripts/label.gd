@@ -1,3 +1,5 @@
+# Collin Whitney
+
 extends Label
 
 @export var delay := 2.0          # Seconds before fading starts

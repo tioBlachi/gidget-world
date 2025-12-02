@@ -1,3 +1,5 @@
+# Collin WHitney
+
 extends CharacterBody2D
 
 @export var min_speed := 60.0

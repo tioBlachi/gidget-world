@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=4 uid="uid://d0i3qyivat5rr"]
+[gd_scene load_steps=31 format=4 uid="uid://bq53t2vewgug"]
 
 [ext_resource type="Script" path="res://scripts/Levels/rooftop_runner.gd" id="1_bnifr"]
 [ext_resource type="PackedScene" path="res://scripts/UI/pause_menu.tscn" id="1_q2xwr"]
@@ -999,7 +999,9 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_7a5k8")
 
 [sub_resource type="GDScript" id="GDScript_hi56s"]
-script/source = "extends Area2D
+script/source = "# Collin Whitney
+
+extends Area2D
 func _ready():
 	if not is_connected('body_entered', Callable(self, '_on_body_entered')):
 		body_entered.connect(_on_body_entered)

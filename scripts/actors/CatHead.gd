@@ -1,3 +1,9 @@
+# Blas Antunez
+
+# Script for controlling how the CatHead moves. Using RNG to determine a 
+# direction. Bounces off collidable environment using trigonometry and normalization
+# of force vectors
+
 extends CharacterBody2D
 
 @onready var anim: AnimatedSprite2D = $Anim
@@ -5,16 +11,13 @@ extends CharacterBody2D
 @onready var meow2: AudioStreamPlayer2D = $Meow2
 @onready var meow3: AudioStreamPlayer2D = $Meow3
 @export var frames: SpriteFrames
-# How fast the cat moves (pixels per second)
 @export var speed: float = 150.0
 @export var flee_speed: float = 220.0
 @export var bounce_nudge: float = 0.5
 @export var bounce_random_deg: float = 12.0
-# Minimum and maximum distance to move each time
 @export var min_distance: float = 8.0
 @export var max_distance: float = 200.0
 @export var flee_distance: float = 150.0 # tweak this until it feels right
-# How long to pause between moves
 @export var min_pause: float = 0.5
 @export var max_pause: float = 1.25
 
@@ -98,7 +101,6 @@ func _start_move() -> void:
 
 func _stop_move() -> void:
 	moving = false
-	# Wait a random pause time before next move
 	var wait_time = rng.randf_range(min_pause, max_pause)
 	pause_timer.start(wait_time)
 
@@ -123,15 +125,13 @@ func _reset_meow_timer():
 
 
 func _apply_bounce(c: KinematicCollision2D, is_fleeing: bool) -> void:
-	var n := c.get_normal()                  # surface normal
+	var n := c.get_normal()
 	var incoming: Vector2
 
 	if is_fleeing and player_nearby:
 		# FLEE: slide along the wall to avoid jitter
 		incoming = (global_position - player_nearby.global_position).normalized()
 		var slid := incoming.slide(n)
-		# If slide nearly zero (grazing a corner), pick the wall tangent,
-		# biased to keep roughly the previous direction.
 		if slid.length() < 0.001:
 			var tangent := Vector2(-n.y, n.x)  # one of the tangents
 			if tangent.dot(direction) < 0.0:

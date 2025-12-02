@@ -1,5 +1,11 @@
 extends AnimatableBody2D
 
+# Blas Antunez
+
+# Script to set up moving platforms in various levels
+# It is also used on the blue bird at the end of urban uprising
+# to fly the players to the level compete popup
+
 signal ready_to_fly
 
 @export var players_needed: int = 2

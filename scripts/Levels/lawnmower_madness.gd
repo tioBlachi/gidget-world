@@ -1,3 +1,9 @@
+# Blas Antunez
+
+# Script to set up Lawnmower Madness level. Spawns players and connets the 
+# all_keys_collected signal from Score Manager. This triggers the winning message
+# popup
+
 extends Node2D
 
 @onready var player_scene = preload("res://scenes/player/player.tscn")

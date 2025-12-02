@@ -1,3 +1,9 @@
+# Collin Whitney
+
+# Script to update the score label in the game so players
+# can see how many keys are left to collect. Emits a signal when
+# all keys are collected
+
 extends Node2D
 
 signal all_keys_collected

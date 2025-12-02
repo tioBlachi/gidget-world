@@ -1,3 +1,12 @@
+# Blas Antunez
+
+# Game managing script for herding cats
+# The cats placed around the scene are counted up and that 
+# value is used for cats_left
+# once all cats are herded, this triggers the win popup
+# If a mine exploded, the players lose
+# _setup_level_logic was just for testing
+
 extends Node2D
 
 @onready var player_scene = preload("res://scenes/player/player.tscn")

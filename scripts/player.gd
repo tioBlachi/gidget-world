@@ -151,15 +151,16 @@ func _process(delta):
 	# Handle pickup/drop action
 	if Input.is_action_just_pressed("pickup_drop") and get_tree().current_scene.name == "Alligator Dentistry":
 		if held_item:
-			drop_item()
+			drop_item.rpc()
 		else:
-			try_pickup_item()
+			try_pickup_item.rpc()
 
 	# Update held item position if one exists
 	if held_item:
 		# Use global_position for accurate world positioning
 		held_item.global_position = global_position + float_offset
 
+@rpc("any_peer", "call_local")
 func try_pickup_item():
 	# Assuming the player has an Area2D named "PickupZone" to detect items
 	var pickup_zone = $PickupZone 
@@ -183,6 +184,7 @@ func pickup_item(item_node):
 			#item_node.set_collision_layer_value(1, false)
 			#item_node.set_collision_mask_value(1, false)
 
+@rpc("any_peer", "call_local")
 func drop_item():
 	if held_item:
 		# Reparent the item back to the main world scene (e.g., "/root/World")

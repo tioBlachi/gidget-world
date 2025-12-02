@@ -1,6 +1,9 @@
+# Blas Antunez
+# Script for setting up the win conditions in Car Dodge level
+
 extends Node2D
 
-@onready var player_scene = preload("res://scenes/player/player.tscn") # optional in tests
+@onready var player_scene = preload("res://scenes/player/player.tscn")
 @onready var player1marker: Marker2D = $PlayerMarkers/Player1Marker
 @onready var player2marker: Marker2D = $PlayerMarkers/Player2Marker
 @onready var pSpawner: MultiplayerSpawner = $pSpawner
@@ -16,7 +19,6 @@ func _ready() -> void:
 
 @rpc("authority", "call_local", "reliable")
 func spawn_players(p_array: PackedInt32Array) -> void:
-	# Prevent double-spawning if this RPC gets called twice
 	if players_spawned:
 		print("CarDodge.spawn_players: already spawned, skipping")
 		return
@@ -69,6 +71,5 @@ func check_win() -> void:
 	print("Checking for win...")
 	print(players_in_game)
 	if players_in_game <= 0:
-		# Set state on all peers, then pause
 		popup.set_level_state.rpc(popup.LEVEL_STATE.COMPLETE)
 		popup.pause()

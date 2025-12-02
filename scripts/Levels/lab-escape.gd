@@ -1,3 +1,8 @@
+# Blas Antunez
+
+# The first game level I wrote for this project. Sets up the flimsy cell logiv
+# and win conditions. WHat need to be synhed using RPCs is synched accordingly
+
 extends Node2D
 
 @export var map_limits: Rect2 = Rect2(0, 0, 2053, 1120)

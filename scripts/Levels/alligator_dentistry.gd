@@ -1,16 +1,16 @@
+# Jacob Ashmore and Blas Antunez
+
 extends Node2D
 
 @onready var player_scene = preload("res://scenes/player/player.tscn")
 @onready var player1marker: Node2D = $PlayerMarkers/Player1Marker
 @onready var player2marker: Node2D = $PlayerMarkers/Player2Marker
 @onready var pSpawner: Node = $pSpawner
+@onready var popup : Control = $PopupUI/restart_screen
 
 var players_in_game = Net.players.size()
 
 func _ready():
-	
-	
-	
 	if multiplayer.multiplayer_peer == null:
 		return
 	
@@ -22,7 +22,10 @@ func _ready():
 	if net and multiplayer.multiplayer_peer != null:
 		net._level_ready_rpc.rpc_id(1, multiplayer.get_unique_id())
 		
-	$Exit.alligator_exit_opened.connect
+	$Exit.win_trigger.connect(func():
+		popup.current_state = popup.LEVEL_STATE.COMPLETE
+		popup.pause()
+		)
 		
 		
 	#Change Layers and Masks
@@ -56,11 +59,6 @@ func spawn_players(p_array: PackedInt32Array):
 		cam.enabled = true
 		if peer_id == multiplayer.get_unique_id():
 			cam.make_current()
-
-
-func _on_exit_body_entered(body: Node2D) -> void:
-	pass # Replace with function body.
-
 
 
 func configure_players_for_new_interaction_zone():

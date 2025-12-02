@@ -1,3 +1,9 @@
+# Blas Antunez
+
+# Script to control how cars spawn in Car Dodge
+# Altered the original manager writtern by James Wilcox 
+# so that it properly runs in multiplayer
+
 extends Node
 
 @export var spawn_interval_min := 1.0
@@ -15,7 +21,6 @@ func _ready():
 
 	_rng.randomize()
 
-	# only the server controls spawning
 	if multiplayer.is_server():
 		_spawn_loop()
 

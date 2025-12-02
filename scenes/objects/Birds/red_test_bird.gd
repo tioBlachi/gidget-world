@@ -1,3 +1,5 @@
+# James Wilcox
+
 extends Path2D
 
 @export var chase_speed: float = 150.0

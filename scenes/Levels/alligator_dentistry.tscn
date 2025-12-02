@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=4 uid="uid://dmxfaox45d8k6"]
+[gd_scene load_steps=28 format=4 uid="uid://dmxfaox45d8k6"]
 
 [ext_resource type="Script" uid="uid://bkllaeomrwfbs" path="res://scripts/Levels/alligator_dentistry.gd" id="1_rwegt"]
 [ext_resource type="Texture2D" uid="uid://d4ho01yhwke0" path="res://assets/sprites/Bottom Alligator Jaw.png" id="4_1sjml"]
@@ -607,14 +607,6 @@ _data = {
 &"idle": SubResource("Animation_4mk0g")
 }
 
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_dpgru"]
-properties/0/path = NodePath("Alligator/Top:position")
-properties/0/spawn = true
-properties/0/replication_mode = 1
-properties/1/path = NodePath("Alligator/Top:rotation")
-properties/1/spawn = true
-properties/1/replication_mode = 1
-
 [node name="Alligator Dentistry" type="Node2D"]
 script = ExtResource("1_rwegt")
 
@@ -791,9 +783,8 @@ autoplay = "idle"
 
 [node name="PauseMenu" parent="." instance=ExtResource("15_bbspm")]
 
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
-replication_config = SubResource("SceneReplicationConfig_dpgru")
-
 [connection signal="body_entered" from="Exit" to="Exit" method="_on_body_entered"]
 [connection signal="body_entered" from="Alligator/MouthArea" to="Alligator" method="_on_mouth_area_body_entered"]
 [connection signal="body_exited" from="Alligator/MouthArea" to="Alligator" method="_on_mouth_area_body_exited"]
+
+[editable path="PopupUI"]

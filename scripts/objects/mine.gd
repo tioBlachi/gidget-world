@@ -1,3 +1,9 @@
+# Blas Antunez
+
+# Script to control mine animations and sound effects
+# Variable danger zones around the mine that play different
+# animations and sfx
+
 extends Node2D
 
 signal exploded

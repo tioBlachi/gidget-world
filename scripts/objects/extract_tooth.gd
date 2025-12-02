@@ -1,3 +1,5 @@
+# Jacob Ashmore
+
 extends RigidBody2D
 
 @export var is_key_tooth: bool = false
@@ -31,8 +33,9 @@ func _on_body_entered(body: Node2D):
 		# We need the player script to have an 'is_holding_extractor()' function
 		
 		if body.has_method("is_holding_extractor") and body.is_holding_extractor():
-			extract_tooth()
+			extract_tooth.rpc()
 
+@rpc("any_peer", "call_local")
 func extract_tooth():
 	if extracted: return
 	extracted = true
@@ -54,6 +57,7 @@ func extract_tooth():
 	add_child(timer)
 	timer.timeout.connect(self.queue_free)
 	timer.start(5.0) # Delete after 5 seconds
+
 
 func spawn_key_tooth_item():
 	# Instantiate a new item using the generic Item Scene
@@ -93,6 +97,6 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		if not extracted and is_holding_extractor_check:
 			# The body parameter here is the Player node
 			print("Conditions met: Extracting tooth!")
-			extract_tooth()
+			extract_tooth.rpc()
 		elif not extracted:
 			print("Player is nearby, but is not holding the correct item.")

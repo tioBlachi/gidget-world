@@ -1,5 +1,10 @@
 extends Area2D
 
+# Blas Antunez
+
+# Simple script to control how the lab exit door is activated and synched
+# in multiplayer mode+
+
 signal lab_door_opened
 signal player_left
 

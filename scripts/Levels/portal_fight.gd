@@ -1,3 +1,10 @@
+# Blas Anutnez
+
+# Sets up the different phases of the final portal battle. In Phase 1, turrets
+# are activated that target the players. In Phase 2, players movement controls are 
+# reversed. They are also attacked with rotating spike balls. Phase 3, Red Birds spawn
+# that follow and attack the nearest player to them.  Once the CatBoss is defeated, the game ends
+
 extends Node2D
 
 @export var red_bird_scene: PackedScene

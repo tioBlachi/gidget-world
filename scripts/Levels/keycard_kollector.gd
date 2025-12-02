@@ -1,3 +1,9 @@
+# Blas Antunez
+
+# Script to setup the timer label in the game 
+# as well as the winning logic. Also sets up the animations
+# for the Grinder
+
 extends Node2D
 
 @onready var player_scene = preload("res://scenes/player/player.tscn")
