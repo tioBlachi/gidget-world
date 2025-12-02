@@ -7,6 +7,7 @@ extends Node2D # Or whatever your level's root node type is
 func _ready():
 	# --- CRITICAL STEP ---
 	# Assign the local AnimatedSprite2D node reference to the global manager
+	
 	if GlobalGameManager:
 		GlobalGameManager.portal_animated_sprite = portal_sprite
 		print("Level script assigned portal_sprite to the global manager.")

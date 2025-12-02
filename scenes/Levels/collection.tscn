@@ -1752,9 +1752,8 @@ script = ExtResource("10_yyikl")
 
 [node name="Portal Animation" type="AnimatedSprite2D" parent="Exit"]
 sprite_frames = SubResource("SpriteFrames_3bg2q")
-animation = &"Opened 2"
+animation = &"Opened 1"
 autoplay = "default"
-frame_progress = 0.69601
 script = ExtResource("9_k6mo5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Exit"]
@@ -2046,7 +2045,6 @@ position = Vector2(-1167, 1235)
 scale = Vector2(3, 3)
 texture = ExtResource("41_ua0l5")
 
-[connection signal="animation_finished" from="Exit/Portal Animation" to="." method="_on_portal_animation_animation_finished"]
 [connection signal="body_entered" from="Watch Spots/Hour Spot" to="." method="_on_hour_spot_body_entered"]
 [connection signal="body_entered" from="Watch Spots/Pocket Spot" to="." method="_on_pocket_spot_body_entered"]
 [connection signal="body_entered" from="Watch Spots/Wrist Spot" to="." method="_on_wrist_spot_body_entered"]
