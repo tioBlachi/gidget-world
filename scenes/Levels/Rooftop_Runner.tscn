@@ -1,6 +1,6 @@
-[gd_scene load_steps=31 format=4 uid="uid://bq53t2vewgug"]
+[gd_scene load_steps=33 format=4 uid="uid://bq53t2vewgug"]
 
-[ext_resource type="Script" path="res://scripts/Levels/rooftop_runner.gd" id="1_bnifr"]
+[ext_resource type="Script" uid="uid://cctxhg835g1wp" path="res://scripts/Levels/rooftop_runner.gd" id="1_bnifr"]
 [ext_resource type="PackedScene" path="res://scripts/UI/pause_menu.tscn" id="1_q2xwr"]
 [ext_resource type="PackedScene" path="res://scenes/UI/restart_screen.tscn" id="2_bnifr"]
 [ext_resource type="Texture2D" uid="uid://cs58b63d0hxtf" path="res://Art/NewArt/Big City.png" id="2_x1kbg"]
@@ -1022,6 +1022,12 @@ _data = {
 }
 point_count = 2
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_30iew"]
+size = Vector2(31.202, 7.32306)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uxmjo"]
+size = Vector2(955, 20)
+
 [node name="Rooftop Runner" type="Node2D"]
 position = Vector2(4279, -620)
 script = ExtResource("1_bnifr")
@@ -1035,7 +1041,7 @@ position = Vector2(-351.108, -745)
 stream = ExtResource("13_d8s2p")
 
 [node name="PlayerMarkers" type="Node2D" parent="."]
-position = Vector2(-337, -1096)
+position = Vector2(1493, -1096)
 
 [node name="Player1Marker" type="Marker2D" parent="PlayerMarkers"]
 position = Vector2(-3660, 1021)
@@ -1125,14 +1131,14 @@ position = Vector2(-2466, 376)
 position = Vector2(-1985, 60)
 max_height = 15.0
 little_fall = true
-fall_speed = 100.0
+fall_speed = 80.0
 gravity = 100.0
 hor_distance = -2200.0
 
 [node name="StaticBody2D2" parent="." instance=ExtResource("14_362ly")]
 position = Vector2(-1798, 9)
 little_fall = true
-fall_speed = 100.0
+fall_speed = 80.0
 gravity = 100.0
 max_fall_speed = 400.0
 hor_distance = -2200.0
@@ -1140,7 +1146,7 @@ hor_distance = -2200.0
 [node name="StaticBody2D3" parent="." instance=ExtResource("14_362ly")]
 position = Vector2(-1590, -44)
 little_fall = true
-fall_speed = 75.0
+fall_speed = 50.0
 gravity = 100.0
 hor_distance = -2200.0
 
@@ -1191,7 +1197,34 @@ autoplay = true
 max_distance = 2e+06
 
 [node name="GreenBird2" parent="." instance=ExtResource("16_30iew")]
-position = Vector2(-1475, 136)
+z_index = 4
+position = Vector2(-1524, 280)
 scale = Vector2(5, 5)
 curve = SubResource("Curve2D_uxmjo")
 chase_speed = 100.0
+
+[node name="PathFollow2D" parent="GreenBird2" index="0"]
+position = Vector2(171.8, 4.59999)
+rotation = -0.0131572
+
+[node name="AnimatableBody2D" parent="GreenBird2" index="1"]
+position = Vector2(171.8, 4.59998)
+rotation = -0.0131572
+scale = Vector2(1, 1)
+
+[node name="Killbox" parent="GreenBird2/AnimatableBody2D" index="1"]
+position = Vector2(0.411743, -0.936401)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_30iew")
+
+[node name="Exit" type="Area2D" parent="."]
+position = Vector2(-757, -26)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Exit"]
+position = Vector2(325.5, 0)
+shape = SubResource("RectangleShape2D_uxmjo")
+
+[connection signal="body_entered" from="Exit" to="." method="_on_exit_body_entered"]
+
+[editable path="PopupUI"]
+[editable path="GreenBird2"]

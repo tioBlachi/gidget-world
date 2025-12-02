@@ -8,6 +8,7 @@ extends Node2D
 @onready var player1marker: Node2D = $PlayerMarkers/Player1Marker
 @onready var player2marker: Node2D = $PlayerMarkers/Player2Marker
 @onready var pSpawner: Node = $pSpawner
+@onready var popup : Control = $PopupUI/restart_screen
 
 
 func _ready():
@@ -50,3 +51,13 @@ func spawn_players(p_array: PackedInt32Array) -> void:
 			var cam: Camera2D = player.get_node("Camera2D")
 			cam.make_current()
 			cam.zoom = Vector2(2,2)
+
+
+func _on_exit_body_entered(body: Node2D) -> void:
+	if body.is_in_group("players"):
+		trigger_win.rpc()
+		
+@rpc("any_peer", "call_local")
+func trigger_win():
+	popup.current_state = popup.LEVEL_STATE.COMPLETE
+	popup.pause()
