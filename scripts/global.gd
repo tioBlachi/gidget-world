@@ -27,6 +27,7 @@ func reset_players_to_standard_configuration():
 			player.collision_mask = 1 | 2
 			print("Reset player: ", player.name, " to standard configuration.")
 			
+signal level_ended #THis is for falling in sewer to ause all enemies to despawn
 signal boss_hit
 signal turret_hit
 signal player_hit_by_turret(id: int)
