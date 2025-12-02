@@ -2,15 +2,15 @@
 
 [ext_resource type="Script" uid="uid://gs2a1w6kgnm1" path="res://scripts/Levels/herding_cats.gd" id="1_diqqx"]
 [ext_resource type="PackedScene" uid="uid://ug4dtfp4td5v" path="res://scenes/actors/catHead.tscn" id="2_yfx42"]
-[ext_resource type="Texture2D" uid="uid://bqmqsuwu2wr23" path="res://assets/Tiles/oldTiles/park_tiles.png" id="3_t3gqf"]
+[ext_resource type="Texture2D" uid="uid://co2bv4uee3eyl" path="res://assets/Tiles/oldTiles/park_tiles.png" id="3_t3gqf"]
 [ext_resource type="Texture2D" uid="uid://cifurrvxjg8jy" path="res://assets/sprites/Fence/fence_side.png" id="4_go4aw"]
 [ext_resource type="Texture2D" uid="uid://cjygpv2l2x8y3" path="res://assets/sprites/grass_tileset_16x16.png" id="4_q7pie"]
 [ext_resource type="Texture2D" uid="uid://brs3yhmq3yxxc" path="res://assets/sprites/Fence/fence_post.png" id="6_eno57"]
 [ext_resource type="Texture2D" uid="uid://dqgjnfunnd0ep" path="res://assets/sprites/Fence/fence_y.png" id="7_eno57"]
 [ext_resource type="SpriteFrames" uid="uid://bt6qks6un88y8" path="res://scenes/actors/black_frames.tres" id="9_u5efl"]
-[ext_resource type="PackedScene" uid="uid://bf72f4j7c2i3f" path="res://scripts/UI/pause_menu.tscn" id="12_blnbo"]
+[ext_resource type="PackedScene" path="res://scripts/UI/pause_menu.tscn" id="12_blnbo"]
 [ext_resource type="PackedScene" uid="uid://bmxxih4b0lrx8" path="res://scenes/objects/mine.tscn" id="12_u4ftb"]
-[ext_resource type="PackedScene" uid="uid://coo3efhcvxiar" path="res://scenes/UI/restart_screen.tscn" id="13_alwtr"]
+[ext_resource type="PackedScene" path="res://scenes/UI/restart_screen.tscn" id="13_alwtr"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8myk5"]
 texture = ExtResource("3_t3gqf")
@@ -226,9 +226,9 @@ position = Vector2(868, 587)
 [node name="Mine4" parent="." instance=ExtResource("12_u4ftb")]
 position = Vector2(1182, 280)
 
-[node name="UILayer" parent="." instance=ExtResource("12_blnbo")]
-
 [node name="PopupUI" parent="." instance=ExtResource("13_alwtr")]
+
+[node name="PauseMenu" parent="." instance=ExtResource("12_blnbo")]
 
 [connection signal="body_entered" from="Pen" to="." method="_on_pen_body_entered"]
 [connection signal="body_exited" from="Pen" to="." method="_on_pen_body_exited"]

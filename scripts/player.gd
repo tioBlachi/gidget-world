@@ -149,7 +149,7 @@ func _process(delta):
 	
 	
 	# Handle pickup/drop action
-	if Input.is_action_just_pressed("pickup_drop"):
+	if Input.is_action_just_pressed("pickup_drop") and get_tree().current_scene.name == "Alligator Dentistry":
 		if held_item:
 			drop_item()
 		else:

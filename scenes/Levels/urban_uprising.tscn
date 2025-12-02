@@ -1,14 +1,14 @@
 [gd_scene load_steps=15 format=4 uid="uid://byukt8eyso7jr"]
 
-[ext_resource type="Texture2D" uid="uid://c7f3sl0eldmyp" path="res://Art/OldTestArt/metal2.png" id="1_sqmmr"]
+[ext_resource type="Texture2D" uid="uid://bt8mrued3ie7w" path="res://Art/OldTestArt/metal2.png" id="1_sqmmr"]
 [ext_resource type="Script" uid="uid://chy5ttrcgpkg1" path="res://scripts/Levels/urban_uprising.gd" id="1_tf8py"]
-[ext_resource type="Texture2D" uid="uid://biteud63uieua" path="res://Art/NewArt/Big City.png" id="4_5h4xf"]
-[ext_resource type="PackedScene" uid="uid://bq8kpvcnt58vo" path="res://scenes/actors/FlameDudeRC.tscn" id="6_5h4xf"]
-[ext_resource type="Texture2D" uid="uid://dneu22rr5fcdw" path="res://assets/sprites/New Piskel.png" id="6_hb40t"]
-[ext_resource type="PackedScene" uid="uid://csna0g1nst4im" path="res://scenes/objects/moving_platform.tscn" id="7_5h4xf"]
-[ext_resource type="PackedScene" uid="uid://bf72f4j7c2i3f" path="res://scripts/UI/pause_menu.tscn" id="7_mk1m7"]
-[ext_resource type="PackedScene" uid="uid://coo3efhcvxiar" path="res://scenes/UI/restart_screen.tscn" id="8_d1sqi"]
-[ext_resource type="PackedScene" uid="uid://b8s0wxl8xxoe5" path="res://scenes/objects/BetterBird.tscn" id="9_8x7pg"]
+[ext_resource type="Texture2D" uid="uid://cs58b63d0hxtf" path="res://Art/NewArt/Big City.png" id="4_5h4xf"]
+[ext_resource type="PackedScene" path="res://scenes/actors/FlameDudeRC.tscn" id="6_5h4xf"]
+[ext_resource type="Texture2D" uid="uid://dvtufbosn1juy" path="res://assets/sprites/New Piskel.png" id="6_hb40t"]
+[ext_resource type="PackedScene" uid="uid://87ms82l1c82e" path="res://scenes/objects/moving_platform.tscn" id="7_5h4xf"]
+[ext_resource type="PackedScene" path="res://scripts/UI/pause_menu.tscn" id="7_mk1m7"]
+[ext_resource type="PackedScene" path="res://scenes/UI/restart_screen.tscn" id="8_d1sqi"]
+[ext_resource type="PackedScene" path="res://scenes/objects/BetterBird.tscn" id="9_8x7pg"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_5h4xf"]
 
@@ -8820,7 +8820,6 @@ use_start_as_origin = false
 [node name="2nd" parent="." instance=ExtResource("7_5h4xf")]
 position = Vector2(1216, -48)
 scale = Vector2(10.12, 2.92)
-players_needed = 1
 origin = Vector2(1200, -48)
 max_pos = Vector2(920, -232)
 use_start_as_origin = false
