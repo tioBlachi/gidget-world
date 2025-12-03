@@ -105,6 +105,13 @@ func _physics_process(delta: float) -> void:
 							var push_direction = -c.get_normal()
 							collider.apply_central_impulse(push_direction * PUSH_FORCE)					#
 			else:
+				if level_root and level_root.has_method("get_map_limits"):
+					var limits = level_root.get_map_limits()
+					$Camera2D.limit_left = int(limits.position.x)
+					$Camera2D.limit_top = int(limits.position.y)
+					$Camera2D.limit_right = int(limits.end.x)
+					$Camera2D.limit_bottom = int(limits.end.y)
+		
 				var x_direction = Input.get_axis("move left", "move right")
 				var y_direction = Input.get_axis("move up", "move down")
 				var dir = Vector2(x_direction, y_direction)

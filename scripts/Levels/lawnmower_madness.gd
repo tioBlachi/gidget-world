@@ -6,6 +6,7 @@
 
 extends Node2D
 
+@export var map_limits: Rect2 = Rect2(0, -15, 2180, 1106)
 @onready var player_scene = preload("res://scenes/player/player.tscn")
 @onready var player1marker: Node2D = $PlayerMarkers/Player1Marker
 @onready var player2marker: Node2D = $PlayerMarkers/Player2Marker
@@ -57,3 +58,6 @@ func spawn_players(p_array: PackedInt32Array):
 		cam.enabled = true
 		if peer_id == multiplayer.get_unique_id():
 			cam.make_current()
+			
+func get_map_limits() -> Rect2:
+	return map_limits	
