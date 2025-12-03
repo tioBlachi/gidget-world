@@ -1,20 +1,20 @@
 [gd_scene load_steps=33 format=4 uid="uid://dq152o4yttmm5"]
 
 [ext_resource type="Script" uid="uid://cctxhg835g1wp" path="res://scripts/Levels/rooftop_runner.gd" id="1_bnifr"]
-[ext_resource type="PackedScene" path="res://scripts/UI/pause_menu.tscn" id="1_q2xwr"]
+[ext_resource type="PackedScene" uid="uid://bf72f4j7c2i3f" path="res://scripts/UI/pause_menu.tscn" id="1_q2xwr"]
 [ext_resource type="PackedScene" uid="uid://coo3efhcvxiar" path="res://scenes/UI/restart_screen.tscn" id="2_bnifr"]
-[ext_resource type="Texture2D" uid="uid://cs58b63d0hxtf" path="res://Art/NewArt/Big City.png" id="2_x1kbg"]
-[ext_resource type="Texture2D" uid="uid://d1d5g51eufqir" path="res://assets/Tiles/rock.png" id="3_x1kbg"]
-[ext_resource type="Texture2D" uid="uid://gpufj5wv3tf3" path="res://assets/Tiles/marble.png" id="4_kmj5p"]
-[ext_resource type="Texture2D" uid="uid://to2hwj6d7drn" path="res://assets/Tiles/stone.png" id="5_hi56s"]
-[ext_resource type="Texture2D" uid="uid://c855eei5wmjws" path="res://assets/Tiles/tilemap_farm.png" id="6_snjsr"]
-[ext_resource type="Texture2D" uid="uid://dm4ynga7tc6wf" path="res://assets/Tiles/tilemap_industrial.png" id="7_d8s2p"]
-[ext_resource type="PackedScene" uid="uid://crt3hl37uat0j" path="res://scenes/objects/collapsable1.tscn" id="10_kmj5p"]
-[ext_resource type="Texture2D" uid="uid://d1f2jdqfx0p1y" path="res://Art/NewArt/fog_or_smoke.png" id="11_hi56s"]
-[ext_resource type="PackedScene" uid="uid://mlead3pllwv4" path="res://scenes/objects/hidden_collapse.tscn" id="12_7a5k8"]
-[ext_resource type="AudioStream" uid="uid://d3j5iidvdpb15" path="res://assets/BowenStuff/themeMusic.mp3" id="12_snjsr"]
-[ext_resource type="AudioStream" uid="uid://cj4ho2calqgeq" path="res://assets/sounds/080205_life-lost-game-over-89697.mp3" id="13_d8s2p"]
-[ext_resource type="PackedScene" uid="uid://dicma2y7jdpmj" path="res://assets/moving_platform.tscn" id="14_362ly"]
+[ext_resource type="Texture2D" uid="uid://biteud63uieua" path="res://Art/NewArt/Big City.png" id="2_x1kbg"]
+[ext_resource type="Texture2D" uid="uid://bl3xa35qafjr" path="res://assets/Tiles/rock.png" id="3_x1kbg"]
+[ext_resource type="Texture2D" uid="uid://dfiaq77335nxd" path="res://assets/Tiles/marble.png" id="4_kmj5p"]
+[ext_resource type="Texture2D" uid="uid://uglny5y03yek" path="res://assets/Tiles/stone.png" id="5_hi56s"]
+[ext_resource type="Texture2D" uid="uid://cwdda8jby7lf8" path="res://assets/Tiles/tilemap_farm.png" id="6_snjsr"]
+[ext_resource type="Texture2D" uid="uid://bl8uq42vmbtrc" path="res://assets/Tiles/tilemap_industrial.png" id="7_d8s2p"]
+[ext_resource type="PackedScene" path="res://scenes/objects/collapsable1.tscn" id="10_kmj5p"]
+[ext_resource type="Texture2D" uid="uid://ccty1pwbyfqxf" path="res://Art/NewArt/fog_or_smoke.png" id="11_hi56s"]
+[ext_resource type="PackedScene" path="res://scenes/objects/hidden_collapse.tscn" id="12_7a5k8"]
+[ext_resource type="AudioStream" uid="uid://cf36evo6dkx3s" path="res://assets/BowenStuff/themeMusic.mp3" id="12_snjsr"]
+[ext_resource type="AudioStream" uid="uid://duqhd3i6wedit" path="res://assets/sounds/080205_life-lost-game-over-89697.mp3" id="13_d8s2p"]
+[ext_resource type="PackedScene" path="res://assets/moving_platform.tscn" id="14_362ly"]
 [ext_resource type="PackedScene" uid="uid://u3r22v5fvhg3" path="res://scenes/objects/Birds/GreenTestBird.tscn" id="16_30iew"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hi56s"]
@@ -1209,8 +1209,9 @@ rotation = -0.0131572
 progress = 0.0
 
 [node name="AnimatableBody2D" parent="GreenBird2" index="1"]
-position = Vector2(170.428, 4.61804)
+position = Vector2(156.6, 4.79998)
 rotation = -0.0131572
+scale = Vector2(1, 1)
 
 [node name="Killbox" parent="GreenBird2/AnimatableBody2D" index="1"]
 position = Vector2(0.411743, -0.936401)

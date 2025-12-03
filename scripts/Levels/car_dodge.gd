@@ -57,6 +57,7 @@ func spawn_players(p_array: PackedInt32Array) -> void:
 			cam.enabled = true
 			if peer_id == multiplayer.get_unique_id():
 				cam.make_current()
+				cam.zoom = Vector2(3, 3)
 		else:
 			push_warning("Player %s has no Camera2D!" % player.name)
 

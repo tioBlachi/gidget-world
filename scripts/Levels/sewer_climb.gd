@@ -54,7 +54,7 @@ func spawn_players(p_array: PackedInt32Array) -> void:
 		if multiplayer.get_unique_id() == peer_id:
 			var cam: Camera2D = player.get_node("Camera2D")
 			cam.make_current()
-			cam.zoom = Vector2(2,2)
+			cam.zoom = Vector2(3,3)
 
 func get_map_limits() -> Rect2:
 	return map_limits

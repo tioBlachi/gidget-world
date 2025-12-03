@@ -1,19 +1,19 @@
 [gd_scene load_steps=29 format=4 uid="uid://b5g7eb7pdyncf"]
 
 [ext_resource type="Script" uid="uid://ky4ql3m5py7w" path="res://scripts/Levels/lawnmower_madness.gd" id="1_1m4jy"]
-[ext_resource type="Texture2D" uid="uid://co2bv4uee3eyl" path="res://assets/Tiles/oldTiles/park_tiles.png" id="2_qtf7v"]
+[ext_resource type="Texture2D" uid="uid://bqmqsuwu2wr23" path="res://assets/Tiles/oldTiles/park_tiles.png" id="2_qtf7v"]
 [ext_resource type="Texture2D" uid="uid://cjygpv2l2x8y3" path="res://assets/sprites/grass_tileset_16x16.png" id="3_qvew4"]
 [ext_resource type="Texture2D" uid="uid://cifurrvxjg8jy" path="res://assets/sprites/Fence/fence_side.png" id="4_eihww"]
 [ext_resource type="Texture2D" uid="uid://brs3yhmq3yxxc" path="res://assets/sprites/Fence/fence_post.png" id="5_l1kjl"]
 [ext_resource type="Texture2D" uid="uid://dqgjnfunnd0ep" path="res://assets/sprites/Fence/fence_y.png" id="6_chk2d"]
 [ext_resource type="Script" uid="uid://bm8iqp0s05xlv" path="res://scripts/lawnmower_counter.gd" id="7_bnlo4"]
 [ext_resource type="Script" uid="uid://bd5hnbpxmw5vd" path="res://scripts/objects/lawnmower.gd" id="7_l1kjl"]
-[ext_resource type="Texture2D" uid="uid://y64fb3kl4vlj" path="res://assets/sprites/lawnmower.png" id="7_qvew4"]
+[ext_resource type="Texture2D" uid="uid://b6rysdgki0rl4" path="res://assets/sprites/lawnmower.png" id="7_qvew4"]
 [ext_resource type="PackedScene" uid="uid://cj7q37bwul0sb" path="res://scenes/objects/killzone.tscn" id="8_eihww"]
 [ext_resource type="Script" uid="uid://du7m7uksnqxr4" path="res://scenes/Levels/KeyZone.gd" id="10_chk2d"]
-[ext_resource type="PackedScene" path="res://scripts/UI/pause_menu.tscn" id="11_cots3"]
-[ext_resource type="PackedScene" path="res://scenes/UI/restart_screen.tscn" id="12_046b5"]
-[ext_resource type="Script" path="res://scripts/label.gd" id="14_nucci"]
+[ext_resource type="PackedScene" uid="uid://bf72f4j7c2i3f" path="res://scripts/UI/pause_menu.tscn" id="11_cots3"]
+[ext_resource type="PackedScene" uid="uid://coo3efhcvxiar" path="res://scenes/UI/restart_screen.tscn" id="12_046b5"]
+[ext_resource type="Script" uid="uid://rbohap6scsi0" path="res://scripts/label.gd" id="14_nucci"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_cots3"]
 texture = ExtResource("2_qtf7v")
@@ -175,7 +175,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eihww"]
-size = Vector2(90, 80)
+size = Vector2(120, 91.1873)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_chk2d"]
 size = Vector2(17, 17)
@@ -282,7 +282,7 @@ autoplay = "mow"
 [node name="Killzone" parent="Score Manager/Lawnmower" instance=ExtResource("8_eihww")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Score Manager/Lawnmower/Killzone"]
-position = Vector2(0, -40)
+position = Vector2(0.000366211, -45.4061)
 shape = SubResource("RectangleShape2D_eihww")
 
 [node name="Area2D" type="Area2D" parent="Score Manager/Lawnmower"]
@@ -318,7 +318,7 @@ autoplay = "mow"
 [node name="Killzone" parent="Score Manager/Lawnmower2" instance=ExtResource("8_eihww")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Score Manager/Lawnmower2/Killzone"]
-position = Vector2(0, -40)
+position = Vector2(0, -43.8125)
 shape = SubResource("RectangleShape2D_eihww")
 
 [node name="Area2D" type="Area2D" parent="Score Manager/Lawnmower2"]
@@ -354,7 +354,7 @@ autoplay = "mow"
 [node name="Killzone" parent="Score Manager/Lawnmower3" instance=ExtResource("8_eihww")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Score Manager/Lawnmower3/Killzone"]
-position = Vector2(0, -40)
+position = Vector2(0, -45.375)
 shape = SubResource("RectangleShape2D_eihww")
 
 [node name="Area2D" type="Area2D" parent="Score Manager/Lawnmower3"]
