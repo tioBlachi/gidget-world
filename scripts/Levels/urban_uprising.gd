@@ -15,7 +15,7 @@ extends Node2D
 @onready var blue_bird := $BlueBird/AnimatedSprite2D
 @onready var popup := $PopupUI/restart_screen
 
-@export var cam_rise_speed : float = 35
+@export var cam_rise_speed : float = 200
 var killzone_deactivated := false
 var killzone_top: float
 

@@ -1041,7 +1041,7 @@ position = Vector2(-351.108, -745)
 stream = ExtResource("13_d8s2p")
 
 [node name="PlayerMarkers" type="Node2D" parent="."]
-position = Vector2(-324, -1279)
+position = Vector2(2838, -953)
 
 [node name="Player1Marker" type="Marker2D" parent="PlayerMarkers"]
 position = Vector2(-3660, 1021)
@@ -1211,6 +1211,7 @@ progress = 0.0
 [node name="AnimatableBody2D" parent="GreenBird2" index="1"]
 position = Vector2(156.6, 4.79998)
 rotation = -0.0131572
+scale = Vector2(1, 1)
 
 [node name="Killbox" parent="GreenBird2/AnimatableBody2D" index="1"]
 position = Vector2(0.411743, -0.936401)

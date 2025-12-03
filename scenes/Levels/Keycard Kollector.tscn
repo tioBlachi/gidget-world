@@ -1,13 +1,13 @@
 [gd_scene load_steps=17 format=4 uid="uid://chg5dudtxha64"]
 
 [ext_resource type="Script" uid="uid://cii3kg83bo30n" path="res://scripts/Levels/keycard_kollector.gd" id="1_3cmnv"]
-[ext_resource type="Texture2D" uid="uid://fhoq4atbdmbq" path="res://assets/Tiles/oldTiles/lab_tiles.png" id="1_7ka6q"]
+[ext_resource type="Texture2D" uid="uid://dhjnmqtfenj7p" path="res://assets/Tiles/oldTiles/lab_tiles.png" id="1_7ka6q"]
 [ext_resource type="PackedScene" uid="uid://cal6igr6pm15e" path="res://scenes/objects/KeycardKollectables.tscn" id="2_h11fb"]
 [ext_resource type="PackedScene" uid="uid://dxcwdnb8sw8h3" path="res://scenes/objects/jump_block.tscn" id="3_tfvoo"]
-[ext_resource type="FontFile" uid="uid://c8iyk0e4wck81" path="res://assets/sounds/Doto-VariableFont_ROND,wght.ttf" id="6_hxl0d"]
-[ext_resource type="PackedScene" uid="uid://bf72f4j7c2i3f" path="res://scripts/UI/pause_menu.tscn" id="7_b7q7j"]
+[ext_resource type="FontFile" uid="uid://dbprmqtp3a5ge" path="res://assets/sounds/Doto-VariableFont_ROND,wght.ttf" id="6_hxl0d"]
+[ext_resource type="PackedScene" path="res://scripts/UI/pause_menu.tscn" id="7_b7q7j"]
 [ext_resource type="PackedScene" uid="uid://coo3efhcvxiar" path="res://scenes/UI/restart_screen.tscn" id="8_3qean"]
-[ext_resource type="Texture2D" uid="uid://b3670dem531ly" path="res://Art/OldTestArt/spikeBall.png" id="8_b7q7j"]
+[ext_resource type="Texture2D" uid="uid://ceciwuj44j5k4" path="res://Art/OldTestArt/spikeBall.png" id="8_b7q7j"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_h11fb"]
 
@@ -210,18 +210,6 @@ tile_set = SubResource("TileSet_3cmnv")
 
 [node name="Keycards" type="Node2D" parent="."]
 
-[node name="KeycardKollectables" parent="Keycards" instance=ExtResource("2_h11fb")]
-position = Vector2(226, 621)
-
-[node name="KeycardKollectables2" parent="Keycards" instance=ExtResource("2_h11fb")]
-position = Vector2(328, 620)
-
-[node name="KeycardKollectables3" parent="Keycards" instance=ExtResource("2_h11fb")]
-position = Vector2(425, 622)
-
-[node name="KeycardKollectables4" parent="Keycards" instance=ExtResource("2_h11fb")]
-position = Vector2(528, 623)
-
 [node name="KeycardKollectables5" parent="Keycards" instance=ExtResource("2_h11fb")]
 position = Vector2(746, 619)
 
@@ -230,135 +218,6 @@ position = Vector2(861, 617)
 
 [node name="KeycardKollectables7" parent="Keycards" instance=ExtResource("2_h11fb")]
 position = Vector2(963, 615)
-
-[node name="KeycardKollectables8" parent="Keycards" instance=ExtResource("2_h11fb")]
-position = Vector2(744, 553)
-
-[node name="KeycardKollectables9" parent="Keycards" instance=ExtResource("2_h11fb")]
-position = Vector2(860, 549)
-
-[node name="KeycardKollectables10" parent="Keycards" instance=ExtResource("2_h11fb")]
-position = Vector2(962, 550)
-
-[node name="KeycardKollectables11" parent="Keycards" instance=ExtResource("2_h11fb")]
-position = Vector2(639, 551)
-
-[node name="KeycardKollectables12" parent="Keycards" instance=ExtResource("2_h11fb")]
-position = Vector2(127, 620)
-
-[node name="KeycardKollectables13" parent="Keycards" instance=ExtResource("2_h11fb")]
-position = Vector2(331, 526)
-
-[node name="KeycardKollectables14" parent="Keycards" instance=ExtResource("2_h11fb")]
-position = Vector2(227, 530)
-
-[node name="KeycardKollectables15" parent="Keycards" instance=ExtResource("2_h11fb")]
-position = Vector2(128, 528)
-
-[node name="KeycardKollectables16" parent="Keycards" instance=ExtResource("2_h11fb")]
-position = Vector2(129, 118)
-
-[node name="KeycardKollectables17" parent="Keycards" instance=ExtResource("2_h11fb")]
-position = Vector2(128, 213)
-
-[node name="KeycardKollectables18" parent="Keycards" instance=ExtResource("2_h11fb")]
-position = Vector2(128, 306)
-
-[node name="KeycardKollectables19" parent="Keycards" instance=ExtResource("2_h11fb")]
-position = Vector2(128, 421)
-
-[node name="KeycardKollectables20" parent="Keycards" instance=ExtResource("2_h11fb")]
-position = Vector2(1083, 513)
-
-[node name="KeycardKollectables21" parent="Keycards" instance=ExtResource("2_h11fb")]
-position = Vector2(1169, 422)
-
-[node name="KeycardKollectables22" parent="Keycards" instance=ExtResource("2_h11fb")]
-position = Vector2(1083, 308)
-
-[node name="KeycardKollectables23" parent="Keycards" instance=ExtResource("2_h11fb")]
-position = Vector2(1168, 211)
-
-[node name="KeycardKollectables24" parent="Keycards" instance=ExtResource("2_h11fb")]
-position = Vector2(1119, 80)
-
-[node name="KeycardKollectables25" parent="Keycards" instance=ExtResource("2_h11fb")]
-position = Vector2(264, 300)
-
-[node name="KeycardKollectables26" parent="Keycards" instance=ExtResource("2_h11fb")]
-position = Vector2(264, 211)
-
-[node name="KeycardKollectables27" parent="Keycards" instance=ExtResource("2_h11fb")]
-position = Vector2(264, 121)
-
-[node name="KeycardKollectables28" parent="Keycards" instance=ExtResource("2_h11fb")]
-position = Vector2(493, 103)
-
-[node name="KeycardKollectables29" parent="Keycards" instance=ExtResource("2_h11fb")]
-position = Vector2(623, 99)
-
-[node name="KeycardKollectables30" parent="Keycards" instance=ExtResource("2_h11fb")]
-position = Vector2(963, 381)
-
-[node name="KeycardKollectables31" parent="Keycards" instance=ExtResource("2_h11fb")]
-position = Vector2(863, 385)
-
-[node name="KeycardKollectables32" parent="Keycards" instance=ExtResource("2_h11fb")]
-position = Vector2(914, 473)
-
-[node name="KeycardKollectables33" parent="Keycards" instance=ExtResource("2_h11fb")]
-position = Vector2(274, 427)
-
-[node name="KeycardKollectables34" parent="Keycards" instance=ExtResource("2_h11fb")]
-position = Vector2(809, 52)
-
-[node name="KeycardKollectables35" parent="Keycards" instance=ExtResource("2_h11fb")]
-position = Vector2(945, 52)
-
-[node name="KeycardKollectables36" parent="Keycards" instance=ExtResource("2_h11fb")]
-position = Vector2(878, 125)
-
-[node name="KeycardKollectables37" parent="Keycards" instance=ExtResource("2_h11fb")]
-position = Vector2(808, 191)
-
-[node name="KeycardKollectables38" parent="Keycards" instance=ExtResource("2_h11fb")]
-position = Vector2(959, 185)
-
-[node name="KeycardKollectables39" parent="Keycards" instance=ExtResource("2_h11fb")]
-position = Vector2(1001, 294)
-
-[node name="KeycardKollectables40" parent="Keycards" instance=ExtResource("2_h11fb")]
-position = Vector2(345, 217)
-
-[node name="KeycardKollectables41" parent="Keycards" instance=ExtResource("2_h11fb")]
-position = Vector2(346, 118)
-
-[node name="KeycardKollectables42" parent="Keycards" instance=ExtResource("2_h11fb")]
-position = Vector2(356, 375)
-
-[node name="KeycardKollectables43" parent="Keycards" instance=ExtResource("2_h11fb")]
-position = Vector2(479, 345)
-
-[node name="KeycardKollectables44" parent="Keycards" instance=ExtResource("2_h11fb")]
-position = Vector2(512, 419)
-
-[node name="KeycardKollectables45" parent="Keycards" instance=ExtResource("2_h11fb")]
-position = Vector2(598, 425)
-
-[node name="KeycardKollectables46" parent="Keycards" instance=ExtResource("2_h11fb")]
-position = Vector2(632, 336)
-
-[node name="KeycardKollectables47" parent="Keycards" instance=ExtResource("2_h11fb")]
-position = Vector2(539, 518)
-
-[node name="KeycardKollectables48" parent="Keycards" instance=ExtResource("2_h11fb")]
-position = Vector2(729, 417)
-
-[node name="KeycardKollectables49" parent="Keycards" instance=ExtResource("2_h11fb")]
-position = Vector2(724, 258)
-
-[node name="KeycardKollectables50" parent="Keycards" instance=ExtResource("2_h11fb")]
-position = Vector2(726, 126)
 
 [node name="JumpBlocks" type="Node2D" parent="."]
 

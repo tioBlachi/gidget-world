@@ -1,21 +1,21 @@
 [gd_scene load_steps=34 format=4 uid="uid://bw426uewyu1ti"]
 
-[ext_resource type="PackedScene" uid="uid://byf0t5frhhx6r" path="res://scenes/objects/sewage.tscn" id="1_dk0sx"]
-[ext_resource type="PackedScene" uid="uid://bc2hnyo407l47" path="res://scenes/objects/button_once.tscn" id="2_dk0sx"]
+[ext_resource type="PackedScene" path="res://scenes/objects/sewage.tscn" id="1_dk0sx"]
+[ext_resource type="PackedScene" path="res://scenes/objects/button_once.tscn" id="2_dk0sx"]
 [ext_resource type="PackedScene" uid="uid://ct8ip3qr0bu73" path="res://scenes/objects/one_shot_mover.tscn" id="3_dk0sx"]
-[ext_resource type="Texture2D" uid="uid://dfiaq77335nxd" path="res://assets/Tiles/marble.png" id="5_1g2y4"]
+[ext_resource type="Texture2D" uid="uid://gpufj5wv3tf3" path="res://assets/Tiles/marble.png" id="5_1g2y4"]
 [ext_resource type="Script" uid="uid://076niupbrtvo" path="res://scripts/Levels/sewer_climb.gd" id="5_script"]
-[ext_resource type="Texture2D" uid="uid://bl3xa35qafjr" path="res://assets/Tiles/rock.png" id="6_yd7do"]
-[ext_resource type="Texture2D" uid="uid://bl8uq42vmbtrc" path="res://assets/Tiles/tilemap_industrial.png" id="7_6v2ta"]
-[ext_resource type="Texture2D" uid="uid://540pbya5ww6v" path="res://assets/Tiles/sand.png" id="7_yy6s6"]
-[ext_resource type="Texture2D" uid="uid://uglny5y03yek" path="res://assets/Tiles/stone.png" id="8_bf676"]
-[ext_resource type="Texture2D" uid="uid://bgmbgx1nohmd3" path="res://assets/Tiles/BackgroundRock.png" id="9_webr0"]
-[ext_resource type="Texture2D" uid="uid://dqqphhy4l5e4x" path="res://Art/OldTestArt/button.png" id="10_6v2ta"]
+[ext_resource type="Texture2D" uid="uid://d1d5g51eufqir" path="res://assets/Tiles/rock.png" id="6_yd7do"]
+[ext_resource type="Texture2D" uid="uid://dm4ynga7tc6wf" path="res://assets/Tiles/tilemap_industrial.png" id="7_6v2ta"]
+[ext_resource type="Texture2D" uid="uid://kitkyug2b1qj" path="res://assets/Tiles/sand.png" id="7_yy6s6"]
+[ext_resource type="Texture2D" uid="uid://to2hwj6d7drn" path="res://assets/Tiles/stone.png" id="8_bf676"]
+[ext_resource type="Texture2D" uid="uid://cs5w64bj3vdqt" path="res://assets/Tiles/BackgroundRock.png" id="9_webr0"]
+[ext_resource type="Texture2D" uid="uid://bdygq424grhul" path="res://Art/OldTestArt/button.png" id="10_6v2ta"]
 [ext_resource type="Script" uid="uid://dkycc55huw0n0" path="res://scripts/objects/moving_platform.gd" id="12_gmbwg"]
-[ext_resource type="Script" uid="uid://cidmo62j010qv" path="res://scripts/objects/StaticSewage.gd" id="13_ftp6k"]
+[ext_resource type="Script" path="res://scripts/objects/StaticSewage.gd" id="13_ftp6k"]
 [ext_resource type="PackedScene" uid="uid://q5myivnq8cna" path="res://scenes/objects/key_card.tscn" id="14_6v2ta"]
 [ext_resource type="PackedScene" uid="uid://dbh40ehfj6b7n" path="res://scenes/objects/lab_exit_door.tscn" id="15_61xjq"]
-[ext_resource type="PackedScene" uid="uid://bf72f4j7c2i3f" path="res://scripts/UI/pause_menu.tscn" id="16_61xjq"]
+[ext_resource type="PackedScene" path="res://scripts/UI/pause_menu.tscn" id="16_61xjq"]
 [ext_resource type="PackedScene" uid="uid://coo3efhcvxiar" path="res://scenes/UI/restart_screen.tscn" id="17_gmbwg"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_31be5"]
@@ -875,7 +875,7 @@ _spawnable_scenes = PackedStringArray("uid://bxpry3684affg")
 spawn_path = NodePath("../Players")
 
 [node name="PlayerMarkers" type="Node2D" parent="."]
-position = Vector2(-2, 7)
+position = Vector2(1208, -836)
 
 [node name="Player1Marker" type="Marker2D" parent="PlayerMarkers"]
 position = Vector2(288, 804)
