@@ -1211,6 +1211,7 @@ progress = 0.0
 [node name="AnimatableBody2D" parent="GreenBird2" index="1"]
 position = Vector2(156.6, 4.79998)
 rotation = -0.0131572
+scale = Vector2(1, 1)
 
 [node name="Killbox" parent="GreenBird2/AnimatableBody2D" index="1"]
 position = Vector2(0.411743, -0.936401)
